@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/27 19:55:11 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/27 20:23:39 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ short
 	map_read(
 		t_scene *scene)
 {
-	scene->ceiling = 0xFFFFFFFF;
-	scene->floor = 0x999999FF;
+	scene->ceiling = C_CEILING;// obviously, read these from the scene.cub instead
+	scene->floor = C_FLOOR;
 	if (map_size(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (map_calloc(scene) == EXIT_FAILURE)

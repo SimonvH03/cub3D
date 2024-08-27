@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/08/27 20:12:32 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/28 01:39:17 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,27 @@
 
 // mlx window
 # define WINDOW_TITLE "cub3d"
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 2560
+# define HEIGHT 1440
 
 // scene defaults
 # define TILE_SIZE 100
+# define C_CEILING 0x000000FF
+# define C_FLOOR 0x444444FF
+# define C_WALL 0x882222FF
 
 // camera defaults
-# define MOVEMENT_SPEED 1
-# define ROTATION_SPEED 1
-# define CAMERA_PLANE 2
+# define MOVEMENT_SPEED 0.07
+# define ROTATION_SPEED 0.03
+# define CAMERA_PLANE 0.9
 
-// typedef struct s_precalc
-// {
-// 	double			a_cos;
-// 	double			a_sin;
-// 	int				sign;
-// 	bool			reproject;
-// }	t_precalc;
+typedef struct s_precalc
+{
+	double			a_sin;
+	double			a_cos;
+	int				sign_alpha;
+	bool			reproject;
+}	t_precalc;
 
 typedef struct s_colour_construct
 {
@@ -71,8 +74,9 @@ typedef struct s_camera
 	double			dir_x;
 	double			plane_y;
 	double			plane_x;
-	int				movement_speed;
-	int				rotation_speed;
+	t_precalc		precalc;
+	double			rotation_speed;
+	double			movement_speed;
 }	t_camera;
 
 // free: scene->map
@@ -98,7 +102,6 @@ typedef struct s_cub3d
 	mlx_image_t		*image;
 	t_scene			*scene;
 	bool			redraw;
-	// t_precalc		precalc;
 }	t_cub3d;
 
 //// PHASE 0: function types
@@ -114,24 +117,23 @@ short		map_read(t_scene *scene);
 void		camera_init(t_camera *camera, int x, int y, char direction);
 // void		hud_draw(t_cub3d *cub3d);
 
-//// PHASE 2: interpreting user input to change camera
+//// PHASE 2: interpreting user input to change camera data
 mlx_hook	user_inputs;
 mlx_key		keyhook;
 mlx_scroll	scrollhook;
-
-//// PHASE 3: modifying the raycast data based on camera
-mlx_hook	raycast;
+void		rotate_camera(t_camera *camera);
 
 //// PHASE 4: drawing the raycast
-mlx_hook	draw;
+mlx_hook	raycast;
 //// UTILS
 // scene
 int			scene_free(t_scene *scene);
 // draw
 void		draw_background(mlx_image_t *image, t_scene *scene);
+uint32_t	gradient(double ratio, uint32_t end, uint32_t start);
 // calc
 double		deg_to_rad(double angle_deg);
-double		ft_min_double(double a, double b);
+double		ft_max_double(double a, double b);
 double		ft_abs_double(double value);
 short		ft_sign_double(double value);
 // test

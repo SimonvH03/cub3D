@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/27 20:18:57 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/27 21:50:11 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void
 {
 	mlx_key_hook(cub3d->mlx, &keyhook, cub3d);
 	// mlx_scroll_hook(cub3d->mlx, &scrollhook, cub3d);
-	// mlx_loop_hook(cub3d->mlx, &user_inputs, cub3d);
+	mlx_loop_hook(cub3d->mlx, &user_inputs, cub3d);
 	mlx_loop_hook(cub3d->mlx, &raycast, cub3d);
 	// mlx_loop_hook(cub3d->mlx, &draw, cub3d);
 }

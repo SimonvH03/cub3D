@@ -16,7 +16,9 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/init.c \
 			$(SRCDIR)/map_read.c \
 			$(SRCDIR)/raycast.c \
+			$(SRCDIR)/rotate_vector.c \
 			$(SRCDIR)/user_inputs_keyscroll.c \
+			$(SRCDIR)/user_inputs.c \
 			$(SRCDIR)/utils_calc.c \
 			$(SRCDIR)/utils_free.c \
 			$(SRCDIR)/utils_test.c

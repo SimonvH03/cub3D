@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/08/27 20:18:36 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/28 00:03:21 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,16 @@ static void
 	ray->pos_x = (int)camera->pos_x;
 	ray->dir_y = camera->dir_y + camera->plane_y * camera_x;
 	ray->dir_x = camera->dir_x + camera->plane_x * camera_x;
-	if (ray->dir_y == 0)
-		ray->step_y = HEIGHT;
-	else
-		ray->step_y = ft_abs_double(1 / ray->dir_y);
-	if (ray->dir_x == 0)
-		ray->step_x = WIDTH;
-	else
-		ray->step_x = ft_abs_double(1 / ray->dir_x);
+	ray->step_y = ft_abs_double(1 / ray->dir_y);
+	ray->step_x = ft_abs_double(1 / ray->dir_x);
 	ray->sign_y = ft_sign_double(ray->dir_y);
 	ray->sign_x = ft_sign_double(ray->dir_x);
 	if (ray->sign_y > 0)
-		ray->total_y = ((ray->pos_y + 1) - camera->pos_y * ray->step_y);
+		ray->total_y = ((ray->pos_y + 1 - camera->pos_y) * ray->step_y);
 	else
 		ray->total_y = (camera->pos_y - ray->pos_y) * ray->step_y;
 	if (ray->sign_x > 0)
-		ray->total_x = ((ray->pos_x + 1) - camera->pos_x * ray->step_x);
+		ray->total_x = ((ray->pos_x + 1 - camera->pos_x) * ray->step_x);
 	else
 		ray->total_x = (camera->pos_x - ray->pos_x) * ray->step_x;
 	// print_ray(ray);
@@ -51,33 +45,24 @@ static double
 		t_ray *ray,
 		t_scene *scene)
 {
-	short	axis;
-
-	axis = 0;
-	while (ray->pos_x && ray->pos_x < scene->x_max
-		&& ray->pos_y && ray->pos_y < scene->y_max)// true crashes if casting skips walls or map is not enclosed in walls
+	while (true)// true crashes if casting skips walls or map is not enclosed in walls
+	// while (ray->pos_x && ray->pos_x < scene->x_max
+	// 	&& ray->pos_y && ray->pos_y < scene->y_max)
 	{
 		if (ray->total_y < ray->total_x)
 		{
-			// printf("\e[32mrty %-10f < rtx %-10f\e[0m\n", ray->total_y, ray->total_x);
 			ray->total_y += ray->step_y;
 			ray->pos_y += ray->sign_y;
-			axis = 0;
 		}
 		else
 		{
-			// printf("\e[32mrtx %-10f < rty %-10f\e[0m\n", ray->total_x, ray->total_y);
 			ray->total_x += ray->step_x;
 			ray->pos_x += ray->sign_x;
-			axis = 1;
 		}
 		if (scene->map[ray->pos_y][ray->pos_x])
 			break ;
 	}
-	if (axis == 0)
-		return (ray->total_y - ray->step_y);
-	else
-		return (ray->total_x - ray->step_x);
+	return (ft_max_double(ray->total_y - ray->step_y, ray->total_x - ray->step_x));
 }
 
 void
@@ -95,8 +80,8 @@ void
 	y = 0;
 	while (y < height / 2)
 	{
-		mlx_put_pixel(image, screen_x, (image->height / 2) + y, 0xFF00FFFF);
-		mlx_put_pixel(image, screen_x, (image->height / 2) - y, 0xFF00FFFF);
+		mlx_put_pixel(image, screen_x, (image->height / 2) + y, gradient(height / (double)image->height, C_CEILING, C_WALL));
+		mlx_put_pixel(image, screen_x, (image->height / 2) - y, gradient(height / (double)image->height, C_CEILING, C_WALL));
 		++y;
 	}
 }
@@ -112,6 +97,8 @@ void
 	double		distance;
 
 	cub3d = param;
+	if (cub3d->redraw == false)
+		return ;
 	draw_background(cub3d->image, cub3d->scene);
 	screen_x = 0;
 	while (screen_x <= cub3d->image->width)
@@ -123,4 +110,5 @@ void
 		draw_ray(cub3d->image, screen_x, distance);
 		++screen_x;
 	}
+	cub3d->redraw = false;
 }

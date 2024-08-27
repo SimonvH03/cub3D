@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:51:01 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/27 19:16:46 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/27 23:13:29 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ double
 
 // return lowest value
 double
-	ft_min_double(
+	ft_max_double(
 		double a,
 		double b)
 {
-	if (a < 0)
+	if (a > b)
 		return (a);
 	else
 		return (b);

@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/27 19:55:16 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/27 21:53:30 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void
 		int pos_x,
 		char direction)
 {
-	camera->movement_speed = MOVEMENT_SPEED;
 	camera->rotation_speed = ROTATION_SPEED;
+	camera->movement_speed = MOVEMENT_SPEED;
 	camera->pos_y = pos_y + 0.5;
 	camera->pos_x = pos_x + 0.5;
 	if (direction == 'N')
@@ -37,6 +37,7 @@ void
 		camera->dir_x = -1;
 	camera->plane_x = CAMERA_PLANE * camera->dir_y;
 	camera->plane_y = CAMERA_PLANE * camera->dir_x;
+	camera->precalc = (t_precalc){sin(ROTATION_SPEED), cos(ROTATION_SPEED), 0, 0};
 	// print_camera(camera);
 }
 
@@ -72,5 +73,6 @@ short
 	if (map_read(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	cub3d->scene = scene;
+	cub3d->redraw = true;
 	return (EXIT_SUCCESS);
 }
