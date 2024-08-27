@@ -6,24 +6,36 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:51:01 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/26 22:41:42 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/27 19:16:46 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
 // turn degree angle into radian
-float
+double
 	deg_to_rad(
-		float angle_deg)
+		double angle_deg)
 {
-	return (angle_deg * (float)(PI / 180));
+	return (angle_deg * (double)(PI / 180));
+}
+
+// return lowest value
+double
+	ft_min_double(
+		double a,
+		double b)
+{
+	if (a < 0)
+		return (a);
+	else
+		return (b);
 }
 
 // return absolute value
-float
-	ft_abs_float(
-		float value)
+double
+	ft_abs_double(
+		double value)
 {
 	if (value < 0)
 		return (-value);
@@ -32,8 +44,8 @@ float
 
 // return polarity of value
 short
-	ft_sign_float(
-		float value)
+	ft_sign_double(
+		double value)
 {
 	if (value < 0)
 		return (-1);

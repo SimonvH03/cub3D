@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/27 14:19:21 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/27 19:36:53 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void
 	loop_hooks(
 		t_cub3d *cub3d)
 {
-	// mlx_key_hook(cub3d->mlx, &keyhook, cub3d);
+	mlx_key_hook(cub3d->mlx, &keyhook, cub3d);
 	// mlx_scroll_hook(cub3d->mlx, &scrollhook, cub3d);
 	// mlx_loop_hook(cub3d->mlx, &user_inputs, cub3d);
 	mlx_loop_hook(cub3d->mlx, &raycast, cub3d);
@@ -46,6 +46,7 @@ int
 		return (EXIT_FAILURE);
 	// menu_draw(&cub3d);
 	loop_hooks(&cub3d);
+	// raycast(&cub3d);
 	mlx_loop(cub3d.mlx);
 	mlx_terminate(cub3d.mlx);
 	scene_free(&scene);

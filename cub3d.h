@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/08/27 15:43:54 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/27 19:43:56 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@
 
 // mlx window
 # define WINDOW_TITLE "cub3d"
-# define WIDTH 50
-# define HEIGHT 20
+# define WIDTH 640
+# define HEIGHT 360
+
+// scene defaults
+# define TILE_SIZE 100
 
 // camera defaults
 # define MOVEMENT_SPEED 1
@@ -32,8 +35,8 @@
 
 // typedef struct s_precalc
 // {
-// 	float			a_cos;
-// 	float			a_sin;
+// 	double			a_cos;
+// 	double			a_sin;
 // 	int				sign;
 // 	bool			reproject;
 // }	t_precalc;
@@ -48,12 +51,12 @@ typedef struct s_colour_construct
 
 typedef struct s_ray
 {
-	float			dir_y;
-	float			dir_x;
-	float			step_y;
-	float			step_x;
-	float			total_y;
-	float			total_x;
+	double			dir_y;
+	double			dir_x;
+	double			step_y;
+	double			step_x;
+	double			total_y;
+	double			total_x;
 	short			sign_y;
 	short			sign_x;
 	int				pos_y;
@@ -62,12 +65,12 @@ typedef struct s_ray
 
 typedef struct s_camera
 {
-	float			pos_y;
-	float			pos_x;
-	float			dir_y;
-	float			dir_x;
-	float			plane_y;
-	float			plane_x;
+	double			pos_y;
+	double			pos_x;
+	double			dir_y;
+	double			dir_x;
+	double			plane_y;
+	double			plane_x;
 	int				movement_speed;
 	int				rotation_speed;
 }	t_camera;
@@ -108,7 +111,7 @@ typedef void	(mlx_scroll)(double, double, void *);
 //// PHASE 1: initialising mlx window, scene and camera
 short		cub3d_init(t_cub3d *cub3d, t_scene *scene, t_camera *camera, char *cub);
 short		map_read(t_scene *scene);
-void		pov_init(t_camera *camera, int x, int y, char direction);
+void		camera_init(t_camera *camera, int x, int y, char direction);
 // void		hud_draw(t_cub3d *cub3d);
 
 //// PHASE 2: interpreting user input to change camera
@@ -127,8 +130,13 @@ int			scene_free(t_scene *scene);
 // draw
 void		draw_background(mlx_image_t *image, t_scene *scene);
 // calc
-float		deg_to_rad(float angle_deg);
-float		ft_abs_float(float val);
-short		ft_sign_float(float val);
+double		deg_to_rad(double angle_deg);
+double		ft_min_double(double a, double b);
+double		ft_abs_double(double value);
+short		ft_sign_double(double value);
+// test
+void		print_camera(t_camera *camera);
+void		print_map(t_scene *scene);
+void		print_ray(t_ray *ray);
 
 #endif

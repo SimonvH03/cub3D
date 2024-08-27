@@ -12,10 +12,15 @@ LIBFT	=	$(LFTDIR)/libft.a
 
 SRCDIR	=	./src
 SRC		=	$(SRCDIR)/main.c \
+			$(SRCDIR)/draw_utils.c \
 			$(SRCDIR)/init.c \
 			$(SRCDIR)/map_read.c \
 			$(SRCDIR)/raycast.c \
+			$(SRCDIR)/user_inputs_keyscroll.c \
+			$(SRCDIR)/utils_calc.c \
 			$(SRCDIR)/utils_free.c \
+			$(SRCDIR)/utils_test.c
+# $(SRCDIR)/draw.c \
 
 OBJDIR	=	./obj
 OBJ		=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
