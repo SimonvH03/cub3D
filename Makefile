@@ -12,6 +12,10 @@ LIBFT	=	$(LFTDIR)/libft.a
 
 SRCDIR	=	./src
 SRC		=	$(SRCDIR)/main.c \
+			$(SRCDIR)/init.c \
+			$(SRCDIR)/map_read.c \
+			$(SRCDIR)/raycast.c \
+			$(SRCDIR)/utils_free.c \
 
 OBJDIR	=	./obj
 OBJ		=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
@@ -43,6 +47,6 @@ fclean: clean
 	rm -rf $(LFTDIR)/libft.a
 	rm -rf $(LMLXDIR)/build
 
-re: fclean all
+re: clean all
 
 .PHONY: all clean fclean re

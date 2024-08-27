@@ -17,11 +17,11 @@ static void
 		const t_cub3d *cub3d,
 		t_point *point)
 {
-	double			prev_x;
-	double			prev_y;
-	const double	gamma_sin = cub3d->cosin.a_sin * cub3d->precalc.gamma;
-	const double	beta_sin = cub3d->cosin.a_sin * cub3d->precalc.beta;
-	const double	alpha_sin = cub3d->cosin.a_sin * cub3d->precalc.alpha;
+	float			prev_x;
+	float			prev_y;
+	const float	gamma_sin = cub3d->cosin.a_sin * cub3d->precalc.gamma;
+	const float	beta_sin = cub3d->cosin.a_sin * cub3d->precalc.beta;
+	const float	alpha_sin = cub3d->cosin.a_sin * cub3d->precalc.alpha;
 
 	if (cub3d->precalc.gamma)
 	{
@@ -53,7 +53,7 @@ void
 	const t_cub3d	*cub3d = param;
 	t_point		*point;
 
-	point = &cub3d->map->project[y][x];
+	point = &cub3d->scene->project[y][x];
 	if (cub3d->precalc.gamma || cub3d->precalc.beta || cub3d->precalc.alpha)
 		point_rotate_precalculated(cub3d, point);
 }

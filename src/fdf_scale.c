@@ -22,7 +22,7 @@ void
 	const t_cub3d	*cub3d = param;
 	t_point		*point;
 
-	point = &cub3d->map->project[y][x];
+	point = &cub3d->scene->project[y][x];
 	point->x *= cub3d->scale.diff;
 	point->y *= cub3d->scale.diff;
 	point->z *= cub3d->scale.diff;

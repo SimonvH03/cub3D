@@ -16,9 +16,9 @@
 static void
 	point_rotate_gamma(
 		t_point *point,
-		const double gamma)
+		const float gamma)
 {
-	const double	prev_x = point->x;
+	const float	prev_x = point->x;
 
 	point->x = point->x * cos(gamma) + point->y * sin(gamma);
 	point->y = prev_x * -sin(gamma) + point->y * cos(gamma);
@@ -28,9 +28,9 @@ static void
 static void
 	point_rotate_beta(
 		t_point *point,
-		const double beta)
+		const float beta)
 {
-	const double	prev_x = point->x;
+	const float	prev_x = point->x;
 
 	point->x = point->x * cos(beta) + point->z * sin(beta);
 	point->z = prev_x * -sin(beta) + point->z * cos(beta);
@@ -40,9 +40,9 @@ static void
 static void
 	point_rotate_alpha(
 		t_point *point,
-		const double alpha)
+		const float alpha)
 {
-	const double	prev_y = point->y;
+	const float	prev_y = point->y;
 
 	point->y = point->y * cos(alpha) + point->z * sin(alpha);
 	point->z = prev_y * -sin(alpha) + point->z * cos(alpha);
@@ -58,7 +58,7 @@ void
 	const t_cub3d	*cub3d = param;
 	t_point		*point;
 
-	point = &cub3d->map->project[y][x];
+	point = &cub3d->scene->project[y][x];
 	if (cub3d->perspective.gamma)
 		point_rotate_gamma(point, cub3d->perspective.gamma);
 	if (cub3d->perspective.beta)

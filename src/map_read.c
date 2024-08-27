@@ -6,127 +6,123 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/26 18:05:12 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/27 02:20:18 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-// count elements with subject given map constraints
-static int
-	map_row_size(
-		char *buffer)
-{
-	int		count;
-	int		i;
-
-	count = 0;
-	i = 0;
-	while (buffer[i])
-	{
-		while (buffer[i] == ' ')
-			i++;
-		while (buffer[i] && buffer[i] != ' ')
-			i++;
-		count++;
-	}
-	return (count);
-}
-
-// count rows with get_next_line
-static int
+static short
 	map_size(
-		t_map *map)
+		t_scene *scene)
 {
 	char	*buffer;
 	int		temp_x;
 
-	map->fd = open(map->name, O_RDONLY);
-	map->y_max = 0;
-	temp_x = -1;
-	buffer = get_next_line(map->fd);
+	scene->fd = open(scene->name, O_RDONLY);
+	scene->y_max = 0;
+	buffer = get_next_line(scene->fd);
+	if (buffer == NULL)
+		return (EXIT_FAILURE);
 	while (buffer)
 	{
-		map->x_max = map_row_size(buffer);
-		if (temp_x != -1 && temp_x != map->x_max)
-		{
-			ft_printf("Error: map is wonky\n");
-			free(buffer);
-			close(map->fd);
-			return (EXIT_FAILURE);
-		}
-		temp_x = map->x_max;
+		temp_x = ft_strlen(buffer);
+		if (temp_x > scene->x_max)
+			scene->x_max = temp_x;
 		free(buffer);
-		map->y_max++;
-		buffer = get_next_line(map->fd);
+		scene->y_max++;
+		buffer = get_next_line(scene->fd);
 	}
-	close(map->fd);
+	close(scene->fd);
 	return (EXIT_SUCCESS);
 }
 
-// parse buffer, extract values with atoi, place [x,y,z] values in t_points
-// make a copy at map->project
-static void
+static short
+	map_calloc(
+		t_scene *scene)
+{
+	int	y;
+
+	scene->map = (int **)malloc(sizeof(int *) * scene->y_max + 1);
+	if (scene->map == NULL)
+		return (EXIT_FAILURE);
+	ft_bzero(scene->map, scene->y_max + 1);
+	y = 0;
+	while (scene->map[y] && y < scene->y_max)
+	{
+		scene->map[y] = (int *)malloc(sizeof(int) * scene->x_max + 1);
+		if (scene->map[y] == NULL)
+			return (EXIT_FAILURE);
+		ft_bzero(scene->map[y], scene->x_max + 1);
+		++y;
+	}
+	return (EXIT_SUCCESS);	
+}
+
+static short
 	map_fill_row(
-		t_map *map,
+		t_scene *scene,
 		int y,
 		char *buffer)
 {
-	int		i;
 	int		x;
-	int		k;
-	char	str_z[1 + 10 + 1];
+	char	c;
 
-	i = 0;
 	x = 0;
-	while (buffer[i])
+	while (buffer[x])
 	{
-		k = 0;
-		while (buffer[i] == ' ')
-			i++;
-		while (buffer[i] && buffer[i] != ' ' && k < 11)
-		{
-			str_z[k] = buffer[i];
-			k++;
-			i++;
-		}
-		str_z[k] = '\0';
-		map->original[y][x] = (t_point)
-		{x - (map->x_max / 2), y - (map->y_max / 2), ft_atoi(str_z), 0};
-		map->project[y][x] = map->original[y][x];
-		x++;
+		c = buffer[x];
+		if (c == ' ' || c == '0')
+			;
+		else if (c == '1')
+			scene->map[y][x] = 1;
+		else if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
+			pov_init(scene->camera, x, y, c);
+		else
+			return (EXIT_FAILURE);
+		++x;
 	}
+	return (EXIT_SUCCESS);
 }
 
-// from map_init.c / map_init()
-// size up the map, ft_calloc_cub3d 2D for t_points
-// fill rows with each get_next_line
-// make a copy at map->project to initialize projection data
-int
-	map_read(
-		t_map *map)
+static short
+	map_fill(
+		t_scene *scene)
 {
 	char	*buffer;
 	int		y;
 
-	if (map_size(map) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	map->fd = open(map->name, O_RDONLY);
-	if (map->fd == -1)
-		return (EXIT_FAILURE);
-	map_calloc_y(map);
-	buffer = get_next_line(map->fd);
-	if (buffer == NULL)
+	scene->fd = open(scene->name, O_RDONLY);
+	if (scene->fd == -1)
 		return (EXIT_FAILURE);
 	y = 0;
-	while (buffer && y < map->y_max)
+	while (buffer && y < scene->y_max)
 	{
-		map_calloc_x(map, y);
-		map_fill_row(map, y, buffer);
+		if (map_fill_row(scene, y, buffer) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
 		free(buffer);
-		y++;
-		buffer = get_next_line(map->fd);
+		++y;
+		buffer = get_next_line(scene->fd);
 	}
-	close(map->fd);
+	if (buffer)
+		free(buffer);
+	close(scene->fd);
+	return (EXIT_SUCCESS);
+}
+
+// from scene_init.c / scene_init()
+// size up the scene, ft_calloc_cub3d 2D for t_points
+// fill rows with each get_next_line
+// make a copy at scene->project to initialize projection data
+short
+	map_read(
+		t_scene *scene)
+{
+	if (map_size(scene) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (map_calloc(scene) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (map_fill(scene) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

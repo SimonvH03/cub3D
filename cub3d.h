@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                              :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/02 16:59:02 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/05/28 15:26:42 by svan-hoo         ###   ########.fr       */
+/*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
+/*   Updated: 2024/08/27 15:43:54 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,21 @@
 
 // mlx window
 # define WINDOW_TITLE "cub3d"
-# define WIDTH 2000
-# define HEIGHT 1600
+# define WIDTH 50
+# define HEIGHT 20
 
-// cub3d defaults
-# define DEFAULT_FOV 90
-# define ROTATION_SPEED 0.01
+// camera defaults
 # define MOVEMENT_SPEED 1
+# define ROTATION_SPEED 1
+# define CAMERA_PLANE 1
+
+// typedef struct s_precalc
+// {
+// 	float			a_cos;
+// 	float			a_sin;
+// 	int				sign;
+// 	bool			reproject;
+// }	t_precalc;
 
 typedef struct s_colour_construct
 {
@@ -38,105 +46,89 @@ typedef struct s_colour_construct
 	unsigned char	a;
 }	t_colour_construct;
 
-// free: map->content, map->project, map->polar
-typedef struct s_map
+typedef struct s_ray
 {
-	int				fd;
+	float			dir_y;
+	float			dir_x;
+	float			step_y;
+	float			step_x;
+	float			total_y;
+	float			total_x;
+	short			sign_y;
+	short			sign_x;
+	int				pos_y;
+	int				pos_x;
+}	t_ray;
+
+typedef struct s_camera
+{
+	float			pos_y;
+	float			pos_x;
+	float			dir_y;
+	float			dir_x;
+	float			plane_y;
+	float			plane_x;
+	int				movement_speed;
+	int				rotation_speed;
+}	t_camera;
+
+// free: scene->map
+typedef struct s_scene
+{
 	char			*name;
-}	t_map;
-
-typedef struct s_precalc
-{
-	short			beta;
-	int				sign;
-	bool			reproject;
-}	t_precalc;
-
-typedef struct s_cosin
-{
-	double			a_cos;
-	double			a_sin;
-}	t_cosin;
-
-typedef struct s_pov
-{
-	int				x;
-	int				y;
-	int				fov;
-	double			direction;
-
-}	t_pov;
+	int				fd;
+	int				**map;
+	int				y_max;
+	int				x_max;
+	t_camera		*camera;
+	int				north_texture;
+	int				east_texture;
+	int				south_texture;
+	int				west_texture;
+	uint32_t		floor;
+	uint32_t		ceiling;
+}	t_scene;
 
 typedef struct s_cub3d
 {
 	mlx_t			*mlx;
 	mlx_image_t		*image;
-	mlx_image_t		*menu_image;
-	t_map			*map;
-	t_precalc		precalc;
-	t_cosin			cosin;
-	t_pov			pov;
+	t_scene			*scene;
 	bool			redraw;
+	// t_precalc		precalc;
 }	t_cub3d;
 
 //// PHASE 0: function types
-// function type used to modify points on a (t_point **) type map
-typedef	void	(mapi_func)(void *param, const int y, const int x);
 // function type undefined by MLX42
 typedef void	(mlx_hook)(void *param);
 // because 'mlx_scrollfunc' would force all declarations 4 to the right, L norm
 typedef void	(mlx_key)(struct mlx_key_data, void *);
 typedef void	(mlx_scroll)(double, double, void *);
 
-//// PHASE 1: initialising windows, maps and settings based on map
-// map
-int			map_init(t_map *map, char *map_name);
-int			map_read(t_map *map);
-mapi_func	map_colour;
-// cub3d (mlx window)
-int			cub3d_init(t_cub3d *cub3d, t_map *map);
-// draw the menu because it's static anyway
-void		menu_draw(t_cub3d *cub3d);
+//// PHASE 1: initialising mlx window, scene and camera
+short		cub3d_init(t_cub3d *cub3d, t_scene *scene, t_camera *camera, char *cub);
+short		map_read(t_scene *scene);
+void		pov_init(t_camera *camera, int x, int y, char direction);
+// void		hud_draw(t_cub3d *cub3d);
 
-//// PHASE 2: interpreting user input to set up point modification
+//// PHASE 2: interpreting user input to change camera
 mlx_hook	user_inputs;
 mlx_key		keyhook;
 mlx_scroll	scrollhook;
 
-// presets for spherical or flat projection
-void		input_presets_flat(t_cub3d *cub3d);
+//// PHASE 3: modifying the raycast data based on camera
+mlx_hook	raycast;
 
-//// PHASE 3: modifying the projection data based on interpreted user input
-mlx_hook	project;
-// Mother of Death, responsible for 9 victims, with some of with her children
-// loops over map and applies function with each point's [y][x] coordinates
-void		map_iteration(t_map *map, mapi_func *function, void *param);
-// MoD's children, the map iteration functions
-mapi_func	cub3d_rotate;
-mapi_func	cub3d_rotate_optimized;
-mapi_func	cub3d_scale;
-mapi_func	map_fill_polar;
-mapi_func	map_set_polar;
-mapi_func	map_set_original;
-
-//// PHASE 4: drawing the cub3d based on the projection data
+//// PHASE 4: drawing the raycast
 mlx_hook	draw;
 //// UTILS
-// map
-int			map_free(t_map *map);
-int			map_free_err(t_map *map);
-// map_read
-int			map_calloc_y(t_map *map);
-int			map_calloc_x(t_map *map, const int y);
-// cub3d
-void		cub3d_center_offset(t_cub3d *cub3d);
+// scene
+int			scene_free(t_scene *scene);
 // draw
-void		draw_background(const mlx_image_t *image, const uint32_t colour);
-int			draw_check_point(const t_cub3d *cub3d, int x_pixel, int y_pixel);
-uint32_t	gradient(double ratio, uint32_t end, uint32_t start);
+void		draw_background(mlx_image_t *image, t_scene *scene);
 // calc
-double		deg_to_rad(double angle_deg);
-double		ft_abs_double(double val);
-short		ft_sign_double(double val);
+float		deg_to_rad(float angle_deg);
+float		ft_abs_float(float val);
+short		ft_sign_float(float val);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/26 18:05:12 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/26 19:22:47 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void
 		cub3d->offset.x += 10 * cub3d->precalc.sign;
 }
 
-// because bigger maps are slow, press + to get somewhere quick
+// because bigger scenes are slow, press + to get somewhere quick
 static void
 	inputs_variable_speed(
 		t_cub3d	*cub3d)

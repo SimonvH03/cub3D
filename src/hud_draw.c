@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   menu_draw.c                                        :+:      :+:    :+:   */
+/*   hud_draw.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:10:50 by simon             #+#    #+#             */
-/*   Updated: 2024/08/26 18:05:12 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/26 23:10:28 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void
 	int			x;
 	int			y;
 
-	mlx_put_string(cub3d->mlx, cub3d->map->name, x = margin, y = margin);
+	mlx_put_string(cub3d->mlx, cub3d->scene->name, x = margin, y = margin);
 	mlx_put_string(cub3d->mlx, "PRESETS", x, y += margin);
 	mlx_put_string(cub3d->mlx, "Parallel", x, y += line);
 	mlx_put_string(cub3d->mlx, "P", x + tab, y);
@@ -71,10 +71,10 @@ static void
 
 // from main.c main()
 void
-	menu_draw(
+	hud_draw(
 		t_cub3d *cub3d)
 {
-	draw_background(cub3d->menu_image, C_MENU);
-	mlx_image_to_window(cub3d->mlx, cub3d->menu_image, 0, 0);
+	// draw_background(cub3d->menu_image, C_MENU);
+	// mlx_image_to_window(cub3d->mlx, cub3d->menu_image, 0, 0);
 	menu_print_1(cub3d);
 }

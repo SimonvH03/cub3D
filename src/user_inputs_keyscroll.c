@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/26 18:05:12 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/26 23:20:46 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void
 	}
 	if (keydata.key == MLX_KEY_C && keydata.action == MLX_PRESS)
 	{
-		cub3d->map->palette = map_cycle_palettes(cub3d->map);
-		if (!cub3d->map->isearth && cub3d->map->palette.nr == P_EARTH_NR)
-			cub3d->map->palette = map_cycle_palettes(cub3d->map);
-		map_iteration(cub3d->map, &map_colour, cub3d->map);
+		cub3d->scene->palette = scene_cycle_palettes(cub3d->scene);
+		if (!cub3d->scene->isearth && cub3d->scene->palette.nr == P_EARTH_NR)
+			cub3d->scene->palette = scene_cycle_palettes(cub3d->scene);
+		scene_iteration(cub3d->scene, &scene_colour, cub3d->scene);
 	}
 	if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
 	{
