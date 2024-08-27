@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/08/27 19:35:39 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/27 20:03:58 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,28 @@ void
 		mlx_image_t *image,
 		t_scene *scene)
 {
-	uint32_t	i;
-	uint32_t	j;
+	uint32_t	y;
+	uint32_t	x;
 
-	j = 0;
-	while (j < image->height)
+	y = 0;
+	while (y < image->height / 2)
 	{
-		i = 0;
-		while (i < image->width / 2)
+		x = 0;
+		while (x < image->width / 2)
 		{
-			mlx_put_pixel((mlx_image_t *)image, i, j, scene->ceiling);
-			i++;
+			mlx_put_pixel((mlx_image_t *)image, x, y, scene->ceiling);
+			x++;
 		}
-		while (i < image->width)
+		++y;
+	}
+	while (y < image->height / 2)
+	{
+		x = 0;
+		while (x < image->width)
 		{
-			mlx_put_pixel((mlx_image_t *)image, i, j, scene->floor);
-			i++;
+			mlx_put_pixel((mlx_image_t *)image, x, y, scene->floor);
+			x++;
 		}
-		j++;
+		++y;
 	}
 }

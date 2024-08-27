@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/27 19:45:45 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/27 19:55:11 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,6 @@ short
 		return (EXIT_FAILURE);
 	if (map_fill(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	print_map(scene);
+	// print_map(scene);
 	return (EXIT_SUCCESS);
 }

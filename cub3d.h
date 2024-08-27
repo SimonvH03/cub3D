@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/08/27 19:43:56 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/27 20:12:32 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 // mlx window
 # define WINDOW_TITLE "cub3d"
-# define WIDTH 640
-# define HEIGHT 360
+# define WIDTH 1920
+# define HEIGHT 1080
 
 // scene defaults
 # define TILE_SIZE 100
@@ -31,7 +31,7 @@
 // camera defaults
 # define MOVEMENT_SPEED 1
 # define ROTATION_SPEED 1
-# define CAMERA_PLANE 1
+# define CAMERA_PLANE 2
 
 // typedef struct s_precalc
 // {

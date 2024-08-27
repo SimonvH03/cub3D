@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/27 19:26:01 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/27 19:55:16 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void
 		camera->dir_x = -1;
 	camera->plane_x = CAMERA_PLANE * camera->dir_y;
 	camera->plane_y = CAMERA_PLANE * camera->dir_x;
-	print_camera(camera);
+	// print_camera(camera);
 }
 
 static short
