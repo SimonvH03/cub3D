@@ -1,54 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   0_main.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/27 21:50:11 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/28 22:01:58 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-// Phase 2: keyhook
-// 			scrollhook
-// 			user_inputs
-// Phase 3: raycast
-// Phase 4: draw
 static void
 	loop_hooks(
-		t_cub3d *cub3d)
+		t_window *window)
 {
-	mlx_key_hook(cub3d->mlx, &keyhook, cub3d);
-	// mlx_scroll_hook(cub3d->mlx, &scrollhook, cub3d);
-	mlx_loop_hook(cub3d->mlx, &user_inputs, cub3d);
-	mlx_loop_hook(cub3d->mlx, &raycast, cub3d);
-	// mlx_loop_hook(cub3d->mlx, &draw, cub3d);
+	mlx_key_hook(window->mlx, &keyhook, window);
+	// mlx_scroll_hook(window->mlx, &scrollhook, window);
+	mlx_loop_hook(window->mlx, &user_inputs, window);
+	mlx_loop_hook(window->mlx, &raycast, &window->scene);
+	// mlx_loop_hook(window->mlx, &draw, window);
 }
 
-// Phase 1: scene_init
-// 			cub3d_init
-// 			menu_draw
 int
 	main(
 		int argc,
 		char **argv)
 {
-	t_cub3d			cub3d;
-	t_scene			scene;
-	t_camera			camera;
+	t_window			window;
 
 	if (argc != 2)
 		return (EXIT_FAILURE);
-	if (cub3d_init(&cub3d, &scene, &camera, argv[1]) == EXIT_FAILURE)
+	if (init(&window, argv[1]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	// menu_draw(&cub3d);
-	loop_hooks(&cub3d);
-	// raycast(&cub3d);
-	mlx_loop(cub3d.mlx);
-	mlx_terminate(cub3d.mlx);
-	scene_free(&scene);
+	loop_hooks(&window);
+	mlx_loop(window.mlx);
+	mlx_terminate(window.mlx);
+	scene_free(&window.scene);
 	return (EXIT_SUCCESS);
 }

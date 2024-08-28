@@ -11,15 +11,17 @@ LFTDIR	=	./libft
 LIBFT	=	$(LFTDIR)/libft.a
 
 SRCDIR	=	./src
-SRC		=	$(SRCDIR)/main.c \
-			$(SRCDIR)/draw_utils.c \
-			$(SRCDIR)/init.c \
-			$(SRCDIR)/map_read.c \
-			$(SRCDIR)/raycast.c \
-			$(SRCDIR)/rotate_vector.c \
-			$(SRCDIR)/user_inputs_keyscroll.c \
-			$(SRCDIR)/user_inputs.c \
+SRC		=	$(SRCDIR)/0_main.c \
+			$(SRCDIR)/0_init_images.c \
+			$(SRCDIR)/0_init.c \
+			$(SRCDIR)/0_map_read.c \
+			$(SRCDIR)/4_draw_utils.c \
+			$(SRCDIR)/2_raycast.c \
+			$(SRCDIR)/2_rotate_camera.c \
+			$(SRCDIR)/1_user_inputs_keyscroll.c \
+			$(SRCDIR)/1_user_inputs.c \
 			$(SRCDIR)/utils_calc.c \
+			$(SRCDIR)/utils_draw.c \
 			$(SRCDIR)/utils_free.c \
 			$(SRCDIR)/utils_test.c
 # $(SRCDIR)/draw.c \

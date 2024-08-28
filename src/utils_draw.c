@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_utils.c                                        :+:      :+:    :+:   */
+/*   utils_draw.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/26 18:05:12 by simon            ###   ########.fr       */
+/*   Created: 2024/08/28 22:07:27 by simon             #+#    #+#             */
+/*   Updated: 2024/08/28 22:13:01 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int
-	scene_free(
-		t_scene *scene)
+void
+	reset_image(
+		mlx_image_t *image)
 {
-	int	i;
+	uint32_t	y;
+	uint32_t	x;
 
-	i = 0;
-	while (i < scene->y_max && scene->map && scene->map[i])
-		free(scene->map[i++]);
-	free(scene->map);
-	return (EXIT_FAILURE);
+	y = 0;
+	while (y < image->height)
+	{
+		x = 0;
+		while (x < image->width)
+		{
+			mlx_put_pixel(image, x, y, 0x00000000);
+			++x;
+		}
+		++y;
+	}
 }

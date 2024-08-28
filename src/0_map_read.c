@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_read.c                                         :+:      :+:    :+:   */
+/*   0_scene_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/27 20:23:39 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/28 21:09:04 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static short
 			|| buffer[x] == 'S' || buffer[x] == 'W')
 		{
 			scene->map[y][x] = 0;
-			camera_init(scene->camera, y, x, buffer[x]);
+			camera_init(&scene->camera, y, x, buffer[x]);
 		}
 		else
 			return (EXIT_FAILURE);
@@ -123,16 +123,10 @@ static short
 	return (EXIT_SUCCESS);
 }
 
-// from scene_init.c / scene_init()
-// size up the scene, ft_calloc_cub3d 2D for t_points
-// fill rows with each get_next_line
-// make a copy at scene->project to initialize projection data
 short
 	map_read(
 		t_scene *scene)
 {
-	scene->ceiling = C_CEILING;// obviously, read these from the scene.cub instead
-	scene->floor = C_FLOOR;
 	if (map_size(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (map_calloc(scene) == EXIT_FAILURE)
