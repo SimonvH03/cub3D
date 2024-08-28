@@ -15,16 +15,14 @@ SRC		=	$(SRCDIR)/0_main.c \
 			$(SRCDIR)/0_init_images.c \
 			$(SRCDIR)/0_init.c \
 			$(SRCDIR)/0_map_read.c \
-			$(SRCDIR)/4_draw_utils.c \
-			$(SRCDIR)/2_raycast.c \
-			$(SRCDIR)/2_rotate_camera.c \
 			$(SRCDIR)/1_user_inputs_keyscroll.c \
 			$(SRCDIR)/1_user_inputs.c \
+			$(SRCDIR)/2_raycast.c \
+			$(SRCDIR)/2_rotate_camera.c \
 			$(SRCDIR)/utils_calc.c \
 			$(SRCDIR)/utils_draw.c \
 			$(SRCDIR)/utils_free.c \
 			$(SRCDIR)/utils_test.c
-# $(SRCDIR)/draw.c \
 
 OBJDIR	=	./obj
 OBJ		=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
