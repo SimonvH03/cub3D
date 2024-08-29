@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/29 18:27:15 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 00:58:52 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ void
 		camera->dir_y = 0,
 		camera->dir_x = -1;
 	camera->plane_x = CAMERA_PLANE * -camera->dir_y;
-	camera->plane_y = CAMERA_PLANE * -camera->dir_x; // maybe change this
-	camera->precalc = (t_precalc){sin(ROTATION_SPEED), cos(ROTATION_SPEED), 0};
+	camera->plane_y = CAMERA_PLANE * camera->dir_x; // maybe change this
+	camera->rm[0] = cos(ROTATION_SPEED);
+	camera->rm[1] = sin(ROTATION_SPEED);
+	camera->sign_rotate = 0;
 	// print_camera(camera);
 }
 
@@ -61,9 +63,12 @@ static short
 		t_minimap *minimap,
 		t_window *window)
 {
-	minimap->height = window->mlx->height / 8;
-	minimap->width = window->mlx->width / 8;
 	minimap->map = window->scene.map;
+	minimap->height = window->mlx->height / 2.2;
+	minimap->width = minimap->height;
+	minimap->y_offset = minimap->height / 2;
+	minimap->x_offset = minimap->y_offset;
+	minimap->radius = minimap->width / pow(2, 1.5);
 	return (EXIT_SUCCESS);
 }
 
@@ -83,11 +88,11 @@ short
 		t_window *window,
 		char *argv_scene)
 {
+	if (window_init(window) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	if (scene_init(&window->scene, argv_scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (minimap_init(&window->minimap, window) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (window_init(window) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (init_images(window) == EXIT_FAILURE)
 		return (EXIT_FAILURE);

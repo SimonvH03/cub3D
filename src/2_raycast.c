@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/08/29 17:30:53 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/29 22:46:27 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static float
 	return (ft_max_float(ray->total_y - ray->step_y, ray->total_x - ray->step_x));
 }
 
-void
+static void
 	draw_ray(
 		mlx_image_t *image,
 		uint32_t screen_x,

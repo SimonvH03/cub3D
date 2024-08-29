@@ -1,6 +1,6 @@
 NAME	=	cub3d
 
-CC		=	cc
+CC		=	cc -g
 CFLAGS	=	-O3 -flto
 # CFLAGS	=	-Wall -Werror -Wextra -O3 -flto
 MLXFLAGS=	-ldl -lglfw -pthread -lm
@@ -13,6 +13,7 @@ LIBFT	=	$(LFTDIR)/libft.a
 
 SRCDIR	=	./src
 SRC		=	$(SRCDIR)/0_main.c \
+			$(SRCDIR)/0_draw_images.c \
 			$(SRCDIR)/0_init_images.c \
 			$(SRCDIR)/0_init_structs.c \
 			$(SRCDIR)/0_map_read.c \

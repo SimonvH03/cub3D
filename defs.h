@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/08/29 18:10:48 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/29 23:32:34 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,15 @@
 # define WIDTH 2560
 # define HEIGHT 1440
 
+// minimap defaults
+# define C_BORDER 0x80008080
+# define C_TRANSPARENT 0xFFFFFF40
+
 // scene defaults
 # define TILE_SIZE 100
 # define C_CEILING 0x000000FF
 # define C_FLOOR 0x383338FF
-# define C_WALL 0xFF4400FF
+# define C_WALL 0xBF6629FF
 
 // camera defaults
 # define MOVEMENT_SPEED 0.07
@@ -43,13 +47,6 @@ typedef struct s_colour_construct
 	unsigned char	b;
 	unsigned char	a;
 }	t_colour_construct;
-
-typedef struct s_precalc
-{
-	float			a_sin;
-	float			a_cos;
-	int				sign_alpha;
-}	t_precalc;
 
 typedef struct s_ray
 {
@@ -73,7 +70,8 @@ typedef struct s_camera
 	float			dir_x;
 	float			plane_y;
 	float			plane_x;
-	t_precalc		precalc;
+	float			rm[2];
+	short			sign_rotate;
 	float			rotation_speed;
 	float			movement_speed;
 }	t_camera;
@@ -82,10 +80,14 @@ typedef struct s_minimap
 {
 	mlx_image_t		*walls;
 	mlx_image_t		*player;
-	mlx_image_t		*border;
+	uint8_t			*border_overlay;
 	int				**map;
 	int				width;
 	int				height;
+	int				y_offset;
+	int				x_offset;
+	int				radius;
+	int				border_thickness;
 }	t_minimap;
 
 // free: scene->map

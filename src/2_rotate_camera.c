@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 23:30:28 by simon             #+#    #+#             */
-/*   Updated: 2024/08/28 20:21:16 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 01:05:51 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@ void
 	rotate_camera(
 		t_camera *camera)
 {
-	const float	prev_x = camera->dir_x;
+	const float	previous_x = camera->dir_x;
 	const float	prev_plane_x = camera->plane_x;
-	const float	alpha_sin = camera->precalc.a_sin * camera->precalc.sign_alpha;
+	const float	rm[2][2] = {camera->rm[0], camera->rm[1] * camera->sign_rotate,
+		-camera->rm[1] * camera->sign_rotate, camera->rm[0]};
 
-	if (camera->precalc.sign_alpha == 0)
+	if (camera->sign_rotate == 0)
 		return ;
-	camera->dir_x = camera->dir_x * camera->precalc.a_cos + camera->dir_y * alpha_sin;
-	camera->dir_y = prev_x * -alpha_sin + camera->dir_y * camera->precalc.a_cos;
-	camera->plane_x = camera->plane_x * camera->precalc.a_cos + camera->plane_y * alpha_sin;
-	camera->plane_y = prev_plane_x * -alpha_sin + camera->plane_y * camera->precalc.a_cos;
-	camera->precalc.sign_alpha = 0;
+	camera->dir_x = camera->dir_x * rm[0][0] + camera->dir_y * rm[0][1];
+	camera->dir_y = previous_x * rm[1][0] + camera->dir_y * rm[1][1];
+	camera->plane_x = CAMERA_PLANE * -camera->dir_y;
+	camera->plane_y = CAMERA_PLANE * camera->dir_x;
+	camera->sign_rotate = 0;
 }

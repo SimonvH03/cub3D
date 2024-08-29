@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/29 14:47:55 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 00:45:46 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static void
 		t_window	*window)
 {
 	if (mlx_is_key_down(window->mlx, MLX_KEY_LEFT))
-		window->scene.camera.precalc.sign_alpha = 1;
+		window->scene.camera.sign_rotate = 1;
 	if (mlx_is_key_down(window->mlx, MLX_KEY_RIGHT))
-		window->scene.camera.precalc.sign_alpha = -1;
+		window->scene.camera.sign_rotate = -1;
 	rotate_camera(&window->scene.camera);
 }
 
