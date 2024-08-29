@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/28 21:23:47 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/29 14:47:55 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,6 @@ static void
 		|| mlx_is_key_down(window->mlx, MLX_KEY_S)
 		|| mlx_is_key_down(window->mlx, MLX_KEY_D))
 		window->scene.recast = true;
-}
-
-static void
-	wasd_move(
-		t_window	*window)
-{
-	t_camera *camera;
-
-	camera = &window->scene.camera;
-	if (mlx_is_key_down(window->mlx, MLX_KEY_W))
-	{
-		camera->pos_y += camera->dir_y * camera->movement_speed;
-		camera->pos_x += camera->dir_x * camera->movement_speed;
-	}
-	if (mlx_is_key_down(window->mlx, MLX_KEY_S))
-	{
-		camera->pos_y -= camera->dir_y * camera->movement_speed;
-		camera->pos_x -= camera->dir_x * camera->movement_speed;
-	}
-	if (mlx_is_key_down(window->mlx, MLX_KEY_A))
-	{
-		camera->pos_y -= camera->dir_x * camera->movement_speed;
-		camera->pos_x += camera->dir_y * camera->movement_speed;
-	}
-	if (mlx_is_key_down(window->mlx, MLX_KEY_D))
-	{
-		camera->pos_y += camera->dir_x * camera->movement_speed;
-		camera->pos_x -= camera->dir_y * camera->movement_speed;
-	}
 }
 
 static void

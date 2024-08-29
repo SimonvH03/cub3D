@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/08/28 21:51:28 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/29 18:10:48 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 // scene defaults
 # define TILE_SIZE 100
 # define C_CEILING 0x000000FF
-# define C_FLOOR 0x444444FF
-# define C_WALL 0x882222FF
+# define C_FLOOR 0x383338FF
+# define C_WALL 0xFF4400FF
 
 // camera defaults
 # define MOVEMENT_SPEED 0.07
@@ -78,6 +78,16 @@ typedef struct s_camera
 	float			movement_speed;
 }	t_camera;
 
+typedef struct s_minimap
+{
+	mlx_image_t		*walls;
+	mlx_image_t		*player;
+	mlx_image_t		*border;
+	int				**map;
+	int				width;
+	int				height;
+}	t_minimap;
+
 // free: scene->map
 typedef struct s_scene
 {
@@ -102,6 +112,7 @@ typedef struct s_window
 {
 	mlx_t			*mlx;
 	t_scene			scene;
+	t_minimap		minimap;
 	bool			redraw;
 }	t_window;
 

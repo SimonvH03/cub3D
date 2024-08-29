@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/08/28 22:11:41 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/29 18:02:53 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ short		init_images(t_window *window);
 mlx_hook	user_inputs;
 mlx_key		keyhook;
 mlx_scroll	scrollhook;
+void		wasd_move(t_window *window);
 void		rotate_camera(t_camera *camera);
 
 //// PHASE 4: drawing the raycast

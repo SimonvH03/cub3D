@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/08/28 22:06:31 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/29 17:30:53 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void
 		ray->total_x = ((ray->pos_x + 1 - camera->pos_x) * ray->step_x);
 	else
 		ray->total_x = (camera->pos_x - ray->pos_x) * ray->step_x;
-	// print_ray(ray);
 }
 
 // assuming the camera is not inside a wall;
@@ -45,7 +44,7 @@ static float
 		t_ray *ray,
 		t_scene *scene)
 {
-	// while (true)// true crashes if casting skips walls or map is not enclosed in walls
+	// while (true)// crashes if casting skips walls or camera is not enclosed in walls
 	while (ray->pos_x && ray->pos_x < scene->x_max
 		&& ray->pos_y && ray->pos_y < scene->y_max)
 	{
@@ -62,6 +61,10 @@ static float
 		if (scene->map[ray->pos_y][ray->pos_x])
 			break ;
 	}
+	if (ray->step_y == INFINITY)
+		return (ray->total_x - ray->step_x);
+	if (ray->step_x == INFINITY)
+		return (ray->total_y - ray->step_y);
 	return (ft_max_float(ray->total_y - ray->step_y, ray->total_x - ray->step_x));
 }
 
@@ -74,17 +77,17 @@ void
 	const uint32_t	half_height = image->height / 2;
 	uint32_t		wall_height;
 	uint32_t		y;
+	uint32_t		colour;
 
 	wall_height = image->height / distance;
 	if (wall_height > image->height)
 		wall_height = image->height;
+	colour = gradient(wall_height / (float)image->height, C_CEILING, C_WALL);
 	y = 0;
 	while (y < wall_height / 2)
 	{
-		// mlx_put_pixel(image, screen_x, (image->height / 2) + y, gradient(height / (float)image->height, C_CEILING, C_WALL));
-		// mlx_put_pixel(image, screen_x, (image->height / 2) - y, gradient(height / (float)image->height, C_CEILING, C_WALL));
-		mlx_put_pixel(image, screen_x, half_height + y, C_WALL);
-		mlx_put_pixel(image, screen_x, half_height - y, C_WALL);
+		mlx_put_pixel(image, screen_x, half_height + y, colour);
+		mlx_put_pixel(image, screen_x, half_height - y, colour);
 		++y;
 	}
 }
@@ -109,7 +112,6 @@ void
 		camera_x = 2 * screen_x / (float)scene->walls->width - 1;
 		init_ray(&ray, camera_x, &scene->camera);
 		distance = cast_ray(&ray, scene);
-		// printf("\e[33mSCREEN_X %d\e[0m\ncamera_x %d/%d\ndistance %f\n\n", screen_x, (int)(camera_x * WIDTH), WIDTH, distance);
 		draw_ray(scene->walls, screen_x, distance);
 		++screen_x;
 	}

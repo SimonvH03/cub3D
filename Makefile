@@ -1,7 +1,8 @@
 NAME	=	cub3d
 
 CC		=	cc
-CFLAGS	=	-Wall -Werror -Wextra -O3
+CFLAGS	=	-O3 -flto
+# CFLAGS	=	-Wall -Werror -Wextra -O3 -flto
 MLXFLAGS=	-ldl -lglfw -pthread -lm
 
 LMLXDIR	=	./MLX42
@@ -13,10 +14,11 @@ LIBFT	=	$(LFTDIR)/libft.a
 SRCDIR	=	./src
 SRC		=	$(SRCDIR)/0_main.c \
 			$(SRCDIR)/0_init_images.c \
-			$(SRCDIR)/0_init.c \
+			$(SRCDIR)/0_init_structs.c \
 			$(SRCDIR)/0_map_read.c \
 			$(SRCDIR)/1_user_inputs_keyscroll.c \
 			$(SRCDIR)/1_user_inputs.c \
+			$(SRCDIR)/1_wasd_move.c \
 			$(SRCDIR)/2_raycast.c \
 			$(SRCDIR)/2_rotate_camera.c \
 			$(SRCDIR)/utils_calc.c \
