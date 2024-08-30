@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/08/30 02:16:08 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 04:34:12 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		camera_init(t_camera *camera, int x, int y, char direction);
 short		init_images(t_window *window);
 void		draw_scene_background(t_scene *scene);
 void		draw_minimap_border_overlay(t_minimap *minimap);
+void		draw_minimap_player(t_minimap *minimap);
 
 //// PHASE 1: interpreting user input to change camera data
 mlx_hook	user_inputs;

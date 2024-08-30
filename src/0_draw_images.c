@@ -6,11 +6,31 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/08/30 03:17:13 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 05:17:35 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+// void
+// 	draw_minimap_player(
+// 		t_minimap *minimap)
+// {
+// 	uint32_t			y;
+// 	uint32_t			x;
+
+// 	x = 0;
+// 	while (x < minimap->player->width)
+// 	{
+// 		y = 0;
+// 		while (y < minimap->player->height)
+// 		{
+// 			mlx_put_pixel(minimap->player, x, y, 0x00FF00FF);
+// 			++y;
+// 		}
+// 		++x;
+// 	}
+// }
 
 void
 	draw_minimap_border_overlay(
@@ -31,11 +51,14 @@ void
 			else if (is_in_circle(minimap->c_offset, minimap->c_offset,
 				minimap->radius * 15/16, x, y) == false)
 				mlx_put_pixel(minimap->walls, x, y, C_BORDER);
+			else
+				mlx_put_pixel(minimap->walls, x, y, 0);
 			++y;
 		}
 		++x;
 	}
-	minimap->border_overlay = minimap->walls->pixels;
+	ft_memcpy(minimap->overlay, minimap->walls->pixels,
+		minimap->walls->width * minimap->walls->height * sizeof(uint32_t));
 }
 
 void

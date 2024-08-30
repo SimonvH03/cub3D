@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/08/30 03:15:14 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 05:34:42 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 // minimap defaults
 # define C_BORDER 0x80008080
-# define C_TRANSPARENT 0xFFFFFF40
+# define C_TRANSPARENT 0xFFFFFF00
 
 // scene defaults
 # define TILE_SIZE 100
@@ -100,13 +100,12 @@ typedef struct s_minimap
 {
 	mlx_image_t		*walls;
 	mlx_image_t		*player;
-	uint8_t			*border_overlay;
+	uint32_t		*overlay;
 	t_scene			*scene;
 	int				side;
 	int				c_offset;
 	int				radius;
 	int				inner_side;
-	int				border_thickness;
 }	t_minimap;
 
 typedef struct s_window

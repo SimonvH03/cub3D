@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/30 03:19:19 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 05:16:53 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ static short
 	minimap->c_offset = minimap->side / 2;
 	minimap->radius = minimap->side / pow(2, 1.5);
 	minimap->inner_side = minimap->side / 2 - minimap->radius;
+	minimap->overlay = malloc(sizeof(uint32_t) * pow(minimap->side, 2));
+	if (minimap->overlay == NULL)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

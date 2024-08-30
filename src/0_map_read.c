@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0_scene_init.c                                     :+:      :+:    :+:   */
+/*   0_map_read.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/28 21:09:04 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 04:28:47 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ static short
 	x = 0;
 	while (buffer[x] && buffer[x] != '\n')
 	{
-		if (buffer[x] == ' ' || buffer[x] == '0')
-			scene->map[y][x] = 0;
-		else if (buffer[x] == '1')
-			scene->map[y][x] = 1;
+		if (buffer[x] == ' ')
+			scene->map[y][x] = -1;
+		else if (buffer[x] == '1'|| buffer[x] == '0')
+			scene->map[y][x] = buffer[x] - 48;
 		else if (buffer[x] == 'N' || buffer[x] == 'E'
 			|| buffer[x] == 'S' || buffer[x] == 'W')
 		{
@@ -89,7 +89,7 @@ static short
 	}
 	while (x < scene->x_max)
 	{
-		scene->map[y][x] = 0;
+		scene->map[y][x] = -1;
 		++x;
 	}
 	return (EXIT_SUCCESS);
