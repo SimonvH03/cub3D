@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/08/30 05:17:35 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 15:55:17 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void
 				minimap->radius * 15/16, x, y) == false)
 				mlx_put_pixel(minimap->walls, x, y, C_BORDER);
 			else
-				mlx_put_pixel(minimap->walls, x, y, 0);
+				mlx_put_pixel(minimap->walls, x, y, C_WALL);
 			++y;
 		}
 		++x;

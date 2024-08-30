@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/08/30 06:22:47 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 16:05:37 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,21 @@ static void
 		t_minimap *minimap)
 {
 	uint32_t	pixel_count;
-	uint32_t	colour;
-	uint8_t		*p;
-	uint32_t	y;
-	uint32_t	x;
+	uint8_t		*src;
+	uint8_t		*dst;
+	uint32_t	limit;
 
-	y = 0;
-	while (y < minimap->walls->height)
+	pixel_count = 0;
+	src = minimap->overlay;
+	dst = minimap->walls->pixels;
+	limit = minimap->side * minimap->side;
+	while (pixel_count < limit)
 	{
-		x = 0;
-		while (x < minimap->walls->width)
-		{
-			p = (uint8_t *)&colour;
-			*(p++) = (uint8_t)(minimap->overlay[pixel_count] >> 24);
-			*(p++) = (uint8_t)(minimap->overlay[pixel_count] >> 16);
-			*(p++) = (uint8_t)(minimap->overlay[pixel_count] >> 8);
-			*(p++) = (uint8_t)(minimap->overlay[pixel_count] & 0xFF);
-			if (colour != 0x00000000)
-				mlx_put_pixel(minimap->walls, x, y, colour);
-			++x;
-			++pixel_count;
-		}
-		++y;
+		if (src[3] % 0x80 == 0)
+			dst[3] = src[3];
+		++pixel_count;
+		src += sizeof(uint32_t);
+		dst += sizeof(uint32_t);
 	}
 }
 

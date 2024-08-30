@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/08/30 05:34:42 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 15:52:25 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define HEIGHT 1440
 
 // minimap defaults
-# define C_BORDER 0x80008080
+# define C_BORDER 0x80002080
 # define C_TRANSPARENT 0xFFFFFF00
 
 // scene defaults
@@ -87,10 +87,10 @@ typedef struct s_scene
 	int				**map;
 	int				y_max;
 	int				x_max;
-	mlx_texture_t	north_texture;
-	mlx_texture_t	east_texture;
-	mlx_texture_t	south_texture;
-	mlx_texture_t	west_texture;
+	mlx_texture_t	*north_texture;
+	mlx_texture_t	*east_texture;
+	mlx_texture_t	*south_texture;
+	mlx_texture_t	*west_texture;
 	uint32_t		floor;
 	uint32_t		ceiling;
 	bool			recast;
@@ -100,7 +100,7 @@ typedef struct s_minimap
 {
 	mlx_image_t		*walls;
 	mlx_image_t		*player;
-	uint32_t		*overlay;
+	uint8_t			*overlay;
 	t_scene			*scene;
 	int				side;
 	int				c_offset;
