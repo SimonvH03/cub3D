@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/08/30 05:36:15 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 06:22:47 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,8 @@ void
 		x = minimap->inner_side;
 		while (x < minimap->side - minimap->inner_side)
 		{
-			// if (is_in_circle(minimap->c_offset, minimap->c_offset,
-			// 	minimap->radius, x, y) == true)
-			// {
-				colour = transform_minimap_pixel(minimap, x, y);
-				mlx_put_pixel(minimap->walls, x, y, colour);
-			// }
+			colour = transform_minimap_pixel(minimap, x, y);
+			mlx_put_pixel(minimap->walls, x, y, colour);
 			++x;
 		}
 		++y;
