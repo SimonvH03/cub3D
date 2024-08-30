@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/08/29 23:32:34 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 03:15:14 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,6 @@ typedef struct s_camera
 	float			movement_speed;
 }	t_camera;
 
-typedef struct s_minimap
-{
-	mlx_image_t		*walls;
-	mlx_image_t		*player;
-	uint8_t			*border_overlay;
-	int				**map;
-	int				width;
-	int				height;
-	int				y_offset;
-	int				x_offset;
-	int				radius;
-	int				border_thickness;
-}	t_minimap;
-
 // free: scene->map
 typedef struct s_scene
 {
@@ -109,6 +95,19 @@ typedef struct s_scene
 	uint32_t		ceiling;
 	bool			recast;
 }	t_scene;
+
+typedef struct s_minimap
+{
+	mlx_image_t		*walls;
+	mlx_image_t		*player;
+	uint8_t			*border_overlay;
+	t_scene			*scene;
+	int				side;
+	int				c_offset;
+	int				radius;
+	int				inner_side;
+	int				border_thickness;
+}	t_minimap;
 
 typedef struct s_window
 {

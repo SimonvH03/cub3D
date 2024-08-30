@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/30 00:58:52 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 03:19:19 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,11 @@ static short
 		t_minimap *minimap,
 		t_window *window)
 {
-	minimap->map = window->scene.map;
-	minimap->height = window->mlx->height / 2.2;
-	minimap->width = minimap->height;
-	minimap->y_offset = minimap->height / 2;
-	minimap->x_offset = minimap->y_offset;
-	minimap->radius = minimap->width / pow(2, 1.5);
+	minimap->scene = &window->scene;
+	minimap->side = window->mlx->height / 2.2;
+	minimap->c_offset = minimap->side / 2;
+	minimap->radius = minimap->side / pow(2, 1.5);
+	minimap->inner_side = minimap->side / 2 - minimap->radius;
 	return (EXIT_SUCCESS);
 }
 

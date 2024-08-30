@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/08/29 23:24:24 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 02:16:08 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 # include "defs.h"
 
-//// PHASE 1: initialising mlx window, scene and camera
+//// PHASE 0: initialising mlx window, scene and camera
 short		init(t_window *window, char *argv_scene);
 short		map_read(t_scene *scene);
 void		camera_init(t_camera *camera, int x, int y, char direction);
@@ -22,15 +22,16 @@ short		init_images(t_window *window);
 void		draw_scene_background(t_scene *scene);
 void		draw_minimap_border_overlay(t_minimap *minimap);
 
-//// PHASE 2: interpreting user input to change camera data
+//// PHASE 1: interpreting user input to change camera data
 mlx_hook	user_inputs;
 mlx_key		keyhook;
 mlx_scroll	scrollhook;
 void		wasd_move(t_window *window);
 void		rotate_camera(t_camera *camera);
 
-//// PHASE 4: drawing the raycast
-mlx_hook	raycast;
+//// PHASE 2: drawing the raycast
+mlx_hook	draw_minimap;
+mlx_hook	draw_raycast;
 //// UTILS
 // scene
 int			scene_free(t_scene *scene);
@@ -38,6 +39,7 @@ int			scene_free(t_scene *scene);
 void		reset_image(mlx_image_t *image);
 uint32_t	gradient(float ratio, uint32_t end, uint32_t start);
 // calc
+short		is_in_circle(float a, float b, float r, float x, float y);
 float		deg_to_rad(float angle_deg);
 float		ft_max_float(float a, float b);
 float		ft_abs_float(float value);

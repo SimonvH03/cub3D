@@ -6,11 +6,34 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:51:01 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/29 14:17:32 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 02:15:34 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+/// @brief 
+/// @param a x-coordinate of circle center
+/// @param b y-coordinate of circle center
+/// @param r radius of circle
+/// @param x x-coordinate of point to check
+/// @param y y_coordinate of point to check
+/// @return true(1) if point is inside the circle, false(0) if not
+short
+	is_in_circle(
+		float	a,
+		float	b,
+		float	r,
+		float	x,
+		float	y)
+{
+	float	square_distance_to_center;
+
+	square_distance_to_center = (x - a) * (x - a) + (y - b) * (y - b);
+	if (r * r > square_distance_to_center)
+		return (true);
+	return (false);
+}
 
 // turn degree angle into radian
 float

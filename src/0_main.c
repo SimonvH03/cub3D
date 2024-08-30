@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/28 22:01:58 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/30 02:38:23 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void
 	mlx_key_hook(window->mlx, &keyhook, window);
 	// mlx_scroll_hook(window->mlx, &scrollhook, window);
 	mlx_loop_hook(window->mlx, &user_inputs, window);
-	mlx_loop_hook(window->mlx, &raycast, &window->scene);
+	mlx_loop_hook(window->mlx, &draw_raycast, &window->scene);
+	mlx_loop_hook(window->mlx, &draw_minimap, &window->minimap);
 	// mlx_loop_hook(window->mlx, &draw, window);
 }
 

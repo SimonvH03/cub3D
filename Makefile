@@ -1,7 +1,7 @@
 NAME	=	cub3d
 
 CC		=	cc -g
-CFLAGS	=	-O3 -flto
+CFLAGS	=	-O3
 # CFLAGS	=	-Wall -Werror -Wextra -O3 -flto
 MLXFLAGS=	-ldl -lglfw -pthread -lm
 
@@ -20,7 +20,8 @@ SRC		=	$(SRCDIR)/0_main.c \
 			$(SRCDIR)/1_user_inputs_keyscroll.c \
 			$(SRCDIR)/1_user_inputs.c \
 			$(SRCDIR)/1_wasd_move.c \
-			$(SRCDIR)/2_raycast.c \
+			$(SRCDIR)/2_draw_minimap.c \
+			$(SRCDIR)/2_draw_raycast.c \
 			$(SRCDIR)/2_rotate_camera.c \
 			$(SRCDIR)/utils_calc.c \
 			$(SRCDIR)/utils_draw.c \
