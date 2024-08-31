@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/08/30 15:52:25 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/31 12:38:31 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define HEIGHT 1440
 
 // minimap defaults
-# define C_BORDER 0x80002080
+# define C_BORDER 0x80002042
 # define C_TRANSPARENT 0xFFFFFF00
 
 // scene defaults

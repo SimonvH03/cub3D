@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/08/30 16:05:37 by simon            ###   ########.fr       */
+/*   Updated: 2024/08/31 12:38:27 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void
 	limit = minimap->side * minimap->side;
 	while (pixel_count < limit)
 	{
-		if (src[3] % 0x80 == 0)
+		if (src[3] % C_BORDER >> 24 == 0)
 			dst[3] = src[3];
 		++pixel_count;
 		src += sizeof(uint32_t);
