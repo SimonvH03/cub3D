@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/08/31 12:38:27 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/01 12:34:10 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,59 @@ static void
 	}
 }
 
+// static uint32_t
+// 	transform_minimap_pixel(
+// 		t_minimap *minimap,
+// 		float x,
+// 		float y)
+// {
+// 	float		scale = minimap->side / minimap->scene->y_max;
+
+// 	x /= scale;
+// 	y /= scale;
+// 	x += minimap->scene->camera.pos_x - minimap->scene->y_max / (float)2;
+// 	y += minimap->scene->camera.pos_y - minimap->scene->y_max / (float)2;
+// 	if (x < 0 || x >= minimap->scene->x_max
+// 		|| y < 0 || y >= minimap->scene->y_max)
+// 		return (C_CEILING);
+// 	if (minimap->scene->map[(int)y][(int)x] < 0)
+// 		return (C_CEILING);
+// 	if (minimap->scene->map[(int)y][(int)x] > 0)
+// 		return (C_WALL);
+// 	return (C_FLOOR);
+// }
+
 static uint32_t
 	transform_minimap_pixel(
 		t_minimap *minimap,
 		float x,
 		float y)
 {
-	float		scale = minimap->side / minimap->scene->y_max;
+	t_scene		*scene;
+	t_camera	*camera;
+	const float	prev_x = x;
+	const float	screen_map_scale = minimap->side / minimap->scene->y_max;
 
-	x /= scale;
-	y /= scale;
-	x += minimap->scene->camera.pos_x - minimap->scene->y_max / (float)2;
-	y += minimap->scene->camera.pos_y - minimap->scene->y_max / (float)2;
-	if (x < 0 || x >= minimap->scene->x_max
-		|| y < 0 || y >= minimap->scene->y_max)
+	scene = minimap->scene;
+	camera = &minimap->scene->camera;
+
+	x -= minimap->side / 2;
+	y -= minimap->side / 2;
+
+	x = prev_x * camera->dir_x + y * -camera->dir_y;
+	y = prev_x * camera->dir_y + y * camera->dir_x;
+	
+	x /= screen_map_scale;
+	y /= screen_map_scale;
+	
+	x += camera->pos_x;
+	y += camera->pos_y;
+	if (x < 0 || x >= scene->x_max
+		|| y < 0 || y >= scene->y_max)
 		return (C_CEILING);
-	if (minimap->scene->map[(int)y][(int)x] < 0)
+	if (scene->map[(int)y][(int)x] < 0)
 		return (C_CEILING);
-	if (minimap->scene->map[(int)y][(int)x] > 0)
+	if (scene->map[(int)y][(int)x] > 0)
 		return (C_WALL);
 	return (C_FLOOR);
 }
@@ -79,6 +114,6 @@ void
 		}
 		++y;
 	}
-	overlay_border(minimap);
+	// overlay_border(minimap);
 	mlx_put_pixel(minimap->walls, minimap->side / 2, minimap->side / 2, 0x00FF00FF);
 }
