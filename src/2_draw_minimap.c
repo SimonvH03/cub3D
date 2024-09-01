@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/01 12:34:10 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/01 14:15:51 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,17 @@ static uint32_t
 {
 	t_scene		*scene;
 	t_camera	*camera;
-	const float	prev_x = x;
-	const float	screen_map_scale = minimap->side / minimap->scene->y_max;
+	float		prev_x;
 
 	scene = minimap->scene;
 	camera = &minimap->scene->camera;
-
-	x -= minimap->side / 2;
-	y -= minimap->side / 2;
-
-	x = prev_x * camera->dir_x + y * -camera->dir_y;
-	y = prev_x * camera->dir_y + y * camera->dir_x;
-	
-	x /= screen_map_scale;
-	y /= screen_map_scale;
-	
+	x -= minimap->c_offset;
+	y -= minimap->c_offset;
+	prev_x = x;
+	x = prev_x * camera->plane_x + y * -camera->plane_y;
+	y = prev_x * camera->plane_y + y * camera->plane_x;
+	x /= MINIMAP_SCALE;
+	y /= MINIMAP_SCALE;
 	x += camera->pos_x;
 	y += camera->pos_y;
 	if (x < 0 || x >= scene->x_max
@@ -114,6 +110,6 @@ void
 		}
 		++y;
 	}
-	// overlay_border(minimap);
+	overlay_border(minimap);
 	mlx_put_pixel(minimap->walls, minimap->side / 2, minimap->side / 2, 0x00FF00FF);
 }
