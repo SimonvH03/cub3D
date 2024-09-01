@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/08/30 02:07:30 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/01 14:40:59 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,4 @@ void
 		draw_ray(scene->walls, screen_x, distance);
 		++screen_x;
 	}
-	scene->recast = false;
 }

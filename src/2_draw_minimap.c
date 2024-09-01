@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/01 14:15:51 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/01 14:41:39 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void
 	uint32_t	colour;
 
 	minimap = param;
+	if (minimap->scene->recast == false)
+		return ;
 	y = minimap->inner_side;
 	while (y < minimap->side - minimap->inner_side)
 	{
@@ -112,4 +114,5 @@ void
 	}
 	overlay_border(minimap);
 	mlx_put_pixel(minimap->walls, minimap->side / 2, minimap->side / 2, 0x00FF00FF);
+	// minimap->scene->recast = false;
 }
