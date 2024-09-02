@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/01 12:36:42 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/01 16:09:35 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ mlx_hook	draw_raycast;
 // scene
 int			scene_free(t_scene *scene);
 // draw
+void 		put_pixel_2d(mlx_image_t* image,
+			uint32_t x, uint32_t y, uint32_t color);
+void 		put_pixel_1d(mlx_image_t* image, uint32_t i, uint32_t color);
 void		reset_image(mlx_image_t *image);
 uint32_t	gradient(float ratio, uint32_t end, uint32_t start);
 // calc
