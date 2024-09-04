@@ -6,13 +6,13 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/01 14:16:14 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/04 03:22:22 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFS_H
 # define DEFS_H
-# include "MLX42/include/MLX42/MLX42.h"
+# include "MLX42/include/MLX42/MLX42_Int.h"
 # include "libft/libft.h"
 # include <unistd.h>
 # include <fcntl.h>
@@ -37,9 +37,12 @@
 # define C_WALL 0xBF6629FF
 
 // camera defaults
-# define MOVEMENT_SPEED 0.07
-# define ROTATION_SPEED 0.03
-# define CAMERA_PLANE 0.9
+# define MOVEMENT_SPEED 5
+# define ROTATION_SPEED 0.04
+# define CAMERA_PLANE 1
+
+# define FONT_WIDTH 10
+# define FONT_HEIGHT 20
 
 typedef struct s_colour_construct
 {
@@ -51,6 +54,7 @@ typedef struct s_colour_construct
 
 typedef struct s_ray
 {
+	float			camera_x;
 	float			dir_y;
 	float			dir_x;
 	float			step_y;
@@ -61,6 +65,7 @@ typedef struct s_ray
 	short			sign_x;
 	int				pos_y;
 	int				pos_x;
+	float			distance;
 }	t_ray;
 
 typedef struct s_camera
@@ -114,6 +119,9 @@ typedef struct s_window
 	mlx_t			*mlx;
 	t_scene			scene;
 	t_minimap		minimap;
+	double			time;
+	double			deltatime;
+	mlx_image_t		*fps;
 	bool			redraw;
 }	t_window;
 

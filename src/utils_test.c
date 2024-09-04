@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 17:21:01 by simon             #+#    #+#             */
-/*   Updated: 2024/08/28 20:21:16 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/03 01:54:59 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,14 @@ void
 {
 	printf("\e[33mRAY INIT\e[0m\t[%-10d, %-10d]\ndir  -->\t[%-10f, %-10f]\nstep <->\t[%-10f, %-10f]\ntotal<->\t[%-10f, %-10f]\n",
 		ray->pos_y, ray->pos_x, ray->dir_y, ray->dir_x, ray->step_y, ray->step_x, ray->total_y, ray->total_x);
+}
+
+void
+	draw_textures(
+		t_window *window)
+{
+	mlx_image_t *image;
+
+	image = mlx_texture_to_image(window->mlx, window->scene.south_texture);
+	mlx_image_to_window(window->mlx, image, 50, 50);
 }

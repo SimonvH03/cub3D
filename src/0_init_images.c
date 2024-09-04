@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/08/30 14:20:10 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/04 04:12:25 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ short
 	if (new_images_minimap(window, &window->minimap) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	draw_scene_background(&window->scene);
+	draw_scene_walls(&window->scene);
 	draw_minimap_border_overlay(&window->minimap);
 	// draw_minimap_player(&window->minimap);
 	// init_menu();

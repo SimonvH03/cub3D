@@ -17,7 +17,6 @@ SRC		=	$(SRCDIR)/0_main.c \
 			$(SRCDIR)/0_init_images.c \
 			$(SRCDIR)/0_init_structs.c \
 			$(SRCDIR)/0_map_read.c \
-			$(SRCDIR)/1_user_inputs_keyscroll.c \
 			$(SRCDIR)/1_user_inputs.c \
 			$(SRCDIR)/1_wasd_move.c \
 			$(SRCDIR)/2_draw_minimap.c \

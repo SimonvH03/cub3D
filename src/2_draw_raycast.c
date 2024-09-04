@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/01 16:14:23 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/04 04:13:46 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 static void
 	init_ray(
 		t_ray *ray,
-		float camera_x,
 		t_camera *camera)
 {
 	ray->pos_y = (int)camera->pos_y;
 	ray->pos_x = (int)camera->pos_x;
-	ray->dir_y = camera->dir_y + camera->plane_y * camera_x;
-	ray->dir_x = camera->dir_x + camera->plane_x * camera_x;
+	ray->dir_y = camera->dir_y + camera->plane_y * ray->camera_x;
+	ray->dir_x = camera->dir_x + camera->plane_x * ray->camera_x;
 	ray->step_y = ft_abs_float(1 / ray->dir_y);
 	ray->step_x = ft_abs_float(1 / ray->dir_x);
 	ray->sign_y = ft_sign_float(ray->dir_y);
@@ -34,12 +33,13 @@ static void
 		ray->total_x = ((ray->pos_x + 1 - camera->pos_x) * ray->step_x);
 	else
 		ray->total_x = (camera->pos_x - ray->pos_x) * ray->step_x;
+	ray->distance = 0;
 }
 
 // assuming the camera is not inside a wall;
 //	shift map position to the nearest (total_y <> total_x) grid line;
 //	and check wall type (0 or positive int 1-N)
-static float
+static void
 	cast_ray(
 		t_ray *ray,
 		t_scene *scene)
@@ -62,33 +62,31 @@ static float
 			break ;
 	}
 	if (ray->step_y == INFINITY)
-		return (ray->total_x - ray->step_x);
-	if (ray->step_x == INFINITY)
-		return (ray->total_y - ray->step_y);
-	return (ft_max_float(ray->total_y - ray->step_y, ray->total_x - ray->step_x));
+		ray->distance = ray->total_x - ray->step_x;
+	else if (ray->step_x == INFINITY)
+		ray->distance = ray->total_y - ray->step_y;
+	else
+		ray->distance = ft_max_float(ray->total_y - ray->step_y,
+			ray->total_x - ray->step_x);
+	ray->distance = ft_max_float(ray->distance, 1);
 }
 
-static void
+void
 	draw_ray(
 		mlx_image_t *image,
 		uint32_t screen_x,
-		float distance)
+		uint32_t wall_height)
 {
-	const uint32_t	half_height = image->height / 2;
-	uint32_t		wall_height;
-	uint32_t		y;
-	uint32_t		colour;
+	uint8_t		*pixelstart;
+	uint8_t		*pixelend;
 
-	wall_height = image->height / distance;
-	if (wall_height > image->height)
-		wall_height = image->height;
-	colour = gradient(wall_height / (float)image->height, C_CEILING, C_WALL);
-	y = 0;
-	while (y < wall_height / 2)
+	pixelstart = &image->pixels[((image->height / 2 - wall_height)* image->width + screen_x) * sizeof(uint32_t)];
+	// pixelend = &image->pixels[((image->height / 2 + wall_height) * image->width + screen_x) * sizeof(uint32_t)];
+	pixelend = pixelstart + 2 * wall_height * image->width * sizeof(uint32_t);
+	while (pixelstart < pixelend)
 	{
-		mlx_put_pixel(image, screen_x, half_height + y, colour);
-		mlx_put_pixel(image, screen_x, half_height - y, colour);
-		++y;
+		pixelstart[3] = 0xFF;
+		pixelstart += image->width * sizeof(uint32_t);
 	}
 }
 
@@ -97,10 +95,8 @@ void
 		void *param)
 {
 	t_scene		*scene;
-	uint32_t	screen_x;
 	t_ray		ray;
-	float		camera_x;
-	float		distance;
+	uint32_t	screen_x;
 
 	scene = param;
 	if (scene->recast == false)
@@ -109,10 +105,10 @@ void
 	screen_x = 0;
 	while (screen_x < scene->walls->width)
 	{
-		camera_x = 2 * screen_x / (float)scene->walls->width - 1;
-		init_ray(&ray, camera_x, &scene->camera);
-		distance = cast_ray(&ray, scene);
-		draw_ray(scene->walls, screen_x, distance);
+		ray.camera_x = 2 * screen_x / (float)scene->walls->width - 1;
+		init_ray(&ray, &scene->camera);
+		cast_ray(&ray, scene);
+		draw_ray(scene->walls, screen_x, scene->walls->height / 2 / ray.distance);
 		++screen_x;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/01 16:14:17 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/04 03:29:42 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,6 @@ static void
 	}
 }
 
-// static uint32_t
-// 	transform_minimap_pixel(
-// 		t_minimap *minimap,
-// 		float x,
-// 		float y)
-// {
-// 	float		scale = minimap->side / minimap->scene->y_max;
-
-// 	x /= scale;
-// 	y /= scale;
-// 	x += minimap->scene->camera.pos_x - minimap->scene->y_max / (float)2;
-// 	y += minimap->scene->camera.pos_y - minimap->scene->y_max / (float)2;
-// 	if (x < 0 || x >= minimap->scene->x_max
-// 		|| y < 0 || y >= minimap->scene->y_max)
-// 		return (C_CEILING);
-// 	if (minimap->scene->map[(int)y][(int)x] < 0)
-// 		return (C_CEILING);
-// 	if (minimap->scene->map[(int)y][(int)x] > 0)
-// 		return (C_WALL);
-// 	return (C_FLOOR);
-// }
 
 static uint32_t
 	transform_minimap_pixel(

@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/08/29 16:50:34 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/03 15:41:19 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void
 		diagonal_correction += 2;
 	if (diagonal_correction % 3 == 0)
 		window->scene.camera.movement_speed /= sqrt(2);
+	window->scene.camera.movement_speed *= window->deltatime;
 	if (mlx_is_key_down(window->mlx, MLX_KEY_W))
 		move_forward(&window->scene, &window->scene.camera);
 	if (mlx_is_key_down(window->mlx, MLX_KEY_S))
@@ -95,4 +96,5 @@ void
 		move_left(&window->scene, &window->scene.camera);
 	if (diagonal_correction % 3 == 0)
 		window->scene.camera.movement_speed *= sqrt(2);
+	window->scene.camera.movement_speed /= window->deltatime;
 }

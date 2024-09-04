@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 22:07:27 by simon             #+#    #+#             */
-/*   Updated: 2024/09/01 16:17:13 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/04 03:02:57 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,17 @@ void
 	reset_image(
 		mlx_image_t *image)
 {
-	uint32_t	pixel_count;
 	uint8_t		*dst;
-	uint32_t	limit;
+	uint8_t		*dst_limit;
 
-	pixel_count = 0;
 	dst = image->pixels;
-	limit = image->height * image->width;
-	while (pixel_count < limit)
+	dst_limit = dst + image->height * image->width * sizeof(uint32_t);
+	while (dst < dst_limit)
 	{
 		dst[3] = 0x00;
-		++pixel_count;
 		dst += sizeof(uint32_t);
 	}
 }
-
-// void // need to test which of these is faster: while checking (uint32_t) or checking (uint_8_t *)
-// 	reset_image(
-// 		mlx_image_t *image)
-// {
-// 	uint8_t		*dst;
-// 	uint8_t		*dst_limit;
-
-// 	dst = image->pixels;
-// 	dst_limit = dst + image->height * image->width * sizeof(uint32_t);
-// 	while (dst < dst_limit)
-// 	{
-// 		dst[3] = 0x00;
-// 		dst += sizeof(uint32_t);
-// 	}
-// }
 
 uint32_t
 	gradient(

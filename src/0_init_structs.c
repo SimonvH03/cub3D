@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/01 14:14:52 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/04 02:54:28 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,16 @@ static short
 	window_init(
 		t_window *window)
 {
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	mlx_set_setting(MLX_FULLSCREEN, false);
+	mlx_set_setting(MLX_MAXIMIZED, false);
+	mlx_set_setting(MLX_DECORATED, true);
+	mlx_set_setting(MLX_HEADLESS, false);
 	window->mlx = mlx_init(WIDTH, HEIGHT, WINDOW_TITLE, false);
 	if (window->mlx == NULL)
 		return (EXIT_FAILURE);
+	window->time = 0;
+	window->deltatime = 0;
 	window->redraw = true;
 	return (EXIT_SUCCESS);
 }
@@ -98,5 +105,6 @@ short
 		return (EXIT_FAILURE);
 	if (init_images(window) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	window->fps = mlx_put_string(window->mlx, "0000000", WIDTH / 2 - 50, 100);
 	return (EXIT_SUCCESS);
 }

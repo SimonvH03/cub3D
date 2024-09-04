@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/01 16:14:13 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/04 04:02:51 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,26 @@ void
 	}
 	ft_memcpy(minimap->overlay, minimap->walls->pixels,
 		minimap->walls->width * minimap->walls->height * sizeof(uint32_t));
+}
+
+void
+	draw_scene_walls(
+		t_scene *scene)
+{
+	uint32_t			y;
+	uint32_t			x;
+
+	x = 0;
+	while (x < scene->walls->width)
+	{
+		y = 0;
+		while (y < scene->walls->height)
+		{
+			mlx_put_pixel(scene->walls, x, y, C_WALL);
+			++y;
+		}
+		++x;
+	}
 }
 
 void
