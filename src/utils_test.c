@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 17:21:01 by simon             #+#    #+#             */
-/*   Updated: 2024/09/05 18:42:43 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/06 12:56:38 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,12 @@ void
 {
 	mlx_image_t *image;
 
+	image = mlx_texture_to_image(window->mlx, window->scene.north_texture);
+	mlx_image_to_window(window->mlx, image, 128, 64);
+	image = mlx_texture_to_image(window->mlx, window->scene.east_texture);
+	mlx_image_to_window(window->mlx, image, 192, 128);
 	image = mlx_texture_to_image(window->mlx, window->scene.south_texture);
-	mlx_image_to_window(window->mlx, image, 50, 50);
+	mlx_image_to_window(window->mlx, image, 128, 192);
+	image = mlx_texture_to_image(window->mlx, window->scene.west_texture);
+	mlx_image_to_window(window->mlx, image, 64, 128);
 }

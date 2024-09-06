@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/06 03:21:03 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/06 12:47:19 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ static void
 		++line;
 	new.a = 0xFF;
 	new.r = ft_atoi(line);
-	line = ft_strchr(line, ',');
+	line = ft_strchr(line, ',') + 1;
 	new.g = ft_atoi(line);
-	line = ft_strchr(line, ',');
+	line = ft_strchr(line, ',') + 1;
 	new.b = ft_atoi(line);
 	*dest = (uint32_t)((new.r << 24) | (new.g << 16) | (new.b << 8) | new.a);
 	// printf("new colour: %X\n", *dest);

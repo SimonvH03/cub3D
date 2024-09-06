@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/06 02:53:55 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/06 13:15:14 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,21 +88,22 @@ void
 	mlx_image_t	*image;
 	uint32_t	y;
 	uint32_t	x;
-	uint32_t	half_height;
+	uint32_t	horizon;
 	uint32_t	colour;
 
 	image = scene->background;
-	half_height = image->height / 2;
+	horizon = image->height / 2;
 	x = 0;
 	while (x < image->width)
 	{
 		y = 0;
-		while (y < half_height)
+		while (y < horizon)
 		{
-			colour = gradient(y / (float)half_height, scene->ceiling, scene->floor);
-			// mlx_put_pixel(image, x, half_height - y, colour);
-			mlx_put_pixel(image, x, half_height + y, colour);
-			mlx_put_pixel(image, x, half_height - y, scene->ceiling);
+			colour = gradient(y / (float)horizon, scene->ceiling, scene->floor);
+			// mlx_put_pixel(image, x, horizon - y, colour);
+			mlx_put_pixel(image, x, horizon + y, colour);
+			mlx_put_pixel(image, x, horizon - y, scene->ceiling);
+			// mlx_put_pixel(image, x, horizon + y, scene->floor);
 			++y;
 		}
 		++x;
