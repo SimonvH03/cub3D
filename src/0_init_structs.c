@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/04 02:54:28 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/06 03:10:34 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ static short
 		char *argv_scene)
 {
 	scene->name = argv_scene;
-	scene->ceiling = C_CEILING;// obviously, read these from the scene.cub instead
-	scene->floor = C_FLOOR;
-	if (map_read(scene) == EXIT_FAILURE)
+	if (get_content(scene) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	read_elements(scene);
+	if (read_map(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	scene->recast = true;
 	// print_map(scene);

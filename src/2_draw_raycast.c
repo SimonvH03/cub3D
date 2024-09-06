@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/04 04:13:46 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/05 18:23:07 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void
 			ray->total_x += ray->step_x;
 			ray->pos_x += ray->sign_x;
 		}
-		if (scene->map[ray->pos_y][ray->pos_x])
+		if (scene->map[ray->pos_y][ray->pos_x] > 0)
 			break ;
 	}
 	if (ray->step_y == INFINITY)

@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/04 03:22:22 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/06 02:59:54 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "MLX42/include/MLX42/MLX42_Int.h"
 # include "libft/libft.h"
 # include <unistd.h>
+# include <errno.h>
 # include <fcntl.h>
 # include <math.h>
 
@@ -89,7 +90,7 @@ typedef struct s_scene
 	mlx_image_t		*background;
 	t_camera		camera;
 	char			*name;
-	int				fd;
+	char			**content;
 	int				**map;
 	int				y_max;
 	int				x_max;

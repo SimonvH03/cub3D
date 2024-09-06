@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/04 04:12:12 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/06 03:11:16 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 # define CUB3D_H
 # include "defs.h"
 
+void		error_exit(mlx_errno_t mlx_errno, int custom_errno, char *message);
+
 //// PHASE 0: initialising mlx window, scene and camera
 short		init(t_window *window, char *argv_scene);
-short		map_read(t_scene *scene);
+short		get_content(t_scene *scene);
+void		read_elements(t_scene *scene);
+short		read_map(t_scene *scene);
 void		camera_init(t_camera *camera, int x, int y, char direction);
 short		init_images(t_window *window);
 void		draw_scene_background(t_scene *scene);
@@ -49,6 +53,7 @@ float		ft_abs_float(float value);
 short		ft_sign_float(float value);
 // test
 void		print_camera(t_camera *camera);
+void		print_content(t_scene *scene);
 void		print_map(t_scene *scene);
 void		print_ray(t_ray *ray);
 void		draw_textures(t_window *window);

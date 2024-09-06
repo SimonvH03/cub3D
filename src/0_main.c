@@ -6,11 +6,31 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/04 04:14:41 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/06 01:39:33 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void
+	error_exit(
+		mlx_errno_t mlx_errno,
+		int custom_errno,
+		char *message)
+{
+	if (custom_errno == 0)
+		custom_errno = errno;
+	if (write(STDERR_FILENO, "Error\n", 7) == -1)
+		exit(errno);
+	if (mlx_errno)
+		printf("mlx_errno: %d: %s\n", mlx_errno, mlx_strerror(mlx_errno));
+	if (custom_errno)
+		printf("custom_errno: %d: %s\n", custom_errno, strerror(custom_errno));
+	if (message)
+		printf("message: %s\n", message);
+	// set_them_free();
+	exit(errno);
+}
 
 static void
 	loop_hooks(

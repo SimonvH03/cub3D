@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/03 15:41:19 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/05 18:24:07 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void
 	const float next_y = camera->pos_y + (ft_sign_float(camera->dir_y) / (float)8);
 	const float next_x = camera->pos_x + (ft_sign_float(camera->dir_x) / (float)8);
 
-	if (scene->map[(int)next_y][(int)camera->pos_x] == 0)
+	if (scene->map[(int)next_y][(int)camera->pos_x] <= 0)
 		camera->pos_y += camera->dir_y * camera->movement_speed;
-	if (scene->map[(int)camera->pos_y][(int)next_x] == 0)
+	if (scene->map[(int)camera->pos_y][(int)next_x] <= 0)
 		camera->pos_x += camera->dir_x * camera->movement_speed;
 }
 
@@ -34,9 +34,9 @@ static void
 	const float next_y = camera->pos_y - (ft_sign_float(camera->dir_y) / (float)8);
 	const float next_x = camera->pos_x - (ft_sign_float(camera->dir_x) / (float)8);
 
-	if (scene->map[(int)next_y][(int)camera->pos_x] == 0)
+	if (scene->map[(int)next_y][(int)camera->pos_x] <= 0)
 		camera->pos_y -= camera->dir_y * camera->movement_speed;
-	if (scene->map[(int)camera->pos_y][(int)next_x] == 0)
+	if (scene->map[(int)camera->pos_y][(int)next_x] <= 0)
 		camera->pos_x -= camera->dir_x * camera->movement_speed;
 }
 
@@ -48,9 +48,9 @@ static void
 	const float next_y = camera->pos_y + (ft_sign_float(camera->dir_x) / (float)8);
 	const float next_x = camera->pos_x - (ft_sign_float(camera->dir_y) / (float)8);
 
-	if (scene->map[(int)next_y][(int)camera->pos_x] == 0)
+	if (scene->map[(int)next_y][(int)camera->pos_x] <= 0)
 		camera->pos_y += camera->dir_x * camera->movement_speed;
-	if (scene->map[(int)camera->pos_y][(int)next_x] == 0)
+	if (scene->map[(int)camera->pos_y][(int)next_x] <= 0)
 		camera->pos_x -= camera->dir_y * camera->movement_speed;
 }
 
@@ -62,9 +62,9 @@ static void
 	const float next_y = camera->pos_y - (ft_sign_float(camera->dir_x) / (float)8);
 	const float next_x = camera->pos_x + (ft_sign_float(camera->dir_y) / (float)8);
 
-	if (scene->map[(int)next_y][(int)camera->pos_x] == 0)
+	if (scene->map[(int)next_y][(int)camera->pos_x] <= 0)
 		camera->pos_y -= camera->dir_x * camera->movement_speed;
-	if (scene->map[(int)camera->pos_y][(int)next_x] == 0)
+	if (scene->map[(int)camera->pos_y][(int)next_x] <= 0)
 		camera->pos_x += camera->dir_y * camera->movement_speed;
 }
 

@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/04 04:12:25 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/06 00:32:13 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,6 @@ static short
 	scene->walls = mlx_new_image(window->mlx, WIDTH, HEIGHT);
 	if (scene->walls == NULL)
 		return (EXIT_FAILURE);
-	scene->north_texture = mlx_load_png("png/wall.png");
-	if (scene->north_texture == NULL)
-		return (EXIT_FAILURE);
-	scene->east_texture = scene->north_texture;
-	scene->south_texture = scene->north_texture;
-	scene->west_texture = scene->north_texture;
 	if (mlx_image_to_window(window->mlx, scene->background, 0, 0) < 0)
 		return (EXIT_FAILURE);
 	if (mlx_image_to_window(window->mlx, scene->walls, 0, 0) < 0)

@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 17:21:01 by simon             #+#    #+#             */
-/*   Updated: 2024/09/03 01:54:59 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/05 18:42:43 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ void
 			}
 		printf("\n");
 		++y;
+	}
+}
+
+void
+	print_content(
+		t_scene *scene)
+{
+	int	i;
+
+	i = 0;
+	while (scene->content[i])
+	{
+		printf("%s\n", scene->content[i]);
+		++i;
 	}
 }
 

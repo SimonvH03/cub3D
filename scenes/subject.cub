@@ -1,10 +1,10 @@
-NO ./textures/eagle.xpm
-SO ./textures/greystone.xpm
-WE ./textures/purplestone.xpm
-EA ./textures/redstone.xpm
+NO ./textures/eagle.xpm42
+SO ./textures/greystone.xpm42
+WE ./textures/purplestone.xpm42
+EA ./textures/redstone.xpm42
 
-F 220,100,0
-C 225,30,0
+F 124,96,124
+C 0,32,32
 
         1111111111111111111111111
         1000000000110000000000001
