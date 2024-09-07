@@ -6,11 +6,37 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/04 02:52:31 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/07 01:12:27 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+static void
+	scene_recast(
+		t_window *window)
+{
+	if (mlx_is_key_down(window->mlx, MLX_KEY_R)
+		|| mlx_is_key_down(window->mlx, MLX_KEY_LEFT)
+		|| mlx_is_key_down(window->mlx, MLX_KEY_RIGHT)
+		|| mlx_is_key_down(window->mlx, MLX_KEY_W)
+		|| mlx_is_key_down(window->mlx, MLX_KEY_A)
+		|| mlx_is_key_down(window->mlx, MLX_KEY_S)
+		|| mlx_is_key_down(window->mlx, MLX_KEY_D))
+		window->scene.recast = true;
+}
+
+void
+	game_inputs(
+		void	*param)
+{
+	t_window	*window;
+
+	window = param;
+	wasd_move(window);
+	arrowkey_turn(window);
+	scene_recast(window);
+}
 
 // from main.c / loop_hooks()
 void
@@ -38,46 +64,6 @@ void
 // 	window = param;
 // }
 
-static void
-	scene_recast(
-		t_window *window)
-{
-	if (mlx_is_key_down(window->mlx, MLX_KEY_R)
-		|| mlx_is_key_down(window->mlx, MLX_KEY_LEFT)
-		|| mlx_is_key_down(window->mlx, MLX_KEY_RIGHT)
-		|| mlx_is_key_down(window->mlx, MLX_KEY_W)
-		|| mlx_is_key_down(window->mlx, MLX_KEY_A)
-		|| mlx_is_key_down(window->mlx, MLX_KEY_S)
-		|| mlx_is_key_down(window->mlx, MLX_KEY_D))
-		window->scene.recast = true;
-}
-
-void
-	user_inputs(
-		void	*param)
-{
-	t_window	*window;
-
-	window = param;
-	wasd_move(window);
-	arrowkey_turn(window);
-	scene_recast(window);
-}
-
-// void
-// 	fakelx_replace_string(
-// 		mlx_image_t* strimage,
-// 		const char* str,
-// 		int32_t x,
-// 		int32_t y)
-// {
-// 	reset_image(strimage);
-// 	const size_t len = strlen(str);
-// 	int32_t imgoffset = 0;
-// 	for (size_t i = 0; i < len; i++, imgoffset += FONT_WIDTH)
-// 		mlx_draw_char(strimage, mlx_get_texoffset(str[i]), imgoffset);
-// }
-
 void
 	update_time(
 		void	*param)
@@ -88,5 +74,5 @@ void
 	window->deltatime = mlx_get_time() - window->time;
 	window->time = mlx_get_time();
 	reset_image(window->fps);
-	fakelx_replace_string(window->fps, ft_itoa(1 / window->deltatime));
+	modlx_replace_string(window->fps, ft_itoa(1 / window->deltatime));
 }

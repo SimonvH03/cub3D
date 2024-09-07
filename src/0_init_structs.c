@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/06 03:10:34 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/07 03:47:53 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,21 @@ void
 	camera->movement_speed = MOVEMENT_SPEED;
 	camera->pos_y = pos_y + 0.5;
 	camera->pos_x = pos_x + 0.5;
+	camera->dir_x = 0;
+	camera->dir_y = 0;
 	if (direction == 'N')
-		camera->dir_y = -1,
-		camera->dir_x = 0;
+		camera->dir_y = -1;
 	if (direction == 'E')
-		camera->dir_y = 0,
 		camera->dir_x = 1;
 	if (direction == 'S')
-		camera->dir_y = 1,
-		camera->dir_x = 0;
+		camera->dir_y = 1;
 	if (direction == 'W')
-		camera->dir_y = 0,
 		camera->dir_x = -1;
 	camera->plane_x = CAMERA_PLANE * -camera->dir_y;
-	camera->plane_y = CAMERA_PLANE * camera->dir_x; // maybe change this
+	camera->plane_y = CAMERA_PLANE * camera->dir_x;
 	camera->rm[0] = cos(ROTATION_SPEED);
 	camera->rm[1] = sin(ROTATION_SPEED);
 	camera->sign_rotate = 0;
-	// print_camera(camera);
 }
 
 static short
@@ -55,7 +52,6 @@ static short
 	if (read_map(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	scene->recast = true;
-	// print_map(scene);
 	return (EXIT_SUCCESS);
 }
 
@@ -65,13 +61,25 @@ static short
 		t_window *window)
 {
 	minimap->scene = &window->scene;
-	minimap->side = window->mlx->height / 2.2;
+	minimap->side = window->mlx->height * 0.42;
 	minimap->c_offset = minimap->side / 2;
 	minimap->radius = minimap->side / pow(2, 1.5);
 	minimap->inner_side = minimap->side / 2 - minimap->radius;
-	minimap->overlay = malloc(sizeof(uint32_t) * (pow(minimap->side, 2) + 1) + 1);
-	if (minimap->overlay == NULL)
+	minimap->circle_overlay = malloc(sizeof(uint32_t)
+			* (pow(minimap->side, 2) + 1) + 1);
+	if (minimap->circle_overlay == NULL)
 		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+static short
+	map_init(
+		t_map *map,
+		t_window *window)
+{
+	map->scene = &window->scene;
+	map->side = window->mlx->height * 0.9;
+	map->enabled = false;
 	return (EXIT_SUCCESS);
 }
 
@@ -87,14 +95,14 @@ static short
 	window->mlx = mlx_init(WIDTH, HEIGHT, WINDOW_TITLE, false);
 	if (window->mlx == NULL)
 		return (EXIT_FAILURE);
+	window->view = GAME;
 	window->time = 0;
 	window->deltatime = 0;
-	window->redraw = true;
 	return (EXIT_SUCCESS);
 }
 
 short
-	init(
+	init_structs(
 		t_window *window,
 		char *argv_scene)
 {
@@ -104,7 +112,7 @@ short
 		return (EXIT_FAILURE);
 	if (minimap_init(&window->minimap, window) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (init_images(window) == EXIT_FAILURE)
+	if (map_init(&window->map, window) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	window->fps = mlx_put_string(window->mlx, "0000000", WIDTH / 2 - 50, 100);
 	return (EXIT_SUCCESS);

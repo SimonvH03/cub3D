@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/05 19:41:56 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/07 02:06:59 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static short
 	{
 		if (line[x] == ' ')
 			scene->map[y][x] = -1;
-		else if (line[x] == '1'|| line[x] == '0')
+		else if (line[x] == '1' || line[x] == '0')
 			scene->map[y][x] = line[x] - 48;
 		else if (line[x] == 'N' || line[x] == 'E'
 			|| line[x] == 'S' || line[x] == 'W')

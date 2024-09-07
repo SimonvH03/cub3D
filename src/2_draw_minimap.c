@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/04 03:29:42 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/07 03:55:43 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,18 @@ static void
 	uint32_t	limit;
 
 	pixel_count = 0;
-	src = minimap->overlay;
+	src = minimap->circle_overlay;
 	dst = minimap->walls->pixels;
 	limit = minimap->side * minimap->side;
 	while (pixel_count < limit)
 	{
-		if (src[3] % C_BORDER >> 24 == 0)
+		if (src[3] % C_BORDER == 0)
 			dst[3] = src[3];
 		++pixel_count;
 		src += sizeof(uint32_t);
 		dst += sizeof(uint32_t);
 	}
 }
-
 
 static uint32_t
 	transform_minimap_pixel(
@@ -92,6 +91,4 @@ void
 		++y;
 	}
 	overlay_border(minimap);
-	mlx_put_pixel(minimap->walls, minimap->side / 2, minimap->side / 2, 0x00FF00FF);
-	// minimap->scene->recast = false;
 }

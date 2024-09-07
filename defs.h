@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/06 02:59:54 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/07 03:59:44 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 
 // minimap defaults
 # define MINIMAP_SCALE 42
-# define C_BORDER 0x80002042
-# define C_TRANSPARENT 0xFFFFFF00
+# define C_BORDER 0x42
+# define C_TRANSPARENT 0x00
 
 // scene defaults
 # define TILE_SIZE 100
@@ -42,8 +42,21 @@
 # define ROTATION_SPEED 0.04
 # define CAMERA_PLANE 1
 
-# define FONT_WIDTH 10
-# define FONT_HEIGHT 20
+// menu button selection
+enum	e_select
+{
+	START,
+	SETTINGS,
+	QUIT
+};
+
+// current window view
+enum	e_view
+{
+	MENU,
+	GAME,
+	MAP
+};
 
 typedef struct s_colour_construct
 {
@@ -107,27 +120,49 @@ typedef struct s_minimap
 {
 	mlx_image_t		*walls;
 	mlx_image_t		*player;
-	uint8_t			*overlay;
+	uint8_t			*circle_overlay;
+	t_scene			*scene;
+	uint32_t		side;
+	uint32_t		c_offset;
+	uint32_t		radius;
+	uint32_t		inner_side;
+	bool			enabled;
+}	t_minimap;
+
+typedef struct s_map
+{
+	mlx_image_t		*walls;
+	mlx_image_t		*player;
 	t_scene			*scene;
 	int				side;
-	int				c_offset;
-	int				radius;
-	int				inner_side;
-}	t_minimap;
+	bool			enabled;
+}	t_map;
+
+typedef struct s_menu
+{
+	mlx_image_t		*background;
+	mlx_image_t		*interaction_highlight;
+	enum e_select	selection;
+	mlx_image_t		*button_start_game;
+	mlx_image_t		*button_settings;
+	mlx_image_t		*button_quit;
+}	t_menu;
 
 typedef struct s_window
 {
 	mlx_t			*mlx;
+	enum e_view		view;
 	t_scene			scene;
 	t_minimap		minimap;
+	t_map			map;
+	t_menu			menu;
 	double			time;
 	double			deltatime;
 	mlx_image_t		*fps;
-	bool			redraw;
 }	t_window;
 
 typedef void	(mlx_hook)(void *param);
 typedef void	(mlx_key)(struct mlx_key_data, void *);
-typedef void	(mlx_scroll)(float, float, void *);
+typedef void	(mlx_scroll)(double, double, void *);
 
 #endif

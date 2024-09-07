@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/05 18:23:07 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/07 03:23:24 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ static void
 
 // assuming the camera is not inside a wall;
 //	shift map position to the nearest (total_y <> total_x) grid line;
-//	and check wall type (0 or positive int 1-N)
+//	and check wall type (-1, 0 or positive int 1-N)
 static void
 	cast_ray(
 		t_ray *ray,
 		t_scene *scene)
 {
-	// while (true)// crashes if casting skips walls or camera is not enclosed in walls
+	// while (true)// crashes if camera is not enclosed in walls
 	while (ray->pos_x && ray->pos_x < scene->x_max
 		&& ray->pos_y && ray->pos_y < scene->y_max)
 	{
@@ -67,26 +67,23 @@ static void
 		ray->distance = ray->total_y - ray->step_y;
 	else
 		ray->distance = ft_max_float(ray->total_y - ray->step_y,
-			ray->total_x - ray->step_x);
+				ray->total_x - ray->step_x);
 	ray->distance = ft_max_float(ray->distance, 1);
 }
 
-void
+static void
 	draw_ray(
 		mlx_image_t *image,
-		uint32_t screen_x,
+		uint32_t x,
 		uint32_t wall_height)
 {
-	uint8_t		*pixelstart;
-	uint8_t		*pixelend;
+	uint32_t	y;
 
-	pixelstart = &image->pixels[((image->height / 2 - wall_height)* image->width + screen_x) * sizeof(uint32_t)];
-	// pixelend = &image->pixels[((image->height / 2 + wall_height) * image->width + screen_x) * sizeof(uint32_t)];
-	pixelend = pixelstart + 2 * wall_height * image->width * sizeof(uint32_t);
-	while (pixelstart < pixelend)
+	y = image->height / 2 - wall_height;
+	while (y < image->height / 2 + wall_height)
 	{
-		pixelstart[3] = 0xFF;
-		pixelstart += image->width * sizeof(uint32_t);
+		mlx_put_pixel(image, x, y, C_WALL);
+		++y;
 	}
 }
 
@@ -96,19 +93,19 @@ void
 {
 	t_scene		*scene;
 	t_ray		ray;
-	uint32_t	screen_x;
+	uint32_t	x;
 
 	scene = param;
 	if (scene->recast == false)
 		return ;
 	reset_image(scene->walls);
-	screen_x = 0;
-	while (screen_x < scene->walls->width)
+	x = 0;
+	while (x < scene->walls->width)
 	{
-		ray.camera_x = 2 * screen_x / (float)scene->walls->width - 1;
+		ray.camera_x = 2 * x / (float)scene->walls->width - 1;
 		init_ray(&ray, &scene->camera);
 		cast_ray(&ray, scene);
-		draw_ray(scene->walls, screen_x, scene->walls->height / 2 / ray.distance);
-		++screen_x;
+		draw_ray(scene->walls, x, scene->walls->height / 2 / ray.distance);
+		++x;
 	}
 }
