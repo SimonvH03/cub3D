@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 23:30:28 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 18:39:37 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:51:47 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ static void
 {
 	const double	previous_x = camera->dir_x;
 	const double	prev_plane_x = camera->plane_x;
-	const double	rm[2][2] = {camera->rm[0], camera->rm[1] * camera->sign_rotate,
-		-camera->rm[1] * camera->sign_rotate, camera->rm[0]};
+	const double	rm[2][2] = {camera->rm[0],
+		camera->rm[1] * camera->sign_rotate,
+		-camera->rm[1] * camera->sign_rotate,
+		camera->rm[0]};
 
 	if (camera->sign_rotate == 0)
 		return ;

@@ -6,39 +6,11 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/08 18:45:26 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:52:34 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void
-	camera_init(
-		t_camera *camera,
-		int pos_y,
-		int pos_x,
-		char cardinal)
-{
-	camera->rotation_speed = ROTATION_SPEED;
-	camera->movement_speed = MOVEMENT_SPEED;
-	camera->pos_y = pos_y + 0.5;
-	camera->pos_x = pos_x + 0.5;
-	camera->dir_x = 0;
-	camera->dir_y = 0;
-	if (cardinal == 'N')
-		camera->dir_y = -1;
-	if (cardinal == 'E')
-		camera->dir_x = 1;
-	if (cardinal == 'S')
-		camera->dir_y = 1;
-	if (cardinal == 'W')
-		camera->dir_x = -1;
-	camera->plane_x = CAMERA_PLANE * -camera->dir_y;
-	camera->plane_y = CAMERA_PLANE * camera->dir_x;
-	camera->rm[0] = cos(ROTATION_SPEED);
-	camera->rm[1] = sin(ROTATION_SPEED);
-	camera->sign_rotate = 0;
-}
 
 static short
 	scene_init(
@@ -85,13 +57,9 @@ static short
 	map->scene = &window->scene;
 	map->enabled = false;
 	if (map->scene->x_max > map->scene->y_max)
-	{
 		map->scale = (map->scene->x_max + 2) / (double)window->mlx->width;
-	}
 	else
-	{
 		map->scale = (map->scene->y_max + 2) / (double)window->mlx->height;
-	}
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 18:40:01 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:54:04 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ short		init_images(t_window *window);
 short		get_content(t_scene *scene);
 void		read_elements(t_scene *scene);
 short		read_map(t_scene *scene);
-void		camera_init(t_camera *camera, int pos_x, int pos_y, char cardinal);
 short		init_images(t_window *window);
 void		draw_scene_background(t_scene *scene);
 void		draw_minimap_circle_overlay(t_minimap *minimap);

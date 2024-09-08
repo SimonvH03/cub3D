@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 18:45:38 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:51:01 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static short
 			window->scene.player_texture);
 	if (minimap->player == NULL)
 		return (EXIT_FAILURE);
-	// mlx_delete_xpm42(tempx);
 	if (mlx_image_to_window(window->mlx, minimap->walls,
 			window->mlx->width - minimap->side * 1.2,
 			window->mlx->height - minimap->side * 1.2) < 0)
@@ -77,8 +76,8 @@ static short
 	if (map->player == NULL)
 		return (EXIT_FAILURE);
 	if (mlx_image_to_window(window->mlx, map->player,
-		(window->mlx->width / 2),
-		(window->mlx->height / 2)) < 0)
+			(window->mlx->width / 2),
+			(window->mlx->height / 2)) < 0)
 		return (EXIT_FAILURE);
 	map->x_offset = window->mlx->width - map->scene->x_max / map->scale;
 	map->y_offset = window->mlx->height - map->scene->y_max / map->scale;

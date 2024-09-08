@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 18:39:37 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:50:41 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void
 	draw_map_player(
 		t_map *map)
 {
-
 	uint32_t	y;
 	uint32_t	x;
 	uint32_t	colour;
@@ -76,6 +75,8 @@ void
 		}
 		++y;
 	}
-	map->player->instances[0].x = map->scene->camera.pos_x / map->scale + map->x_offset;
-	map->player->instances[0].y = map->scene->camera.pos_y / map->scale + map->y_offset;
+	map->player->instances[0].x = map->x_offset;
+	map->player->instances[0].y = map->y_offset;
+	map->player->instances[0].x += map->scene->camera.pos_x / map->scale;
+	map->player->instances[0].y += map->scene->camera.pos_y / map->scale;
 }
