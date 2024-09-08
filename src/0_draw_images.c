@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 03:26:33 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:39:37 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void
 		y = 0;
 		while (y < minimap->side)
 		{
-			if (is_in_circle(x - (float)minimap->radius,
-					y - (float)minimap->radius,
+			if (is_in_circle(x - (double)minimap->radius,
+					y - (double)minimap->radius,
 					minimap->radius) == false)
 				mlx_put_pixel(minimap->walls, x, y, C_TRANSPARENT);
-			else if (is_in_circle(x - (float)minimap->radius,
-					y - (float)minimap->radius,
+			else if (is_in_circle(x - (double)minimap->radius,
+					y - (double)minimap->radius,
 					minimap->radius * 39 / 42) == false)
 				mlx_put_pixel(minimap->walls, x, y, C_TRANSLUCENT);
 			else
@@ -72,19 +72,18 @@ void
 static uint32_t
 	transform_map_pixel(
 		t_map *map,
-		float x,
-		float y,
-		float map_scale)
+		double x,
+		double y)
 {
 	t_scene		*scene;
 
 	scene = map->scene;
-	x -= map->walls->width / (float)2;
-	y -= map->walls->height / (float)2;
-	x *= map_scale;
-	y *= map_scale;
-	x += scene->x_max / (float)2;
-	y += scene->y_max / (float)2;
+	x -= map->walls->width / (double)2;
+	y -= map->walls->height / (double)2;
+	x *= map->scale;
+	y *= map->scale;
+	x += scene->x_max / (double)2;
+	y += scene->y_max / (double)2;
 	if (x < 0 || x >= scene->x_max
 		|| y < 0 || y >= scene->y_max)
 		return (C_TRANSLUCENT);
@@ -102,19 +101,14 @@ void
 	uint32_t	y;
 	uint32_t	x;
 	uint32_t	colour;
-	float		map_scale;
 
-	if (map->scene->y_max > map->scene->x_max)
-		map_scale = (map->scene->y_max + 2) / (float)map->walls->height;
-	else
-		map_scale = (map->scene->x_max + 2) / (float)map->walls->width;
 	y = 0;
 	while (y < map->walls->height)
 	{
 		x = 0;
 		while (x < map->walls->width)
 		{
-			colour = transform_map_pixel(map, x, y, map_scale);
+			colour = transform_map_pixel(map, x, y);
 			mlx_put_pixel(map->walls, x, y, colour);
 			++x;
 		}

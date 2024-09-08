@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/08 03:19:53 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:45:26 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,14 @@ static short
 {
 	map->scene = &window->scene;
 	map->enabled = false;
+	if (map->scene->x_max > map->scene->y_max)
+	{
+		map->scale = (map->scene->x_max + 2) / (double)window->mlx->width;
+	}
+	else
+	{
+		map->scale = (map->scene->y_max + 2) / (double)window->mlx->height;
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -118,6 +126,5 @@ short
 		return (EXIT_FAILURE);
 	if (map_init(&window->map, window) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	window->fps = mlx_put_string(window->mlx, "0000000", WIDTH / 2 - 50, 100);
 	return (EXIT_SUCCESS);
 }

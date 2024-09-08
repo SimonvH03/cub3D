@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 03:13:44 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:40:01 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,32 +67,32 @@ typedef struct s_colour_construct
 
 typedef struct s_ray
 {
-	float			camera_x;
-	float			dir_y;
-	float			dir_x;
-	float			step_y;
-	float			step_x;
-	float			total_y;
-	float			total_x;
+	double			camera_x;
+	double			dir_y;
+	double			dir_x;
+	double			step_y;
+	double			step_x;
+	double			total_y;
+	double			total_x;
 	short			sign_y;
 	short			sign_x;
 	int				pos_y;
 	int				pos_x;
-	float			distance;
+	double			distance;
 }	t_ray;
 
 typedef struct s_camera
 {
-	float			pos_y;
-	float			pos_x;
-	float			dir_y;
-	float			dir_x;
-	float			plane_y;
-	float			plane_x;
-	float			rm[2];
+	double			pos_y;
+	double			pos_x;
+	double			dir_y;
+	double			dir_x;
+	double			plane_y;
+	double			plane_x;
+	double			rm[2];
 	short			sign_rotate;
-	float			rotation_speed;
-	float			movement_speed;
+	double			rotation_speed;
+	double			movement_speed;
 }	t_camera;
 
 // free: scene->map
@@ -132,6 +132,11 @@ typedef struct s_map
 	mlx_image_t		*walls;
 	mlx_image_t		*player;
 	t_scene			*scene;
+	uint32_t		width;
+	uint32_t		height;
+	uint32_t		x_offset;
+	uint32_t		y_offset;
+	double			scale;
 	bool			enabled;
 }	t_map;
 

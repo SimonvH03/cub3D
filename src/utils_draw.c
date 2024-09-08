@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 22:07:27 by simon             #+#    #+#             */
-/*   Updated: 2024/09/04 03:02:57 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:39:37 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void
 
 uint32_t
 	gradient(
-		float ratio,
+		double ratio,
 		uint32_t start,
 		uint32_t end)
 {

@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 03:23:51 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:45:38 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,21 @@ static short
 		return (EXIT_FAILURE);
 	if (mlx_image_to_window(window->mlx, map->walls, 0, 0) < 0)
 		return (EXIT_FAILURE);
-	map->player = mlx_texture_to_image(window->mlx,
-			window->scene.player_texture);
+	map->player = mlx_new_image(window->mlx,
+			window->scene.player_texture->width * sqrt(2),
+			window->scene.player_texture->height * sqrt(2));
 	if (map->player == NULL)
 		return (EXIT_FAILURE);
 	if (mlx_image_to_window(window->mlx, map->player,
 		(window->mlx->width / 2),
 		(window->mlx->height / 2)) < 0)
 		return (EXIT_FAILURE);
+	map->x_offset = window->mlx->width - map->scene->x_max / map->scale;
+	map->y_offset = window->mlx->height - map->scene->y_max / map->scale;
+	map->x_offset -= map->player->width;
+	map->y_offset -= map->player->height;
+	map->x_offset /= 2;
+	map->y_offset /= 2;
 	map->player->enabled = false;
 	map->walls->enabled = false;
 	return (EXIT_SUCCESS);
@@ -99,5 +106,6 @@ short
 	draw_map_walls(&window->map);
 	// init_menu();
 	// init_hud();
+	window->fps = mlx_put_string(window->mlx, "0000000", WIDTH / 2 - 50, 100);
 	return (EXIT_SUCCESS);
 }

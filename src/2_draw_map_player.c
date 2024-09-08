@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 03:55:49 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:39:37 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,31 @@ void
 static uint32_t
 	transform_player_pixel(
 		t_map *map,
-		float x,
-		float y)
+		double x,
+		double y)
 {
-	t_scene		*scene;
-	t_camera	*camera;
-	float		prev_x;
-	int			pixel_index;
-	uint8_t		*pixelstart;
+	t_camera		*camera;
+	mlx_texture_t	*texture;
+	double			prev_x;
+	uint32_t		index;
+	uint8_t			*pixelstart;
 
-	scene = map->scene;
+	texture = map->scene->player_texture;
 	camera = &map->scene->camera;
-
-	x -= map->player->width / (float)2;
-	y -= map->player->height / (float)2;
-
+	x -= map->player->width / (double)2;
+	y -= map->player->height / (double)2;
 	prev_x = x;
-	x = prev_x * camera->plane_x + y * -camera->plane_y;
-	y = prev_x * camera->plane_y + y * camera->plane_x;
-
-	x += map->player->width / (float)2;
-	y += map->player->height / (float)2;
-
-	if (x > scene->player_texture->width || y > scene->player_texture->height)
-		return (0x00);
-	pixel_index = (y * scene->player_texture->width + x) * scene->player_texture->bytes_per_pixel;
-	pixelstart = &scene->player_texture->pixels[pixel_index];
-	return ((uint32_t)(pixelstart[0] << 24 | pixelstart[1] << 16 | pixelstart[2] << 8 | pixelstart[3]));
+	x = prev_x * camera->plane_x + y * camera->plane_y;
+	y = prev_x * -camera->plane_y + y * camera->plane_x;
+	x += texture->width / (double)2;
+	y += texture->height / (double)2;
+	if (x < 0 || x >= texture->width
+		|| y < 0 || y >= texture->height)
+		return (0x00000000);
+	index = ((int)y * texture->width + (int)x) * sizeof(uint32_t);
+	pixelstart = &texture->pixels[index];
+	return ((uint32_t)(pixelstart[0] << 24 | pixelstart[1] << 16
+		| pixelstart[2] << 8 | pixelstart[3]));
 }
 
 void
@@ -78,4 +76,6 @@ void
 		}
 		++y;
 	}
+	map->player->instances[0].x = map->scene->camera.pos_x / map->scale + map->x_offset;
+	map->player->instances[0].y = map->scene->camera.pos_y / map->scale + map->y_offset;
 }

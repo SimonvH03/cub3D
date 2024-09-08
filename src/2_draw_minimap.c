@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 02:56:16 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:39:37 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ static void
 static uint32_t
 	transform_minimap_pixel(
 		t_minimap *minimap,
-		float x,
-		float y)
+		double x,
+		double y)
 {
 	t_scene		*scene;
 	t_camera	*camera;
-	float		prev_x;
+	double		prev_x;
 
 	scene = minimap->scene;
 	camera = &minimap->scene->camera;

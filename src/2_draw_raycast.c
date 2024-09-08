@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 01:57:02 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:39:37 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static void
 	ray->pos_x = (int)camera->pos_x;
 	ray->dir_y = camera->dir_y + camera->plane_y * ray->camera_x;
 	ray->dir_x = camera->dir_x + camera->plane_x * ray->camera_x;
-	ray->step_y = ft_abs_float(1 / ray->dir_y);
-	ray->step_x = ft_abs_float(1 / ray->dir_x);
-	ray->sign_y = ft_sign_float(ray->dir_y);
-	ray->sign_x = ft_sign_float(ray->dir_x);
+	ray->step_y = ft_abs_double(1 / ray->dir_y);
+	ray->step_x = ft_abs_double(1 / ray->dir_x);
+	ray->sign_y = ft_sign_double(ray->dir_y);
+	ray->sign_x = ft_sign_double(ray->dir_x);
 	if (ray->sign_y > 0)
 		ray->total_y = ((ray->pos_y + 1 - camera->pos_y) * ray->step_y);
 	else
@@ -66,9 +66,9 @@ static void
 	else if (ray->step_x == INFINITY)
 		ray->distance = ray->total_y - ray->step_y;
 	else
-		ray->distance = ft_max_float(ray->total_y - ray->step_y,
+		ray->distance = ft_max_double(ray->total_y - ray->step_y,
 				ray->total_x - ray->step_x);
-	ray->distance = ft_max_float(ray->distance, 1);
+	ray->distance = ft_max_double(ray->distance, 1);
 }
 
 static void
@@ -100,7 +100,7 @@ void
 	x = 0;
 	while (x < scene->walls->width)
 	{
-		ray.camera_x = 2 * x / (float)scene->walls->width - 1;
+		ray.camera_x = 2 * x / (double)scene->walls->width - 1;
 		init_ray(&ray, &scene->camera);
 		cast_ray(&ray, scene);
 		draw_ray(scene->walls, x, scene->walls->height / 2 / ray.distance);
