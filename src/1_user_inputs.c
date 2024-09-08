@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/07 01:12:27 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 02:23:15 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,17 @@ static void
 
 void
 	game_inputs(
-		void	*param)
+		t_window	*window)
 {
-	t_window	*window;
-
-	window = param;
 	wasd_move(window);
 	arrowkey_turn(window);
 	scene_recast(window);
+}
+
+void
+	menu_inputs(
+		t_window	*window)
+{
 }
 
 // from main.c / loop_hooks()
@@ -51,6 +54,11 @@ void
 	{
 		mlx_close_window(window->mlx);
 	}
+	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS
+		&& window->view == GAME)
+	{
+		toggle_maps(&window->minimap, &window->map);
+	}
 }
 
 // void
@@ -63,16 +71,3 @@ void
 
 // 	window = param;
 // }
-
-void
-	update_time(
-		void	*param)
-{
-	t_window	*window;
-
-	window = param;
-	window->deltatime = mlx_get_time() - window->time;
-	window->time = mlx_get_time();
-	reset_image(window->fps);
-	modlx_replace_string(window->fps, ft_itoa(1 / window->deltatime));
-}

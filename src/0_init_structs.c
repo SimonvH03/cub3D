@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/07 03:47:53 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 02:56:59 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void
 		t_camera *camera,
 		int pos_y,
 		int pos_x,
-		char direction)
+		char cardinal)
 {
 	camera->rotation_speed = ROTATION_SPEED;
 	camera->movement_speed = MOVEMENT_SPEED;
@@ -25,13 +25,13 @@ void
 	camera->pos_x = pos_x + 0.5;
 	camera->dir_x = 0;
 	camera->dir_y = 0;
-	if (direction == 'N')
+	if (cardinal == 'N')
 		camera->dir_y = -1;
-	if (direction == 'E')
+	if (cardinal == 'E')
 		camera->dir_x = 1;
-	if (direction == 'S')
+	if (cardinal == 'S')
 		camera->dir_y = 1;
-	if (direction == 'W')
+	if (cardinal == 'W')
 		camera->dir_x = -1;
 	camera->plane_x = CAMERA_PLANE * -camera->dir_y;
 	camera->plane_y = CAMERA_PLANE * camera->dir_x;
@@ -61,14 +61,13 @@ static short
 		t_window *window)
 {
 	minimap->scene = &window->scene;
-	minimap->side = window->mlx->height * 0.42;
-	minimap->c_offset = minimap->side / 2;
-	minimap->radius = minimap->side / pow(2, 1.5);
-	minimap->inner_side = minimap->side / 2 - minimap->radius;
+	minimap->side = window->mlx->height * 0.3;
+	minimap->radius = minimap->side / 2;
 	minimap->circle_overlay = malloc(sizeof(uint32_t)
 			* (pow(minimap->side, 2) + 1) + 1);
 	if (minimap->circle_overlay == NULL)
 		return (EXIT_FAILURE);
+	minimap->enabled = true;
 	return (EXIT_SUCCESS);
 }
 
@@ -78,7 +77,6 @@ static short
 		t_window *window)
 {
 	map->scene = &window->scene;
-	map->side = window->mlx->height * 0.9;
 	map->enabled = false;
 	return (EXIT_SUCCESS);
 }

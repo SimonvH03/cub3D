@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/07 03:59:44 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 02:56:01 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@
 
 // minimap defaults
 # define MINIMAP_SCALE 42
-# define C_BORDER 0x42
 # define C_TRANSPARENT 0x00
+# define C_TRANSLUCENT 0x42
 
-// scene defaults
-# define TILE_SIZE 100
-# define C_CEILING 0x000000FF
-# define C_FLOOR 0x383338FF
+// map defaults
+# define C_CEILING 0x000000BB
+# define C_FLOOR 0x383338BB
 # define C_WALL 0xBF6629FF
 
 // camera defaults
@@ -123,9 +122,7 @@ typedef struct s_minimap
 	uint8_t			*circle_overlay;
 	t_scene			*scene;
 	uint32_t		side;
-	uint32_t		c_offset;
 	uint32_t		radius;
-	uint32_t		inner_side;
 	bool			enabled;
 }	t_minimap;
 
@@ -134,7 +131,6 @@ typedef struct s_map
 	mlx_image_t		*walls;
 	mlx_image_t		*player;
 	t_scene			*scene;
-	int				side;
 	bool			enabled;
 }	t_map;
 

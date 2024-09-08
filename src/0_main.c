@@ -6,11 +6,24 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/07 03:44:02 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 02:17:38 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+static void
+	update_time(
+		void	*param)
+{
+	t_window	*window;
+
+	window = param;
+	window->deltatime = mlx_get_time() - window->time;
+	window->time = mlx_get_time();
+	reset_image(window->fps);
+	modlx_replace_string(window->fps, ft_itoa(1 / window->deltatime));
+}
 
 static void
 	view_manager(
@@ -21,17 +34,13 @@ static void
 	window = param;
 	if (window->view == GAME)
 	{
-		// if (window->map.enabled == true)
-		// 	map_inputs(window);
-		// else
-			game_inputs(window);
+		game_inputs(window);
 		if (window->scene.recast == true)
 		{
 			draw_raycast(&window->scene);
-			// if (window->map.enabled == true)
-			// 	draw_map(&window->map);
-			// else
-				draw_minimap(&window->minimap);
+			draw_minimap(&window->minimap);
+			if (window->map.enabled == true)
+				draw_map_player(&window->map);
 		}
 	}
 	// else if (window->view == MENU)

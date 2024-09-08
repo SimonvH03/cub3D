@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/07 03:56:46 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 02:21:48 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,27 @@ short		init_images(t_window *window);
 short		get_content(t_scene *scene);
 void		read_elements(t_scene *scene);
 short		read_map(t_scene *scene);
-void		camera_init(t_camera *camera, int x, int y, char direction);
+void		camera_init(t_camera *camera, int pos_x, int pos_y, char cardinal);
 short		init_images(t_window *window);
 void		draw_scene_background(t_scene *scene);
 void		draw_minimap_circle_overlay(t_minimap *minimap);
+void		draw_map_walls(t_map *map);
 
-//// PHASE 1: interpreting user input to change camera data
-mlx_hook	update_time;
+//// PHASE 1: interpreting user input to change menu, game and camera view
 mlx_key		keyhook;
 mlx_scroll	scrollhook;
-mlx_hook	game_inputs;
+void		game_inputs(t_window *window);
+void		menu_inputs(t_window *window);
+
 void		wasd_move(t_window *window);
 void		arrowkey_turn(t_window *window);
-mlx_hook	map_inputs;
-mlx_hook	menu_inputs;
+void		toggle_maps(t_minimap *minimap, t_map *map);
 
-//// PHASE 2: drawing the raycast
-mlx_hook	draw_minimap;
-mlx_hook	draw_raycast;
+//// PHASE 2: drawing the current view
+void		draw_raycast(t_scene *scene);
+void		draw_minimap(t_minimap *minimap);
+void		draw_map_player(t_map *map);
+
 //// UTILS
 // scene
 int			scene_free(t_scene *scene);

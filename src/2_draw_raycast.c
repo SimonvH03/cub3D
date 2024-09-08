@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/07 03:23:24 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 01:57:02 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,11 @@ static void
 
 void
 	draw_raycast(
-		void *param)
+		t_scene *scene)
 {
-	t_scene		*scene;
 	t_ray		ray;
 	uint32_t	x;
 
-	scene = param;
 	if (scene->recast == false)
 		return ;
 	reset_image(scene->walls);
