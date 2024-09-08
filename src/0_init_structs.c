@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/08 02:56:59 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 03:19:53 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,15 @@ static short
 		t_scene *scene,
 		char *argv_scene)
 {
+	xpm_t	*tempx;
+
 	scene->name = argv_scene;
 	if (get_content(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	tempx = mlx_load_xpm42("./textures/player.xpm42");
+	if (tempx == NULL)
+		return (EXIT_FAILURE);
+	scene->player_texture = &tempx->texture;
 	read_elements(scene);
 	if (read_map(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);

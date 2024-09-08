@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 02:56:01 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 03:13:44 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_scene
 	mlx_texture_t	*east_texture;
 	mlx_texture_t	*south_texture;
 	mlx_texture_t	*west_texture;
+	mlx_texture_t	*player_texture;
 	uint32_t		floor;
 	uint32_t		ceiling;
 	bool			recast;

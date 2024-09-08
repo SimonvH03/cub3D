@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 02:59:53 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 03:26:33 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ static uint32_t
 	t_scene		*scene;
 
 	scene = map->scene;
-	x -= map->walls->width / 2;
-	y -= map->walls->height / 2;
+	x -= map->walls->width / (float)2;
+	y -= map->walls->height / (float)2;
 	x *= map_scale;
 	y *= map_scale;
-	x += scene->x_max / 2;
-	y += scene->y_max / 2;
+	x += scene->x_max / (float)2;
+	y += scene->y_max / (float)2;
 	if (x < 0 || x >= scene->x_max
 		|| y < 0 || y >= scene->y_max)
 		return (C_TRANSLUCENT);
@@ -120,5 +120,4 @@ void
 		}
 		++y;
 	}
-	
 }

@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 02:57:22 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/08 03:23:51 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,11 @@ static short
 			minimap->side, minimap->side);
 	if (minimap->walls == NULL)
 		return (EXIT_FAILURE);
-	tempx = mlx_load_xpm42("./textures/player.xpm42");
-	if (tempx == NULL)
-		return (EXIT_FAILURE);
-	minimap->player = mlx_texture_to_image(window->mlx, &tempx->texture);
+	minimap->player = mlx_texture_to_image(window->mlx,
+			window->scene.player_texture);
 	if (minimap->player == NULL)
 		return (EXIT_FAILURE);
-	mlx_delete_xpm42(tempx);
+	// mlx_delete_xpm42(tempx);
 	if (mlx_image_to_window(window->mlx, minimap->walls,
 			window->mlx->width - minimap->side * 1.2,
 			window->mlx->height - minimap->side * 1.2) < 0)
@@ -73,14 +71,15 @@ static short
 		return (EXIT_FAILURE);
 	if (mlx_image_to_window(window->mlx, map->walls, 0, 0) < 0)
 		return (EXIT_FAILURE);
-	// map->player = mlx_new_image(window->mlx, map->side / 42, map->side / 42);
-	// if (map->player == NULL)
-	// 	return (EXIT_FAILURE);
-	// if (mlx_image_to_window(window->mlx, map->player,
-	// 	(window->mlx->width / 2),
-	// 	(window->mlx->height / 2)) < 0)
-		// return (EXIT_FAILURE);
-	// map->player->enabled = false;
+	map->player = mlx_texture_to_image(window->mlx,
+			window->scene.player_texture);
+	if (map->player == NULL)
+		return (EXIT_FAILURE);
+	if (mlx_image_to_window(window->mlx, map->player,
+		(window->mlx->width / 2),
+		(window->mlx->height / 2)) < 0)
+		return (EXIT_FAILURE);
+	map->player->enabled = false;
 	map->walls->enabled = false;
 	return (EXIT_SUCCESS);
 }
