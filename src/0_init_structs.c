@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/09 23:49:37 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 00:49:56 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static short
 	window->view = GAME;
 	window->time = 0;
 	window->deltatime = 0;
+	window->scene.camera.aspect_ratio = 1.0 * WIDTH / HEIGHT;
 	return (EXIT_SUCCESS);
 }
 

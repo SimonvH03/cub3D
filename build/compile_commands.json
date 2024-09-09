@@ -1,0 +1,112 @@
+[
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/mlx_cursor.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/mlx_cursor.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/mlx_cursor.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/mlx_exit.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/mlx_exit.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/mlx_exit.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/mlx_images.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/mlx_images.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/mlx_images.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/mlx_init.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/mlx_init.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/mlx_init.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/mlx_keys.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/mlx_keys.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/mlx_keys.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/mlx_loop.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/mlx_loop.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/mlx_loop.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/mlx_monitor.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/mlx_monitor.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/mlx_monitor.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/mlx_mouse.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/mlx_mouse.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/mlx_mouse.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/mlx_put_pixel.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/mlx_put_pixel.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/mlx_put_pixel.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/mlx_window.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/mlx_window.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/mlx_window.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/utils/mlx_error.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/utils/mlx_error.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/utils/mlx_error.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/utils/mlx_list.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/utils/mlx_list.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/utils/mlx_list.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/utils/mlx_utils.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/utils/mlx_utils.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/utils/mlx_utils.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/utils/mlx_compare.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/utils/mlx_compare.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/utils/mlx_compare.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/font/mlx_font.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/font/mlx_font.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/font/mlx_font.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/textures/mlx_png.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/textures/mlx_png.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/textures/mlx_png.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/textures/mlx_texture.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/textures/mlx_texture.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/textures/mlx_texture.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/src/textures/mlx_xpm42.c.o -c /home/simon/Core/W/Cub3d/MLX42/src/textures/mlx_xpm42.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/src/textures/mlx_xpm42.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/lib/png/lodepng.c.o -c /home/simon/Core/W/Cub3d/MLX42/lib/png/lodepng.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/lib/png/lodepng.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/lib/glad/glad.c.o -c /home/simon/Core/W/Cub3d/MLX42/lib/glad/glad.c",
+  "file": "/home/simon/Core/W/Cub3d/MLX42/lib/glad/glad.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/mlx_vert_shader.c.o -c /home/simon/Core/W/Cub3d/build/mlx_vert_shader.c",
+  "file": "/home/simon/Core/W/Cub3d/build/mlx_vert_shader.c"
+},
+{
+  "directory": "/home/simon/Core/W/Cub3d/build",
+  "command": "/usr/bin/cc  -I/home/simon/Core/W/Cub3d/MLX42/include -g -fPIC   -D LODEPNG_NO_COMPILE_ENCODER -D LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -D NDEBUG -Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers -Ofast -std=c11 -o CMakeFiles/mlx42.dir/mlx_frag_shader.c.o -c /home/simon/Core/W/Cub3d/build/mlx_frag_shader.c",
+  "file": "/home/simon/Core/W/Cub3d/build/mlx_frag_shader.c"
+}
+]

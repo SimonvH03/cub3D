@@ -5,5 +5,6 @@
 		"mlx42.h": "c",
 		"lodepng.h": "c",
 		"glad.h": "c"
-	}
+	},
+	"cmake.sourceDirectory": "/home/simon/Core/W/Cub3d/MLX42"
 }

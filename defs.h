@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/10 00:34:56 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 01:15:07 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 // mlx window
 # define WINDOW_TITLE "cub3d"
 # define WIDTH 2560
-# define HEIGHT 1440
+# define HEIGHT 720
 
 // minimap defaults
 # define MINIMAP_SCALE 42
@@ -40,7 +40,8 @@
 // camera defaults
 # define MOVEMENT_SPEED 5
 # define ROTATION_SPEED 3
-# define CAMERA_PLANE 1.0 * 16/9
+// ratio of cube height / width
+# define CAMERA_PLANE 1
 
 // menu button selection
 enum	e_select
@@ -92,6 +93,7 @@ typedef struct s_ray
 
 typedef struct s_camera
 {
+	float			aspect_ratio;
 	float			pos_y;
 	float			pos_x;
 	float			dir_y;

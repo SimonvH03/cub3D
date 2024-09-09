@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/10 00:12:38 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 01:15:22 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void
 		camera->dir_y = 1;
 	if (cardinal == 'W')
 		camera->dir_x = -1;
-	camera->plane_x = CAMERA_PLANE * -camera->dir_y;
-	camera->plane_y = CAMERA_PLANE * camera->dir_x;
+	camera->plane_x = CAMERA_PLANE * camera->aspect_ratio * -camera->dir_y;
+	camera->plane_y = CAMERA_PLANE * camera->aspect_ratio * camera->dir_x;
 	camera->movement_speed = MOVEMENT_SPEED;
 	camera->rotation_cosin[0] = cos(ROTATION_SPEED);
 	camera->rotation_cosin[1] = sin(ROTATION_SPEED);

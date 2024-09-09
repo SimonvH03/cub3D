@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 23:30:28 by simon             #+#    #+#             */
-/*   Updated: 2024/09/09 19:04:22 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 01:15:25 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void
 		return ;
 	camera->dir_x = camera->dir_x * rm[0][0] + camera->dir_y * rm[0][1];
 	camera->dir_y = previous_x * rm[1][0] + camera->dir_y * rm[1][1];
-	camera->plane_x = CAMERA_PLANE * -camera->dir_y;
-	camera->plane_y = CAMERA_PLANE * camera->dir_x;
+	camera->plane_x = CAMERA_PLANE * camera->aspect_ratio * -camera->dir_y;
+	camera->plane_y = CAMERA_PLANE * camera->aspect_ratio * camera->dir_x;
 	camera->sign_rotate = 0;
 }
 
