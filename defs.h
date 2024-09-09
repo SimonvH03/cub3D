@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 18:40:01 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 00:34:56 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,17 @@
 # define MINIMAP_SCALE 42
 # define C_TRANSPARENT 0x00
 # define C_TRANSLUCENT 0x42
+# define C_CEILING 0x000000BB
+# define C_FLOOR 0x42424280
+# define C_WALL 0xBF6629FF
 
 // map defaults
-# define C_CEILING 0x000000BB
-# define C_FLOOR 0x383338BB
-# define C_WALL 0xBF6629FF
+# define C_ERROR 0x00FF80FF
 
 // camera defaults
 # define MOVEMENT_SPEED 5
-# define ROTATION_SPEED 0.04
-# define CAMERA_PLANE 1
+# define ROTATION_SPEED 3
+# define CAMERA_PLANE 1.0 * 16/9
 
 // menu button selection
 enum	e_select
@@ -57,6 +58,13 @@ enum	e_view
 	MAP
 };
 
+// raycasting DDA wall hit
+enum	e_hit_axis
+{
+	HORIZONTAL,
+	VERTICAL
+};
+
 typedef struct s_colour_construct
 {
 	unsigned char	r;
@@ -67,32 +75,32 @@ typedef struct s_colour_construct
 
 typedef struct s_ray
 {
-	double			camera_x;
-	double			dir_y;
-	double			dir_x;
-	double			step_y;
-	double			step_x;
-	double			total_y;
-	double			total_x;
-	short			sign_y;
-	short			sign_x;
-	int				pos_y;
+	float			camera_x;
 	int				pos_x;
-	double			distance;
+	int				pos_y;
+	float			dir_x;
+	float			dir_y;
+	float			step_x;
+	float			step_y;
+	float			total_x;
+	float			total_y;
+	short			sign_x;
+	short			sign_y;
+	bool			hit_type;
+	float			distance;
 }	t_ray;
 
 typedef struct s_camera
 {
-	double			pos_y;
-	double			pos_x;
-	double			dir_y;
-	double			dir_x;
-	double			plane_y;
-	double			plane_x;
-	double			rm[2];
+	float			pos_y;
+	float			pos_x;
+	float			dir_y;
+	float			dir_x;
+	float			plane_y;
+	float			plane_x;
 	short			sign_rotate;
-	double			rotation_speed;
-	double			movement_speed;
+	float			rotation_cosin[2];
+	float			movement_speed;
 }	t_camera;
 
 // free: scene->map
@@ -136,7 +144,7 @@ typedef struct s_map
 	uint32_t		height;
 	uint32_t		x_offset;
 	uint32_t		y_offset;
-	double			scale;
+	float			scale;
 	bool			enabled;
 }	t_map;
 
@@ -158,8 +166,8 @@ typedef struct s_window
 	t_minimap		minimap;
 	t_map			map;
 	t_menu			menu;
-	double			time;
-	double			deltatime;
+	float			time;
+	float			deltatime;
 	mlx_image_t		*fps;
 }	t_window;
 

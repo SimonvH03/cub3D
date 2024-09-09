@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 18:39:37 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/09 00:06:57 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void
 		y = 0;
 		while (y < minimap->side)
 		{
-			if (is_in_circle(x - (double)minimap->radius,
-					y - (double)minimap->radius,
+			if (is_in_circle(x - (float)minimap->radius,
+					y - (float)minimap->radius,
 					minimap->radius) == false)
 				mlx_put_pixel(minimap->walls, x, y, C_TRANSPARENT);
-			else if (is_in_circle(x - (double)minimap->radius,
-					y - (double)minimap->radius,
+			else if (is_in_circle(x - (float)minimap->radius,
+					y - (float)minimap->radius,
 					minimap->radius * 39 / 42) == false)
 				mlx_put_pixel(minimap->walls, x, y, C_TRANSLUCENT);
 			else
@@ -70,20 +70,20 @@ void
 }
 
 static uint32_t
-	transform_map_pixel(
+	get_map_pixel_colour(
 		t_map *map,
-		double x,
-		double y)
+		float x,
+		float y)
 {
 	t_scene		*scene;
 
 	scene = map->scene;
-	x -= map->walls->width / (double)2;
-	y -= map->walls->height / (double)2;
+	x -= map->walls->width / (float)2;
+	y -= map->walls->height / (float)2;
 	x *= map->scale;
 	y *= map->scale;
-	x += scene->x_max / (double)2;
-	y += scene->y_max / (double)2;
+	x += scene->x_max / (float)2;
+	y += scene->y_max / (float)2;
 	if (x < 0 || x >= scene->x_max
 		|| y < 0 || y >= scene->y_max)
 		return (C_TRANSLUCENT);
@@ -108,7 +108,7 @@ void
 		x = 0;
 		while (x < map->walls->width)
 		{
-			colour = transform_map_pixel(map, x, y);
+			colour = get_map_pixel_colour(map, x, y);
 			mlx_put_pixel(map->walls, x, y, colour);
 			++x;
 		}

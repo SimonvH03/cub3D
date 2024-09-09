@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/08 03:29:19 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/09 19:04:22 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,17 @@ static void
 		void	*param)
 {
 	t_window	*window;
+	t_camera	*camera;
 
 	window = param;
+	camera = &window->scene.camera;
 	window->deltatime = mlx_get_time() - window->time;
 	window->time = mlx_get_time();
 	reset_image(window->fps);
 	modlx_replace_string(window->fps, ft_itoa(1 / window->deltatime));
+	camera->movement_speed = MOVEMENT_SPEED * window->deltatime;
+	camera->rotation_cosin[0] = cos(ROTATION_SPEED * window->deltatime);
+	camera->rotation_cosin[1] = sin(ROTATION_SPEED * window->deltatime);
 }
 
 static void
@@ -42,6 +47,7 @@ static void
 			if (window->map.enabled == true)
 				draw_map_player(&window->map);
 		}
+		window->scene.recast = false;
 	}
 	// else if (window->view == MENU)
 	// {

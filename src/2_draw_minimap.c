@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 18:39:37 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/09 00:06:57 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ static void
 }
 
 static uint32_t
-	transform_minimap_pixel(
+	get_minimap_pixel_colour(
 		t_minimap *minimap,
-		double x,
-		double y)
+		float x,
+		float y)
 {
 	t_scene		*scene;
 	t_camera	*camera;
-	double		prev_x;
+	float		prev_x;
 
 	scene = minimap->scene;
 	camera = &minimap->scene->camera;
@@ -82,7 +82,7 @@ void
 		x = 0;
 		while (x < minimap->side)
 		{
-			colour = transform_minimap_pixel(minimap, x, y);
+			colour = get_minimap_pixel_colour(minimap, x, y);
 			mlx_put_pixel(minimap->walls, x, y, colour);
 			++x;
 		}

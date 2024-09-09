@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 18:54:04 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/09 23:49:49 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,12 @@ void		draw_map_player(t_map *map);
 int			scene_free(t_scene *scene);
 // draw
 void		reset_image(mlx_image_t *image);
-uint32_t	gradient(double ratio, uint32_t end, uint32_t start);
+uint32_t	gradient(float ratio, uint32_t end, uint32_t start);
 // calc
-short		is_in_circle(double x_minus_a, double y_minus_b, double radius);
-// short		is_in_circle(double a, double b, double r, double x, double y);
-double		deg_to_rad(double angle_deg);
-double		ft_max_double(double a, double b);
-double		ft_abs_double(double value);
-short		ft_sign_double(double value);
+short		is_in_circle(float x_minus_a, float y_minus_b, float radius);
+float		ft_max_float(float a, float b);
+float		ft_abs_float(float value);
+short		ft_sign_float(float value);
 // test
 void		print_camera(t_camera *camera);
 void		print_content(t_scene *scene);

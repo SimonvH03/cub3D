@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/08 18:52:34 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/09 23:49:37 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,9 @@ static short
 {
 	map->scene = &window->scene;
 	map->enabled = false;
-	if (map->scene->x_max > map->scene->y_max)
-		map->scale = (map->scene->x_max + 2) / (double)window->mlx->width;
-	else
-		map->scale = (map->scene->y_max + 2) / (double)window->mlx->height;
+	map->scale = ft_max_float(
+		(map->scene->x_max + 2) / (float)window->mlx->width,
+		(map->scene->y_max + 2) / (float)window->mlx->height);
 	return (EXIT_SUCCESS);
 }
 

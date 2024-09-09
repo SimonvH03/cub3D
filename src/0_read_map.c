@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/08 18:53:55 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 00:12:38 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static void
 		int pos_x,
 		char cardinal)
 {
-	camera->rotation_speed = ROTATION_SPEED;
-	camera->movement_speed = MOVEMENT_SPEED;
 	camera->pos_y = pos_y + 0.5;
 	camera->pos_x = pos_x + 0.5;
 	camera->dir_x = 0;
@@ -35,8 +33,9 @@ static void
 		camera->dir_x = -1;
 	camera->plane_x = CAMERA_PLANE * -camera->dir_y;
 	camera->plane_y = CAMERA_PLANE * camera->dir_x;
-	camera->rm[0] = cos(ROTATION_SPEED);
-	camera->rm[1] = sin(ROTATION_SPEED);
+	camera->movement_speed = MOVEMENT_SPEED;
+	camera->rotation_cosin[0] = cos(ROTATION_SPEED);
+	camera->rotation_cosin[1] = sin(ROTATION_SPEED);
 	camera->sign_rotate = 0;
 }
 

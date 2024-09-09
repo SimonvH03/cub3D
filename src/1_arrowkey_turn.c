@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 23:30:28 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 18:51:47 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/09 19:04:22 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static void
 	rotate_camera(
 		t_camera *camera)
 {
-	const double	previous_x = camera->dir_x;
-	const double	prev_plane_x = camera->plane_x;
-	const double	rm[2][2] = {camera->rm[0],
-		camera->rm[1] * camera->sign_rotate,
-		-camera->rm[1] * camera->sign_rotate,
-		camera->rm[0]};
+	const float	previous_x = camera->dir_x;
+	const float	prev_plane_x = camera->plane_x;
+	const float	rm[2][2] = {camera->rotation_cosin[0],
+		camera->rotation_cosin[1] * camera->sign_rotate,
+		-camera->rotation_cosin[1] * camera->sign_rotate,
+		camera->rotation_cosin[0]};
 
 	if (camera->sign_rotate == 0)
 		return ;

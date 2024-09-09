@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 18:50:41 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/09 00:06:57 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,26 @@ void
 }
 
 static uint32_t
-	transform_player_pixel(
+	get_player_pixel_colour(
 		t_map *map,
-		double x,
-		double y)
+		float x,
+		float y)
 {
 	t_camera		*camera;
 	mlx_texture_t	*texture;
-	double			prev_x;
+	float			prev_x;
 	uint32_t		index;
 	uint8_t			*pixelstart;
 
 	texture = map->scene->player_texture;
 	camera = &map->scene->camera;
-	x -= map->player->width / (double)2;
-	y -= map->player->height / (double)2;
+	x -= map->player->width / (float)2;
+	y -= map->player->height / (float)2;
 	prev_x = x;
 	x = prev_x * camera->plane_x + y * camera->plane_y;
 	y = prev_x * -camera->plane_y + y * camera->plane_x;
-	x += texture->width / (double)2;
-	y += texture->height / (double)2;
+	x += texture->width / (float)2;
+	y += texture->height / (float)2;
 	if (x < 0 || x >= texture->width
 		|| y < 0 || y >= texture->height)
 		return (0x00000000);
@@ -69,7 +69,7 @@ void
 		x = 0;
 		while (x < map->player->width)
 		{
-			colour = transform_player_pixel(map, x, y);
+			colour = get_player_pixel_colour(map, x, y);
 			mlx_put_pixel(map->player, x, y, colour);
 			++x;
 		}
