@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/09 19:04:22 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 15:22:22 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static void
 		if (window->scene.recast == true)
 		{
 			draw_raycast(&window->scene);
-			draw_minimap(&window->minimap);
+			if (window->minimap.enabled == true)
+				draw_minimap(&window->minimap);
 			if (window->map.enabled == true)
 				draw_map_player(&window->map);
 		}
@@ -79,7 +80,6 @@ int
 	if (init_structs(&window, argv[1]) == EXIT_FAILURE
 		|| init_images(&window) == EXIT_FAILURE)
 		error_exit(mlx_errno, 0, "initialisation failed");
-	draw_textures(&window);// test
 	loop_hooks(&window);
 	mlx_loop(window.mlx);
 	mlx_terminate(window.mlx);

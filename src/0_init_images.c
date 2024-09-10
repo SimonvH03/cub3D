@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/08 18:51:01 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 01:42:18 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,16 @@ static short
 			window->scene.player_texture->height * sqrt(2));
 	if (map->player == NULL)
 		return (EXIT_FAILURE);
-	if (mlx_image_to_window(window->mlx, map->player,
-			(window->mlx->width / 2),
-			(window->mlx->height / 2)) < 0)
-		return (EXIT_FAILURE);
 	map->x_offset = window->mlx->width - map->scene->x_max / map->scale;
 	map->y_offset = window->mlx->height - map->scene->y_max / map->scale;
 	map->x_offset -= map->player->width;
 	map->y_offset -= map->player->height;
 	map->x_offset /= 2;
 	map->y_offset /= 2;
+	if (mlx_image_to_window(window->mlx, map->player,
+		map->x_offset + map->scene->camera.pos_x / map->scale,
+		map->y_offset + map->scene->camera.pos_y / map->scale) < 0)
+		return (EXIT_FAILURE);
 	map->player->enabled = false;
 	map->walls->enabled = false;
 	return (EXIT_SUCCESS);

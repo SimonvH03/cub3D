@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/09 00:06:57 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 15:38:33 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void
 	map->player->enabled = !map->player->enabled;
 	map->walls->enabled = !map->walls->enabled;
 	map->enabled = !map->enabled;
+	map->scene->recast = true;
 }
 
 static uint32_t
@@ -44,6 +45,8 @@ static uint32_t
 	prev_x = x;
 	x = prev_x * camera->plane_x + y * camera->plane_y;
 	y = prev_x * -camera->plane_y + y * camera->plane_x;
+	x /= map->scene->camera.aspect_ratio;
+	y /= map->scene->camera.aspect_ratio;
 	x += texture->width / (float)2;
 	y += texture->height / (float)2;
 	if (x < 0 || x >= texture->width
