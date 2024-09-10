@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/10 15:34:35 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 18:15:05 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,15 @@
 
 // mlx window
 # define WINDOW_TITLE "cub3d"
-# define WIDTH 2755
-# define HEIGHT 1440
+# define WIDTH 1920
+# define HEIGHT 1200
 
-// minimap defaults
-# define MINIMAP_SCALE 42
+// (mini)map defaults
 # define C_TRANSPARENT 0x00
 # define C_TRANSLUCENT 0x42
 # define C_CEILING 0x000000BB
 # define C_FLOOR 0x42424280
 # define C_WALL 0xBF6629FF
-
-// map defaults
 # define C_ERROR 0x00FF80FF
 
 // camera defaults
@@ -134,6 +131,7 @@ typedef struct s_minimap
 	t_scene			*scene;
 	uint32_t		side;
 	uint32_t		radius;
+	float			scale;
 	bool			enabled;
 }	t_minimap;
 

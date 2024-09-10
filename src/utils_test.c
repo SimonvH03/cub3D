@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 17:21:01 by simon             #+#    #+#             */
-/*   Updated: 2024/09/07 02:10:00 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 17:49:46 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ void
 {
 	printf("\e[33mRAY INIT\e[0m\t[%-10d, %-10d]\ndir  -->\t[%-10f, %-10f]\nstep <->\t[%-10f, %-10f]\ntotal<->\t[%-10f, %-10f]\n",
 		ray->pos_y, ray->pos_x, ray->dir_y, ray->dir_x, ray->step_y, ray->step_x, ray->total_y, ray->total_x);
+}
+
+void
+	print_minimap(
+		t_minimap *minimap)
+{
+	printf("\e[33mMinimap Init\e[0m\nside:\t%d\nradius:\t%d\nscale:\t%f\n",
+		minimap->side, minimap->radius, minimap->scale);
+	printf("\e[32mScene\e[0m\nx_max\t%d\ny_max\t%d\n",
+		minimap->scene->x_max, minimap->scene->y_max);
 }
 
 void

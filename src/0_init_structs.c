@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/10 00:49:56 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 18:14:44 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,18 @@ static short
 	scene->name = argv_scene;
 	if (get_content(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	scene->north_texture = NULL;
+	scene->east_texture = NULL;
+	scene->south_texture = NULL;
+	scene->west_texture = NULL;
 	tempx = mlx_load_xpm42("./textures/player.xpm42");
 	if (tempx == NULL)
 		return (EXIT_FAILURE);
 	scene->player_texture = &tempx->texture;
 	read_elements(scene);
+	if (scene->north_texture == NULL || scene->east_texture == NULL
+		|| scene->south_texture == NULL || scene->west_texture == NULL)
+		error_exit(mlx_errno, EINVAL, "missing scene.cub texture path");
 	if (read_map(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	scene->recast = true;
@@ -39,12 +46,13 @@ static short
 		t_window *window)
 {
 	minimap->scene = &window->scene;
-	minimap->side = window->mlx->height * 0.3;
+	minimap->side = window->mlx->height / 3;
 	minimap->radius = minimap->side / 2;
 	minimap->circle_overlay = malloc(sizeof(uint32_t)
 			* (pow(minimap->side, 2) + 1) + 1);
 	if (minimap->circle_overlay == NULL)
 		return (EXIT_FAILURE);
+	minimap->scale = minimap->side / 6 * minimap->scene->camera.aspect_ratio;
 	minimap->enabled = true;
 	return (EXIT_SUCCESS);
 }

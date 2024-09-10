@@ -7,10 +7,13 @@ CFLAGS	+=	-g
 MLXFLAGS=	-ldl -lglfw -pthread -lm
 
 LMLXDIR	=	./MLX42
-LIBMLX	=	$(LMLXDIR)/build/libmlx42.a 
+LIBMLX	=	$(LMLXDIR)/build/libmlx42.a
 
 LFTDIR	=	./libft
 LIBFT	=	$(LFTDIR)/libft.a
+
+HEADERS =	./cub3d.h \
+			./defs.h
 
 SRCDIR	=	./src
 SRC		=	$(SRCDIR)/0_main.c \
@@ -44,8 +47,8 @@ $(LIBFT):
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	$(CC) $(CFLAGS) -o $@ -c $<
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
 $(NAME): $(LIBMLX) $(LIBFT) $(OBJDIR) $(OBJ)
 	$(CC) $(OBJ) $(LIBMLX) $(MLXFLAGS) $(LIBFT) -o $(NAME)

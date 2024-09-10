@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:51:01 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/09 23:49:55 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 16:23:52 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,18 @@ float
 		return (b);
 	else
 		return (a);
+}
+
+// return lowest value
+float
+	ft_min_float(
+		float a,
+		float b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
 }
 
 // return absolute value

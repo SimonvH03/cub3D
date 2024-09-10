@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/10 15:56:48 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/10 18:12:38 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static uint32_t
 	prev_x = x;
 	x = prev_x * camera->plane_x + y * -camera->plane_y;
 	y = prev_x * camera->plane_y + y * camera->plane_x;
-	x /= MINIMAP_SCALE * minimap->scene->camera.aspect_ratio;
-	y /= MINIMAP_SCALE * minimap->scene->camera.aspect_ratio;
+	x /= minimap->scale;
+	y /= minimap->scale;
 	x += camera->pos_x;
 	y += camera->pos_y;
 	if (x < 0 || x >= scene->x_max
