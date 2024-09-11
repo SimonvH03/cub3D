@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/11 02:15:35 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/11 15:11:59 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@
 # define C_ERROR 0x00FF80FF
 
 // camera defaults
-# define MOVEMENT_SPEED 5
+# define MOVEMENT_SPEED 6
 # define ROTATION_SPEED 3
+# define COLLISION_HITBOX 0.1
 // ratio of cube height / width
 # define CAMERA_PLANE 1
 

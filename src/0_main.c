@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/10 20:42:00 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/11 14:57:27 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void
 	reset_image(window->fps);
 	modlx_replace_string(window->fps, ft_itoa(1 / window->deltatime));
 	camera->movement_speed = MOVEMENT_SPEED * window->deltatime;
+	if (camera->movement_speed > 0.49)
+		camera->movement_speed = 0.49;
 	camera->rotation_cosin[0] = cos(ROTATION_SPEED * window->deltatime);
 	camera->rotation_cosin[1] = sin(ROTATION_SPEED * window->deltatime);
 }
