@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/10 18:15:05 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/11 02:15:35 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 // mlx window
 # define WINDOW_TITLE "cub3d"
-# define WIDTH 1920
-# define HEIGHT 1200
+# define WIDTH 2560
+# define HEIGHT 1080
 
 // (mini)map defaults
 # define C_TRANSPARENT 0x00
@@ -99,6 +99,7 @@ typedef struct s_camera
 	float			plane_x;
 	short			sign_rotate;
 	float			rotation_cosin[2];
+	float			movement_matrix[3][3];
 	float			movement_speed;
 }	t_camera;
 

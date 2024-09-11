@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/08 02:23:15 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/11 01:01:14 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void
 	game_inputs(
 		t_window	*window)
 {
-	wasd_move(window);
-	arrowkey_turn(window);
+	wasd_move(window, &window->scene.camera);
+	arrowkey_turn(window, &window->scene.camera);
 	scene_recast(window);
 }
 

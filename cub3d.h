@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/10 17:49:52 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/11 01:00:46 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ mlx_scroll	scrollhook;
 void		game_inputs(t_window *window);
 void		menu_inputs(t_window *window);
 
-void		wasd_move(t_window *window);
-void		arrowkey_turn(t_window *window);
+void		wasd_move(t_window *window, t_camera *camera);
+void		arrowkey_turn(t_window *window, t_camera *camera);
 void		toggle_maps(t_minimap *minimap, t_map *map);
 
 //// PHASE 2: drawing the current view

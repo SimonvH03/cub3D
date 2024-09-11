@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 23:30:28 by simon             #+#    #+#             */
-/*   Updated: 2024/09/10 01:15:25 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/11 00:58:01 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ static void
 
 void
 	arrowkey_turn(
-		t_window	*window)
+		t_window	*window,
+		t_camera *camera)
 {
 	if (mlx_is_key_down(window->mlx, MLX_KEY_LEFT))
-		window->scene.camera.sign_rotate = 1;
+		camera->sign_rotate = 1;
 	if (mlx_is_key_down(window->mlx, MLX_KEY_RIGHT))
-		window->scene.camera.sign_rotate = -1;
-	rotate_camera(&window->scene.camera);
+		camera->sign_rotate = -1;
+	rotate_camera(camera);
 }

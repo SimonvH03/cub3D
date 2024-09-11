@@ -6,11 +6,26 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/10 01:15:22 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/11 02:22:15 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+static void
+	init_matrix(
+		float matrix[3][3])
+{
+	matrix[0][0] = -sqrtf(2);
+	matrix[0][1] = 0;
+	matrix[0][2] = sqrtf(2);
+	matrix[1][0] = -1;
+	matrix[1][1] = 0;
+	matrix[1][2] = 1;
+	matrix[2][0] = -sqrtf(2);
+	matrix[2][1] = 0;
+	matrix[2][2] = sqrtf(2);
+}
 
 static void
 	camera_init(
@@ -36,6 +51,7 @@ static void
 	camera->movement_speed = MOVEMENT_SPEED;
 	camera->rotation_cosin[0] = cos(ROTATION_SPEED);
 	camera->rotation_cosin[1] = sin(ROTATION_SPEED);
+	init_matrix(camera->movement_matrix);
 	camera->sign_rotate = 0;
 }
 
