@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:51:01 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/10 16:23:52 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/11 13:18:45 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ float
 
 // return lowest value
 float
-	ft_min_float(
+	ft_max_abs_float(
 		float a,
 		float b)
 {
-	if (a < b)
+	if (ft_abs_float(a) < ft_abs_float(b))
 		return (a);
 	else
 		return (b);

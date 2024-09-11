@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/11 01:00:46 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/11 13:19:11 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ uint32_t	gradient(float ratio, uint32_t end, uint32_t start);
 // calc
 short		is_in_circle(float x_minus_a, float y_minus_b, float radius);
 float		ft_max_float(float a, float b);
-float		ft_min_float(float a, float b);
+float		ft_max_abs_float(float a, float b);
 float		ft_abs_float(float value);
 short		ft_sign_float(float value);
 // test

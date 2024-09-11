@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/11 02:22:15 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/11 13:14:46 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ static void
 	init_matrix(
 		float matrix[3][3])
 {
-	matrix[0][0] = -sqrtf(2);
+	matrix[0][0] = -1 / sqrtf(2);
 	matrix[0][1] = 0;
-	matrix[0][2] = sqrtf(2);
+	matrix[0][2] = 1 / sqrtf(2);
 	matrix[1][0] = -1;
 	matrix[1][1] = 0;
 	matrix[1][2] = 1;
-	matrix[2][0] = -sqrtf(2);
+	matrix[2][0] = -1 / sqrtf(2);
 	matrix[2][1] = 0;
-	matrix[2][2] = sqrtf(2);
+	matrix[2][2] = 1 / sqrtf(2);
 }
 
 static void
