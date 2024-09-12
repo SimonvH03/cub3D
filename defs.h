@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/11 15:11:59 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/12 18:34:47 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,17 @@ typedef struct s_ray
 	bool			hit_type;
 	float			distance;
 }	t_ray;
+
+typedef struct s_column
+{
+	int				height;
+	int				start;
+	int				end;
+	mlx_texture_t	*texture;
+	float			x;
+	float			step;
+	float			y;
+}	t_column;
 
 typedef struct s_camera
 {

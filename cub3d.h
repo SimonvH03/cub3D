@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/11 13:19:11 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/12 17:06:34 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void		toggle_maps(t_minimap *minimap, t_map *map);
 
 //// PHASE 2: drawing the current view
 void		draw_raycast(t_scene *scene);
+void		draw_texture_column(t_scene *scene, t_ray *ray, uint32_t x);
 void		draw_minimap(t_minimap *minimap);
 void		draw_map_player(t_map *map);
 

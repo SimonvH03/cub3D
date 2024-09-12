@@ -2,6 +2,13 @@
 	"cmake.ignoreCMakeListsMissing": true,
 	"files.associations": {
 		"cub3d.h": "c",
-		"defs.h": "c"
+		"defs.h": "c",
+		"array": "c",
+		"deque": "c",
+		"string": "c",
+		"unordered_map": "c",
+		"vector": "c",
+		"string_view": "c",
+		"initializer_list": "c"
 	}
 }

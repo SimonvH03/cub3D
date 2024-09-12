@@ -28,6 +28,7 @@ SRC		=	$(SRCDIR)/0_main.c \
 			$(SRCDIR)/2_draw_map_player.c \
 			$(SRCDIR)/2_draw_minimap.c \
 			$(SRCDIR)/2_draw_raycast.c \
+			$(SRCDIR)/2_draw_texture_column.c \
 			$(SRCDIR)/utils_calc.c \
 			$(SRCDIR)/utils_draw.c \
 			$(SRCDIR)/utils_free.c \
