@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/12 18:34:47 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/13 02:56:31 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 // mlx window
 # define WINDOW_TITLE "cub3d"
 # define WIDTH 2560
-# define HEIGHT 1080
+# define HEIGHT 1480
 
 // (mini)map defaults
 # define C_TRANSPARENT 0x00

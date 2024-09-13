@@ -65,6 +65,6 @@ fclean: clean
 	rm -rf $(LFTDIR)/libft.a
 	rm -rf $(LMLXDIR)/build
 
-re: clean all
+re: fclean all
 
 .PHONY: all clean fclean re

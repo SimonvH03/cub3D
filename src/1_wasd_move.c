@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/11 15:25:38 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/12 18:54:22 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ static void
 		move_dir_x = (int)camera->pos_x + (move_dir_x > 0) - camera->pos_x
 			- COLLISION_HITBOX * ft_sign_float(move_dir_x);
 	if (map[(int)(camera->pos_y + move_dir_y * camera->movement_speed
-			+ COLLISION_HITBOX * ft_sign_float(move_dir_y))][(int)camera->pos_x])
+			+ COLLISION_HITBOX * ft_sign_float(move_dir_y))]
+			[(int)camera->pos_x])
 		move_dir_y = (int)camera->pos_y + (move_dir_y > 0) - camera->pos_y
 			- COLLISION_HITBOX * ft_sign_float(move_dir_y);
 	camera->pos_x += move_dir_x * camera->movement_speed;

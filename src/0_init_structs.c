@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/10 18:14:44 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/13 02:59:48 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static short
 	scene->east_texture = NULL;
 	scene->south_texture = NULL;
 	scene->west_texture = NULL;
-	tempx = mlx_load_xpm42("./textures/player.xpm42");
+	tempx = mlx_load_xpm42("./textures/arrow_32.xpm42");
 	if (tempx == NULL)
 		return (EXIT_FAILURE);
 	scene->player_texture = &tempx->texture;
@@ -65,8 +65,8 @@ static short
 	map->scene = &window->scene;
 	map->enabled = false;
 	map->scale = ft_max_float(
-		(map->scene->x_max + 2) / (float)window->mlx->width,
-		(map->scene->y_max + 2) / (float)window->mlx->height);
+			(map->scene->x_max + 2) / (float)window->mlx->width,
+			(map->scene->y_max + 2) / (float)window->mlx->height);
 	return (EXIT_SUCCESS);
 }
 

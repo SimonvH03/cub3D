@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/10 16:40:56 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/12 23:57:28 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,29 @@ static short
 	map->x_offset /= 2;
 	map->y_offset /= 2;
 	if (mlx_image_to_window(window->mlx, map->player,
-		map->x_offset + map->scene->camera.pos_x / map->scale,
-		map->y_offset + map->scene->camera.pos_y / map->scale) < 0)
+			map->x_offset + map->scene->camera.pos_x / map->scale,
+			map->y_offset + map->scene->camera.pos_y / map->scale) < 0)
 		return (EXIT_FAILURE);
 	map->player->enabled = false;
 	map->walls->enabled = false;
 	return (EXIT_SUCCESS);
 }
 
+// static short
+// 	new_images_menu(
+// 		t_window *window,
+// 		t_menu *menu)
+// {
+	
+// 	return (EXIT_SUCCESS);
+// }
+
 short
 	init_images(
 		t_window *window)
 {
+	// if (new_images_menu(window, &window->menu) == EXIT_FAILURE)
+	// 	return (EXIT_FAILURE);
 	if (new_images_scene(window, &window->scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (new_images_minimap(window, &window->minimap) == EXIT_FAILURE)
@@ -103,7 +114,6 @@ short
 	draw_scene_background(&window->scene);
 	draw_minimap_circle_overlay(&window->minimap);
 	draw_map_walls(&window->map);
-	// init_menu();
 	// init_hud();
 	window->fps = mlx_put_string(window->mlx, "0000000", WIDTH / 2 - 50, 100);
 	return (EXIT_SUCCESS);
