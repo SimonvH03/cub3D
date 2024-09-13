@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/13 02:59:48 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/14 01:27:56 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static short
 		t_scene *scene,
 		char *argv_scene)
 {
-	xpm_t	*tempx;
-
 	scene->name = argv_scene;
 	if (get_content(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
@@ -26,10 +24,6 @@ static short
 	scene->east_texture = NULL;
 	scene->south_texture = NULL;
 	scene->west_texture = NULL;
-	tempx = mlx_load_xpm42("./textures/arrow_32.xpm42");
-	if (tempx == NULL)
-		return (EXIT_FAILURE);
-	scene->player_texture = &tempx->texture;
 	read_elements(scene);
 	if (scene->north_texture == NULL || scene->east_texture == NULL
 		|| scene->south_texture == NULL || scene->west_texture == NULL)
@@ -82,7 +76,7 @@ static short
 	window->mlx = mlx_init(WIDTH, HEIGHT, WINDOW_TITLE, false);
 	if (window->mlx == NULL)
 		return (EXIT_FAILURE);
-	window->view = GAME;
+	window->view = MENU;
 	window->time = 0;
 	window->deltatime = 0;
 	window->scene.camera.aspect_ratio = 1.0 * WIDTH / HEIGHT;

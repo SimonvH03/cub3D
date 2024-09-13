@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/12 23:57:28 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/14 01:28:57 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ static short
 		t_window *window,
 		t_scene *scene)
 {
+	xpm_t	*tempx;
+
+	tempx = mlx_load_xpm42(PLAYER_ICON_PATH);
+	if (tempx == NULL)
+		return (EXIT_FAILURE);
+	scene->player_texture = &tempx->texture;
 	scene->background = mlx_new_image(window->mlx, WIDTH, HEIGHT);
 	if (scene->background == NULL)
 		return (EXIT_FAILURE);
@@ -90,31 +96,63 @@ static short
 	return (EXIT_SUCCESS);
 }
 
-// static short
-// 	new_images_menu(
-// 		t_window *window,
-// 		t_menu *menu)
-// {
-	
-// 	return (EXIT_SUCCESS);
-// }
+static short
+	new_images_menu(
+		t_window *window,
+		t_menu *menu)
+{
+	xpm_t			*tempx;
+	mlx_texture_t	*temp;
+	uint32_t		button_x_offset;
+	uint32_t		button_y_offset;
+
+	temp = mlx_load_png(MENU_BACKGROUND_PATH);
+	if (temp == NULL)
+		return (EXIT_FAILURE);
+	menu->background = mlx_texture_to_image(window->mlx, temp);
+	if (menu->background == NULL)
+		return (EXIT_FAILURE);
+	tempx = mlx_load_xpm42(MENU_BUTTON_START_PATH);
+	if (tempx == NULL)
+		return (EXIT_FAILURE);
+	menu->button_start = mlx_texture_to_image(window->mlx, &tempx->texture);
+	if (menu->button_start == NULL)
+		return (EXIT_FAILURE);
+	tempx = mlx_load_xpm42(MENU_BUTTON_QUIT_PATH);
+	if (tempx == NULL)
+		return (EXIT_FAILURE);
+	menu->button_quit = mlx_texture_to_image(window->mlx, &tempx->texture);
+	if (menu->button_quit == NULL)
+		return (EXIT_FAILURE);
+	if (mlx_image_to_window(window->mlx, menu->background, 0, 0) < 0)
+		return (EXIT_FAILURE);
+	button_x_offset = window->mlx->width / 2 - menu->button_start->width / 2;
+	button_y_offset = window->mlx->height / 2 - menu->button_start->height * 2;
+	if (mlx_image_to_window(window->mlx, menu->button_start,
+			button_x_offset, button_y_offset) < 0)
+		return (EXIT_FAILURE);
+	if (mlx_image_to_window(window->mlx, menu->button_quit, button_x_offset,
+			button_y_offset + menu->button_start->height * 3) < 0)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
 
 short
 	init_images(
 		t_window *window)
 {
-	// if (new_images_menu(window, &window->menu) == EXIT_FAILURE)
-	// 	return (EXIT_FAILURE);
 	if (new_images_scene(window, &window->scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (new_images_minimap(window, &window->minimap) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (new_images_map(window, &window->map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	if (new_images_menu(window, &window->menu) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	draw_scene_background(&window->scene);
 	draw_minimap_circle_overlay(&window->minimap);
 	draw_map_walls(&window->map);
 	// init_hud();
-	window->fps = mlx_put_string(window->mlx, "0000000", WIDTH / 2 - 50, 100);
+	window->fps = mlx_put_string(window->mlx, "000", WIDTH / 2 - 50, 100);
 	return (EXIT_SUCCESS);
 }

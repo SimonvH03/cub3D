@@ -1,0 +1,14 @@
+NO ./scenes/textures/eagle.xpm42
+SO ./scenes/textures/greystone.xpm42
+WE ./scenes/textures/purplestone.xpm42
+EA ./scenes/textures/redstone.xpm42
+
+F 124,96,124
+C 0,32,32
+
+111111111111111
+100000101000001
+100000010001111
+1111000N0000001
+100001001000011
+111111111111111

@@ -1,7 +1,7 @@
-NO ./textures/eagle.xpm42
-SO ./textures/greystone.xpm42
-WE ./textures/purplestone.xpm42
-EA ./textures/redstone.xpm42
+NO ./scenes/textures/eagle.xpm42
+SO ./scenes/textures/greystone.xpm42
+WE ./scenes/textures/purplestone.xpm42
+EA ./scenes/textures/redstone.xpm42
 
 F 124,96,124
 C 0,32,32

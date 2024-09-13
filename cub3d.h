@@ -6,13 +6,14 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/12 17:06:34 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/14 00:46:09 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 # include "defs.h"
+# include "paths.h"
 
 void		error_exit(mlx_errno_t mlx_errno, int custom_errno, char *message);
 
