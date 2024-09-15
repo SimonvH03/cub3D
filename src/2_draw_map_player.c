@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/10 16:43:26 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/14 18:29:00 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static uint32_t
 	prev_x = x;
 	x = prev_x * camera->plane_x + y * camera->plane_y;
 	y = prev_x * -camera->plane_y + y * camera->plane_x;
-	x /= 2;
+	x /= 2; // I forgot why I did this
 	y /= 2;
 	x += texture->width / (float)2;
 	y += texture->height / (float)2;

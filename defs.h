@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/14 00:48:48 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/15 17:17:43 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 // mlx window
 # define WINDOW_TITLE "cub3d"
-# define WIDTH 2560
-# define HEIGHT 1080
+# define WIDTH 1600
+# define HEIGHT 100
 
 // (mini)map defaults
 # define C_TRANSPARENT 0x00
@@ -63,6 +63,8 @@ enum	e_hit_axis
 	HORIZONTAL,
 	VERTICAL
 };
+
+
 
 typedef struct s_colour_construct
 {
@@ -161,14 +163,21 @@ typedef struct s_map
 	bool			enabled;
 }	t_map;
 
+typedef struct s_scalable
+{
+	mlx_image_t		*image;
+	mlx_texture_t	*texture;
+	float			scale;
+}	t_scalable;
+
 typedef struct s_menu
 {
-	mlx_image_t		*background;
-	mlx_image_t		*interaction_highlight;
-	enum e_select	selection;
-	mlx_image_t		*button_start;
-	mlx_image_t		*button_settings;
-	mlx_image_t		*button_quit;
+	t_scalable	background;
+	t_scalable	button_start;
+	// t_scalable	button_settings;
+	t_scalable	button_quit;
+	// mlx_image_t		*interaction_highlight;
+	// enum e_select	selection;
 }	t_menu;
 
 typedef struct s_window

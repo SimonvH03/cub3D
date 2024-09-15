@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0_main.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/14 01:29:08 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/15 16:52:23 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,34 +33,6 @@ static void
 }
 
 static void
-	view_manager(
-		void *param)
-{
-	t_window	*window;
-
-	window = param;
-	if (window->view == GAME)
-	{
-		game_inputs(window);
-		if (window->scene.recast == true)
-		{
-			draw_raycast(&window->scene);
-			if (window->minimap.enabled == true)
-				draw_minimap(&window->minimap);
-			if (window->map.enabled == true)
-				draw_map_player(&window->map);
-		}
-		window->scene.recast = false;
-	}
-	// else if (window->view == MENU)
-	// {
-	// 	menu_inputs(window);
-	// 	if (window->menu.interaction_highlight)
-	// 	draw_menu(&window->menu);
-	// }
-}
-
-static void
 	loop_hooks(
 		t_window *window)
 {
@@ -79,8 +51,10 @@ int
 
 	if (argc != 2)
 		return (EXIT_FAILURE);
-	if (init_structs(&window, argv[1]) == EXIT_FAILURE
-		|| init_images(&window) == EXIT_FAILURE)
+	if (init_game_structs(&window, argv[1]) == EXIT_FAILURE
+		|| init_game_images(&window) == EXIT_FAILURE
+		|| init_scalables(&window) == EXIT_FAILURE
+		|| init_menu_images(&window) == EXIT_FAILURE)
 		error_exit(mlx_errno, 0, "initialisation failed");
 	loop_hooks(&window);
 	mlx_loop(window.mlx);

@@ -4,6 +4,7 @@ CC		=	cc
 CFLAGS	=	-O3
 # CFLAGS	+=	-Wall -Werror -Wextra
 CFLAGS	+=	-g
+CFLAGS	+= -Werror
 MLXFLAGS=	-ldl -lglfw -pthread -lm
 
 LMLXDIR	=	./MLX42
@@ -16,12 +17,16 @@ HEADERS =	./cub3d.h \
 			./defs.h
 
 SRCDIR	=	./src
-SRC		=	$(SRCDIR)/0_main.c \
-			$(SRCDIR)/0_draw_images.c \
-			$(SRCDIR)/0_init_images.c \
-			$(SRCDIR)/0_init_structs.c \
-			$(SRCDIR)/0_read_elements.c \
-			$(SRCDIR)/0_read_map.c \
+SRC		=	$(SRCDIR)/main.c \
+			$(SRCDIR)/view_manager.c \
+			$(SRCDIR)/0_draw_game_images.c \
+			$(SRCDIR)/0_draw_menu_images.c \
+			$(SRCDIR)/0_init_game_images.c \
+			$(SRCDIR)/0_init_game_structs.c \
+			$(SRCDIR)/0_init_menu_images.c \
+			$(SRCDIR)/0_init_scalables.c \
+			$(SRCDIR)/0_read_cub_elements.c \
+			$(SRCDIR)/0_read_map_init_camera.c \
 			$(SRCDIR)/1_arrowkey_turn.c \
 			$(SRCDIR)/1_user_inputs.c \
 			$(SRCDIR)/1_wasd_move.c \

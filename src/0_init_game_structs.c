@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0_init_structs.c                                   :+:      :+:    :+:   */
+/*   0_init_game_structs.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/14 01:27:56 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/15 16:15:29 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ static short
 		t_scene *scene,
 		char *argv_scene)
 {
+	scene->player_texture = &mlx_load_xpm42(PLAYER_ICON_PATH)->texture;
+	if (scene->player_texture == NULL)
+		return (EXIT_FAILURE);
 	scene->name = argv_scene;
 	if (get_content(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
@@ -79,12 +82,11 @@ static short
 	window->view = MENU;
 	window->time = 0;
 	window->deltatime = 0;
-	window->scene.camera.aspect_ratio = 1.0 * WIDTH / HEIGHT;
 	return (EXIT_SUCCESS);
 }
 
 short
-	init_structs(
+	init_game_structs(
 		t_window *window,
 		char *argv_scene)
 {

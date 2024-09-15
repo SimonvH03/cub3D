@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/11 01:01:14 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/15 16:48:57 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void
 	menu_inputs(
 		t_window	*window)
 {
+	
 }
 
 // from main.c / loop_hooks()
@@ -58,6 +59,10 @@ void
 		&& window->view == GAME)
 	{
 		toggle_maps(&window->minimap, &window->map);
+	}
+	if (keydata.key == MLX_KEY_ENTER && keydata.action == MLX_PRESS)
+	{
+		toggle_view(window);
 	}
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0_read_map.c                                       :+:      :+:    :+:   */
+/*   0_read_map_init_camera.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/11 13:14:46 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/14 19:54:36 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void
 		int pos_x,
 		char cardinal)
 {
+	camera->aspect_ratio = 1.0 * WIDTH / HEIGHT;
 	camera->pos_y = pos_y + 0.5;
 	camera->pos_x = pos_x + 0.5;
 	camera->dir_x = 0;

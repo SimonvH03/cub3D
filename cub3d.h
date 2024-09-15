@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/14 00:46:09 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/15 17:05:13 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,29 @@
 void		error_exit(mlx_errno_t mlx_errno, int custom_errno, char *message);
 
 //// PHASE 0: initialising mlx window, scene and camera
-short		init_structs(t_window *window, char *argv_scene);
-short		init_images(t_window *window);
+short		init_game_structs(t_window *window, char *argv_scene);
+short		init_game_images(t_window *window);
+short		init_scalables(t_window *window);
+short		init_menu_images(t_window *window);
 short		get_content(t_scene *scene);
 void		read_elements(t_scene *scene);
 short		read_map(t_scene *scene);
-short		init_images(t_window *window);
 void		draw_scene_background(t_scene *scene);
 void		draw_minimap_circle_overlay(t_minimap *minimap);
 void		draw_map_walls(t_map *map);
+void		draw_scaled_image(t_scalable *scalable);
 
 //// PHASE 1: interpreting user input to change menu, game and camera view
 mlx_key		keyhook;
 mlx_scroll	scrollhook;
+mlx_hook	view_manager;
 void		game_inputs(t_window *window);
 void		menu_inputs(t_window *window);
 
 void		wasd_move(t_window *window, t_camera *camera);
 void		arrowkey_turn(t_window *window, t_camera *camera);
 void		toggle_maps(t_minimap *minimap, t_map *map);
+void		toggle_view(t_window *window);
 
 //// PHASE 2: drawing the current view
 void		draw_raycast(t_scene *scene);
@@ -53,7 +57,7 @@ uint32_t	gradient(float ratio, uint32_t end, uint32_t start);
 // calc
 short		is_in_circle(float x_minus_a, float y_minus_b, float radius);
 float		ft_max_float(float a, float b);
-float		ft_max_abs_float(float a, float b);
+float		ft_min_float(float a, float b);
 float		ft_abs_float(float value);
 short		ft_sign_float(float value);
 // test
