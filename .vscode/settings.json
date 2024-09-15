@@ -10,6 +10,7 @@
 		"vector": "c",
 		"string_view": "c",
 		"initializer_list": "c",
-		"paths.h": "c"
+		"paths.h": "c",
+		"unistd.h": "c"
 	}
 }

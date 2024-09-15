@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0_init_menu_images.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/15 17:09:48 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/15 19:23:05 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ short
 		- menu->button_start.image->width / 2;
 	button_y_offset = window->mlx->height / 2
 		- menu->button_start.image->height / 2;
-	button_y_margin = menu->button_start.image->height * 2;
+	button_y_margin = menu->button_start.image->height;
 	if (mlx_image_to_window(window->mlx, menu->background.image, 0, 0) < 0)
 		return (EXIT_FAILURE);
 	if (mlx_image_to_window(window->mlx, menu->button_start.image,

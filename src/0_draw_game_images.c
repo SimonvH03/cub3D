@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0_draw_game_images.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/15 16:58:52 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/15 19:22:56 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static uint32_t
 	scene = map->scene;
 	x -= map->walls->width / (float)2;
 	y -= map->walls->height / (float)2;
-	x *= map->scale;// maybe divide/instead
+	x *= map->scale;
 	y *= map->scale;
 	x += scene->x_max / (float)2;
 	y += scene->y_max / (float)2;
