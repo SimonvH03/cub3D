@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0_read_map_init_camera.c                           :+:      :+:    :+:   */
+/*   read_map_init_camera.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/15 19:23:12 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:35:13 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 static void
 	init_matrix(
@@ -64,10 +64,10 @@ static short
 
 	scene->y_max = 0;
 	scene->x_max = 0;
-	while (scene->content[scene->y_max])
+	while (scene->r_content[scene->y_max])
 	{
-		temp_x = ft_strlen(scene->content[scene->y_max]);
-		if (scene->content[scene->y_max][temp_x - 1] == '\n')
+		temp_x = ft_strlen(scene->r_content[scene->y_max]);
+		if (scene->r_content[scene->y_max][temp_x - 1] == '\n')
 			--temp_x;
 		if (temp_x > scene->x_max)
 			scene->x_max = temp_x;
@@ -126,7 +126,7 @@ short
 		scene->map[y] = (int *)ft_calloc(scene->x_max, sizeof(int));
 		if (scene->map[y] == NULL)
 			return (EXIT_FAILURE);
-		if (map_fill_row(scene, y, scene->content[y]) == EXIT_FAILURE)
+		if (map_fill_row(scene, y, scene->r_content[y]) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		++y;
 	}

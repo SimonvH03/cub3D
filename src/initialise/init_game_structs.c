@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0_init_game_structs.c                              :+:      :+:    :+:   */
+/*   init_game_structs.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/15 19:23:03 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:34:59 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 static short
 	scene_init(
@@ -42,14 +42,14 @@ static short
 		t_minimap *minimap,
 		t_window *window)
 {
-	minimap->scene = &window->scene;
+	minimap->r_scene = &window->scene;
 	minimap->side = window->mlx->height / 3;
 	minimap->radius = minimap->side / 2;
 	minimap->circle_overlay = malloc(sizeof(uint32_t)
 			* (pow(minimap->side, 2) + 1) + 1);
 	if (minimap->circle_overlay == NULL)
 		return (EXIT_FAILURE);
-	minimap->scale = minimap->side / 6 * minimap->scene->camera.aspect_ratio;
+	minimap->scale = minimap->side / 6 * minimap->r_scene->camera.aspect_ratio;
 	minimap->enabled = true;
 	return (EXIT_SUCCESS);
 }
@@ -59,11 +59,11 @@ static short
 		t_map *map,
 		t_window *window)
 {
-	map->scene = &window->scene;
+	map->r_scene = &window->scene;
 	map->enabled = false;
 	map->scale = ft_max_float(
-			(map->scene->x_max + 2) / (float)window->mlx->width,
-			(map->scene->y_max + 2) / (float)window->mlx->height);
+			(map->r_scene->x_max + 2) / (float)window->mlx->width,
+			(map->r_scene->y_max + 2) / (float)window->mlx->height);
 	return (EXIT_SUCCESS);
 }
 
@@ -80,8 +80,6 @@ static short
 	if (window->mlx == NULL)
 		return (EXIT_FAILURE);
 	window->view = MENU;
-	window->time = 0;
-	window->deltatime = 0;
 	return (EXIT_SUCCESS);
 }
 

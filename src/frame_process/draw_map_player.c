@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2_draw_map_player.c                                :+:      :+:    :+:   */
+/*   draw_map_player.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/15 19:23:19 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:34:37 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
-
-void
-	toggle_maps(
-		t_minimap *minimap,
-		t_map *map)
-{
-	minimap->player->enabled = !minimap->player->enabled;
-	minimap->walls->enabled = !minimap->walls->enabled;
-	minimap->enabled = !minimap->enabled;
-	map->player->enabled = !map->player->enabled;
-	map->walls->enabled = !map->walls->enabled;
-	map->enabled = !map->enabled;
-	map->scene->recast = true;
-}
+#include "../../cub3d.h"
 
 static uint32_t
 	get_player_pixel_colour(
@@ -38,14 +24,14 @@ static uint32_t
 	uint32_t		index;
 	uint8_t			*pixelstart;
 
-	texture = map->scene->player_texture;
-	camera = &map->scene->camera;
+	texture = map->r_scene->player_texture;
+	camera = &map->r_scene->camera;
 	x -= map->player->width / (float)2;
 	y -= map->player->height / (float)2;
 	prev_x = x;
 	x = prev_x * camera->plane_x + y * camera->plane_y;
 	y = prev_x * -camera->plane_y + y * camera->plane_x;
-	x /= 2; // I forgot why I did this
+	x /= 2;
 	y /= 2;
 	x += texture->width / (float)2;
 	y += texture->height / (float)2;
@@ -80,6 +66,6 @@ void
 	}
 	map->player->instances[0].x = map->x_offset;
 	map->player->instances[0].y = map->y_offset;
-	map->player->instances[0].x += map->scene->camera.pos_x / map->scale;
-	map->player->instances[0].y += map->scene->camera.pos_y / map->scale;
+	map->player->instances[0].x += map->r_scene->camera.pos_x / map->scale;
+	map->player->instances[0].y += map->r_scene->camera.pos_y / map->scale;
 }

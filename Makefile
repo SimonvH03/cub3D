@@ -4,7 +4,7 @@ CC		=	cc
 CFLAGS	=	-O3
 # CFLAGS	+=	-Wall -Werror -Wextra
 CFLAGS	+=	-g
-CFLAGS	+= -Werror
+CFLAGS	+=	-Werror
 MLXFLAGS=	-ldl -lglfw -pthread -lm
 
 LMLXDIR	=	./MLX42
@@ -14,30 +14,31 @@ LFTDIR	=	./libft
 LIBFT	=	$(LFTDIR)/libft.a
 
 HEADERS =	./cub3d.h \
-			./defs.h
+			./defs.h \
+			./paths.h \
+			./modlx_font.h \
 
 SRCDIR	=	./src
 SRC		=	$(SRCDIR)/main.c \
-			$(SRCDIR)/view_manager.c \
-			$(SRCDIR)/0_draw_game_images.c \
-			$(SRCDIR)/0_draw_menu_images.c \
-			$(SRCDIR)/0_init_game_images.c \
-			$(SRCDIR)/0_init_game_structs.c \
-			$(SRCDIR)/0_init_menu_images.c \
-			$(SRCDIR)/0_init_scalables.c \
-			$(SRCDIR)/0_read_cub_elements.c \
-			$(SRCDIR)/0_read_map_init_camera.c \
-			$(SRCDIR)/1_arrowkey_turn.c \
-			$(SRCDIR)/1_user_inputs.c \
-			$(SRCDIR)/1_wasd_move.c \
-			$(SRCDIR)/2_draw_map_player.c \
-			$(SRCDIR)/2_draw_minimap.c \
-			$(SRCDIR)/2_draw_raycast.c \
-			$(SRCDIR)/2_draw_texture_column.c \
-			$(SRCDIR)/utils_calc.c \
-			$(SRCDIR)/utils_draw.c \
-			$(SRCDIR)/utils_free.c \
-			$(SRCDIR)/utils_test.c
+			$(SRCDIR)/modlx.c \
+			$(SRCDIR)/initialise/draw_game_images.c \
+			$(SRCDIR)/initialise/draw_menu_images.c \
+			$(SRCDIR)/initialise/init_game_images.c \
+			$(SRCDIR)/initialise/init_game_structs.c \
+			$(SRCDIR)/initialise/init_menu_images.c \
+			$(SRCDIR)/initialise/init_menu_structs.c \
+			$(SRCDIR)/initialise/read_cub_elements.c \
+			$(SRCDIR)/initialise/read_map_init_camera.c \
+			$(SRCDIR)/user_interface/arrowkey_turn.c \
+			$(SRCDIR)/user_interface/user_inputs.c \
+			$(SRCDIR)/user_interface/view_manager.c \
+			$(SRCDIR)/user_interface/wasd_move.c \
+			$(SRCDIR)/frame_process/arithmetic.c \
+			$(SRCDIR)/frame_process/draw_map_player.c \
+			$(SRCDIR)/frame_process/draw_minimap_walls.c \
+			$(SRCDIR)/frame_process/draw_raycast.c \
+			$(SRCDIR)/frame_process/draw_texture_column.c \
+# SRC		+=	$(SRCDIR)/test.c
 
 OBJDIR	=	./obj
 OBJ		=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
@@ -54,6 +55,7 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
 $(NAME): $(LIBMLX) $(LIBFT) $(OBJDIR) $(OBJ)
@@ -61,13 +63,12 @@ $(NAME): $(LIBMLX) $(LIBFT) $(OBJDIR) $(OBJ)
 
 clean:
 	rm -f $(OBJ)
-	rm -f $(OBJDIR)/*
-	rm -df $(OBJDIR)
+	rm -rf $(OBJDIR)
 	make -C $(LFTDIR) clean
 
 fclean: clean
 	rm -f $(NAME)
-	rm -rf $(LFTDIR)/libft.a
+	rm -f $(LFTDIR)/libft.a
 	rm -rf $(LMLXDIR)/build
 
 re: fclean all

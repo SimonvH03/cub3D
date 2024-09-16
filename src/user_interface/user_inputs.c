@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1_user_inputs.c                                    :+:      :+:    :+:   */
+/*   user_inputs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/15 19:23:16 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:35:21 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 static void
 	scene_recast(
@@ -39,10 +39,8 @@ void
 	menu_inputs(
 		t_window	*window)
 {
-	
 }
 
-// from main.c / loop_hooks()
 void
 	keyhook(
 		mlx_key_data_t keydata,
@@ -65,14 +63,3 @@ void
 		toggle_view(window);
 	}
 }
-
-// void
-// 	scrollhook(
-// 		double xdelta,
-// 		double ydelta,
-// 		void *param)
-// {
-// 	t_window	*window;
-
-// 	window = param;
-// }

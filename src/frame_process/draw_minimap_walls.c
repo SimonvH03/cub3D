@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2_draw_minimap.c                                   :+:      :+:    :+:   */
+/*   draw_minimap_walls.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/15 19:23:20 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:34:40 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 static void
 	overlay_border(
@@ -45,8 +45,8 @@ static uint32_t
 	t_camera	*camera;
 	float		prev_x;
 
-	scene = minimap->scene;
-	camera = &minimap->scene->camera;
+	scene = minimap->r_scene;
+	camera = &minimap->r_scene->camera;
 	x -= minimap->radius;
 	y -= minimap->radius;
 	prev_x = x;
@@ -67,20 +67,20 @@ static uint32_t
 }
 
 void
-	draw_minimap(
+	draw_minimap_walls(
 		t_minimap	*minimap)
 {
 	uint32_t	y;
 	uint32_t	x;
 	uint32_t	colour;
 
-	if (minimap->scene->recast == false)
+	if (minimap->r_scene->recast == false)
 		return ;
 	y = 0;
-	while (y < minimap->side)
+	while (y < minimap->walls->height)
 	{
 		x = 0;
-		while (x < minimap->side)
+		while (x < minimap->walls->width)
 		{
 			colour = get_minimap_pixel_colour(minimap, x, y);
 			mlx_put_pixel(minimap->walls, x, y, colour);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simon <simon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/15 17:19:43 by simon            ###   ########.fr       */
+/*   Updated: 2024/09/15 22:19:28 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
-
-# define PI 3.14159265358979
 
 // mlx window
 # define WINDOW_TITLE "cub3d"
@@ -125,6 +123,7 @@ typedef struct s_scene
 	t_camera		camera;
 	char			*name;
 	char			**content;
+	char			**r_content;
 	int				**map;
 	int				y_max;
 	int				x_max;
@@ -143,7 +142,7 @@ typedef struct s_minimap
 	mlx_image_t		*walls;
 	mlx_image_t		*player;
 	uint8_t			*circle_overlay;
-	t_scene			*scene;
+	t_scene			*r_scene;
 	uint32_t		side;
 	uint32_t		radius;
 	float			scale;
@@ -154,7 +153,7 @@ typedef struct s_map
 {
 	mlx_image_t		*walls;
 	mlx_image_t		*player;
-	t_scene			*scene;
+	t_scene			*r_scene;
 	uint32_t		width;
 	uint32_t		height;
 	uint32_t		x_offset;
@@ -188,13 +187,17 @@ typedef struct s_window
 	t_minimap		minimap;
 	t_map			map;
 	t_menu			menu;
-	float			time;
-	float			deltatime;
 	mlx_image_t		*fps;
+	mlx_list_t		*textures;
+	mlx_list_t		*other;
 }	t_window;
 
-typedef void	(mlx_hook)(void *param);
+typedef void	(mlx_hook)(void *);
 typedef void	(mlx_key)(struct mlx_key_data, void *);
+typedef void	(mlx_close)(void *);
+typedef void	(mlx_mouse)(mouse_key_t, action_t, modifier_key_t, void *);
+typedef void	(mlx_cursor)(double, double, void *);
+typedef void	(mlx_resize)(uint32_t, uint32_t, void *);
 typedef void	(mlx_scroll)(double, double, void *);
 
 #endif

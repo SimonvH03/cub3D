@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0_read_cub_elements.c                              :+:      :+:    :+:   */
+/*   read_cub_elements.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/15 19:23:10 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:35:09 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 static void
 	load_texture(
@@ -63,25 +63,25 @@ void
 	int	element_count;
 
 	element_count = 0;
-	while (*scene->content && element_count++ < 6)
+	while (*scene->r_content && element_count++ < 6)
 	{
-		if (ft_strncmp(*scene->content, "NO ", 3) == 0)
-			load_texture(&scene->north_texture, *scene->content + 3);
-		else if (ft_strncmp(*scene->content, "EA ", 3) == 0)
-			load_texture(&scene->east_texture, *scene->content + 3);
-		else if (ft_strncmp(*scene->content, "SO ", 3) == 0)
-			load_texture(&scene->south_texture, *scene->content + 3);
-		else if (ft_strncmp(*scene->content, "WE ", 3) == 0)
-			load_texture(&scene->west_texture, *scene->content + 3);
-		else if (ft_strncmp(*scene->content, "F ", 2) == 0)
-			load_colour(&scene->floor, *scene->content + 2);
-		else if (ft_strncmp(*scene->content, "C ", 2) == 0)
-			load_colour(&scene->ceiling, *scene->content + 2);
-		else if (*scene->content[0] != '\0')
+		if (ft_strncmp(*scene->r_content, "NO ", 3) == 0)
+			load_texture(&scene->north_texture, *scene->r_content + 3);
+		else if (ft_strncmp(*scene->r_content, "EA ", 3) == 0)
+			load_texture(&scene->east_texture, *scene->r_content + 3);
+		else if (ft_strncmp(*scene->r_content, "SO ", 3) == 0)
+			load_texture(&scene->south_texture, *scene->r_content + 3);
+		else if (ft_strncmp(*scene->r_content, "WE ", 3) == 0)
+			load_texture(&scene->west_texture, *scene->r_content + 3);
+		else if (ft_strncmp(*scene->r_content, "F ", 2) == 0)
+			load_colour(&scene->floor, *scene->r_content + 2);
+		else if (ft_strncmp(*scene->r_content, "C ", 2) == 0)
+			load_colour(&scene->ceiling, *scene->r_content + 2);
+		else if (*scene->r_content[0] != '\0')
 			error_exit(0, EINVAL, "missing or invalid scene.cub elements");
 		else
 			--element_count;
-		++scene->content;
+		++scene->r_content;
 	}
 }
 
@@ -110,5 +110,6 @@ short
 			free(buffer);
 		buffer = get_next_line(fd);
 	}
+	scene->r_content = scene->content;
 	return (EXIT_SUCCESS);
 }

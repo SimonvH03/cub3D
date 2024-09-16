@@ -11,6 +11,8 @@
 		"string_view": "c",
 		"initializer_list": "c",
 		"paths.h": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"libft.h": "c",
+		"mlx42_int.h": "c"
 	}
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0_init_menu_images.c                               :+:      :+:    :+:   */
+/*   init_menu_images.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/15 19:23:05 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:35:02 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 static short
 	new_scaled_image(
@@ -18,8 +18,8 @@ static short
 		t_scalable *dest)
 {
 	dest->image = mlx_new_image(mlx,
-		dest->texture->width * dest->scale,
-		dest->texture->height * dest->scale);
+			dest->texture->width * dest->scale,
+			dest->texture->height * dest->scale);
 	if (dest->image == NULL)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

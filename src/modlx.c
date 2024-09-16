@@ -1,19 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_draw.c                                       :+:      :+:    :+:   */
+/*   modlx.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 22:07:27 by simon             #+#    #+#             */
-/*   Updated: 2024/09/15 19:23:26 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:12:23 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+static void
+	mlx_draw_char(
+		mlx_image_t *image,
+		int32_t texoffset,
+		int32_t imgoffset)
+{
+	char		*pixelx;
+	uint8_t		*pixeli;
+	uint32_t	y;
+
+	if (texoffset < 0)
+		return ;
+	y = 0;
+	while (y < FONT_HEIGHT)
+	{
+		pixelx = &font_atlas.pixels[(y * font_atlas.width + texoffset) * BPP];
+		pixeli = image->pixels + ((y * image->width + imgoffset) * BPP);
+		ft_memcpy(pixeli, pixelx, FONT_WIDTH * BPP);
+		++y;
+	}
+}
+
 void
-	reset_image(
+	modlx_reset_image(
 		mlx_image_t *image)
 {
 	uint8_t		*dst;
@@ -28,27 +50,22 @@ void
 	}
 }
 
-uint32_t
-	gradient(
-		float ratio,
-		uint32_t start,
-		uint32_t end)
+void
+	modlx_replace_string(
+		mlx_image_t *strimage,
+		const char *str)
 {
-	const t_colour_construct	c0 = (t_colour_construct)
-	{(start >> 24) & 0xFF,
-		(start >> 16) & 0xFF,
-		(start >> 8) & 0xFF,
-		start & 0xFF};
-	const t_colour_construct	c1 = (t_colour_construct)
-	{(end >> 24) & 0xFF,
-		(end >> 16) & 0xFF,
-		(end >> 8) & 0xFF,
-		end & 0xFF};
-	const t_colour_construct	res = (t_colour_construct)
-	{(unsigned int)(c1.r * ratio) + (c0.r * (1 - ratio)),
-		(unsigned int)(c1.g * ratio) + (c0.g * (1 - ratio)),
-		(unsigned int)(c1.b * ratio) + (c0.b * (1 - ratio)),
-		(unsigned int)(c1.a * ratio) + (c0.a * (1 - ratio))};
+	const size_t	len = strlen(str);
+	int32_t			imgoffset;
+	size_t			i;
 
-	return ((uint32_t)((res.r << 24) | (res.g << 16) | (res.b << 8) | res.a));
+	modlx_reset_image(strimage);
+	imgoffset = 0;
+	i = 0;
+	while (i < len)
+	{
+		mlx_draw_char(strimage, mlx_get_texoffset(str[i]), imgoffset);
+		imgoffset += FONT_WIDTH;
+		i++;
+	}
 }

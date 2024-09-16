@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/15 19:23:23 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:28:38 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,26 @@ static void
 {
 	t_window	*window;
 	t_camera	*camera;
+	char		*tempf;
 
 	window = param;
 	camera = &window->scene.camera;
-	window->deltatime = mlx_get_time() - window->time;
-	window->time = mlx_get_time();
-	reset_image(window->fps);
-	modlx_replace_string(window->fps, ft_itoa(1 / window->deltatime));
-	camera->movement_speed = MOVEMENT_SPEED * window->deltatime;
+	tempf = ft_itoa(1 / window->mlx->delta_time);
+	modlx_replace_string(window->fps, tempf);
+	free(tempf);
+	camera->movement_speed = MOVEMENT_SPEED * window->mlx->delta_time;
 	if (camera->movement_speed > 0.49)
 		camera->movement_speed = 0.49;
-	camera->rotation_cosin[0] = cosf(ROTATION_SPEED * window->deltatime);
-	camera->rotation_cosin[1] = sinf(ROTATION_SPEED * window->deltatime);
+	camera->rotation_cosin[0] = cosf(ROTATION_SPEED * window->mlx->delta_time);
+	camera->rotation_cosin[1] = sinf(ROTATION_SPEED * window->mlx->delta_time);
 }
 
 static void
-	loop_hooks(
+	link_loop_hooks(
 		t_window *window)
 {
 	mlx_loop_hook(window->mlx, &update_time, window);
 	mlx_key_hook(window->mlx, &keyhook, window);
-	// mlx_scroll_hook(window->mlx, &scrollhook, window);
 	mlx_loop_hook(window->mlx, &view_manager, window);
 }
 
@@ -53,13 +52,12 @@ int
 		return (EXIT_FAILURE);
 	if (init_game_structs(&window, argv[1]) == EXIT_FAILURE
 		|| init_game_images(&window) == EXIT_FAILURE
-		|| init_scalables(&window) == EXIT_FAILURE
+		|| init_menu_structs(&window) == EXIT_FAILURE
 		|| init_menu_images(&window) == EXIT_FAILURE)
 		error_exit(mlx_errno, 0, "initialisation failed");
-	loop_hooks(&window);
+	link_loop_hooks(&window);
 	mlx_loop(window.mlx);
-	mlx_terminate(window.mlx);
-	scene_free(&window.scene);
+	cub3d_terminate(&window);
 	return (EXIT_SUCCESS);
 }
 
@@ -79,6 +77,23 @@ void
 		printf("std_errno: %3d: %s\n", custom_errno, strerror(custom_errno));
 	if (message)
 		printf("message  :    : %s\n", message);
-	// set_them_free();
 	exit(errno);
+}
+
+void
+	cub3d_terminate(
+		t_window *window)
+{
+	mlx_terminate(window->mlx);
+	mlx_delete_texture(window->scene.player_texture);
+	mlx_delete_texture(window->scene.north_texture);
+	mlx_delete_texture(window->scene.east_texture);
+	mlx_delete_texture(window->scene.south_texture);
+	mlx_delete_texture(window->scene.west_texture);
+	mlx_delete_texture(window->menu.background.texture);
+	mlx_delete_texture(window->menu.button_start.texture);
+	mlx_delete_texture(window->menu.button_quit.texture);
+	ft_free_array((void **)window->scene.content);
+	ft_free_array((void **)window->scene.map);
+	free((void *)window->minimap.circle_overlay);
 }

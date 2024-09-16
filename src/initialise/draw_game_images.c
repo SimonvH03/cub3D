@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0_draw_game_images.c                               :+:      :+:    :+:   */
+/*   draw_game_images.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/15 19:22:56 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:34:19 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void
 	draw_scene_background(
@@ -77,7 +77,7 @@ static uint32_t
 {
 	t_scene		*scene;
 
-	scene = map->scene;
+	scene = map->r_scene;
 	x -= map->walls->width / (float)2;
 	y -= map->walls->height / (float)2;
 	x *= map->scale;

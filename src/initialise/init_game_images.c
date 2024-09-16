@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0_init_game_images.c                               :+:      :+:    :+:   */
+/*   init_game_images.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/15 19:23:01 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:13:17 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 static short
 	new_images_scene(
@@ -74,15 +74,15 @@ static short
 			window->scene.player_texture->height * sqrt(2));
 	if (map->player == NULL)
 		return (EXIT_FAILURE);
-	map->x_offset = window->mlx->width - map->scene->x_max / map->scale;
-	map->y_offset = window->mlx->height - map->scene->y_max / map->scale;
+	map->x_offset = window->mlx->width - map->r_scene->x_max / map->scale;
+	map->y_offset = window->mlx->height - map->r_scene->y_max / map->scale;
 	map->x_offset -= map->player->width;
 	map->y_offset -= map->player->height;
 	map->x_offset /= 2;
 	map->y_offset /= 2;
 	if (mlx_image_to_window(window->mlx, map->player,
-			map->x_offset + map->scene->camera.pos_x / map->scale,
-			map->y_offset + map->scene->camera.pos_y / map->scale) < 0)
+			map->x_offset + map->r_scene->camera.pos_x / map->scale,
+			map->y_offset + map->r_scene->camera.pos_y / map->scale) < 0)
 		return (EXIT_FAILURE);
 	map->player->enabled = false;
 	map->walls->enabled = false;
@@ -102,7 +102,6 @@ short
 	draw_scene_background(&window->scene);
 	draw_minimap_circle_overlay(&window->minimap);
 	draw_map_walls(&window->map);
-	// init_hud();
 	window->fps = mlx_put_string(window->mlx, "0000", WIDTH / 2 - 50, 100);
 	return (EXIT_SUCCESS);
 }
