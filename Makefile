@@ -15,11 +15,9 @@ LIBFT	=	$(LFTDIR)/libft.a
 HEADERS =	./cub3d.h \
 			./defs.h \
 			./paths.h \
-			./modlx_font.h \
 
 SRCDIR	=	./src
 SRC		=	$(SRCDIR)/main.c \
-			$(SRCDIR)/modlx.c \
 			$(SRCDIR)/initialise/draw_game_images.c \
 			$(SRCDIR)/initialise/draw_menu_images.c \
 			$(SRCDIR)/initialise/init_game_images.c \
@@ -37,7 +35,8 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/frame_process/draw_minimap_walls.c \
 			$(SRCDIR)/frame_process/draw_raycast.c \
 			$(SRCDIR)/frame_process/draw_texture_column.c \
-# SRC		+=	$(SRCDIR)/test.c
+			$(SRCDIR)/frame_process/modlx.c \
+			$(SRCDIR)/test.c
 
 OBJDIR	=	./obj
 OBJ		=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

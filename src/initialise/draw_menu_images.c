@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 16:34:27 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:47:00 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ static uint32_t
 		float x,
 		float y)
 {
-	t_camera		*camera;
 	mlx_texture_t	*texture;
-	float			prev_x;
 	uint32_t		index;
 	uint8_t			*pixelstart;
 

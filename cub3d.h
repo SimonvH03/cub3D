@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 16:43:27 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:35:31 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CUB3D_H
 # include "defs.h"
 # include "paths.h"
-# include "modlx_font.h"
 
 void		error_exit(mlx_errno_t mlx_errno, int custom_errno, char *message);
 void		cub3d_terminate(t_window *window);
@@ -58,15 +57,14 @@ float		ft_min_float(float a, float b);
 float		ft_abs_float(float value);
 short		ft_sign_float(float value);
 // modlx
-void		modlx_reset_image(mlx_image_t *image);
-void		modlx_replace_string(mlx_image_t* strimage, const char* str);
+void		reset_image(mlx_image_t *image);
 
 // TEST
 // void		print_camera(t_camera *camera);
 // void		print_ray(t_ray *ray);
 // void		print_minimap(t_minimap *minimap);
-// void		print_content(t_scene *scene);
-// void		print_map(t_scene *scene);
+void		print_content(t_scene *scene);
+void		print_map(t_scene *scene);
 // void		draw_textures(t_window *window);
 
 #endif

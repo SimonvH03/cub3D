@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 16:41:18 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:35:31 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void
 	t_ray		ray;
 	uint32_t	x;
 
-	modlx_reset_image(scene->walls);
+	reset_image(scene->walls);
 	x = 0;
 	while (x < scene->walls->width)
 	{

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/16 16:35:21 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:50:41 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void
 	menu_inputs(
 		t_window	*window)
 {
+	(void)window;
 }
 
 void

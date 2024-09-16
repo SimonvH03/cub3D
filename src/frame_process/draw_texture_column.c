@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 16:34:48 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:51:55 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void
 	if (column->start < 0)
 		column->start = 0;
 	column->end = (scene->walls->height + column->height) / 2;
-	if (column->end >= scene->walls->height)
+	if ((uint32_t)column->end >= scene->walls->height)
 		column->end = scene->walls->height;
 	column->step = column->texture->height / (float)column->height;
 	column->y = (column->start
@@ -76,8 +76,8 @@ void
 
 	init_column(scene, ray, &column);
 	tex_x = column.x * column.texture->width;
-	if (ray->hit_type == HORIZONTAL && ray->sign_x > 0
-		|| ray->hit_type == VERTICAL && ray->sign_y < 0)
+	if ((ray->hit_type == HORIZONTAL && ray->sign_x > 0)
+		|| (ray->hit_type == VERTICAL && ray->sign_y < 0))
 		tex_x = column.texture->width - 1 - tex_x;
 	screen_y = (uint32_t)column.start;
 	while (screen_y < (uint32_t)column.end)

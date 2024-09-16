@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/16 16:35:09 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:32:23 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ short
 		buffer = get_next_line(fd);
 	}
 	scene->r_content = scene->content;
+	print_content(scene);
 	return (EXIT_SUCCESS);
 }

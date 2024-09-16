@@ -13,6 +13,7 @@
 		"paths.h": "c",
 		"unistd.h": "c",
 		"libft.h": "c",
-		"mlx42_int.h": "c"
+		"mlx42_int.h": "c",
+		"modlx_font.h": "c"
 	}
 }

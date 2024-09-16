@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 17:13:03 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:52:48 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static short
 	background->scale = ft_max_float(
 			1.0 * mlx->width / background->texture->width,
 			1.0 * mlx->height / background->texture->height);
+	return (EXIT_SUCCESS);
 }
 
 static short
@@ -40,16 +41,21 @@ static short
 	button->scale = ft_min_float(
 			1.0 * (mlx->width / 3) / button->texture->width,
 			1.0 * (mlx->height / 10) / button->texture->height);
+	return (EXIT_SUCCESS);
 }
 
 short
 	init_menu_structs(
 		t_window *window)
 {
-	init_menu_background(window->mlx, &window->menu.background);
-	init_menu_button(window->mlx,
-		&window->menu.button_start, MENU_BUTTON_START_PATH);
-	init_menu_button(window->mlx,
-		&window->menu.button_quit, MENU_BUTTON_QUIT_PATH);
+	if (init_menu_background(window->mlx, &window->menu.background)
+		== EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (init_menu_button(window->mlx, &window->menu.button_start,
+			MENU_BUTTON_START_PATH) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (init_menu_button(window->mlx, &window->menu.button_quit,
+			MENU_BUTTON_QUIT_PATH) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

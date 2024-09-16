@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 17:13:17 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:47:16 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static short
 		t_window *window,
 		t_minimap *minimap)
 {
-	xpm_t	*tempx;
-
 	minimap->walls = mlx_new_image(window->mlx,
 			minimap->side, minimap->side);
 	if (minimap->walls == NULL)
