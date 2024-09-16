@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/16 17:32:39 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:58:48 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,5 @@ short
 			return (EXIT_FAILURE);
 		++y;
 	}
-	print_map(scene);
 	return (EXIT_SUCCESS);
 }

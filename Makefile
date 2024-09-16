@@ -36,7 +36,7 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/frame_process/draw_raycast.c \
 			$(SRCDIR)/frame_process/draw_texture_column.c \
 			$(SRCDIR)/frame_process/modlx.c \
-			$(SRCDIR)/test.c
+			# $(SRCDIR)/test.c
 
 OBJDIR	=	./obj
 OBJ		=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

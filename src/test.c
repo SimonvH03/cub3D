@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 17:21:01 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 17:31:47 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:59:08 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,48 +42,48 @@
 // 		minimap->r_scene->x_max, minimap->r_scene->y_max);
 // }
 
-void
-	print_content(
-		t_scene *scene)
-{
-	int	i;
+// void
+// 	print_content(
+// 		t_scene *scene)
+// {
+// 	int	i;
 
-	i = 0;
-	while (scene->content[i])
-	{
-		printf("%s\n", scene->content[i]);
-		++i;
-	}
-}
+// 	i = 0;
+// 	while (scene->content[i])
+// 	{
+// 		printf("%s\n", scene->content[i]);
+// 		++i;
+// 	}
+// }
 
-void
-	print_map(
-		t_scene *scene)
-{
-	int	y;
-	int	x;
+// void
+// 	print_map(
+// 		t_scene *scene)
+// {
+// 	int	y;
+// 	int	x;
 
-	printf("\e[33mmap size: %d * %d\e[0m\n", scene->y_max, scene->x_max);
-	y = 0;
-	while (y < scene->y_max)
-	{
-		printf("%p\t", scene->map[y]);
-		x = 0;
-		if (scene->map[y])
-		{
-			while (x < scene->x_max)
-			{
-				if (scene->map[y][x] == 0)
-					printf("  ");
-				else
-					printf("\e[34mX \e[0m");
-				++x;
-			}
-		}
-		printf("\n");
-		++y;
-	}
-}
+// 	printf("\e[33mmap size: %d * %d\e[0m\n", scene->y_max, scene->x_max);
+// 	y = 0;
+// 	while (y < scene->y_max)
+// 	{
+// 		printf("%p\t", scene->map[y]);
+// 		x = 0;
+// 		if (scene->map[y])
+// 		{
+// 			while (x < scene->x_max)
+// 			{
+// 				if (scene->map[y][x] == 0)
+// 					printf("  ");
+// 				else
+// 					printf("\e[34mX \e[0m");
+// 				++x;
+// 			}
+// 		}
+// 		printf("\n");
+// 		++y;
+// 	}
+// }
 
 // void
 // 	draw_textures(

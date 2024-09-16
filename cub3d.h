@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 17:35:31 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:59:18 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void		reset_image(mlx_image_t *image);
 // void		print_camera(t_camera *camera);
 // void		print_ray(t_ray *ray);
 // void		print_minimap(t_minimap *minimap);
-void		print_content(t_scene *scene);
-void		print_map(t_scene *scene);
+// void		print_content(t_scene *scene);
+// void		print_map(t_scene *scene);
 // void		draw_textures(t_window *window);
 
 #endif

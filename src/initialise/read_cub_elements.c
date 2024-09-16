@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/16 17:32:23 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:58:44 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ short
 	{
 		if (buffer[0] != '\n')
 		{
-			buffer[ft_strlen(buffer) - 1] = '\0';
+			if (buffer[ft_strlen(buffer) - 1] == '\n')
+				buffer[ft_strlen(buffer) - 1] = '\0';
 			scene->content = ft_array_append(scene->content, buffer);
 		}
 		else
@@ -111,6 +112,5 @@ short
 		buffer = get_next_line(fd);
 	}
 	scene->r_content = scene->content;
-	print_content(scene);
 	return (EXIT_SUCCESS);
 }

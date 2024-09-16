@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/16 17:37:14 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:00:20 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void
 	camera = &window->scene.camera;
 	tempf = ft_itoa(1 / window->mlx->delta_time);
 	mlx_delete_image(window->mlx, window->fps);
-	mlx_put_string(window->mlx, tempf,
-		window->mlx->width / 2, window->mlx->height / 2);
+	window->fps = mlx_put_string(window->mlx, tempf,
+		window->mlx->width / 2, window->mlx->height / 42);
 	free(tempf);
 	camera->movement_speed = MOVEMENT_SPEED * window->mlx->delta_time;
 	if (camera->movement_speed > 0.49)
