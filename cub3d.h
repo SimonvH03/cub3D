@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 17:59:18 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/17 02:49:01 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,30 @@ void		error_exit(mlx_errno_t mlx_errno, int custom_errno, char *message);
 void		cub3d_terminate(t_window *window);
 
 //// PHASE 0: initialising mlx window, scene and camera
-short		init_game_structs(t_window *window, char *argv_scene);
+short		window_init(t_window *window);
+
+short		init_game_structs(mlx_t *mlx, t_window *window, char *argv_scene);
 short		get_content(t_scene *scene);
 void		read_elements(t_scene *scene);
 short		read_map(t_scene *scene);
 
-short		init_game_images(t_window *window);
+short		init_game_images(mlx_t *mlx, t_window *window);
 void		draw_scene_background(t_scene *scene);
 void		draw_minimap_circle_overlay(t_minimap *minimap);
 void		draw_map_walls(t_map *map);
 
-short		init_menu_structs(t_window *window);
-short		init_menu_images(t_window *window);
+short		init_menu_structs(mlx_t *mlx, t_menu *menu);
+short		init_menu_images(mlx_t *mlx, t_menu *menu);
 void		draw_scaled_image(t_scalable *scalable);
+// void		draw_menu_highlight(mlx_image_t *image);
 
 // interpretation of user inputs
-void		game_inputs(t_window *window);
+mlx_key		window_keyhook;
+mlx_hook	view_manager;
 void		wasd_move(t_window *window, t_camera *camera);
 void		arrowkey_turn(t_window *window, t_camera *camera);
-
-void		menu_inputs(t_window *window);
-//
-
-mlx_key		keyhook;
-mlx_hook	view_manager;
+void		up_down_select(t_menu *menu);
+void		confirm_selection(t_menu *menu, t_window *window);
 void		toggle_maps(t_minimap *minimap, t_map *map);
 void		toggle_view(t_window *window);
 

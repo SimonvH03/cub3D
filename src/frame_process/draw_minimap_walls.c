@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 16:34:40 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/17 00:56:05 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void
 	uint32_t	x;
 	uint32_t	colour;
 
-	if (minimap->r_scene->recast == false)
-		return ;
 	y = 0;
 	while (y < minimap->walls->height)
 	{

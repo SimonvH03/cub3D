@@ -6,12 +6,13 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 17:51:55 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/17 03:10:44 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
+// ...else if ((CASE) || 1)... against braindead -Werror=maybe-uninitialized
 static void
 	init_column(
 		t_scene *scene,
@@ -20,11 +21,11 @@ static void
 {
 	if (ray->hit_type == HORIZONTAL && ray->sign_x > 0)
 		column->texture = scene->east_texture;
-	if (ray->hit_type == HORIZONTAL && ray->sign_x < 0)
+	else if (ray->hit_type == HORIZONTAL && ray->sign_x < 0)
 		column->texture = scene->west_texture;
-	if (ray->hit_type == VERTICAL && ray->sign_y > 0)
+	else if (ray->hit_type == VERTICAL && ray->sign_y > 0)
 		column->texture = scene->south_texture;
-	if (ray->hit_type == VERTICAL && ray->sign_y < 0)
+	else if ((ray->hit_type == VERTICAL && ray->sign_y < 0) || 1)
 		column->texture = scene->north_texture;
 	if (ray->hit_type == HORIZONTAL)
 		column->x = scene->camera.pos_y + ray->distance * ray->dir_y;
@@ -39,9 +40,8 @@ static void
 	if ((uint32_t)column->end >= scene->walls->height)
 		column->end = scene->walls->height;
 	column->step = column->texture->height / (float)column->height;
-	column->y = (column->start
-			- (int)scene->walls->height / 2 + column->height / 2)
-		* column->step;
+	column->y = (column->start - (int)scene->walls->height / 2
+			+ column->height / 2) * column->step;
 }
 
 static uint32_t
@@ -54,9 +54,9 @@ static uint32_t
 	uint32_t	index;
 	uint8_t		*texel;
 
-	if (tex_y >= texture->height)
-		return (C_ERROR);
 	index = tex_y * texture->width + tex_x;
+	if (index > texture->height * texture->width)
+		return (C_TRANSPARENT);
 	texel = &texture->pixels[index * texture->bytes_per_pixel];
 	colour = texel[0] << 24 | texel[1] << 16 | texel[2] << 8 | texel[3];
 	return (colour);

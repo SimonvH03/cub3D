@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/16 17:58:48 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 22:13:44 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void
 		int pos_x,
 		char cardinal)
 {
+	if (camera->movement_speed != 0)
+		error_exit(mlx_errno, EINVAL, "multiple player starting positions");
 	camera->aspect_ratio = 1.0 * WIDTH / HEIGHT;
 	camera->pos_y = pos_y + 0.5;
 	camera->pos_x = pos_x + 0.5;

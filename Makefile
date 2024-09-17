@@ -1,7 +1,7 @@
 NAME	=	cub3d
 
 CC		=	cc
-CFLAGS	=	-O3 -flto
+CFLAGS	=	-O3
 CFLAGS	+=	-Wall -Werror -Wextra
 # CFLAGS	+=	-g -Werror
 MLXFLAGS=	-ldl -lglfw -pthread -lm
@@ -27,7 +27,8 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/initialise/read_cub_elements.c \
 			$(SRCDIR)/initialise/read_map_init_camera.c \
 			$(SRCDIR)/user_interface/arrowkey_turn.c \
-			$(SRCDIR)/user_interface/user_inputs.c \
+			$(SRCDIR)/user_interface/keyhooks.c \
+			$(SRCDIR)/user_interface/up_down_select.c \
 			$(SRCDIR)/user_interface/view_manager.c \
 			$(SRCDIR)/user_interface/wasd_move.c \
 			$(SRCDIR)/frame_process/arithmetic.c \

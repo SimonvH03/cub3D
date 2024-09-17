@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/16 16:35:33 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 22:56:39 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,8 @@ void
 	if (mlx_is_key_down(window->mlx, MLX_KEY_D))
 		left_right += 1;
 	if (forward_backward || left_right)
+	{
+		window->scene.recast = true;
 		do_movement(camera, window->scene.map, forward_backward, left_right);
+	}
 }

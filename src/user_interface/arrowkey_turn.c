@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 23:30:28 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 17:53:28 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/16 22:56:15 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static void
 	{-camera->rotation_cosin[1] * camera->sign_rotate,
 		camera->rotation_cosin[0]}};
 
-	if (camera->sign_rotate == 0)
-		return ;
 	camera->dir_x = camera->dir_x * rm[0][0] + camera->dir_y * rm[0][1];
 	camera->dir_y = previous_x * rm[1][0] + camera->dir_y * rm[1][1];
 	camera->plane_x = CAMERA_PLANE * camera->aspect_ratio * -camera->dir_y;
@@ -40,5 +38,9 @@ void
 		camera->sign_rotate = 1;
 	if (mlx_is_key_down(window->mlx, MLX_KEY_RIGHT))
 		camera->sign_rotate = -1;
-	rotate_camera(camera);
+	if (camera->sign_rotate != 0)
+	{
+		rotate_camera(camera);
+		window->scene.recast = true;
+	}
 }

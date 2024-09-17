@@ -6,14 +6,14 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/16 18:00:20 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/17 02:27:06 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
 static void
-	update_time(
+	update_time_dependant_variables(
 		void	*param)
 {
 	t_window	*window;
@@ -25,7 +25,7 @@ static void
 	tempf = ft_itoa(1 / window->mlx->delta_time);
 	mlx_delete_image(window->mlx, window->fps);
 	window->fps = mlx_put_string(window->mlx, tempf,
-		window->mlx->width / 2, window->mlx->height / 42);
+			window->mlx->width / 2, window->mlx->height / 42);
 	free(tempf);
 	camera->movement_speed = MOVEMENT_SPEED * window->mlx->delta_time;
 	if (camera->movement_speed > 0.49)
@@ -38,8 +38,8 @@ static void
 	link_loop_hooks(
 		t_window *window)
 {
-	mlx_loop_hook(window->mlx, &update_time, window);
-	mlx_key_hook(window->mlx, &keyhook, window);
+	mlx_key_hook(window->mlx, &window_keyhook, window);
+	mlx_loop_hook(window->mlx, &update_time_dependant_variables, window);
 	mlx_loop_hook(window->mlx, &view_manager, window);
 }
 
@@ -52,10 +52,11 @@ int
 
 	if (argc != 2)
 		return (EXIT_FAILURE);
-	if (init_game_structs(&window, argv[1]) == EXIT_FAILURE
-		|| init_game_images(&window) == EXIT_FAILURE
-		|| init_menu_structs(&window) == EXIT_FAILURE
-		|| init_menu_images(&window) == EXIT_FAILURE)
+	if (window_init(&window) == EXIT_FAILURE
+		|| init_game_structs(window.mlx, &window, argv[1]) == EXIT_FAILURE
+		|| init_game_images(window.mlx, &window) == EXIT_FAILURE
+		|| init_menu_structs(window.mlx, &window.menu) == EXIT_FAILURE
+		|| init_menu_images(window.mlx, &window.menu) == EXIT_FAILURE)
 		error_exit(mlx_errno, 0, "initialisation failed");
 	link_loop_hooks(&window);
 	mlx_loop(window.mlx);
@@ -86,6 +87,8 @@ void
 	cub3d_terminate(
 		t_window *window)
 {
+	size_t	i;
+
 	mlx_terminate(window->mlx);
 	mlx_delete_texture(window->scene.player_texture);
 	mlx_delete_texture(window->scene.north_texture);
@@ -93,8 +96,13 @@ void
 	mlx_delete_texture(window->scene.south_texture);
 	mlx_delete_texture(window->scene.west_texture);
 	mlx_delete_texture(window->menu.background.texture);
-	mlx_delete_texture(window->menu.button_start.texture);
-	mlx_delete_texture(window->menu.button_quit.texture);
+	mlx_delete_texture(window->menu.highlight.texture);
+	i = 0;
+	while (i < MENU_B_COUNT)
+	{
+		mlx_delete_texture(window->menu.buttons[i].texture);
+		++i;
+	}
 	ft_free_array((void **)window->scene.content);
 	ft_free_array((void **)window->scene.map);
 	free((void *)window->minimap.circle_overlay);

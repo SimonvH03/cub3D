@@ -6,11 +6,38 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/16 17:14:51 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/17 02:24:14 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+void
+	view_manager(
+		void *param)
+{
+	t_window	*window;
+
+	window = param;
+	if (window->view == GAME)
+	{
+		wasd_move(window, &window->scene.camera);
+		arrowkey_turn(window, &window->scene.camera);
+		if (window->scene.recast == true)
+		{
+			draw_raycast(&window->scene);
+			if (window->minimap.enabled == true)
+				draw_minimap_walls(&window->minimap);
+			if (window->map.enabled == true)
+				draw_map_player(&window->map);
+			window->scene.recast = false;
+		}
+	}
+	if (window->view == MENU)
+	{
+		up_down_select(&window->menu);
+	}
+}
 
 void
 	toggle_maps(
@@ -30,42 +57,21 @@ void
 	toggle_view(
 		t_window *window)
 {
+	size_t	i;
+
 	if (window->view == MENU)
 		window->view = GAME;
 	else if (window->view == GAME)
 		window->view = MENU;
 	window->menu.background.image->enabled
 		= !window->menu.background.image->enabled;
-	window->menu.button_start.image->enabled
-		= !window->menu.button_start.image->enabled;
-	window->menu.button_quit.image->enabled
-		= !window->menu.button_quit.image->enabled;
-}
-
-void
-	view_manager(
-		void *param)
-{
-	t_window	*window;
-
-	window = param;
-	if (window->view == GAME)
+	window->menu.highlight.image->enabled
+		= !window->menu.highlight.image->enabled;
+	i = 0;
+	while (i < MENU_B_COUNT)
 	{
-		game_inputs(window);
-		if (window->scene.recast == true)
-		{
-			draw_raycast(&window->scene);
-			if (window->minimap.enabled == true)
-				draw_minimap_walls(&window->minimap);
-			if (window->map.enabled == true)
-				draw_map_player(&window->map);
-		}
-		window->scene.recast = false;
+		window->menu.buttons[i].image->enabled
+			= !window->menu.buttons[i].image->enabled;
+		++i;
 	}
-	// else if (window->view == MENU)
-	// {
-	// 	menu_inputs(window);
-	// 	if (window->menu.interaction_highlight)
-	// 	draw_menu(&window->menu);
-	// }
 }

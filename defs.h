@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/15 22:19:28 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/17 02:05:33 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,23 @@
 
 // mlx window
 # define WINDOW_TITLE "cub3d"
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH				2560
+# define HEIGHT				1440
 
-// (mini)map defaults
-# define C_TRANSPARENT 0x00
-# define C_TRANSLUCENT 0x42
-# define C_CEILING 0x000000BB
-# define C_FLOOR 0x42424280
-# define C_WALL 0xBF6629FF
-# define C_ERROR 0x00FF80FF
+// colours
+# define C_TRANSPARENT		0x00
+# define C_TRANSLUCENT		0x42
+# define C_CEILING			0x000000BB
+# define C_FLOOR			0x42424280
+# define C_WALL				0xBF6629FF
+# define C_ERROR			0x00FF80FF
 
 // camera defaults
-# define MOVEMENT_SPEED 6
-# define ROTATION_SPEED 3
-# define COLLISION_HITBOX 0.1
+# define MOVEMENT_SPEED		6
+# define ROTATION_SPEED		3
+# define COLLISION_HITBOX	0.1
 // ratio of cube height / width
-# define CAMERA_PLANE 1
-
-// menu button selection
-enum	e_select
-{
-	START,
-	SETTINGS,
-	QUIT
-};
+# define CAMERA_PLANE		1
 
 // current window view
 enum	e_view
@@ -171,12 +163,13 @@ typedef struct s_scalable
 
 typedef struct s_menu
 {
-	t_scalable	background;
-	t_scalable	button_start;
-	// t_scalable	button_settings;
-	t_scalable	button_quit;
-	// mlx_image_t		*interaction_highlight;
-	// enum e_select	selection;
+	t_scalable		background;
+	t_scalable		highlight;
+	t_scalable		buttons[2];
+	size_t			selection;
+	uint32_t		buttons_x_offset;
+	uint32_t		buttons_y_offset;
+	uint32_t		buttons_y_margin;
 }	t_menu;
 
 typedef struct s_window
@@ -188,8 +181,6 @@ typedef struct s_window
 	t_map			map;
 	t_menu			menu;
 	mlx_image_t		*fps;
-	mlx_list_t		*textures;
-	mlx_list_t		*other;
 }	t_window;
 
 typedef void	(mlx_hook)(void *);
