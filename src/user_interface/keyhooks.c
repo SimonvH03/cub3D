@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/17 02:59:02 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:51:00 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void
 		if (keydata.key == MLX_KEY_DOWN
 			&& window->menu.selection < MENU_B_COUNT - 1)
 			window->menu.selection += 1;
+		up_down_select(&window->menu);
 	}
 	if ((keydata.key == MLX_KEY_ENTER || keydata.key == MLX_KEY_SPACE)
 		&& keydata.action == MLX_PRESS)
@@ -63,7 +64,11 @@ void
 		mlx_close_window(window->mlx);
 	}
 	if (window->view == GAME)
+	{
 		game_keys(keydata, window);
+	}
 	else if (window->view == MENU)
+	{
 		menu_keys(keydata, window);
+	}
 }

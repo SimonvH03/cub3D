@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/17 02:05:33 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/18 22:12:47 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ typedef struct s_minimap
 	t_scene			*r_scene;
 	uint32_t		side;
 	uint32_t		radius;
-	float			scale;
+	float			block_size;
 	bool			enabled;
 }	t_minimap;
 
@@ -146,11 +146,9 @@ typedef struct s_map
 	mlx_image_t		*walls;
 	mlx_image_t		*player;
 	t_scene			*r_scene;
-	uint32_t		width;
-	uint32_t		height;
 	uint32_t		x_offset;
 	uint32_t		y_offset;
-	float			scale;
+	float			block_size;
 	bool			enabled;
 }	t_map;
 

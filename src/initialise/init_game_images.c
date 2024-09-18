@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/17 02:04:18 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/18 22:16:43 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static short
 static short
 	new_images_map(
 		mlx_t *mlx,
-		mlx_texture_t *player,
 		t_map *map)
 {
 	map->walls = mlx_new_image(mlx, mlx->width, mlx->height);
@@ -67,18 +66,18 @@ static short
 	if (mlx_image_to_window(mlx, map->walls, 0, 0) < 0)
 		return (EXIT_FAILURE);
 	map->player = mlx_new_image(mlx,
-			player->width * sqrt(2), player->height * sqrt(2));
+			(uint32_t)map->block_size, (uint32_t)map->block_size);
 	if (map->player == NULL)
 		return (EXIT_FAILURE);
-	map->x_offset = mlx->width - map->r_scene->x_max / map->scale;
-	map->y_offset = mlx->height - map->r_scene->y_max / map->scale;
+	map->x_offset = mlx->width - map->r_scene->x_max * map->block_size;
+	map->y_offset = mlx->height - map->r_scene->y_max * map->block_size;
 	map->x_offset -= map->player->width;
 	map->y_offset -= map->player->height;
 	map->x_offset /= 2;
 	map->y_offset /= 2;
 	if (mlx_image_to_window(mlx, map->player,
-			map->x_offset + map->r_scene->camera.pos_x / map->scale,
-			map->y_offset + map->r_scene->camera.pos_y / map->scale) < 0)
+			map->x_offset + map->r_scene->camera.pos_x * map->block_size,
+			map->y_offset + map->r_scene->camera.pos_y * map->block_size) < 0)
 		return (EXIT_FAILURE);
 	map->player->enabled = false;
 	map->walls->enabled = false;
@@ -95,8 +94,7 @@ short
 	if (new_images_minimap(mlx, window->scene.player_texture,
 			&window->minimap) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (new_images_map(mlx, window->scene.player_texture,
-			&window->map) == EXIT_FAILURE)
+	if (new_images_map(mlx, &window->map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	draw_scene_background(&window->scene);
 	draw_minimap_circle_overlay(&window->minimap);

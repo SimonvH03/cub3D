@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/17 03:00:48 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:52:37 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ short
 		return (EXIT_FAILURE);
 	if (mlx_image_to_window(mlx, menu->highlight.image, 0, 0) < 0)
 		return (EXIT_FAILURE);
-	menu->highlight.image->enabled = false;
+	up_down_select(menu);
 	return (EXIT_SUCCESS);
 }
 

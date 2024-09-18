@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/17 02:24:14 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:51:08 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,6 @@ void
 				draw_map_player(&window->map);
 			window->scene.recast = false;
 		}
-	}
-	if (window->view == MENU)
-	{
-		up_down_select(&window->menu);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 16:34:19 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/18 21:58:23 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ static uint32_t
 	scene = map->r_scene;
 	x -= map->walls->width / (float)2;
 	y -= map->walls->height / (float)2;
-	x *= map->scale;
-	y *= map->scale;
+	x /= map->block_size;
+	y /= map->block_size;
 	x += scene->x_max / (float)2;
 	y += scene->y_max / (float)2;
 	if (x < 0 || x >= scene->x_max

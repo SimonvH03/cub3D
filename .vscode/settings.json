@@ -14,6 +14,9 @@
 		"unistd.h": "c",
 		"libft.h": "c",
 		"mlx42_int.h": "c",
-		"modlx_font.h": "c"
+		"modlx_font.h": "c",
+		"atomic": "c",
+		"*.tcc": "c",
+		"ostream": "c"
 	}
 }

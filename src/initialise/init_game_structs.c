@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/17 02:25:46 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/18 22:11:14 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ static short
 		t_minimap *minimap,
 		mlx_t *mlx)
 {
-	minimap->side = mlx->height / 3;
+	minimap->side = ft_min_float(mlx->height, mlx->width) / 3;
 	minimap->radius = minimap->side / 2;
 	minimap->circle_overlay = malloc(sizeof(uint32_t)
 			* (pow(minimap->side, 2) + 1) + 1);
 	if (minimap->circle_overlay == NULL)
 		return (EXIT_FAILURE);
-	minimap->scale = minimap->side / 6 * minimap->r_scene->camera.aspect_ratio;
+	minimap->block_size = (minimap->side / 6)
+		* minimap->r_scene->camera.aspect_ratio;
 	minimap->enabled = true;
 	return (EXIT_SUCCESS);
 }
@@ -60,9 +61,9 @@ static short
 		mlx_t *mlx)
 {
 	map->enabled = false;
-	map->scale = ft_max_float(
-			1.0 * (map->r_scene->x_max + 2) / mlx->width,
-			1.0 * (map->r_scene->y_max + 2) / mlx->height);
+	map->block_size = ft_min_float(
+			mlx->height / (map->r_scene->y_max + 2),
+			mlx->width / (map->r_scene->x_max + 2));
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/17 00:56:15 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/18 22:14:43 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static uint32_t
 	prev_x = x;
 	x = prev_x * camera->plane_x + y * camera->plane_y;
 	y = prev_x * -camera->plane_y + y * camera->plane_x;
-	x /= 2;
-	y /= 2;
+	x *= sqrtf(2);
+	y *= sqrtf(2);
 	x += texture->width / (float)2;
 	y += texture->height / (float)2;
 	if (x < 0 || x >= texture->width
@@ -66,6 +66,6 @@ void
 	}
 	map->player->instances[0].x = map->x_offset;
 	map->player->instances[0].y = map->y_offset;
-	map->player->instances[0].x += map->r_scene->camera.pos_x / map->scale;
-	map->player->instances[0].y += map->r_scene->camera.pos_y / map->scale;
+	map->player->instances[0].x += map->r_scene->camera.pos_x * map->block_size;
+	map->player->instances[0].y += map->r_scene->camera.pos_y * map->block_size;
 }

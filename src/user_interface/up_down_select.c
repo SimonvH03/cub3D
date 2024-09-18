@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 23:36:30 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/17 02:48:08 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:52:58 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void
 		= menu->buttons[menu->selection].image->instances[0].x;
 	menu->highlight.image->instances[0].y
 		= menu->buttons[menu->selection].image->instances[0].y;
-	menu->highlight.image->enabled = true;
 }
 
 void

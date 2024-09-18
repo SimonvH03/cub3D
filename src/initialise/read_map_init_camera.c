@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/16 22:13:44 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/18 22:18:26 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ static short
 	while (scene->r_content[scene->y_max])
 	{
 		temp_x = ft_strlen(scene->r_content[scene->y_max]);
-		if (scene->r_content[scene->y_max][temp_x - 1] == '\n')
-			--temp_x;
 		if (temp_x > scene->x_max)
 			scene->x_max = temp_x;
 		++scene->y_max;
@@ -87,7 +85,7 @@ static short
 	int		x;
 
 	x = 0;
-	while (line[x] && line[x] != '\n')
+	while (line[x])
 	{
 		if (line[x] == ' ')
 			scene->map[y][x] = -1;
