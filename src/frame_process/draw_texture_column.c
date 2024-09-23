@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/17 03:10:44 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/23 01:35:19 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ void
 
 	init_column(scene, ray, &column);
 	tex_x = column.x * column.texture->width;
-	if ((ray->hit_type == HORIZONTAL && ray->sign_x > 0)
-		|| (ray->hit_type == VERTICAL && ray->sign_y < 0))
+	if ((ray->hit_type == HORIZONTAL && ray->sign_x < 0)
+		|| (ray->hit_type == VERTICAL && ray->sign_y > 0))
 		tex_x = column.texture->width - 1 - tex_x;
 	screen_y = (uint32_t)column.start;
 	while (screen_y < (uint32_t)column.end)

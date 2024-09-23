@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/17 02:45:25 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/23 01:28:30 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 // # define MENU_B_SETTINGS_PATH	"./data/textures/button_settings_128.xpm42"
 
 // minimap / map
-// # define PLAYER_ICON_PATH	"./data/textures/arrow_32.xpm42"
+# define PLAYER_ICON_PATH	"./data/textures/arrow_32.xpm42"
 // # define PLAYER_ICON_PATH	"./data/textures/barrel_32.xpm42"
-# define PLAYER_ICON_PATH	"./data/textures/incognito_64.xpm42"
+// # define PLAYER_ICON_PATH	"./data/textures/incognito_64.xpm42"
 
 #endif

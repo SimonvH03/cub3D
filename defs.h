@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/18 22:12:47 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/09/23 02:15:59 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 // mlx window
 # define WINDOW_TITLE "cub3d"
-# define WIDTH				2560
-# define HEIGHT				1440
+# define WIDTH				1280
+# define HEIGHT				1280
 
 // colours
 # define C_TRANSPARENT		0x00
@@ -35,7 +35,7 @@
 // camera defaults
 # define MOVEMENT_SPEED		6
 # define ROTATION_SPEED		3
-# define COLLISION_HITBOX	0.1
+# define COLLISION_HITBOX	0.3
 // ratio of cube height / width
 # define CAMERA_PLANE		1
 
