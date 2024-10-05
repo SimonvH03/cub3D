@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/23 02:15:59 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:06:51 by svan-hoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 // mlx window
 # define WINDOW_TITLE "cub3d"
-# define WIDTH				1280
-# define HEIGHT				1280
+# define WIDTH				1920
+# define HEIGHT				1200
 
 // colours
 # define C_TRANSPARENT		0x00
@@ -53,8 +53,6 @@ enum	e_hit_axis
 	HORIZONTAL,
 	VERTICAL
 };
-
-
 
 typedef struct s_colour_construct
 {

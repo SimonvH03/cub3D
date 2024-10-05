@@ -62,11 +62,11 @@ $(NAME): $(LIBMLX) $(LIBFT) $(OBJDIR) $(OBJ)
 
 clean:
 	rm -f $(OBJ)
-	rm -rf $(OBJDIR)
 	make -C $(LFTDIR) clean
 
 fclean: clean
 	rm -f $(NAME)
+	rm -rf $(OBJDIR)
 	rm -f $(LFTDIR)/libft.a
 	rm -rf $(LMLXDIR)/build
 
