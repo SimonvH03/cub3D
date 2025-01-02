@@ -61,8 +61,12 @@ static uint32_t
 		return (C_CEILING);
 	if (scene->map[(int)y][(int)x] < 0)
 		return (C_CEILING);
-	if (scene->map[(int)y][(int)x] > 0)
+	if (scene->map[(int)y][(int)x] == TILE_WALL)
 		return (C_WALL);
+	if (scene->map[(int)y][(int)x] == TILE_DOOR)
+		return (0xFF0000FF); // Red for closed doors
+	if (scene->map[(int)y][(int)x] == TILE_DOOR_OPEN)
+		return (0x00FF00FF); // Green for open doors
 	return (C_FLOOR);
 }
 

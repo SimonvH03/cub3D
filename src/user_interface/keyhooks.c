@@ -26,6 +26,10 @@ static void
 	{
 		toggle_view(window);
 	}
+	if (keydata.key == MLX_KEY_E && keydata.action == MLX_PRESS)
+	{
+		interact_with_door(&window->scene, &window->scene.camera);
+	}
 }
 
 static void

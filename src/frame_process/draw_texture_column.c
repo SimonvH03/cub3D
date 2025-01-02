@@ -19,14 +19,23 @@ static void
 		t_ray *ray,
 		t_column *column)
 {
-	if (ray->hit_type == HORIZONTAL && ray->sign_x > 0)
-		column->texture = scene->east_texture;
-	else if (ray->hit_type == HORIZONTAL && ray->sign_x < 0)
-		column->texture = scene->west_texture;
-	else if (ray->hit_type == VERTICAL && ray->sign_y > 0)
-		column->texture = scene->south_texture;
-	else if ((ray->hit_type == VERTICAL && ray->sign_y < 0) || 1)
-		column->texture = scene->north_texture;
+	// Check if we hit a door
+	if (scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR ||
+		scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR_OPEN)
+	{
+		column->texture = scene->door_texture;
+	}
+	else
+	{
+		if (ray->hit_type == HORIZONTAL && ray->sign_x > 0)
+			column->texture = scene->east_texture;
+		else if (ray->hit_type == HORIZONTAL && ray->sign_x < 0)
+			column->texture = scene->west_texture;
+		else if (ray->hit_type == VERTICAL && ray->sign_y > 0)
+			column->texture = scene->south_texture;
+		else if ((ray->hit_type == VERTICAL && ray->sign_y < 0) || 1)
+			column->texture = scene->north_texture;
+	}
 	if (ray->hit_type == HORIZONTAL)
 		column->x = scene->camera.pos_y + ray->distance * ray->dir_y;
 	else
@@ -54,10 +63,13 @@ static uint32_t
 	uint32_t	index;
 	uint8_t		*texel;
 
-	index = tex_y * texture->width + tex_x;
-	if (index > texture->height * texture->width)
+	// Check bounds first
+	if (tex_x >= texture->width || tex_y >= texture->height)
 		return (C_TRANSPARENT);
-	texel = &texture->pixels[index * texture->bytes_per_pixel];
+
+	// Calculate byte index
+	index = (tex_y * texture->width + tex_x) * texture->bytes_per_pixel;
+	texel = &texture->pixels[index];
 	colour = texel[0] << 24 | texel[1] << 16 | texel[2] << 8 | texel[3];
 	return (colour);
 }

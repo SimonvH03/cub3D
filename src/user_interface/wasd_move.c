@@ -79,15 +79,15 @@ static void
 	cos_sin[1] = camera->movement_matrix[1 + forward_backward][1 + left_right];
 	move_dir_x = camera->dir_x * cos_sin[0] + camera->dir_y * -cos_sin[1];
 	move_dir_y = camera->dir_x * cos_sin[1] + camera->dir_y * cos_sin[0];
-	if (map[(int)camera->pos_y]
+	if (is_solid(map[(int)camera->pos_y]
 		[(int)(camera->pos_x + move_dir_x * camera->movement_speed
-			+ COLLISION_HITBOX * ft_sign_float(move_dir_x))] > 0)
+			+ COLLISION_HITBOX * ft_sign_float(move_dir_x))]))
 		move_dir_x = (int)camera->pos_x + (move_dir_x > 0) - camera->pos_x
 			- COLLISION_HITBOX * ft_sign_float(move_dir_x);
 	camera->pos_x += move_dir_x * camera->movement_speed;
-	if (map[(int)(camera->pos_y + move_dir_y * camera->movement_speed
+	if (is_solid(map[(int)(camera->pos_y + move_dir_y * camera->movement_speed
 			+ COLLISION_HITBOX * ft_sign_float(move_dir_y))]
-			[(int)camera->pos_x] > 0)
+			[(int)camera->pos_x]))
 		move_dir_y = (int)camera->pos_y + (move_dir_y > 0) - camera->pos_y
 			- COLLISION_HITBOX * ft_sign_float(move_dir_y);
 	camera->pos_y += move_dir_y * camera->movement_speed;

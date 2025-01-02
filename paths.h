@@ -23,6 +23,9 @@
 # define MENU_B_COUNT			2
 // # define MENU_B_SETTINGS_PATH	"./data/textures/button_settings_128.xpm42"
 
+// Door texture
+# define DOOR_TEXTURE_PATH		"./scenes/textures/door.xpm42"
+
 // minimap / map
 # define PLAYER_ICON_PATH		"./data/textures/arrow_32.xpm42"
 // # define PLAYER_ICON_PATH		"./data/textures/barrel_32.xpm42"

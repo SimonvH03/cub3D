@@ -27,6 +27,9 @@ static short
 	scene->east_texture = NULL;
 	scene->south_texture = NULL;
 	scene->west_texture = NULL;
+	scene->door_texture = &mlx_load_xpm42(DOOR_TEXTURE_PATH)->texture;
+	if (scene->door_texture == NULL)
+		return (EXIT_FAILURE);
 	scene->camera.movement_speed = 0;
 	read_elements(scene);
 	if (scene->north_texture == NULL || scene->east_texture == NULL
@@ -35,6 +38,7 @@ static short
 	if (read_map(scene) == EXIT_FAILURE || scene->camera.movement_speed == 0)
 		return (EXIT_FAILURE);
 	scene->recast = true;
+	init_doors(scene);
 	return (EXIT_SUCCESS);
 }
 

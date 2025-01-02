@@ -95,6 +95,7 @@ void
 	mlx_delete_texture(window->scene.east_texture);
 	mlx_delete_texture(window->scene.south_texture);
 	mlx_delete_texture(window->scene.west_texture);
+	mlx_delete_texture(window->scene.door_texture);
 	mlx_delete_texture(window->menu.background.texture);
 	mlx_delete_texture(window->menu.highlight.texture);
 	i = 0;
@@ -106,4 +107,6 @@ void
 	ft_free_array((void **)window->scene.content);
 	ft_free_array((void **)window->scene.map);
 	free((void *)window->minimap.circle_overlay);
+	if (window->scene.doors.doors)
+		free(window->scene.doors.doors);
 }

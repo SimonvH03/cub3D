@@ -64,8 +64,9 @@ static void
 			ray->pos_y += ray->sign_y;
 			ray->hit_type = VERTICAL;
 		}
-		if (scene->map[ray->pos_y][ray->pos_x] > 0)
-			break ;
+		if (scene->map[ray->pos_y][ray->pos_x] == TILE_WALL ||
+			scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR)
+			break;
 	}
 	if (ray->hit_type == HORIZONTAL)
 		ray->distance = ray->total_x - ray->step_x;

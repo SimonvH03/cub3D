@@ -46,6 +46,12 @@ void		confirm_selection(t_menu *menu, t_window *window);
 void		toggle_maps(t_minimap *minimap, t_map *map);
 void		toggle_view(t_window *window);
 
+// Door system functions
+void		init_doors(t_scene *scene);
+void		interact_with_door(t_scene *scene, t_camera *camera);
+bool		is_door(int tile);
+bool		is_solid(int tile);
+
 // frame processing
 void		draw_raycast(t_scene *scene);
 void		draw_texture_column(t_scene *scene, t_ray *ray, uint32_t x);
