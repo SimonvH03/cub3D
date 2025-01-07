@@ -47,7 +47,6 @@ void		toggle_maps(t_minimap *minimap, t_map *map);
 void		toggle_view(t_window *window);
 
 // Door system functions
-void		init_door(t_scene *scene, int x, int y);
 void		interact_with_door(t_scene *scene, t_camera *camera);
 bool		is_door(int tile);
 bool		is_solid(int tile);

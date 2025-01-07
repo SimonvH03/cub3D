@@ -13,18 +13,6 @@
 #include "../../cub3d.h"
 
 /*
-** Initialize a single door at the given coordinates
-*/
-void
-	init_door(
-		t_scene *scene,
-		int x,
-		int y)
-{
-	scene->map[y][x] = TILE_DOOR;  // Just set the map tile
-}
-
-/*
 ** Check if a tile is a door (either open or closed)
 */
 bool
