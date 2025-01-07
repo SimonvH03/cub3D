@@ -63,22 +63,6 @@ enum e_tile_type
 	TILE_DOOR_OPEN = 3  // Internal representation of open door
 };
 
-// Door structure to track individual doors
-typedef struct s_door
-{
-	int		x;          // Door x position in map
-	int		y;          // Door y position in map
-	bool	is_open;    // Door state
-} t_door;
-
-// List of all doors in the map
-typedef struct s_door_list
-{
-	t_door	*doors;     // Array of doors
-	int		count;      // Number of doors
-	int		capacity;   // Maximum number of doors
-} t_door_list;
-
 typedef struct s_colour_construct
 {
 	unsigned char	r;
@@ -151,7 +135,6 @@ typedef struct s_scene
 	uint32_t		floor;
 	uint32_t		ceiling;
 	bool			recast;
-	t_door_list		doors;         // List of all doors in the scene
 }	t_scene;
 
 typedef struct s_minimap

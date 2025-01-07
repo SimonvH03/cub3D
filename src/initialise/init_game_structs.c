@@ -38,7 +38,6 @@ static short
 	if (read_map(scene) == EXIT_FAILURE || scene->camera.movement_speed == 0)
 		return (EXIT_FAILURE);
 	scene->recast = true;
-	init_doors(scene);
 	return (EXIT_SUCCESS);
 }
 

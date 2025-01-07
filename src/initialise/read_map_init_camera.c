@@ -92,7 +92,10 @@ static short
 		else if (line[x] == '1' || line[x] == '0')
 			scene->map[y][x] = line[x] - '0';
 		else if (line[x] == 'D')
+		{
 			scene->map[y][x] = TILE_DOOR;
+			init_door(scene, x, y);
+		}
 		else if (line[x] == 'N' || line[x] == 'E'
 			|| line[x] == 'S' || line[x] == 'W')
 		{
