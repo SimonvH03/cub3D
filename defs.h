@@ -63,13 +63,22 @@ enum e_tile_type
 	TILE_DOOR_OPEN = 3  // Internal representation of open door
 };
 
-typedef struct s_colour_construct
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	a;
-}	t_colour_construct;
+// Door state structure
+typedef struct s_door_state {
+    bool is_opening;
+    float animation_progress;
+    int x;
+    int y;
+} t_door_state;
+
+typedef struct s_hit {
+    int pos_x;
+    int pos_y;
+    float distance;
+    bool is_door;
+    bool hit_type;
+    t_door_state *door_state;
+} t_hit;
 
 typedef struct s_ray
 {
@@ -86,7 +95,19 @@ typedef struct s_ray
 	short			sign_y;
 	bool			hit_type;
 	float			distance;
+	t_hit			door_hit;   // Store door hit information
+	t_hit			wall_hit;   // Store wall hit information
+	bool			has_door;   // Whether we hit a door
+	bool			has_wall;   // Whether we hit a wall
 }	t_ray;
+
+typedef struct s_colour_construct
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	a;
+}	t_colour_construct;
 
 typedef struct s_column
 {
@@ -95,7 +116,7 @@ typedef struct s_column
 	int				end;
 	mlx_texture_t	*texture;
 	float			x;
-	float			step;
+	float				step;
 	float			y;
 }	t_column;
 
@@ -114,15 +135,6 @@ typedef struct s_camera
 	float			movement_speed;
 }	t_camera;
 
-// Door state structure
-typedef struct s_door_state {
-    bool is_opening;
-    float animation_progress;
-    int x;
-    int y;
-} t_door_state;
-
-// free: scene->map
 typedef struct s_scene
 {
 	mlx_image_t		*walls;
