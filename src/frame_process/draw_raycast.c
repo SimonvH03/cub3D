@@ -111,8 +111,6 @@ static void
 				if (door_pos < (1.0f - door_state->animation_progress))
 				{
 					ray->has_door = true;
-					if (!door_state->is_opening)  // If door is closing, stop here
-						break;
 				}
 			}
 		}
