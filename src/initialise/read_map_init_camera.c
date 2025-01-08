@@ -73,6 +73,8 @@ static short
 			scene->x_max = temp_x;
 		++scene->y_max;
 	}
+	scene->height = scene->y_max;
+	scene->width = scene->x_max;
 	return (EXIT_SUCCESS);
 }
 

@@ -1,0 +1,97 @@
+!XPM42
+64 64 31 1 c
+  #383838FF
+. #545454FF
+X #8C8C8CFF
+o #989898FF
+O #A8A8A8FF
++ #B4B4B4FF
+@ #C0C0C0FF
+# #D0D0D0FF
+$ #DCDCDCFF
+% #7C7C7CFF
+& #707070FF
+* #646464FF
+= #484848FF
+- #ECECECFF
+; #FCE034FF
+: #FCD424FF
+> #FCCC18FF
+, #FCC008FF
+< #FCB400FF
+1 #FC9840FF
+2 #FC8820FF
+3 #FCF420FF
+4 #FCFCFCFF
+5 #2C2C2CFF
+6 #202020FF
+7 #1C1C1CFF
+8 #000000FF
+9 #5C5C5CFF
+0 #FCF85CFF
+q #FC7800FF
+w #FFFFFFFF
+                                                                
+.XXoooOO+++@###$$$$$$$####@@++OOoooooXXXXX%%%%&&&&**&&&%%%%XXXX 
+*XXXoooO+++@@@@#$$$$$$####@@++OOOooooXXXXX%%%%&&&&**&&&&%%%%XXX 
+*X*oXXoOOOO*o@@#$$$$$*o$$#@@@@+*oOoooXXXX*o%%%%&&&&.o**&%%%%*oX 
+*X=*XXoOOOO=*@@###$$$=*$$###@@+=*OOoooXXX=*XX%%&&&&=.**&%%%%=*X 
+&%XXXXooOOO+@@@@##$$$$$$$###@@++OOOoooXXXXXXX%%%&&&****&&&&%%%X 
+&%XXXXXooooO+++@####$$$$$$##@@@@+OOoooXXXXXXXX%%%%&&&***&&&&%%% 
+&%XXXXXooooO+++@####$$$$$$$$##@@+++OOooooXXXXX%%%%&&&***&&&&%%% 
+&%%XXXXooooO++++@@##$$$$$$$$##@@+++OOooooXXXXX%%%%&&&******&%%% 
+&&%XXXXXooooOOO+@@............=================%%%%&&&&****&&&% 
+&&%%%%XXooooOOOO+@-===========                $X%%%%&&&****&&&% 
+&&%%%%XXoooooOOO++#-;;;;::>>,,,,,<<<111111122$@XXX%%%&&&&***&&% 
+&&*o%%%XXXX*XooO++@#-33;::::>>,,,<<<<<<11111$@XXXX%*o&&&&***.o& 
+&*=*%%%XXXX=*ooOOO++#-33;;::>>,,,,,<<<<<111$@XXXXX%=*%%&&&**=.&=
+&*&%%%%XXXXooooOOO++@$-3;;::>>,,,,,<<<<<11$@ooXXXXX%%%%&&&****&=
+&*&&&&%%XXXXooooOO+++@$-;;;;::>,,,,<<<<<1$@oooXXXXX%%%%&&&****&=
+&**&&&%%XXXXXXXoooOO+@@$-3;;::>>>,,,<<<<$@ooooooXXX%%%%%%&&&&**=
+&**&&&%%XX..XXXoooOO+@@#$-;;::>>>,,,<<<$@OOOOoooXXXXX%%%%&&&&**=
+&**&&&&%%%.=.XXoooOOO++@@$-;;;:>>,,,<<$#+OOOOoooXXXXX%%%%&&&&**=
+&*****&&%%.  .XXooooO++@@@$-;;:::>>,,4-@@+OOOoooooXX. %%%%&&&&*=
+&*****&&%%. : .XooooO++@@@@$-;:::>>,4-@@@++++OooooX. OX%%%%%%&*=
+&&.o***&%%. >: .XXoooOO++@@#$-;::>>4-#@@@++++Ooooo. XOX%%%%%*o*=
+&&=.***&&&. >>: .XoooOO++@@@#$-:::4-$####@+++Oooo. 2XOXXX%%%=*&=
+&&&&****&&. >>:: .XXoooOO++@##$4;4-$$$###@@@@+OO. 12XOXXX%%%%%&=
+&&&&****&&. ,,,,, .XoooOO++@###-4-$$$$####@@@+O. 112XOXXXX%%%%&=
+&%&&&*****.O++++++.XoooOO+*o@@@#-$$$$*o###@@@+. 1111XOXXXX%%%%&=
+&%&&&*****&&&%%%XXXXXooooO=*@@@####$$=*$$####. <<111X+oXXX%%%%%=
+*%&&&5  =*&&&&%%XXXXXooooOO+@@@####$$$$$$$##. <<<111X+oXXXXXX%%=
+*%%%&65 =**&&&&%%%XXXooooOOO+++@####$$$$$$#. ,<<<111X+oXXXXXX%%=
+*%%%&65 =**&555%%%%%XXXooooO+++@@@@#$$$$$$. ,,<<<<<1X+oooXXXXX%=
+*%%%&65 .***575%%%%%XXXooooO+++@@@@#$$$$$. ,,,<<<<<1X+oooXXXXX%=
+*X*o%65 .***585&%%%%XXXoooooOOO+@@@##$$$. >,,,,,<<<1X+oooXXX*o%=
+*X=*%65 .&**585&&&%%%XXXXoooOOO+@@@@#$$$4::>,,,,<<<<o+OoooXX=*X=
+*XXX%65 .&**575&&&%%%XXXXoooOOO+@@@@#$$$-4:>,,,,<<<<o+OoooXXXXX=
+*XXX%65 9&&*555&&&%%%XXXXooooooO+++@####$-4>,,,,,<<<o+OoooXXXXX=
+*XXX%65 9&&*****&&&&%%%XXXXooooO++++@###$$-4>>,,,,,<o+OOOooooXX=
+*XXXX6659&&*******&&%%%XXX*OooooOOO+@*o@#$$-4>>>,,,<o@+OOooooXX=
+*XXXX%999%&&&&****&&%%%XXX=*ooooOOO+@=*@#$$$-4>>,,,<o@+++OooooX=
+*oXXXX%%%%........o&&%%%%XXXooooOOOO+@@@###$$-4>,,,,O@+++OooooX=
+*oXXXXX%%%.      &o*&&&%%XXXXXXo..oO+@@@@##$$$-4>,,,O@@++Oooooo=
+*oXXXXX%%%. 2111Oo**&&&%%XXXXXX.  .O+@@@@##$$$$-4,,,O@@@@+OOOoo=
+*o*oXXX%%%. 221Oo****&&%%%%XXX. ;3 .O+++@####$$$-4,,O@@@@+OO*Xo=
+*o=*XXXXX%. 22Oo*****&&&&%%XX. ;;30 .+++@@@##$$$$-4,O@#@@+OO=*o=
+.oooXXXXX%. qOo&*****&&&&%%X. ;;;330 .++@@@##$$$$$-4O@#@@@+++Oo=
+.ooooXXXXX. Oo%&&&&****&&&&. :;;;;300 .O+@@####$$$$-4@#@@@+++Oo=
+.OoooooXXX.&o%%%&&&&***&&&. >:;;;;3000 .+++@@##$$$$$-4###@+++OO=
+.OOOoooXXX.o%%%%&&&&***&&. ,,>:::;33330 .++@@##$$$$$$$$###@@@+O=
+.OOOoooXXXXX%%%%&&&&****. ,,,>::::;33300 .+@@@@#$$$$$$$###@@@+O=
+.+OOoooooXXX%%%%%%%&&**. <,,,,>>>:;;;;300 .++@@####$$$$$$#@@@++=
+.+++OooooXXXXXX%%%%%&*. <<,,,,>>>:;;;;3000 .+@@@###$$$$$$####@+=
+.+*oOooooXX*oXX%%%%%&. <<<,,,,>>>>:;;;33300 .@@@###*o$$$$$##*o@=
+.@=*Ooooooo=*XXX%%%%. 1<<<<<<,,,,>:;;;;33000 .+@###=*$$$$$##=*@=
+.@+++OOooooXXXXX%%%. 11<<<<<<,,,,>:;;;;330000 .+@@@#$$$$$$$$$#@=
+.@+++OOooooXXXXX%%% oooooooooooXXXXXXXXXXXXXXX +@@@#$$$$$$$$$#@=
+.#@@+OOOOoooXXXXXXX+++++++++++OOOOOOOOOOOOOOOOO+@@@##$$$$$$$$#@=
+.#@@@++OOoooXXXXXXXX%%%%&&&****&&&&%%XXXXooooOOO+++@#$$$$$$$$$#=
+.#@@@++OOoooXXXXXXXX%%%%&&&****&&&&%%XXXXooooOOO+++@#$$$$$$$$$#=
+.###@++OOOOooooXXXXX%%%%&&&*****&&&&%XXXXXXooooO+++@@###$$$$$$#=
+.$###@@++OOooooXXXXXX%%%%&&&&***&&&&%%%%XXXooooOOOO+@####$$$$$$=
+.$*o#@@++++*XoooXXXXX*o%%&&&&**.o**&&%%%%*oXXoooOOO*o@@@#$$$*o$=
+.$=*#@@++++=*oooooXXX=*%%&&&&**=.**&&%%%%=*XXooooOO=*@@@#$$$=*$=
+.$$$###@@++OoooooooXXXXX%%%&&&&*****&%%%%XXXXooooooO+@@@####$$$=
+.$$$$##@@@@+OOOooooXXXXX%%%%%&&&****&&&&%%%XXXXooooO++++@##$$$$=
+                                                                

@@ -106,5 +106,6 @@ void
 	}
 	ft_free_array((void **)window->scene.content);
 	ft_free_array((void **)window->scene.map);
+	free(window->scene.doors);
 	free((void *)window->minimap.circle_overlay);
 }

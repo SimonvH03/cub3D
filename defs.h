@@ -114,6 +114,14 @@ typedef struct s_camera
 	float			movement_speed;
 }	t_camera;
 
+// Door state structure
+typedef struct s_door_state {
+    bool is_opening;
+    float animation_progress;
+    int x;
+    int y;
+} t_door_state;
+
 // free: scene->map
 typedef struct s_scene
 {
@@ -135,6 +143,10 @@ typedef struct s_scene
 	uint32_t		floor;
 	uint32_t		ceiling;
 	bool			recast;
+	t_door_state *doors;  // Array of door states
+	int door_count;       // Number of doors
+	int height;          // Map height
+	int width;           // Map width
 }	t_scene;
 
 typedef struct s_minimap

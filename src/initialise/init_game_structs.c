@@ -12,21 +12,40 @@
 
 #include "../../cub3d.h"
 
+static void
+	init_scene(
+		t_scene *scene)
+{
+	scene->content = NULL;
+	scene->map = NULL;
+	scene->player_texture = NULL;
+	scene->north_texture = NULL;
+	scene->east_texture = NULL;
+	scene->south_texture = NULL;
+	scene->west_texture = NULL;
+	scene->door_texture = NULL;
+	scene->doors = NULL;
+	scene->door_count = 0;
+	scene->height = 0;
+	scene->width = 0;
+	scene->floor = 0;
+	scene->ceiling = 0;
+	scene->recast = true;
+}
+
 static short
 	scene_init(
 		t_scene *scene,
 		char *argv_scene)
 {
+	init_scene(scene);
+	
 	scene->player_texture = &mlx_load_xpm42(PLAYER_ICON_PATH)->texture;
 	if (scene->player_texture == NULL)
 		return (EXIT_FAILURE);
 	scene->name = argv_scene;
 	if (get_content(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	scene->north_texture = NULL;
-	scene->east_texture = NULL;
-	scene->south_texture = NULL;
-	scene->west_texture = NULL;
 	scene->door_texture = &mlx_load_xpm42(DOOR_TEXTURE_PATH)->texture;
 	if (scene->door_texture == NULL)
 		return (EXIT_FAILURE);
