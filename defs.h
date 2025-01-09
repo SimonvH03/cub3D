@@ -60,13 +60,15 @@ enum e_tile_type
 	TILE_EMPTY = 0,
 	TILE_WALL = 1,
 	TILE_DOOR = 2,
-	TILE_DOOR_OPEN = 3  // Internal representation of open door
+	TILE_DOOR_OPEN = 3
 };
 
 // Door state structure
 typedef struct s_door_state {
     bool is_opening;
+    bool is_closing;
     float animation_progress;
+    float animation_speed;
     int x;
     int y;
 } t_door_state;
@@ -95,10 +97,10 @@ typedef struct s_ray
 	short			sign_y;
 	bool			hit_type;
 	float			distance;
-	t_hit			door_hit;   // Store door hit information
-	t_hit			wall_hit;   // Store wall hit information
-	bool			has_door;   // Whether we hit a door
-	bool			has_wall;   // Whether we hit a wall
+	t_hit			door_hit; 
+	t_hit			wall_hit;
+	bool			has_door;   
+	bool			has_wall;   
 }	t_ray;
 
 typedef struct s_colour_construct
@@ -150,15 +152,14 @@ typedef struct s_scene
 	mlx_texture_t	*east_texture;
 	mlx_texture_t	*south_texture;
 	mlx_texture_t	*west_texture;
-	mlx_texture_t	*door_texture;    // Door texture
+	mlx_texture_t	*door_texture;
 	mlx_texture_t	*player_texture;
 	uint32_t		floor;
 	uint32_t		ceiling;
-	bool			recast;
-	t_door_state *doors;  // Array of door states
-	int door_count;       // Number of doors
-	int height;          // Map height
-	int width;           // Map width
+	bool			recast;	
+	int				max_doors;        
+	t_door_state	*doors;
+	int				door_count;     	
 }	t_scene;
 
 typedef struct s_minimap

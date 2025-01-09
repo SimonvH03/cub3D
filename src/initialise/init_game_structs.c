@@ -12,25 +12,29 @@
 
 #include "../../cub3d.h"
 
-static void
+void
 	init_scene(
 		t_scene *scene)
 {
+	scene->walls = NULL;
+	scene->background = NULL;
+	scene->name = NULL;
 	scene->content = NULL;
+	scene->r_content = NULL;
 	scene->map = NULL;
-	scene->player_texture = NULL;
+	scene->y_max = 0;
+	scene->x_max = 0;
 	scene->north_texture = NULL;
 	scene->east_texture = NULL;
 	scene->south_texture = NULL;
 	scene->west_texture = NULL;
 	scene->door_texture = NULL;
-	scene->doors = NULL;
-	scene->door_count = 0;
-	scene->height = 0;
-	scene->width = 0;
+	scene->player_texture = NULL;
 	scene->floor = 0;
 	scene->ceiling = 0;
 	scene->recast = true;
+	scene->doors = NULL;
+	scene->door_count = 0;
 }
 
 static short

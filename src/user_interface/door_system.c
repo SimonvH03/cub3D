@@ -12,60 +12,89 @@
 
 #include "../../cub3d.h"
 
-/*
-** Get or create a door state at the given position
-*/
-t_door_state*
-	get_door_at_position(
-		t_scene *scene,
+#define DOOR_ANIMATION_SPEED 2.0f
+#define DOOR_INTERACTION_RANGE 1.5f
+#define DOOR_ANIMATION_STEP 0.016f
+
+static int
+	count_doors(
+		t_scene *scene)
+{
+	int x;
+	int y;
+	int count;
+
+	count = 0;
+	y = 0;
+	while (y < scene->y_max)
+	{
+		x = 0;
+		while (x < scene->x_max)
+		{
+			if (scene->map[y][x] == TILE_DOOR)
+				count++;
+			x++;
+		}
+		y++;
+	}
+	return (count);
+}
+
+static void
+	init_door_state(
+		t_door_state *door,
 		int x,
 		int y)
 {
-	int i;
-
-	// Look for existing door state
-	for (i = 0; i < scene->door_count; i++)
-	{
-		if (scene->doors[i].x == x && scene->doors[i].y == y)
-			return &scene->doors[i];
-	}
-
-	// Create new door state if not found
-	scene->doors = realloc(scene->doors, (scene->door_count + 1) * sizeof(t_door_state));
-	if (!scene->doors)
-		return NULL;
-
-	scene->doors[scene->door_count].x = x;
-	scene->doors[scene->door_count].y = y;
-	scene->doors[scene->door_count].is_opening = false;
-	scene->doors[scene->door_count].animation_progress = 0.0f;
-	
-	return &scene->doors[scene->door_count++];
+	door->is_opening = false;
+	door->is_closing = false;
+	door->animation_progress = 0.0f;
+	door->animation_speed = DOOR_ANIMATION_SPEED;
+	door->x = x;
+	door->y = y;
 }
 
-/*
-** Initialize a single door at the given coordinates
-*/
+static void
+	init_all_doors(
+		t_scene *scene)
+{
+	int x;
+	int y;
+	int count;
+
+	count = 0;
+	y = 0;
+	while (y < scene->y_max)
+	{
+		x = 0;
+		while (x < scene->x_max)
+		{
+			if (scene->map[y][x] == TILE_DOOR)
+			{
+				init_door_state(&scene->doors[count], x, y);
+				count++;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
 void
-	init_door(
-		t_scene *scene,
-		int x,
-		int y)
+	init_door_manager(
+		t_scene *scene)
 {
-	t_door_state *door;
+	int door_count;
 
-	scene->map[y][x] = TILE_DOOR;
-	door = get_door_at_position(scene, x, y);
-	if (door)
-	{
-		door->is_opening = false;
-		door->animation_progress = 0.0f;
-	}
+	door_count = count_doors(scene);
+	scene->doors = malloc(sizeof(t_door_state) * door_count);
+	if (!scene->doors)
+		return ;
+	scene->door_count = door_count;
+	scene->max_doors = door_count;
+	init_all_doors(scene);
 }
 
-/*
-** Check if a tile is a door (either open or closed)
-*/
 bool
 	is_door(
 		int tile)
@@ -73,14 +102,45 @@ bool
 	return (tile == TILE_DOOR || tile == TILE_DOOR_OPEN);
 }
 
-/*
-** Check if a tile blocks movement (walls and closed doors)
-*/
 bool
 	is_solid(
 		int tile)
 {
-	return (tile == TILE_WALL || tile == TILE_DOOR);  // Only closed doors block movement
+	return (tile == TILE_WALL || tile == TILE_DOOR);
+}
+
+t_door_state
+	*get_door_at_position(
+		t_scene *scene,
+		int x,
+		int y)
+{
+	int i;
+
+	i = 0;
+	while (i < scene->door_count)
+	{
+		if (scene->doors[i].x == x && 
+			scene->doors[i].y == y)
+		{
+			return (&scene->doors[i]);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+void
+	cleanup_door_manager(
+		t_scene *scene)
+{
+	if (scene->doors)
+	{
+		free(scene->doors);
+		scene->doors = NULL;
+	}
+	scene->door_count = 0;
+	scene->max_doors = 0;
 }
 
 /*
@@ -104,8 +164,6 @@ void
 	{
 		check_x = (int)(camera->pos_x + camera->dir_x * check_distance);
 		check_y = (int)(camera->pos_y + camera->dir_y * check_distance);
-		
-		// Debug output
 		printf("Checking position: (%d, %d), Map value: %d\n", 
 			check_x, check_y, scene->map[check_y][check_x]);
 		
@@ -144,21 +202,22 @@ void
 	printf("No door found in range\n");
 }
 
-/*
-** Add a new function to update door animations
-*/
 void
 	update_door_animations(
 		t_scene *scene,
 		float delta_time)
 {
-	int x, y;
+	int x;
+	int y;
 	t_door_state *door;
-	float animation_speed = 1.5f;  // Slightly slower for smoother animation
+	float animation_speed;
 
-	for (y = 0; y < scene->height; y++)
+	animation_speed = 1.5f;
+	y = 0;
+	while (y < scene->y_max)
 	{
-		for (x = 0; x < scene->width; x++)
+		x = 0;
+		while (x < scene->x_max)
 		{
 			if (is_door(scene->map[y][x]))
 			{
@@ -187,6 +246,8 @@ void
 					}
 				}
 			}
+			x++;
 		}
+		y++;
 	}
 } 

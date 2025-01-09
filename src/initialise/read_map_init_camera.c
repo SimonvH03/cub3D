@@ -63,18 +63,19 @@ static short
 		t_scene *scene)
 {
 	int		temp_x;
+	int		y;
 
 	scene->y_max = 0;
 	scene->x_max = 0;
-	while (scene->r_content[scene->y_max])
+	y = 0;
+	while (scene->r_content[y])
 	{
-		temp_x = ft_strlen(scene->r_content[scene->y_max]);
+		temp_x = ft_strlen(scene->r_content[y]);
 		if (temp_x > scene->x_max)
 			scene->x_max = temp_x;
-		++scene->y_max;
+		y++;
+		scene->y_max++;
 	}
-	scene->height = scene->y_max;
-	scene->width = scene->x_max;
 	return (EXIT_SUCCESS);
 }
 
@@ -94,10 +95,7 @@ static short
 		else if (line[x] == '1' || line[x] == '0')
 			scene->map[y][x] = line[x] - '0';
 		else if (line[x] == 'D')
-		{
 			scene->map[y][x] = TILE_DOOR;
-			init_door(scene, x, y);
-		}
 		else if (line[x] == 'N' || line[x] == 'E'
 			|| line[x] == 'S' || line[x] == 'W')
 		{
@@ -137,5 +135,6 @@ short
 			return (EXIT_FAILURE);
 		++y;
 	}
+	init_door_manager(scene);
 	return (EXIT_SUCCESS);
 }
