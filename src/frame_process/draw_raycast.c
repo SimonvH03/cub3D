@@ -91,17 +91,14 @@ static void
 			{
 				float door_pos;
 				if (ray->hit_type == HORIZONTAL)
-					door_pos = ray->sign_x > 0 ? 
-						1.0f - (scene->camera.pos_x + ray->distance * ray->dir_x - (int)(scene->camera.pos_x + ray->distance * ray->dir_x)) :
-						(scene->camera.pos_x + ray->distance * ray->dir_x - (int)(scene->camera.pos_x + ray->distance * ray->dir_x));
+					door_pos = scene->camera.pos_x + ray->distance * ray->dir_x - (int)(scene->camera.pos_x + ray->distance * ray->dir_x);
 				else
-					door_pos = ray->sign_y > 0 ? 
-						1.0f - (scene->camera.pos_y + ray->distance * ray->dir_y - (int)(scene->camera.pos_y + ray->distance * ray->dir_y)) :
-						(scene->camera.pos_y + ray->distance * ray->dir_y - (int)(scene->camera.pos_y + ray->distance * ray->dir_y));
+					door_pos = scene->camera.pos_y + ray->distance * ray->dir_y - (int)(scene->camera.pos_y + ray->distance * ray->dir_y);
 
 				// Store door hit information
 				ray->door_hit.pos_x = ray->pos_x;
 				ray->door_hit.pos_y = ray->pos_y;
+				
 				ray->door_hit.distance = ray->distance;
 				ray->door_hit.hit_type = ray->hit_type;
 				ray->door_hit.is_door = true;
