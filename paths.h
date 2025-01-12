@@ -25,6 +25,7 @@
 
 // Door texture
 # define DOOR_TEXTURE_PATH		"./scenes/textures/door.xpm42"
+# define DOOR_TEXTURE_PATH2		"./scenes/textures/door1.xpm42"
 
 // minimap / map
 # define PLAYER_ICON_PATH		"./data/textures/arrow_32.xpm42"

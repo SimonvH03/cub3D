@@ -25,7 +25,12 @@ static void
 	if (scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR ||
 		scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR_OPEN)
 	{
-		column->texture = scene->door_texture;
+		// Select door texture based on hit direction
+		if ((ray->hit_type == HORIZONTAL && ray->sign_x > 0) ||  // East
+			(ray->hit_type == VERTICAL && ray->sign_y < 0))      // North
+			column->texture = scene->door_texture;
+		else                                                      // South or West
+			column->texture = scene->door_texture2;
 		door_state = get_door_at_position(scene, ray->pos_x, ray->pos_y);
 	}
 	else
@@ -48,27 +53,12 @@ static void
 	// Apply door animation offset if this is a door
 	if (door_state)
 	{
-		// Slide the door texture based on animation progress
-		if (ray->hit_type == HORIZONTAL)
-		{
-			if (ray->sign_x > 0)
-				column->x = column->x + door_state->animation_progress;
-			else
-				column->x = column->x - door_state->animation_progress;
-		}
+		// First check if we're in the part that should be shaved off (right side)
+		if (column->x > (1.0f - door_state->animation_progress))
+			column->x = 2.0f;  // Set to invalid value to skip drawing
 		else
-		{
-			if (ray->sign_y > 0)
-				column->x = column->x + door_state->animation_progress;
-			else
-				column->x = column->x - door_state->animation_progress;
-		}
-
-		// Clamp the texture coordinate
-		if (column->x < 0.0f)
-			column->x = 0.0f;
-		if (column->x > 1.0f)
-			column->x = 1.0f;
+			// Move the remaining visible part to the right
+			column->x += door_state->animation_progress;
 	}
 
 	column->height = scene->walls->height / ray->distance;
