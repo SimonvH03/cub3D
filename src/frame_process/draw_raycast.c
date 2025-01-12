@@ -71,23 +71,27 @@ static void
 		}
 
 		// Check for wall hit
-		if (scene->map[ray->pos_y][ray->pos_x] == TILE_WALL)
+		if (scene->map[ray->pos_y][ray->pos_x] == TILE_WALL ||
+			(scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR && 
+			(!get_door_at_position(scene, ray->pos_x, ray->pos_y) || 
+			get_door_at_position(scene, ray->pos_x, ray->pos_y)->animation_progress == 0.0f)))
 		{
 			ray->wall_hit.pos_x = ray->pos_x;
 			ray->wall_hit.pos_y = ray->pos_y;
 			ray->wall_hit.distance = ray->distance;
+			
 			ray->wall_hit.hit_type = ray->hit_type;
 			ray->wall_hit.is_door = false;
 			ray->has_wall = true;
 			break;
 		}
 		
-		// Check for door hit
+		// Check for door hit (only for doors being animated)
 		if (!ray->has_door && (scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR ||
 			scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR_OPEN))
 		{
 			t_door_state *door_state = get_door_at_position(scene, ray->pos_x, ray->pos_y);
-			if (door_state)
+			if (door_state && door_state->animation_progress > 0.0f)
 			{
 				float door_pos;
 				if (ray->hit_type == HORIZONTAL)
