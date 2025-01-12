@@ -25,7 +25,12 @@ static void
 	if (scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR ||
 		scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR_OPEN)
 	{
-		column->texture = scene->door_texture;
+		// Select door texture based on hit direction
+		if ((ray->hit_type == HORIZONTAL && ray->sign_x > 0) ||  // East
+			(ray->hit_type == VERTICAL && ray->sign_y < 0))      // North
+			column->texture = scene->door_texture;
+		else                                                      // South or West
+			column->texture = scene->door_texture2;
 		door_state = get_door_at_position(scene, ray->pos_x, ray->pos_y);
 	}
 	else

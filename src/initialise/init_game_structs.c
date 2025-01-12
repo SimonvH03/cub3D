@@ -29,6 +29,7 @@ void
 	scene->south_texture = NULL;
 	scene->west_texture = NULL;
 	scene->door_texture = NULL;
+	scene->door_texture2 = NULL;
 	scene->player_texture = NULL;
 	scene->floor = 0;
 	scene->ceiling = 0;
@@ -52,6 +53,9 @@ static short
 		return (EXIT_FAILURE);
 	scene->door_texture = &mlx_load_xpm42(DOOR_TEXTURE_PATH)->texture;
 	if (scene->door_texture == NULL)
+		return (EXIT_FAILURE);
+	scene->door_texture2 = &mlx_load_xpm42(DOOR_TEXTURE_PATH2)->texture;
+	if (scene->door_texture2 == NULL)
 		return (EXIT_FAILURE);
 	scene->camera.movement_speed = 0;
 	read_elements(scene);

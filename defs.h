@@ -153,6 +153,7 @@ typedef struct s_scene
 	mlx_texture_t	*south_texture;
 	mlx_texture_t	*west_texture;
 	mlx_texture_t	*door_texture;
+	mlx_texture_t	*door_texture2;
 	mlx_texture_t	*player_texture;
 	uint32_t		floor;
 	uint32_t		ceiling;
@@ -169,7 +170,7 @@ typedef struct s_minimap
 	uint8_t			*circle_overlay;
 	t_scene			*r_scene;
 	uint32_t		side;
-	uint32_t		radius;
+	uint32_t			radius;
 	float			block_size;
 	bool			enabled;
 }	t_minimap;
