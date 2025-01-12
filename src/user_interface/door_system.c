@@ -164,42 +164,35 @@ void
 	{
 		check_x = (int)(camera->pos_x + camera->dir_x * check_distance);
 		check_y = (int)(camera->pos_y + camera->dir_y * check_distance);
-		printf("Checking position: (%d, %d), Map value: %d\n", 
-			check_x, check_y, scene->map[check_y][check_x]);
 		
 		if (is_door(scene->map[check_y][check_x]))
 		{
-			printf("Found door at: (%d, %d)\n", check_x, check_y);
 			door = get_door_at_position(scene, check_x, check_y);
 			if (door)
 			{
-				printf("Door state - Opening: %d, Progress: %f\n", 
-					door->is_opening, door->animation_progress);
-				
+				// Don't interact if door is in motion
+				if (door->is_opening || door->is_closing)
+					return;
+					
 				// Start animation based on current state
 				if (scene->map[check_y][check_x] == TILE_DOOR)
 				{
 					door->is_opening = true;
+					door->is_closing = false;
 					door->animation_progress = 0.0f;  // Start from closed
-					printf("Starting door opening animation\n");
 				}
-				else
+				else if (scene->map[check_y][check_x] == TILE_DOOR_OPEN)
 				{
+					door->is_closing = true;
 					door->is_opening = false;
 					door->animation_progress = 1.0f;  // Start from open
-					printf("Starting door closing animation\n");
 				}
 				scene->recast = true;
-			}
-			else
-			{
-				printf("Failed to get door state\n");
 			}
 			return;
 		}
 		check_distance += step;
 	}
-	printf("No door found in range\n");
 }
 
 void
@@ -230,16 +223,18 @@ void
 						if (door->animation_progress >= 1.0f)
 						{
 							door->animation_progress = 1.0f;
+							door->is_opening = false;
 							scene->map[y][x] = TILE_DOOR_OPEN;
 						}
 						scene->recast = true;
 					}
-					else
+					else if (door->is_closing)
 					{
 						door->animation_progress -= delta_time * animation_speed;
 						if (door->animation_progress <= 0.0f)
 						{
 							door->animation_progress = 0.0f;
+							door->is_closing = false;
 							scene->map[y][x] = TILE_DOOR;
 						}
 						scene->recast = true;

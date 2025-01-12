@@ -45,6 +45,10 @@ void
 	float step;
 	t_door_state *door;
 
+	// First check if player is inside a door tile
+	if (is_door(scene->map[(int)camera->pos_y][(int)camera->pos_x]))
+		return;
+
 	step = 0.1;
 	check_distance = 0.1;
 	while (check_distance <= 1.0)
