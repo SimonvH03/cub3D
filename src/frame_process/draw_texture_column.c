@@ -19,11 +19,19 @@ static void
 		t_ray *ray,
 		t_column *column)
 {
+	t_door_state *door_state = NULL;
+
 	// Check if we hit a door
 	if (scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR ||
 		scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR_OPEN)
 	{
-		column->texture = scene->door_texture;
+		// Select door texture based on hit direction
+		if ((ray->hit_type == HORIZONTAL && ray->sign_x > 0) ||  // East
+			(ray->hit_type == VERTICAL && ray->sign_y < 0))      // North
+			column->texture = scene->door_texture;
+		else                                                      // South or West
+			column->texture = scene->door_texture2;
+		door_state = get_door_at_position(scene, ray->pos_x, ray->pos_y);
 	}
 	else
 	{
@@ -41,6 +49,18 @@ static void
 	else
 		column->x = scene->camera.pos_x + ray->distance * ray->dir_x;
 	column->x -= (int)column->x;
+
+	// Apply door animation offset if this is a door
+	if (door_state)
+	{
+		// First check if we're in the part that should be shaved off (right side)
+		if (column->x > (1.0f - door_state->animation_progress))
+			column->x = 2.0f;  // Set to invalid value to skip drawing
+		else
+			// Move the remaining visible part to the right
+			column->x += door_state->animation_progress;
+	}
+
 	column->height = scene->walls->height / ray->distance;
 	column->start = (int)(scene->walls->height - column->height) / 2;
 	if (column->start < 0)
@@ -80,24 +100,61 @@ void
 		t_ray *ray,
 		uint32_t screen_x)
 {
-	t_column		column;
-	uint32_t		tex_x;
-	uint32_t		screen_y;
-	uint32_t		tex_y;
-	uint32_t		colour;
-
-	init_column(scene, ray, &column);
-	tex_x = column.x * column.texture->width;
-	if ((ray->hit_type == HORIZONTAL && ray->sign_x < 0)
-		|| (ray->hit_type == VERTICAL && ray->sign_y > 0))
-		tex_x = column.texture->width - 1 - tex_x;
-	screen_y = (uint32_t)column.start;
-	while (screen_y < (uint32_t)column.end)
+	// Draw wall first if it's visible
+	if (ray->has_wall)
 	{
-		tex_y = (int)column.y & (column.texture->height - 1);
-		column.y += column.step;
-		colour = get_ray_pixel_colour(column.texture, tex_x, tex_y);
-		mlx_put_pixel(scene->walls, screen_x, screen_y, colour);
-		++screen_y;
+		t_column wall_col;
+		ray->pos_x = ray->wall_hit.pos_x;
+		ray->pos_y = ray->wall_hit.pos_y;
+		ray->distance = ray->wall_hit.distance;
+		ray->hit_type = ray->wall_hit.hit_type;
+		init_column(scene, ray, &wall_col);
+
+		uint32_t tex_x = wall_col.x * wall_col.texture->width;
+		if ((ray->hit_type == HORIZONTAL && ray->sign_x < 0)
+			|| (ray->hit_type == VERTICAL && ray->sign_y > 0))
+			tex_x = wall_col.texture->width - 1 - tex_x;
+
+		uint32_t screen_y = (uint32_t)wall_col.start;
+		while (screen_y < (uint32_t)wall_col.end)
+		{
+			uint32_t tex_y = (int)wall_col.y & (wall_col.texture->height - 1);
+			wall_col.y += wall_col.step;
+			uint32_t colour = get_ray_pixel_colour(wall_col.texture, tex_x, tex_y);
+			if ((colour & 0xFF000000) != 0)
+				mlx_put_pixel(scene->walls, screen_x, screen_y, colour);
+			++screen_y;
+		}
+	}
+
+	// Draw door if it's closer than the wall
+	if (ray->has_door && (!ray->has_wall || ray->door_hit.distance < ray->wall_hit.distance))
+	{
+		t_column door_col;
+		ray->pos_x = ray->door_hit.pos_x;
+		ray->pos_y = ray->door_hit.pos_y;
+		ray->distance = ray->door_hit.distance;
+		ray->hit_type = ray->door_hit.hit_type;
+		init_column(scene, ray, &door_col);
+
+		// Skip drawing if we're in the open part of the door
+		if (ray->door_hit.door_state && door_col.x < ray->door_hit.door_state->animation_progress)
+			return;
+
+		uint32_t tex_x = door_col.x * door_col.texture->width;
+		if ((ray->hit_type == HORIZONTAL && ray->sign_x < 0)
+			|| (ray->hit_type == VERTICAL && ray->sign_y > 0))
+			tex_x = door_col.texture->width - 1 - tex_x;
+
+		uint32_t screen_y = (uint32_t)door_col.start;
+		while (screen_y < (uint32_t)door_col.end)
+		{
+			uint32_t tex_y = (int)door_col.y & (door_col.texture->height - 1);
+			door_col.y += door_col.step;
+			uint32_t colour = get_ray_pixel_colour(door_col.texture, tex_x, tex_y);
+			if ((colour & 0xFF000000) != 0)
+				mlx_put_pixel(scene->walls, screen_x, screen_y, colour);
+			++screen_y;
+		}
 	}
 }

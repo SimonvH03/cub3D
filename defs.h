@@ -60,16 +60,27 @@ enum e_tile_type
 	TILE_EMPTY = 0,
 	TILE_WALL = 1,
 	TILE_DOOR = 2,
-	TILE_DOOR_OPEN = 3  // Internal representation of open door
+	TILE_DOOR_OPEN = 3
 };
 
-typedef struct s_colour_construct
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	a;
-}	t_colour_construct;
+// Door state structure
+typedef struct s_door_state {
+    bool is_opening;
+    bool is_closing;
+    float animation_progress;
+    float animation_speed;
+    int x;
+    int y;
+} t_door_state;
+
+typedef struct s_hit {
+    int pos_x;
+    int pos_y;
+    float distance;
+    bool is_door;
+    bool hit_type;
+    t_door_state *door_state;
+} t_hit;
 
 typedef struct s_ray
 {
@@ -86,7 +97,19 @@ typedef struct s_ray
 	short			sign_y;
 	bool			hit_type;
 	float			distance;
+	t_hit			door_hit; 
+	t_hit			wall_hit;
+	bool			has_door;   
+	bool			has_wall;   
 }	t_ray;
+
+typedef struct s_colour_construct
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	a;
+}	t_colour_construct;
 
 typedef struct s_column
 {
@@ -95,7 +118,7 @@ typedef struct s_column
 	int				end;
 	mlx_texture_t	*texture;
 	float			x;
-	float			step;
+	float				step;
 	float			y;
 }	t_column;
 
@@ -114,7 +137,6 @@ typedef struct s_camera
 	float			movement_speed;
 }	t_camera;
 
-// free: scene->map
 typedef struct s_scene
 {
 	mlx_image_t		*walls;
@@ -130,11 +152,15 @@ typedef struct s_scene
 	mlx_texture_t	*east_texture;
 	mlx_texture_t	*south_texture;
 	mlx_texture_t	*west_texture;
-	mlx_texture_t	*door_texture;    // Door texture
+	mlx_texture_t	*door_texture;
+	mlx_texture_t	*door_texture2;
 	mlx_texture_t	*player_texture;
 	uint32_t		floor;
 	uint32_t		ceiling;
-	bool			recast;
+	bool			recast;	
+	int				max_doors;        
+	t_door_state	*doors;
+	int				door_count;     	
 }	t_scene;
 
 typedef struct s_minimap
@@ -144,7 +170,7 @@ typedef struct s_minimap
 	uint8_t			*circle_overlay;
 	t_scene			*r_scene;
 	uint32_t		side;
-	uint32_t		radius;
+	uint32_t			radius;
 	float			block_size;
 	bool			enabled;
 }	t_minimap;

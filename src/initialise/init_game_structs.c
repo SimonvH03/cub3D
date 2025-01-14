@@ -12,23 +12,50 @@
 
 #include "../../cub3d.h"
 
+void
+	init_scene(
+		t_scene *scene)
+{
+	scene->walls = NULL;
+	scene->background = NULL;
+	scene->name = NULL;
+	scene->content = NULL;
+	scene->r_content = NULL;
+	scene->map = NULL;
+	scene->y_max = 0;
+	scene->x_max = 0;
+	scene->north_texture = NULL;
+	scene->east_texture = NULL;
+	scene->south_texture = NULL;
+	scene->west_texture = NULL;
+	scene->door_texture = NULL;
+	scene->door_texture2 = NULL;
+	scene->player_texture = NULL;
+	scene->floor = 0;
+	scene->ceiling = 0;
+	scene->recast = true;
+	scene->doors = NULL;
+	scene->door_count = 0;
+}
+
 static short
 	scene_init(
 		t_scene *scene,
 		char *argv_scene)
 {
+	init_scene(scene);
+	
 	scene->player_texture = &mlx_load_xpm42(PLAYER_ICON_PATH)->texture;
 	if (scene->player_texture == NULL)
 		return (EXIT_FAILURE);
 	scene->name = argv_scene;
 	if (get_content(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	scene->north_texture = NULL;
-	scene->east_texture = NULL;
-	scene->south_texture = NULL;
-	scene->west_texture = NULL;
 	scene->door_texture = &mlx_load_xpm42(DOOR_TEXTURE_PATH)->texture;
 	if (scene->door_texture == NULL)
+		return (EXIT_FAILURE);
+	scene->door_texture2 = &mlx_load_xpm42(DOOR_TEXTURE_PATH2)->texture;
+	if (scene->door_texture2 == NULL)
 		return (EXIT_FAILURE);
 	scene->camera.movement_speed = 0;
 	read_elements(scene);

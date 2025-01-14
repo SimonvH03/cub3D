@@ -23,6 +23,7 @@ void
 	{
 		wasd_move(window, &window->scene.camera);
 		arrowkey_turn(window, &window->scene.camera);
+		update_door_animations(&window->scene, window->mlx->delta_time);
 		if (window->scene.recast == true)
 		{
 			draw_raycast(&window->scene);

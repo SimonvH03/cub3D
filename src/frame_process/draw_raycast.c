@@ -49,6 +49,9 @@ static void
 		t_ray *ray,
 		t_scene *scene)
 {
+	ray->has_door = false;
+	ray->has_wall = false;
+
 	while (ray->pos_x && ray->pos_x < scene->x_max
 		&& ray->pos_y && ray->pos_y < scene->y_max)
 	{
@@ -57,21 +60,78 @@ static void
 			ray->total_x += ray->step_x;
 			ray->pos_x += ray->sign_x;
 			ray->hit_type = HORIZONTAL;
+			ray->distance = ray->total_x - ray->step_x;
 		}
 		else
 		{
 			ray->total_y += ray->step_y;
 			ray->pos_y += ray->sign_y;
 			ray->hit_type = VERTICAL;
+			ray->distance = ray->total_y - ray->step_y;
 		}
+
+		// Check for wall hit
 		if (scene->map[ray->pos_y][ray->pos_x] == TILE_WALL ||
-			scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR)
+			(scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR && 
+			(!get_door_at_position(scene, ray->pos_x, ray->pos_y) || 
+			get_door_at_position(scene, ray->pos_x, ray->pos_y)->animation_progress == 0.0f)))
+		{
+			ray->wall_hit.pos_x = ray->pos_x;
+			ray->wall_hit.pos_y = ray->pos_y;
+			ray->wall_hit.distance = ray->distance;
+			
+			ray->wall_hit.hit_type = ray->hit_type;
+			ray->wall_hit.is_door = false;
+			ray->has_wall = true;
 			break;
+		}
+		
+		// Check for door hit (only for doors being animated)
+		if (!ray->has_door && (scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR ||
+			scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR_OPEN))
+		{
+			t_door_state *door_state = get_door_at_position(scene, ray->pos_x, ray->pos_y);
+			if (door_state && door_state->animation_progress > 0.0f)
+			{
+				float door_pos;
+				if (ray->hit_type == HORIZONTAL)
+					door_pos = scene->camera.pos_x + ray->distance * ray->dir_x - (int)(scene->camera.pos_x + ray->distance * ray->dir_x);
+				else
+					door_pos = scene->camera.pos_y + ray->distance * ray->dir_y - (int)(scene->camera.pos_y + ray->distance * ray->dir_y);
+
+				// Store door hit information
+				ray->door_hit.pos_x = ray->pos_x;
+				ray->door_hit.pos_y = ray->pos_y;
+				
+				ray->door_hit.distance = ray->distance;
+				ray->door_hit.hit_type = ray->hit_type;
+				ray->door_hit.is_door = true;
+				ray->door_hit.door_state = door_state;
+
+				// If we hit the solid part of the door
+				if (door_pos < (1.0f - door_state->animation_progress))
+				{
+					ray->has_door = true;
+				}
+			}
+		}
 	}
-	if (ray->hit_type == HORIZONTAL)
-		ray->distance = ray->total_x - ray->step_x;
-	else
-		ray->distance = ray->total_y - ray->step_y;
+
+	// Set the final ray position and distance based on what we hit
+	if (ray->has_door && (!ray->has_wall || ray->door_hit.distance < ray->wall_hit.distance))
+	{
+		ray->pos_x = ray->door_hit.pos_x;
+		ray->pos_y = ray->door_hit.pos_y;
+		ray->distance = ray->door_hit.distance;
+		ray->hit_type = ray->door_hit.hit_type;
+	}
+	else if (ray->has_wall)
+	{
+		ray->pos_x = ray->wall_hit.pos_x;
+		ray->pos_y = ray->wall_hit.pos_y;
+		ray->distance = ray->wall_hit.distance;
+		ray->hit_type = ray->wall_hit.hit_type;
+	}
 }
 
 void

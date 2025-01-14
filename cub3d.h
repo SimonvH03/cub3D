@@ -47,13 +47,17 @@ void		toggle_maps(t_minimap *minimap, t_map *map);
 void		toggle_view(t_window *window);
 
 // Door system functions
-void		interact_with_door(t_scene *scene, t_camera *camera);
-bool		is_door(int tile);
-bool		is_solid(int tile);
+void init_door_manager(t_scene *scene);
+void cleanup_door_manager(t_scene *scene);
+bool is_door(int tile);
+bool is_solid(int tile);
+t_door_state *get_door_at_position(t_scene *scene, int x, int y);
+void interact_with_door(t_scene *scene, t_camera *camera);
+void update_door_animations(t_scene *scene, float delta_time);
 
 // frame processing
 void		draw_raycast(t_scene *scene);
-void		draw_texture_column(t_scene *scene, t_ray *ray, uint32_t x);
+void			draw_texture_column(t_scene *scene, t_ray *ray, uint32_t x);
 void		draw_minimap_walls(t_minimap *minimap);
 void		draw_map_player(t_map *map);
 // arithmetic
