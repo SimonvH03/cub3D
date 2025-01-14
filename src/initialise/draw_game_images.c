@@ -51,11 +51,11 @@ void
 		y = 0;
 		while (y < minimap->side)
 		{
-			if (is_in_circle(x - (float)minimap->radius,
+			if (ft_is_in_circle(x - (float)minimap->radius,
 					y - (float)minimap->radius,
 					minimap->radius) == false)
 				mlx_put_pixel(minimap->walls, x, y, C_TRANSPARENT);
-			else if (is_in_circle(x - (float)minimap->radius,
+			else if (ft_is_in_circle(x - (float)minimap->radius,
 					y - (float)minimap->radius,
 					minimap->radius * 39 / 42) == false)
 				mlx_put_pixel(minimap->walls, x, y, C_TRANSLUCENT);

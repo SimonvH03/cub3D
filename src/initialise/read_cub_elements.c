@@ -95,7 +95,7 @@ short
 	fd = open(scene->name, O_RDONLY);
 	if (fd == -1)
 		return (EXIT_FAILURE);
-	buffer = get_next_line(fd);
+	buffer = ft_get_next_line(fd);
 	if (buffer == NULL)
 		return (EXIT_FAILURE);
 	scene->content = NULL;
@@ -105,11 +105,11 @@ short
 		{
 			if (buffer[ft_strlen(buffer) - 1] == '\n')
 				buffer[ft_strlen(buffer) - 1] = '\0';
-			scene->content = ft_array_append(scene->content, buffer);
+			scene->content = ft_arrcat(scene->content, buffer);
 		}
 		else
 			free(buffer);
-		buffer = get_next_line(fd);
+		buffer = ft_get_next_line(fd);
 	}
 	scene->r_content = scene->content;
 	return (EXIT_SUCCESS);

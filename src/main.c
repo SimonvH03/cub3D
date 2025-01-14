@@ -104,7 +104,7 @@ void
 		mlx_delete_texture(window->menu.buttons[i].texture);
 		++i;
 	}
-	ft_free_array((void **)window->scene.content);
-	ft_free_array((void **)window->scene.map);
+	ft_arrclear((void **)window->scene.content);
+	ft_arrclear((void **)window->scene.map);
 	free((void *)window->minimap.circle_overlay);
 }

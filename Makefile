@@ -3,7 +3,7 @@ NAME	=	cub3d
 CC		=	cc
 CFLAGS	=	-O3
 CFLAGS	+=	-Wall -Werror -Wextra
-# CFLAGS	+=	-g -Werror
+#CFLAGS	+=	-g
 MLXFLAGS=	-ldl -lglfw -pthread -lm
 
 LMLXDIR	=	./MLX42
@@ -38,7 +38,7 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/frame_process/draw_raycast.c \
 			$(SRCDIR)/frame_process/draw_texture_column.c \
 			$(SRCDIR)/frame_process/modlx.c \
-			# $(SRCDIR)/test.c
+			#$(SRCDIR)/test.c
 
 OBJDIR	=	./obj
 OBJ		=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
@@ -56,7 +56,7 @@ $(OBJDIR):
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -o $@ -c $<
+	$(CC) $(CFLAGS) -o $@ -c $< -I MLX42/include
 
 $(NAME): $(LIBMLX) $(LIBFT) $(OBJDIR) $(OBJ)
 	$(CC) $(OBJ) $(LIBMLX) $(MLXFLAGS) $(LIBFT) -o $(NAME)
@@ -68,9 +68,9 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	rm -rf $(OBJDIR)
-	rm -f $(LFTDIR)/libft.a
+	rm -f $(LIBFT)
 	rm -rf $(LMLXDIR)/build
 
-re: fclean all
+re: clean all
 
 .PHONY: all clean fclean re
