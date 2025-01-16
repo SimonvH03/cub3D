@@ -57,9 +57,19 @@ void update_door_animations(t_scene *scene, float delta_time);
 
 // frame processing
 void		draw_raycast(t_scene *scene);
-void			draw_texture_column(t_scene *scene, t_ray *ray, uint32_t x);
+void		draw_texture_column(t_scene *scene, t_ray *ray, uint32_t x);
+void		init_column(t_scene *scene, t_ray *ray, t_column *column);
 void		draw_minimap_walls(t_minimap *minimap);
 void		draw_map_player(t_map *map);
+
+// ray casting functions
+void        init_ray(t_ray *ray, t_camera *camera);
+void        update_ray_position(t_ray *ray);
+void        update_final_ray_position(t_ray *ray);
+bool        check_wall_hit(t_ray *ray, t_scene *scene);
+void        check_door_hit(t_ray *ray, t_scene *scene);
+void        cast_ray(t_ray *ray, t_scene *scene);
+
 // arithmetic
 float		ft_max_float(float a, float b);
 float		ft_min_float(float a, float b);

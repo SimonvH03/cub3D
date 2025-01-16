@@ -35,8 +35,10 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/frame_process/arithmetic.c \
 			$(SRCDIR)/frame_process/draw_map_player.c \
 			$(SRCDIR)/frame_process/draw_minimap_walls.c \
-			$(SRCDIR)/frame_process/draw_raycast.c \
-			$(SRCDIR)/frame_process/draw_texture_column.c \
+			$(SRCDIR)/frame_process/ray_init.c \
+			$(SRCDIR)/frame_process/ray_collision.c \
+			$(SRCDIR)/frame_process/texture_column_init.c \
+			$(SRCDIR)/frame_process/texture_column_draw.c \
 			$(SRCDIR)/frame_process/modlx.c \
 			#$(SRCDIR)/test.c
 

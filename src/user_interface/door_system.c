@@ -143,10 +143,35 @@ void
 	scene->max_doors = 0;
 }
 
-/*
-** Handle door interaction when player presses 'E'
-** Checks if there's a door in front of the player and toggles its state
-*/
+static bool
+	try_toggle_door(
+		t_scene *scene,
+		int check_x,
+		int check_y)
+{
+	t_door_state *door;
+
+	if (!is_door(scene->map[check_y][check_x]))
+		return (false);
+	door = get_door_at_position(scene, check_x, check_y);
+	if (!door || door->is_opening || door->is_closing)
+		return (true);
+	if (scene->map[check_y][check_x] == TILE_DOOR)
+	{
+		door->is_opening = true;
+		door->is_closing = false;
+		door->animation_progress = 0.0f;
+	}
+	else if (scene->map[check_y][check_x] == TILE_DOOR_OPEN)
+	{
+		door->is_closing = true;
+		door->is_opening = false;
+		door->animation_progress = 1.0f;
+	}
+	scene->recast = true;
+	return (true);
+}
+
 void
 	interact_with_door(
 		t_scene *scene,
@@ -156,7 +181,6 @@ void
 	int		check_y;
 	float	check_distance;
 	float	step;
-	t_door_state *door;
 
 	step = 0.1;
 	check_distance = 0.1;
@@ -164,34 +188,44 @@ void
 	{
 		check_x = (int)(camera->pos_x + camera->dir_x * check_distance);
 		check_y = (int)(camera->pos_y + camera->dir_y * check_distance);
-		
-		if (is_door(scene->map[check_y][check_x]))
-		{
-			door = get_door_at_position(scene, check_x, check_y);
-			if (door)
-			{
-				// Don't interact if door is in motion
-				if (door->is_opening || door->is_closing)
-					return;
-					
-				// Start animation based on current state
-				if (scene->map[check_y][check_x] == TILE_DOOR)
-				{
-					door->is_opening = true;
-					door->is_closing = false;
-					door->animation_progress = 0.0f;  // Start from closed
-				}
-				else if (scene->map[check_y][check_x] == TILE_DOOR_OPEN)
-				{
-					door->is_closing = true;
-					door->is_opening = false;
-					door->animation_progress = 1.0f;  // Start from open
-				}
-				scene->recast = true;
-			}
+		if (try_toggle_door(scene, check_x, check_y))
 			return;
-		}
 		check_distance += step;
+	}
+}
+
+static void
+	update_single_door(
+		t_scene *scene,
+		t_door_state *door,
+		int x,
+		int y,
+		float delta_time)
+{
+	float animation_speed;
+
+	animation_speed = 1.5f;
+	if (door->is_opening)
+	{
+		door->animation_progress += delta_time * animation_speed;
+		if (door->animation_progress >= 1.0f)
+		{
+			door->animation_progress = 1.0f;
+			door->is_opening = false;
+			scene->map[y][x] = TILE_DOOR_OPEN;
+		}
+		scene->recast = true;
+	}
+	else if (door->is_closing)
+	{
+		door->animation_progress -= delta_time * animation_speed;
+		if (door->animation_progress <= 0.0f)
+		{
+			door->animation_progress = 0.0f;
+			door->is_closing = false;
+			scene->map[y][x] = TILE_DOOR;
+		}
+		scene->recast = true;
 	}
 }
 
@@ -203,9 +237,7 @@ void
 	int x;
 	int y;
 	t_door_state *door;
-	float animation_speed;
 
-	animation_speed = 1.5f;
 	y = 0;
 	while (y < scene->y_max)
 	{
@@ -216,30 +248,7 @@ void
 			{
 				door = get_door_at_position(scene, x, y);
 				if (door)
-				{
-					if (door->is_opening)
-					{
-						door->animation_progress += delta_time * animation_speed;
-						if (door->animation_progress >= 1.0f)
-						{
-							door->animation_progress = 1.0f;
-							door->is_opening = false;
-							scene->map[y][x] = TILE_DOOR_OPEN;
-						}
-						scene->recast = true;
-					}
-					else if (door->is_closing)
-					{
-						door->animation_progress -= delta_time * animation_speed;
-						if (door->animation_progress <= 0.0f)
-						{
-							door->animation_progress = 0.0f;
-							door->is_closing = false;
-							scene->map[y][x] = TILE_DOOR;
-						}
-						scene->recast = true;
-					}
-				}
+					update_single_door(scene, door, x, y, delta_time);
 			}
 			x++;
 		}
