@@ -53,7 +53,7 @@ static void
     if (door_state)
     {
         if (column->x > (1.0f - door_state->animation_progress))
-            column->x = 2.0f;
+            column->x = 2.0f;  // Set to invalid value to skip drawing
         else
             column->x += door_state->animation_progress;
     }

@@ -46,15 +46,14 @@ void
         return;
 
     door_state = get_door_at_position(scene, ray->pos_x, ray->pos_y);
-    if (!door_state || door_state->animation_progress <= 0.0f)
+    if (!door_state || door_state->animation_progress == 0.0f)
         return;
 
     if (ray->hit_type == HORIZONTAL)
-        door_pos = scene->camera.pos_x + ray->distance * ray->dir_x - 
-            (int)(scene->camera.pos_x + ray->distance * ray->dir_x);
+        door_pos = scene->camera.pos_y + ray->distance * ray->dir_y;
     else
-        door_pos = scene->camera.pos_y + ray->distance * ray->dir_y - 
-            (int)(scene->camera.pos_y + ray->distance * ray->dir_y);
+        door_pos = scene->camera.pos_x + ray->distance * ray->dir_x;
+    door_pos -= (int)door_pos;
 
     ray->door_hit.pos_x = ray->pos_x;
     ray->door_hit.pos_y = ray->pos_y;
