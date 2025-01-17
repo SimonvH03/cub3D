@@ -44,7 +44,6 @@ static short
 		char *argv_scene)
 {
 	init_scene(scene);
-	
 	scene->player_texture = &mlx_load_xpm42(PLAYER_ICON_PATH)->texture;
 	if (scene->player_texture == NULL)
 		return (EXIT_FAILURE);

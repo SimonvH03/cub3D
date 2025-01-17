@@ -4,7 +4,7 @@ WE ./scenes/textures/flag_ss.xpm42
 EA ./scenes/textures/flag_usa.xpm42
 
 F 124,96,124
-C 0,32,32
+C 100,32,32
 
 111111111111111
 100000000000001

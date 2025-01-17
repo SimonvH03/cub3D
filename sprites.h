@@ -7,17 +7,18 @@
 enum e_tile_type
 {
 	TILE_EMPTY = 0,
-	TILE_WALL = 1,
-	TILE_DOOR = 2,
-	TILE_DOOR_OPEN = 3
+	TILE_WALL,
+	TILE_DOOR,
+	TILE_DOOR_OPEN
 };
 
 // Door state structure (matching defs.h)
-typedef struct s_door_state {
-    bool is_opening;              // Whether the door is currently opening
-    float animation_progress;     // 0.0 (closed) to 1.0 (open)
-    int x;                       // Door position
-    int y;                       // Door position
-} t_door_state;
+typedef struct s_door_state
+{
+	bool	is_opening;			//	Whether the door is currently opening
+	float	animation_progress;	// 0.0 (closed) to 1.0 (open)
+	int		x;					// Door position
+	int		y;					// Door position
+}	t_door;
 
-#endif 
+#endif

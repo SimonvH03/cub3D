@@ -47,13 +47,13 @@ void		toggle_maps(t_minimap *minimap, t_map *map);
 void		toggle_view(t_window *window);
 
 // Door system functions
-void init_door_manager(t_scene *scene);
-void cleanup_door_manager(t_scene *scene);
-bool is_door(int tile);
-bool is_solid(int tile);
-t_door_state *get_door_at_position(t_scene *scene, int x, int y);
-void interact_with_door(t_scene *scene, t_camera *camera);
-void update_door_animations(t_scene *scene, float delta_time);
+void		init_door_manager(t_scene *scene);
+void		cleanup_door_manager(t_scene *scene);
+bool		is_door(int tile);
+bool		is_solid(int tile);
+t_door		*get_door_at_position(t_scene *scene, int x, int y);
+void		interact_with_door(t_scene *scene, t_camera *camera);
+void		update_door_animations(t_scene *scene, float delta_time);
 
 // frame processing
 void		draw_raycast(t_scene *scene);
@@ -63,18 +63,19 @@ void		draw_minimap_walls(t_minimap *minimap);
 void		draw_map_player(t_map *map);
 
 // ray casting functions
-void        init_ray(t_ray *ray, t_camera *camera);
-void        update_ray_position(t_ray *ray);
-void        update_final_ray_position(t_ray *ray);
-bool        check_wall_hit(t_ray *ray, t_scene *scene);
-void        check_door_hit(t_ray *ray, t_scene *scene);
-void        cast_ray(t_ray *ray, t_scene *scene);
+void		init_ray(t_ray *ray, t_camera *camera);
+void		update_ray_position(t_ray *ray);
+void		update_final_ray_position(t_ray *ray);
+bool		check_wall_hit(t_ray *ray, t_scene *scene);
+void		check_door_hit(t_ray *ray, t_scene *scene);
+void		cast_ray(t_ray *ray, t_scene *scene);
 
 // arithmetic
 float		ft_max_float(float a, float b);
 float		ft_min_float(float a, float b);
 float		ft_abs_float(float value);
 short		ft_sign_float(float value);
+
 // modlx
 void		reset_image(mlx_image_t *image);
 

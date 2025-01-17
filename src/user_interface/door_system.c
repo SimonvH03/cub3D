@@ -12,17 +12,17 @@
 
 #include "../../cub3d.h"
 
-#define DOOR_ANIMATION_SPEED 2.0f
-#define DOOR_INTERACTION_RANGE 1.5f
-#define DOOR_ANIMATION_STEP 0.016f
+#define DOOR_ANIMATION_SPEED	2.0f
+#define DOOR_INTERACTION_RANGE	1.5f
+#define DOOR_ANIMATION_STEP		0.016f
 
 static int
 	count_doors(
 		t_scene *scene)
 {
-	int x;
-	int y;
-	int count;
+	int	x;
+	int	y;
+	int	count;
 
 	count = 0;
 	y = 0;
@@ -42,7 +42,7 @@ static int
 
 static void
 	init_door_state(
-		t_door_state *door,
+		t_door *door,
 		int x,
 		int y)
 {
@@ -58,9 +58,9 @@ static void
 	init_all_doors(
 		t_scene *scene)
 {
-	int x;
-	int y;
-	int count;
+	int	x;
+	int	y;
+	int	count;
 
 	count = 0;
 	y = 0;
@@ -84,10 +84,10 @@ void
 	init_door_manager(
 		t_scene *scene)
 {
-	int door_count;
+	int	door_count;
 
 	door_count = count_doors(scene);
-	scene->doors = malloc(sizeof(t_door_state) * door_count);
+	scene->doors = malloc(sizeof(t_door) * door_count);
 	if (!scene->doors)
 		return ;
 	scene->door_count = door_count;
@@ -109,19 +109,19 @@ bool
 	return (tile == TILE_WALL || tile == TILE_DOOR);
 }
 
-t_door_state
-	*get_door_at_position(
+t_door *
+	get_door_at_position(
 		t_scene *scene,
 		int x,
 		int y)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < scene->door_count)
 	{
-		if (scene->doors[i].x == x && 
-			scene->doors[i].y == y)
+		if (scene->doors[i].x == x
+			&& scene->doors[i].y == y)
 		{
 			return (&scene->doors[i]);
 		}
@@ -149,7 +149,7 @@ static bool
 		int check_x,
 		int check_y)
 {
-	t_door_state *door;
+	t_door	*door;
 
 	if (!is_door(scene->map[check_y][check_x]))
 		return (false);
@@ -189,7 +189,7 @@ void
 		check_x = (int)(camera->pos_x + camera->dir_x * check_distance);
 		check_y = (int)(camera->pos_y + camera->dir_y * check_distance);
 		if (try_toggle_door(scene, check_x, check_y))
-			return;
+			return ;
 		check_distance += step;
 	}
 }
@@ -197,12 +197,12 @@ void
 static void
 	update_single_door(
 		t_scene *scene,
-		t_door_state *door,
+		t_door *door,
 		int x,
 		int y,
 		float delta_time)
 {
-	float animation_speed;
+	float	animation_speed;
 
 	animation_speed = 1.5f;
 	if (door->is_opening)
@@ -234,9 +234,9 @@ void
 		t_scene *scene,
 		float delta_time)
 {
-	int x;
-	int y;
-	t_door_state *door;
+	int		x;
+	int		y;
+	t_door	*door;
 
 	y = 0;
 	while (y < scene->y_max)
@@ -254,4 +254,4 @@ void
 		}
 		y++;
 	}
-} 
+}

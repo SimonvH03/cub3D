@@ -14,7 +14,7 @@
 
 static void
 	update_opening_door(
-		t_door_state *door,
+		t_door *door,
 		t_scene *scene,
 		float delta_time,
 		float animation_speed)
@@ -30,7 +30,7 @@ static void
 
 static void
 	update_closing_door(
-		t_door_state *door,
+		t_door *door,
 		t_scene *scene,
 		float delta_time,
 		float animation_speed)
@@ -49,10 +49,10 @@ void
 		t_scene *scene,
 		float delta_time)
 {
-	int x;
-	int y;
-	t_door_state *door;
-	float animation_speed;
+	int		x;
+	int		y;
+	t_door	*door;
+	float	animation_speed;
 
 	animation_speed = 1.5f;
 	y = 0;
@@ -76,4 +76,4 @@ void
 		}
 		y++;
 	}
-} 
+}

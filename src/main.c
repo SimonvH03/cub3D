@@ -51,7 +51,10 @@ int
 	t_window	window;
 
 	if (argc != 2)
-		return (EXIT_FAILURE);
+	{
+		printf("Usage: ./cub3d <scene.cub>\n");
+		return (EINVAL);
+	}
 	if (window_init(&window) == EXIT_FAILURE
 		|| init_game_structs(window.mlx, &window, argv[1]) == EXIT_FAILURE
 		|| init_game_images(window.mlx, &window) == EXIT_FAILURE

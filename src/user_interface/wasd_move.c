@@ -58,10 +58,6 @@
 // 	camera->pos_y += move_dir_y * camera->movement_speed;
 // }
 
-// I'm really proud of this one, basically you look up the sin and cosin values
-//	based on which of the 8 directions (9 if you count 0, 0) you want to move
-// each directions has precalculated normalized x and y direction components
-//  based on the unit circle /pythagoras because why bother with cos45 or sin45
 // !this function assumes the camera is not currently outside of the map
 // !this function was pretty readable. but norminette. see better version above
 static void
@@ -80,14 +76,14 @@ static void
 	move_dir_x = camera->dir_x * cos_sin[0] + camera->dir_y * -cos_sin[1];
 	move_dir_y = camera->dir_x * cos_sin[1] + camera->dir_y * cos_sin[0];
 	if (is_solid(map[(int)camera->pos_y]
-		[(int)(camera->pos_x + move_dir_x * camera->movement_speed
-			+ COLLISION_HITBOX * ft_sign_float(move_dir_x))]))
+			[(int)(camera->pos_x + move_dir_x * camera->movement_speed
+				+ COLLISION_HITBOX * ft_sign_float(move_dir_x))]))
 		move_dir_x = (int)camera->pos_x + (move_dir_x > 0) - camera->pos_x
 			- COLLISION_HITBOX * ft_sign_float(move_dir_x);
 	camera->pos_x += move_dir_x * camera->movement_speed;
 	if (is_solid(map[(int)(camera->pos_y + move_dir_y * camera->movement_speed
-			+ COLLISION_HITBOX * ft_sign_float(move_dir_y))]
-			[(int)camera->pos_x]))
+				+ COLLISION_HITBOX * ft_sign_float(move_dir_y))]
+		[(int)camera->pos_x]))
 		move_dir_y = (int)camera->pos_y + (move_dir_y > 0) - camera->pos_y
 			- COLLISION_HITBOX * ft_sign_float(move_dir_y);
 	camera->pos_y += move_dir_y * camera->movement_speed;

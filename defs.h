@@ -64,23 +64,25 @@ enum e_tile_type
 };
 
 // Door state structure
-typedef struct s_door_state {
-    bool is_opening;
-    bool is_closing;
-    float animation_progress;
-    float animation_speed;
-    int x;
-    int y;
-} t_door_state;
+typedef struct s_door
+{
+	bool			is_opening;
+	bool			is_closing;
+	float			animation_progress;
+	float			animation_speed;
+	int				x;
+	int				y;
+}	t_door;
 
-typedef struct s_hit {
-    int pos_x;
-    int pos_y;
-    float distance;
-    bool is_door;
-    bool hit_type;
-    t_door_state *door_state;
-} t_hit;
+typedef struct s_hit
+{
+	int				pos_x;
+	int				pos_y;
+	float			distance;
+	bool			is_door;
+	bool			hit_type;
+	t_door			*door_state;
+}	t_hit;
 
 typedef struct s_ray
 {
@@ -97,10 +99,10 @@ typedef struct s_ray
 	short			sign_y;
 	bool			hit_type;
 	float			distance;
-	t_hit			door_hit; 
+	t_hit			door_hit;
 	t_hit			wall_hit;
-	bool			has_door;   
-	bool			has_wall;   
+	bool			has_door;
+	bool			has_wall;
 }	t_ray;
 
 typedef struct s_colour_construct
@@ -118,7 +120,7 @@ typedef struct s_column
 	int				end;
 	mlx_texture_t	*texture;
 	float			x;
-	float				step;
+	float			step;
 	float			y;
 }	t_column;
 
@@ -158,9 +160,9 @@ typedef struct s_scene
 	uint32_t		floor;
 	uint32_t		ceiling;
 	bool			recast;	
-	int				max_doors;        
-	t_door_state	*doors;
-	int				door_count;     	
+	int				max_doors;
+	int				door_count;
+	t_door			*doors;
 }	t_scene;
 
 typedef struct s_minimap
@@ -170,7 +172,7 @@ typedef struct s_minimap
 	uint8_t			*circle_overlay;
 	t_scene			*r_scene;
 	uint32_t		side;
-	uint32_t			radius;
+	uint32_t		radius;
 	float			block_size;
 	bool			enabled;
 }	t_minimap;

@@ -14,7 +14,7 @@
 
 static void
 	start_door_opening(
-		t_door_state *door,
+		t_door *door,
 		t_scene *scene)
 {
 	door->is_opening = true;
@@ -25,7 +25,7 @@ static void
 
 static void
 	start_door_closing(
-		t_door_state *door,
+		t_door *door,
 		t_scene *scene)
 {
 	door->is_closing = true;
@@ -39,16 +39,14 @@ void
 		t_scene *scene,
 		t_camera *camera)
 {
-	int check_x;
-	int check_y;
-	float check_distance;
-	float step;
-	t_door_state *door;
+	int		check_x;
+	int		check_y;
+	float	check_distance;
+	float	step;
+	t_door	*door;
 
-	// First check if player is inside a door tile
 	if (is_door(scene->map[(int)camera->pos_y][(int)camera->pos_x]))
-		return;
-
+		return ;
 	step = 0.1;
 	check_distance = 0.1;
 	while (check_distance <= 1.0)
@@ -69,4 +67,4 @@ void
 		}
 		check_distance += step;
 	}
-} 
+}
