@@ -23,9 +23,14 @@ static short
 	scene->walls = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (scene->walls == NULL)
 		return (EXIT_FAILURE);
+	scene->health_bar.image = mlx_new_image(mlx, scene->health_bar.width, scene->health_bar.height);
+	if (scene->health_bar.image == NULL)
+		return (EXIT_FAILURE);
 	if (mlx_image_to_window(mlx, scene->background, 0, 0) < 0)
 		return (EXIT_FAILURE);
 	if (mlx_image_to_window(mlx, scene->walls, 0, 0) < 0)
+		return (EXIT_FAILURE);
+	if (mlx_image_to_window(mlx, scene->health_bar.image, scene->health_bar.x_pos, scene->health_bar.y_pos) < 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

@@ -111,6 +111,18 @@ typedef struct s_colour_construct
 	unsigned char	a;
 }	t_colour_construct;
 
+typedef struct s_health_bar
+{
+	mlx_image_t		*image;
+	mlx_texture_t	*texture;
+	float			current_health;
+	float			max_health;
+	uint32_t		x_pos;
+	uint32_t		y_pos;
+	uint32_t		width;
+	uint32_t		height;
+}	t_health_bar;
+
 typedef struct s_column
 {
 	int				height;
@@ -160,7 +172,8 @@ typedef struct s_scene
 	bool			recast;	
 	int				max_doors;        
 	t_door_state	*doors;
-	int				door_count;     	
+	int				door_count;
+	t_health_bar	health_bar;     	
 }	t_scene;
 
 typedef struct s_minimap

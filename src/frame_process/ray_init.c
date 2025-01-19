@@ -84,7 +84,7 @@ void
     draw_raycast(
         t_scene *scene)
 {
-    t_ray       ray;
+    t_ray   ray;
     uint32_t    x;
 
     reset_image(scene->walls);
@@ -97,4 +97,5 @@ void
         draw_texture_column(scene, &ray, x);
         ++x;
     }
+    draw_health_bar(&scene->health_bar);
 } 

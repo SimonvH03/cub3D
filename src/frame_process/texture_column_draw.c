@@ -54,7 +54,7 @@ static void
         tex_y = (int)col->y & (col->texture->height - 1);
         col->y += col->step;
         colour = get_ray_pixel_colour(col->texture, tex_x, tex_y);
-        if ((colour & 0xFF000000) != 0)
+        if ((colour & 0xFF) != 0)
             mlx_put_pixel(scene->walls, screen_x, screen_y, colour);
         ++screen_y;
     }

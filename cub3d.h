@@ -55,6 +55,10 @@ t_door_state *get_door_at_position(t_scene *scene, int x, int y);
 void interact_with_door(t_scene *scene, t_camera *camera);
 void update_door_animations(t_scene *scene, float delta_time);
 
+// Health bar functions
+void update_health_bar(t_health_bar *health_bar, float new_health);
+void draw_health_bar(t_health_bar *health_bar);
+
 // frame processing
 void		draw_raycast(t_scene *scene);
 void		draw_texture_column(t_scene *scene, t_ray *ray, uint32_t x);
