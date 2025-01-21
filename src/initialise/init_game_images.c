@@ -32,6 +32,8 @@ static short
 		return (EXIT_FAILURE);
 	if (mlx_image_to_window(mlx, scene->health_bar.image, scene->health_bar.x_pos, scene->health_bar.y_pos) < 0)
 		return (EXIT_FAILURE);
+	if (init_weapon(mlx, scene) != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

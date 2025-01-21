@@ -149,6 +149,16 @@ typedef struct s_camera
 	float			movement_speed;
 }	t_camera;
 
+typedef struct s_weapon
+{
+    mlx_image_t     *image;
+    mlx_texture_t   *texture;
+    uint32_t        x_pos;
+    uint32_t        y_pos;
+    float           scale;
+    bool            enabled;
+}   t_weapon;
+
 typedef struct s_scene
 {
 	mlx_image_t		*walls;
@@ -174,6 +184,7 @@ typedef struct s_scene
 	t_door_state	*doors;
 	int				door_count;
 	t_health_bar	health_bar;     	
+	t_weapon        weapon;      
 }	t_scene;
 
 typedef struct s_minimap

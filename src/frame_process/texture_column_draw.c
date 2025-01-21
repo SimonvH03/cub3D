@@ -12,15 +12,15 @@
 
 #include "../../cub3d.h"
 
-static uint32_t
+uint32_t
     get_ray_pixel_colour(
         mlx_texture_t *texture,
         uint32_t tex_x,
         uint32_t tex_y)
 {
-    uint32_t    colour;
     uint32_t    index;
     uint8_t     *texel;
+    uint32_t    colour;
 
     if (tex_x >= texture->width || tex_y >= texture->height)
         return (C_TRANSPARENT);

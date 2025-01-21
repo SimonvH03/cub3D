@@ -98,4 +98,5 @@ void
         ++x;
     }
     draw_health_bar(&scene->health_bar);
+    draw_weapon(scene);
 } 

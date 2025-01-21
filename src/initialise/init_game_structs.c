@@ -12,6 +12,27 @@
 
 #include "../../cub3d.h"
 
+static void
+	init_ui_elements(
+		t_scene *scene)
+{
+	scene->health_bar.image = NULL;
+	scene->health_bar.texture = NULL;
+	scene->health_bar.current_health = 100.0f;
+	scene->health_bar.max_health = 100.0f;
+	scene->health_bar.width = WIDTH / 4;
+	scene->health_bar.height = HEIGHT / 20;
+	scene->health_bar.x_pos = 20;
+	scene->health_bar.y_pos = HEIGHT - scene->health_bar.height - 80;
+
+	scene->weapon.image = NULL;
+	scene->weapon.texture = NULL;
+	scene->weapon.scale = 1.0f;
+	scene->weapon.enabled = true;
+	scene->weapon.x_pos = WIDTH / 2;
+	scene->weapon.y_pos = HEIGHT - HEIGHT / 3;
+}
+
 void
 	init_scene(
 		t_scene *scene)
@@ -36,14 +57,7 @@ void
 	scene->recast = true;
 	scene->doors = NULL;
 	scene->door_count = 0;
-	scene->health_bar.image = NULL;
-	scene->health_bar.texture = NULL;
-	scene->health_bar.current_health = 100.0f;
-	scene->health_bar.max_health = 100.0f;
-	scene->health_bar.width = WIDTH / 4;
-	scene->health_bar.height = HEIGHT / 20;
-	scene->health_bar.x_pos = WIDTH / 2 - scene->health_bar.width / 2;
-	scene->health_bar.y_pos = HEIGHT - scene->health_bar.height * 2;
+	init_ui_elements(scene);
 }
 
 static short

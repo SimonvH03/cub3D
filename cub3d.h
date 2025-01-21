@@ -90,4 +90,11 @@ void		reset_image(mlx_image_t *image);
 // void		print_map(t_scene *scene);
 // void		draw_textures(t_window *window);
 
+// Texture functions
+uint32_t get_ray_pixel_colour(mlx_texture_t *texture, uint32_t tex_x, uint32_t tex_y);
+
+// Weapon system
+short   init_weapon(mlx_t *mlx, t_scene *scene);
+void    draw_weapon(t_scene *scene);
+
 #endif

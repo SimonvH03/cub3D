@@ -40,6 +40,7 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/frame_process/ray_collision.c \
 			$(SRCDIR)/frame_process/texture_column_init.c \
 			$(SRCDIR)/frame_process/texture_column_draw.c \
+			$(SRCDIR)/frame_process/weapon_system.c \
 			$(SRCDIR)/frame_process/modlx.c \
 			#$(SRCDIR)/test.c
 
