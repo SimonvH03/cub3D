@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/17 03:28:56 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:23:57 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ uint32_t get_ray_pixel_colour(mlx_texture_t *texture, uint32_t tex_x, uint32_t t
 // Weapon system
 short   init_weapon(mlx_t *mlx, t_scene *scene);
 void    draw_weapon(t_scene *scene);
-void    next_weapon_frame(t_scene *scene);
+void    next_weapon_frame(t_scene *scene, float delta_time);
 void    start_weapon_animation(t_scene *scene);
+void    start_reload_animation(t_scene *scene);
 
 #endif

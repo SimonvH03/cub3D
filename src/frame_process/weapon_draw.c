@@ -5,12 +5,56 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 17:16:21 by ferid             #+#    #+#             */
-/*   Updated: 2025/01/21 17:16:36 by ferid            ###   ########.fr       */
+/*   Created: 2025/01/21 21:25:08 by ferid             #+#    #+#             */
+/*   Updated: 2025/01/21 21:31:00 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+static void
+    clear_weapon_image(
+        mlx_image_t *image)
+{
+    uint32_t    cy;
+    uint32_t    cx;
+
+    cy = 0;
+    while (cy < image->height)
+    {
+        cx = 0;
+        while (cx < image->width)
+        {
+            mlx_put_pixel(image, cx, cy, 0x00000000);
+            cx++;
+        }
+        cy++;
+    }
+}
+
+static void
+    draw_pixel_block(
+        mlx_image_t *image,
+        uint32_t x,
+        uint32_t y,
+        uint32_t color)
+{
+    const int   pixel_size = 12;
+    uint32_t    cy;
+    uint32_t    cx;
+
+    cy = 0;
+    while (cy < pixel_size && (y + cy) < image->height)
+    {
+        cx = 0;
+        while (cx < pixel_size && (x + cx) < image->width)
+        {
+            mlx_put_pixel(image, x + cx, y + cy, color);
+            cx++;
+        }
+        cy++;
+    }
+}
 
 static void
     draw_weapon_frame(
@@ -19,7 +63,7 @@ static void
     uint32_t    x;
     uint32_t    y;
     uint32_t    color;
-    const int   pixel_size = 9;
+    const int   pixel_size = 12;
 
     y = 0;
     while (y < scene->weapon.image->height)
@@ -44,7 +88,6 @@ void
 {
     if (!scene->weapon.enabled)
         return;
-
     clear_weapon_image(scene->weapon.image);
     draw_weapon_frame(scene);
 } 

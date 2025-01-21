@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/10/05 21:06:51 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:23:57 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,13 +153,16 @@ typedef struct s_weapon
 {
     mlx_image_t     *image;
     mlx_texture_t   *texture;
-    mlx_texture_t   *textures[6];  // Array to store all weapon textures
+    mlx_texture_t   *textures[34];  // Array to store all weapon textures (6 shoot + 28 reload)
     uint32_t        x_pos;
     uint32_t        y_pos;
     float           scale;
     bool            enabled;
-    int             current_frame;  // Current frame (0-5)
+    int             current_frame;  // Current frame
     bool            is_animating;   // Whether animation is in progress
+    bool            is_reloading;   // Whether weapon is reloading
+    float           frame_time;     // Time accumulator for frame updates
+    float           frame_delay;    // Delay between frames
 }   t_weapon;
 
 typedef struct s_scene

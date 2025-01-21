@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game_images.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/18 22:16:43 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:37:52 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ static short
 	scene->walls = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (scene->walls == NULL)
 		return (EXIT_FAILURE);
+	scene->health_bar.width = 200;
+	scene->health_bar.height = 10;
+	scene->health_bar.x_pos = WIDTH - scene->health_bar.width - 20;
+	scene->health_bar.y_pos = 20;
 	scene->health_bar.image = mlx_new_image(mlx, scene->health_bar.width, scene->health_bar.height);
 	if (scene->health_bar.image == NULL)
 		return (EXIT_FAILURE);
@@ -109,3 +113,4 @@ short
 	window->fps = mlx_put_string(mlx, "0000", WIDTH / 2 - 50, 100);
 	return (EXIT_SUCCESS);
 }
+
