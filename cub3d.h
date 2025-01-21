@@ -96,5 +96,7 @@ uint32_t get_ray_pixel_colour(mlx_texture_t *texture, uint32_t tex_x, uint32_t t
 // Weapon system
 short   init_weapon(mlx_t *mlx, t_scene *scene);
 void    draw_weapon(t_scene *scene);
+void    next_weapon_frame(t_scene *scene);
+void    start_weapon_animation(t_scene *scene);
 
 #endif

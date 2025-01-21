@@ -153,10 +153,13 @@ typedef struct s_weapon
 {
     mlx_image_t     *image;
     mlx_texture_t   *texture;
+    mlx_texture_t   *textures[6];  // Array to store all weapon textures
     uint32_t        x_pos;
     uint32_t        y_pos;
     float           scale;
     bool            enabled;
+    int             current_frame;  // Current frame (0-5)
+    bool            is_animating;   // Whether animation is in progress
 }   t_weapon;
 
 typedef struct s_scene

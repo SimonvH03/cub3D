@@ -24,6 +24,15 @@ void
 		wasd_move(window, &window->scene.camera);
 		arrowkey_turn(window, &window->scene.camera);
 		update_door_animations(&window->scene, window->mlx->delta_time);
+
+		// Check for G key to start weapon animation
+		if (mlx_is_key_down(window->mlx, MLX_KEY_G))
+			start_weapon_animation(&window->scene);
+
+		// Update weapon animation if it's in progress
+		if (window->scene.weapon.is_animating)
+			next_weapon_frame(&window->scene);
+
 		if (window->scene.recast == true)
 		{
 			draw_raycast(&window->scene);
