@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2025/01/21 21:23:57 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/22 23:04:30 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,9 @@ void    draw_weapon(t_scene *scene);
 void    next_weapon_frame(t_scene *scene, float delta_time);
 void    start_weapon_animation(t_scene *scene);
 void    start_reload_animation(t_scene *scene);
+
+// Crosshair system
+short   init_crosshair(mlx_t *mlx, t_scene *scene);
+void    draw_crosshair(t_scene *scene);
 
 #endif

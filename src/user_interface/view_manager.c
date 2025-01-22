@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2025/01/21 21:23:57 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/22 23:04:30 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,10 @@ void
 		wasd_move(window, &window->scene.camera);
 		arrowkey_turn(window, &window->scene.camera);
 		update_door_animations(&window->scene, window->mlx->delta_time);
-
-		// Check for G key to start weapon animation
 		if (mlx_is_key_down(window->mlx, MLX_KEY_G))
 			start_weapon_animation(&window->scene);
-
-		// Check for R key to start reload animation
 		if (mlx_is_key_down(window->mlx, MLX_KEY_R))
 			start_reload_animation(&window->scene);
-
-		// Update weapon animation if it's in progress
 		if (window->scene.weapon.is_animating || window->scene.weapon.is_reloading)
 			next_weapon_frame(&window->scene, window->mlx->delta_time);
 
@@ -44,6 +38,7 @@ void
 				draw_minimap_walls(&window->minimap);
 			if (window->map.enabled == true)
 				draw_map_player(&window->map);
+			draw_crosshair(&window->scene);
 			window->scene.recast = false;
 		}
 	}

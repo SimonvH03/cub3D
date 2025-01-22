@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2025/01/21 21:23:57 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/22 23:04:30 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,8 @@ typedef struct s_scene
 	mlx_texture_t	*door_texture;
 	mlx_texture_t	*door_texture2;
 	mlx_texture_t	*player_texture;
+	mlx_texture_t	*crosshair_texture;
+	mlx_image_t		*crosshair;
 	uint32_t		floor;
 	uint32_t		ceiling;
 	bool			recast;	

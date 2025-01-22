@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2025/01/21 21:37:52 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/22 23:08:34 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,42 @@ short
 {
 	if (new_images_scene(mlx, &window->scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (new_images_minimap(mlx, window->scene.player_texture,
-			&window->minimap) == EXIT_FAILURE)
+	if (new_images_minimap(mlx, window->scene.player_texture, &window->minimap) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (new_images_map(mlx, &window->map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	draw_scene_background(&window->scene);
 	draw_minimap_circle_overlay(&window->minimap);
+	if (init_crosshair(mlx, &window->scene) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	draw_map_walls(&window->map);
 	window->fps = mlx_put_string(mlx, "0000", WIDTH / 2 - 50, 100);
 	return (EXIT_SUCCESS);
+}
+
+short
+    init_crosshair(
+        mlx_t *mlx,
+        t_scene *scene)
+{
+    xpm_t* crosshair_xpm;
+
+    crosshair_xpm = mlx_load_xpm42("scenes/textures/crosshair.xpm42");
+    if (!crosshair_xpm)
+        return (EXIT_FAILURE);
+    scene->crosshair_texture = &crosshair_xpm->texture;
+
+    // Create crosshair image
+    scene->crosshair = mlx_new_image(mlx, scene->crosshair_texture->width, scene->crosshair_texture->height);
+    if (!scene->crosshair)
+        return (EXIT_FAILURE);
+
+    // Position crosshair at center of screen
+    if (mlx_image_to_window(mlx, scene->crosshair, 
+        (WIDTH - scene->crosshair_texture->width) / 2,
+        (HEIGHT - scene->crosshair_texture->height) / 2) < 0)
+        return (EXIT_FAILURE);
+
+    return (EXIT_SUCCESS);
 }
 

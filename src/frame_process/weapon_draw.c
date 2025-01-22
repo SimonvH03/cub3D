@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 21:25:08 by ferid             #+#    #+#             */
-/*   Updated: 2025/01/22 18:43:22 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/22 23:15:52 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,27 @@ void
         return;
     clear_weapon_image(scene->weapon.image);
     draw_weapon_frame(scene);
+}
+
+void
+    draw_crosshair(
+        t_scene *scene)
+{
+    uint32_t    x;
+    uint32_t    y;
+    uint32_t    color;
+
+    y = 0;
+    while (y < scene->crosshair_texture->height)
+    {
+        x = 0;
+        while (x < scene->crosshair_texture->width)
+        {
+            color = get_ray_pixel_colour(scene->crosshair_texture, x, y);
+            if ((color & 0x000000FF) > 0)
+                mlx_put_pixel(scene->crosshair, x, y, color);
+            x++;
+        }
+        y++;
+    }
 } 
