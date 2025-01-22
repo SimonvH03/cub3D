@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 21:25:08 by ferid             #+#    #+#             */
-/*   Updated: 2025/01/21 21:31:00 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/22 18:43:22 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,22 @@ static void
     uint32_t    x;
     uint32_t    y;
     uint32_t    color;
+    float       scale_x;
+    float       scale_y;
     const int   pixel_size = 12;
 
+    scale_x = (float)WIDTH / (scene->weapon.texture->width * pixel_size);
+    scale_y = (float)HEIGHT / (scene->weapon.texture->height * pixel_size);
+
     y = 0;
-    while (y < scene->weapon.image->height)
+    while (y < HEIGHT)
     {
         x = 0;
-        while (x < scene->weapon.image->width)
+        while (x < WIDTH)
         {
-            color = get_ray_pixel_colour(scene->weapon.texture, 
-                    (x / pixel_size) * pixel_size, 
-                    (y / pixel_size) * pixel_size);
+            uint32_t tex_x = (uint32_t)((float)x / scale_x / pixel_size);
+            uint32_t tex_y = (uint32_t)((float)y / scale_y / pixel_size); 
+            color = get_ray_pixel_colour(scene->weapon.texture, tex_x, tex_y);
             if ((color & 0xFF000000) != 0)
                 draw_pixel_block(scene->weapon.image, x, y, color);
             x += pixel_size;

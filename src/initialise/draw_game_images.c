@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_game_images.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/18 21:58:23 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:44:37 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void
 	}
 }
 
-// for illustrative purposes, set outer circle pixel colour to C_TRANSLUCENT
 void
 	draw_minimap_circle_overlay(
 		t_minimap *minimap)
@@ -92,9 +91,9 @@ static uint32_t
 	if (scene->map[(int)y][(int)x] == TILE_WALL)
 		return (C_WALL);
 	if (scene->map[(int)y][(int)x] == TILE_DOOR)
-		return (0xFF0000FF); // Red for closed doors
+		return (0xFF0000FF);
 	if (scene->map[(int)y][(int)x] == TILE_DOOR_OPEN)
-		return (0x00FF00FF); // Green for open doors
+		return (0x00FF00FF);
 	return (C_FLOOR);
 }
 
