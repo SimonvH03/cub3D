@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game_structs.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/18 22:11:14 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2025/01/26 13:24:33 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ static void
 	scene->weapon.enabled = true;
 	scene->weapon.x_pos = WIDTH / 2;
 	scene->weapon.y_pos = HEIGHT - HEIGHT / 3;
+
+	scene->ammo_display.image = NULL;
+	for (int i = 0; i < 10; i++)
+		scene->ammo_display.number_textures[i] = NULL;
+	scene->ammo_display.slash_texture = NULL;
+	scene->ammo_display.x_pos = 0;
+	scene->ammo_display.y_pos = 0;
 }
 
 void

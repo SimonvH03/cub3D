@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2025/01/22 23:08:34 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/26 13:24:33 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static short
 	if (mlx_image_to_window(mlx, scene->health_bar.image, scene->health_bar.x_pos, scene->health_bar.y_pos) < 0)
 		return (EXIT_FAILURE);
 	if (init_weapon(mlx, scene) != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
+	if (init_ammo_display(mlx, scene) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

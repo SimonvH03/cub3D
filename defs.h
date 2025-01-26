@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2025/01/26 13:14:11 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/26 13:29:05 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WIDTH				1920
 # define HEIGHT				1200
 
-# define MAX_AMMO           16
+# define MAX_AMMO           9
 
 // colours
 # define C_TRANSPARENT		0x00
@@ -168,6 +168,15 @@ typedef struct s_weapon
     int             ammo_count;     // Current ammo count
 }   t_weapon;
 
+typedef struct s_ammo_display
+{
+    mlx_image_t     *image;
+    mlx_texture_t   *number_textures[10];  // 0-9 digits
+    mlx_texture_t   *slash_texture;        // / symbol
+    uint32_t        x_pos;
+    uint32_t        y_pos;
+}   t_ammo_display;
+
 typedef struct s_scene
 {
 	mlx_image_t		*walls;
@@ -195,7 +204,8 @@ typedef struct s_scene
 	t_door_state	*doors;
 	int				door_count;
 	t_health_bar	health_bar;     	
-	t_weapon        weapon;      
+	t_weapon        weapon;
+    t_ammo_display  ammo_display;      
 }	t_scene;
 
 typedef struct s_minimap

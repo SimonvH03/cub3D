@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2025/01/22 23:04:30 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/26 13:24:33 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void
 			if (window->map.enabled == true)
 				draw_map_player(&window->map);
 			draw_crosshair(&window->scene);
+			draw_ammo_display(&window->scene);
 			window->scene.recast = false;
 		}
 	}
