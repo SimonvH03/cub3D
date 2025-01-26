@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2025/01/22 23:04:30 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/26 13:14:11 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define WINDOW_TITLE "cub3d"
 # define WIDTH				1920
 # define HEIGHT				1200
+
+# define MAX_AMMO           16
 
 // colours
 # define C_TRANSPARENT		0x00
@@ -163,6 +165,7 @@ typedef struct s_weapon
     bool            is_reloading;   // Whether weapon is reloading
     float           frame_time;     // Time accumulator for frame updates
     float           frame_delay;    // Delay between frames
+    int             ammo_count;     // Current ammo count
 }   t_weapon;
 
 typedef struct s_scene

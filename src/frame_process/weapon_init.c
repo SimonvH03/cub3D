@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 15:45:23 by svan-hoo          #+#    #+#             */
-/*   Updated: 2025/01/22 19:07:52 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/26 13:18:08 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static void
     scene->weapon.is_animating = false;
     scene->weapon.is_reloading = false;
     scene->weapon.frame_time = 0.0f;
-    scene->weapon.frame_delay = 0.1f;
+    scene->weapon.frame_delay = 0.05f;
+    scene->weapon.ammo_count = MAX_AMMO;
 }
 
 static char *

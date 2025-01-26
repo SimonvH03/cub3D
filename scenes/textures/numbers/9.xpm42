@@ -1,0 +1,273 @@
+!XPM42
+29 45 226 2 c
+   #1A0F0BFF
+.  #1A0F0CFF
+X  #1C110EFF
+o  #1D120FFF
+O  #1E1310FF
++  #1F1310FF
+@  #1F1411FF
+#  #201411FF
+$  #201511FF
+%  #201512FF
+&  #211512FF
+*  #211612FF
+=  #211613FF
+-  #221613FF
+;  #221713FF
+:  #221714FF
+>  #231714FF
+,  #231815FF
+<  #241916FF
+1  #241A17FF
+2  #251A17FF
+3  #261B18FF
+4  #271C19FF
+5  #271D1AFF
+6  #281D1BFF
+7  #281E1BFF
+8  #291E1BFF
+9  #2A1F1CFF
+0  #2B201DFF
+q  #2B201EFF
+w  #2B211EFF
+e  #2C211EFF
+r  #2C211FFF
+t  #2D221FFF
+y  #2D2220FF
+u  #2D2320FF
+i  #2E2321FF
+p  #2E2421FF
+a  #2F2421FF
+s  #2F2522FF
+d  #302522FF
+f  #302523FF
+g  #302623FF
+h  #312623FF
+j  #312724FF
+k  #322825FF
+l  #332926FF
+z  #342A27FF
+x  #352A28FF
+c  #352B28FF
+v  #362C29FF
+b  #362C2AFF
+n  #372D2AFF
+m  #372D2BFF
+M  #372E2BFF
+N  #382E2BFF
+B  #3A302DFF
+V  #3A302EFF
+C  #3B312EFF
+Z  #3B312FFF
+A  #3C322FFF
+S  #3D3330FF
+D  #3F3532FF
+F  #403633FF
+G  #423836FF
+H  #433A37FF
+J  #443B38FF
+K  #443B39FF
+L  #453B39FF
+P  #453C39FF
+I  #463C3AFF
+U  #463D3BFF
+Y  #493F3DFF
+T  #49403DFF
+R  #4A413FFF
+E  #4B4240FF
+W  #4C4341FF
+Q  #4D4441FF
+!  #4D4442FF
+~  #4D4542FF
+^  #4F4644FF
+/  #4F4744FF
+(  #504745FF
+)  #524947FF
+_  #524A47FF
+`  #534B48FF
+'  #554D4BFF
+]  #574E4CFF
+[  #584F4DFF
+{  #58504DFF
+}  #59514FFF
+|  #5A514FFF
+ . #5E5654FF
+.. #615956FF
+X. #615957FF
+o. #625A58FF
+O. #635B59FF
++. #635C5AFF
+@. #645C5AFF
+#. #655D5BFF
+$. #665E5CFF
+%. #67605EFF
+&. #68615FFF
+*. #69615FFF
+=. #6A6260FF
+-. #6A6361FF
+;. #6B6462FF
+:. #6C6563FF
+>. #6D6563FF
+,. #6D6664FF
+<. #6E6664FF
+1. #6E6765FF
+2. #736C6AFF
+3. #736C6BFF
+4. #756E6CFF
+5. #766F6DFF
+6. #766F6EFF
+7. #77706EFF
+8. #77706FFF
+9. #77716FFF
+0. #78716FFF
+q. #797270FF
+w. #797271FF
+e. #797371FF
+r. #7A7371FF
+t. #7A7372FF
+y. #7B7573FF
+u. #7C7674FF
+i. #7D7674FF
+p. #7D7775FF
+a. #7F7977FF
+s. #817B79FF
+d. #827B7AFF
+f. #827C7AFF
+g. #837D7BFF
+h. #837D7CFF
+j. #847E7CFF
+k. #86807EFF
+l. #87817FFF
+z. #888281FF
+x. #8B8684FF
+c. #8C8684FF
+v. #8C8685FF
+b. #8E8887FF
+n. #8F8987FF
+m. #918C8AFF
+M. #938E8CFF
+N. #969190FF
+B. #9A9593FF
+V. #9B9695FF
+C. #9E9A98FF
+Z. #9F9A99FF
+A. #A09B99FF
+S. #A29D9CFF
+D. #A39E9DFF
+F. #A49F9EFF
+G. #A6A2A0FF
+H. #A7A3A2FF
+J. #A9A5A3FF
+K. #AAA6A4FF
+L. #AAA6A5FF
+P. #ABA7A6FF
+I. #ACA7A6FF
+U. #ACA8A7FF
+Y. #ADA9A8FF
+T. #AEAAA9FF
+R. #B1ADACFF
+E. #B3AFAEFF
+W. #B4B0AFFF
+Q. #B4B1B0FF
+!. #B5B1B0FF
+~. #B6B2B1FF
+^. #B6B3B2FF
+/. #B7B4B3FF
+(. #B9B6B5FF
+). #BCB9B8FF
+_. #BFBBBAFF
+`. #C1BEBDFF
+'. #C3C0BFFF
+]. #C5C2C1FF
+[. #C6C4C3FF
+{. #C7C4C3FF
+}. #C7C4C4FF
+|. #C7C5C4FF
+ X #C8C5C4FF
+.X #C8C5C5FF
+XX #C9C6C5FF
+oX #C9C7C6FF
+OX #CAC7C6FF
++X #CAC8C7FF
+@X #CBC8C7FF
+#X #CBC8C8FF
+$X #CCC9C8FF
+%X #CCC9C9FF
+&X #CCCAC9FF
+*X #CDCAC9FF
+=X #CDCACAFF
+-X #CDCBCAFF
+;X #CECBCAFF
+:X #CECBCBFF
+>X #CECCCBFF
+,X #CFCDCCFF
+<X #D0CDCDFF
+1X #D0CECDFF
+2X #D1CECEFF
+3X #D1CFCEFF
+4X #D1CFCFFF
+5X #D3D1D0FF
+6X #D3D1D1FF
+7X #D5D3D2FF
+8X #D5D3D3FF
+9X #D6D3D3FF
+0X #D7D5D5FF
+qX #D8D6D6FF
+wX #D9D7D6FF
+eX #D9D7D7FF
+rX #DAD8D7FF
+tX #DAD8D8FF
+yX #DAD9D8FF
+uX #DBD9D8FF
+iX #DBD9D9FF
+pX #DDDBDBFF
+aX #DDDCDBFF
+sX #E9E8E7FF
+dX #E9E8E8FF
+fX #00000000
+fXfXfXfXfXfX, J _ ) ) ) ) ) ) ) ) ) ) ) ) R 5 fXfXfXfXfXfX
+fXfXfXfXfX% *.9X3X<X<X<X<X<X<X<X<X<X<X<X1XtXk.4 fXfXfXfXfX
+fXfXfXfX* -.uXu.C A A A A A A A A A A A V O.0Xv.6 fXfXfXfX
+fXfXfX= ;.iX8., = = = = = = = = = = = = = % [ 8Xm.9 fXfXfX
+fXfX= >.iX5., , , , , , , , , , , , , , , , % ` 6XN.w fXfX
+fX= 1.iX4.: , , , , , , , , , , , , , , , , , % / 2XV.u fX
+, <.yX3.: , , , , , : = = = = = = = = , , , , , % E :XC.g 
+z :Xs.= , , , , , : v L J J J J J L D 2 : , , , , % Q tX#.
+N >X[ # , , , , % E oX7X3X3X3X3X3X4XwXp.< : , , , : y  X>.
+m :X| % , , , ; P $XA.I P P P P P H ,.eXh.4 , , , : p .X:.
+m :X| % , , , , G.E.i fXfXfXfXfXfXfXO #.aX/ % , , : p .X:.
+m :X| % , , , < W.d.. fXfXfXfXfXfXfXfXz -X| % , , : p .X:.
+m :X| % , , , < E.g.fXfXfXfXfXfXfXfXfXn =X} % , , : p .X:.
+m :X| % , , , < E.g.fXfXfXfXfXfXfXfXfXn =X} % , , : p .X:.
+m :X| % , , , < E.g.fXfXfXfXfXfXfXfXfXn =X} % , , : p .X:.
+m :X| % , , , < E.f.fXfXfXfXfXfXfXfXfXn =X} % , , : p .X:.
+m :X| % , , , < Q.b.o fXfXfXfXfXfXfXfXb =X} % , , : p .X:.
+m :X| % , , , : i.eX..4 7 5 4 4 4 4 2 n >X} % , , : p .X:.
+m :X} % , , , , 3 l.pX).(./././.^.~.~.).dX[ % , , : p .X:.
+N 3X .+ , , , , : 4 X.7.6.w.e.r.u.p.p.a.r.N : , , : p .X:.
+e T.).B * , , , , , % @ @ @ @ @ @ @ @ @ @ : , , , : p .X:.
+fXB !._.S & , , , , , , , , , , , , , , , , , , , : p .X:.
+fXfXn R.'.F % , , , , , , , , , , , , , , , , , , : p .X:.
+fXfXfXz U.[.H % , , , , , , , , , , , , , , , , , : p .X:.
+fXfXfXfXk H.OXU + @ # # # # # # # # # # $ : , , , : p .X:.
+fXfXfXfXfXf S.1Xn.x.c.c.c.c.c.c.c.c.c.c.j.C - , , : p .X:.
+fXfXfXfXfXfXs z.I.L.L.L.L.L.L.L.L.L.K.E.sX{ % , , : p .X:.
+fXfXfXfXfXfXfX% , > > > > > > > > > = z :X} % , , : p .X:.
+fXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXb =X} % , , : p .X:.
+fXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXn =X} % , , : p .X:.
+fXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXn =X} % , , : p .X:.
+< p j j j j j j j 8 fXfXfXfXfXfXfXfXfXn =X} % , , : p .X:.
+k Y.+X{.{.{.{.}.$X=.fXfXfXfXfXfXfXfXfXn *X} % , , : p .X:.
+M 5Xc.o.@.@.@.#.&Xs.  fXfXfXfXfXfXfXfXz :X| % , , : p .X:.
+m ;X] X # # @ % K.T.r fXfXfXfXfXfXfX# ,.pX! % , , : p .X:.
+m :X| % , , , : W :XD.( ^ / / / / ~ e.uXq.2 , , , : p .X:.
+N :X{ % , , , , % Y `.5X1X1X1X1X1X2X5X2., > , , , : u |.>.
+c 1X0.% , , , , , = d Z C C C C C Z b , , , , , , % K qX%.
+1 r.rX$.= , , , , , : - - - - - - - : , , , , , % G ].P.x 
+fX< y.yX%.= , , , , , , , , , , , , , , , , , % P XXJ.l fX
+fXfX, t.uX&.= , , , , , , , , , , , , , , , % T %XF.h fXfX
+fXfXfX, q.iX=.= : : : : : : : : : : : : : % Q ,XZ.a fXfXfX
+fXfXfXfX, 9.uX<.h k k k k k k k k k k k g ' 3XB.t fXfXfXfX
+fXfXfXfXfX, 5.tX%X@X#X#X#X#X#X#X#X#X#X#X@XiXM.0 fXfXfXfXfX
+fXfXfXfXfXfX2 ) +.O.O.O.O.O.O.O.O.O.O.O.O.} q fXfXfXfXfXfX
