@@ -14,7 +14,7 @@
 
 static void
 	start_door_opening(
-		t_door *door,
+		t_door_state *door,
 		t_scene *scene)
 {
 	door->is_opening = true;
@@ -25,7 +25,7 @@ static void
 
 static void
 	start_door_closing(
-		t_door *door,
+		t_door_state *door,
 		t_scene *scene)
 {
 	door->is_closing = true;
@@ -43,7 +43,7 @@ void
 	int		check_y;
 	float	check_distance;
 	float	step;
-	t_door	*door;
+	t_door_state	*door;
 
 	if (is_door(scene->map[(int)camera->pos_y][(int)camera->pos_x]))
 		return ;

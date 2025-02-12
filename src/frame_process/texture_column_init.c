@@ -42,7 +42,7 @@ static void
 		t_scene *scene,
 		t_ray *ray,
 		t_column *column,
-		t_door *door_state)
+		t_door_state *door_state)
 {
 	if (ray->hit_type == HORIZONTAL)
 		column->x = scene->camera.pos_y + ray->distance * ray->dir_y;
@@ -82,7 +82,7 @@ void
 		t_ray *ray,
 		t_column *column)
 {
-	t_door	*door_state;
+	t_door_state	*door_state;
 
 	door_state = NULL;
 	if (scene->map[ray->pos_y][ray->pos_x] == TILE_DOOR ||

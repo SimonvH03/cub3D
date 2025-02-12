@@ -42,7 +42,7 @@ static int
 
 static void
 	init_door_state(
-		t_door *door,
+		t_door_state *door,
 		int x,
 		int y)
 {
@@ -87,7 +87,7 @@ void
 	int	door_count;
 
 	door_count = count_doors(scene);
-	scene->doors = malloc(sizeof(t_door) * door_count);
+	scene->doors = malloc(sizeof(t_door_state) * door_count);
 	if (!scene->doors)
 		return ;
 	scene->door_count = door_count;
@@ -109,7 +109,7 @@ bool
 	return (tile == TILE_WALL || tile == TILE_DOOR);
 }
 
-t_door *
+t_door_state *
 	get_door_at_position(
 		t_scene *scene,
 		int x,
@@ -149,7 +149,7 @@ static bool
 		int check_x,
 		int check_y)
 {
-	t_door	*door;
+	t_door_state	*door;
 
 	if (!is_door(scene->map[check_y][check_x]))
 		return (false);
@@ -197,7 +197,7 @@ void
 static void
 	update_single_door(
 		t_scene *scene,
-		t_door *door,
+		t_door_state *door,
 		int x,
 		int y,
 		float delta_time)
@@ -236,7 +236,7 @@ void
 {
 	int		x;
 	int		y;
-	t_door	*door;
+	t_door_state	*door;
 
 	y = 0;
 	while (y < scene->y_max)

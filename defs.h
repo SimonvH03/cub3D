@@ -74,7 +74,7 @@ typedef struct s_door
 	float			animation_speed;
 	int				x;
 	int				y;
-}	t_door;
+}	t_door_state;
 
 typedef struct s_hit
 {
@@ -83,7 +83,7 @@ typedef struct s_hit
 	float			distance;
 	bool			is_door;
 	bool			hit_type;
-	t_door			*door_state;
+	t_door_state			*door_state;
 }	t_hit;
 
 typedef struct s_ray

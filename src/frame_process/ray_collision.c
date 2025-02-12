@@ -79,7 +79,7 @@ void
 		t_ray *ray,
 		t_scene *scene)
 {
-	t_door	*door_state;
+	t_door_state	*door_state;
 	float	door_pos;
 
 	if (ray->has_door || (scene->map[ray->pos_y][ray->pos_x] != TILE_DOOR
