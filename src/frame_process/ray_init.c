@@ -44,17 +44,19 @@ void
 	draw_raycast(
 		t_scene *scene)
 {
-	t_ray		ray;
-	uint32_t	x;
+    t_ray   ray;
+    uint32_t    x;
 
-	reset_image(scene->walls);
-	x = 0;
-	while (x < scene->walls->width)
-	{
-		ray.camera_x = 2 * x / (float)scene->walls->width - 1;
-		init_ray(&ray, &scene->camera);
-		cast_ray(&ray, scene);
-		draw_texture_column(scene, &ray, x);
-		++x;
-	}
-}
+    reset_image(scene->walls);
+    x = 0;
+    while (x < scene->walls->width)
+    {
+        ray.camera_x = 2 * x / (float)scene->walls->width - 1;
+        init_ray(&ray, &scene->camera);
+        cast_ray(&ray, scene);
+        draw_texture_column(scene, &ray, x);
+        ++x;
+    }
+    draw_health_bar(&scene->health_bar);
+    draw_weapon(scene);
+} 

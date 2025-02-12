@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game_images.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/18 22:16:43 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2025/01/26 13:24:33 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,22 @@ static short
 	scene->walls = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (scene->walls == NULL)
 		return (EXIT_FAILURE);
+	scene->health_bar.width = 200;
+	scene->health_bar.height = 10;
+	scene->health_bar.x_pos = WIDTH - scene->health_bar.width - 20;
+	scene->health_bar.y_pos = 20;
+	scene->health_bar.image = mlx_new_image(mlx, scene->health_bar.width, scene->health_bar.height);
+	if (scene->health_bar.image == NULL)
+		return (EXIT_FAILURE);
 	if (mlx_image_to_window(mlx, scene->background, 0, 0) < 0)
 		return (EXIT_FAILURE);
 	if (mlx_image_to_window(mlx, scene->walls, 0, 0) < 0)
+		return (EXIT_FAILURE);
+	if (mlx_image_to_window(mlx, scene->health_bar.image, scene->health_bar.x_pos, scene->health_bar.y_pos) < 0)
+		return (EXIT_FAILURE);
+	if (init_weapon(mlx, scene) != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
+	if (init_ammo_display(mlx, scene) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -91,14 +104,42 @@ short
 {
 	if (new_images_scene(mlx, &window->scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (new_images_minimap(mlx, window->scene.player_texture,
-			&window->minimap) == EXIT_FAILURE)
+	if (new_images_minimap(mlx, window->scene.player_texture, &window->minimap) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (new_images_map(mlx, &window->map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	draw_scene_background(&window->scene);
 	draw_minimap_circle_overlay(&window->minimap);
+	if (init_crosshair(mlx, &window->scene) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	draw_map_walls(&window->map);
 	window->fps = mlx_put_string(mlx, "0000", WIDTH / 2 - 50, 100);
 	return (EXIT_SUCCESS);
 }
+
+short
+    init_crosshair(
+        mlx_t *mlx,
+        t_scene *scene)
+{
+    xpm_t* crosshair_xpm;
+
+    crosshair_xpm = mlx_load_xpm42("scenes/textures/crosshair.xpm42");
+    if (!crosshair_xpm)
+        return (EXIT_FAILURE);
+    scene->crosshair_texture = &crosshair_xpm->texture;
+
+    // Create crosshair image
+    scene->crosshair = mlx_new_image(mlx, scene->crosshair_texture->width, scene->crosshair_texture->height);
+    if (!scene->crosshair)
+        return (EXIT_FAILURE);
+
+    // Position crosshair at center of screen
+    if (mlx_image_to_window(mlx, scene->crosshair, 
+        (WIDTH - scene->crosshair_texture->width) / 2,
+        (HEIGHT - scene->crosshair_texture->height) / 2) < 0)
+        return (EXIT_FAILURE);
+
+    return (EXIT_SUCCESS);
+}
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   view_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/18 17:51:08 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2025/01/26 13:24:33 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ void
 		wasd_move(window, &window->scene.camera);
 		arrowkey_turn(window, &window->scene.camera);
 		update_door_animations(&window->scene, window->mlx->delta_time);
+		if (mlx_is_key_down(window->mlx, MLX_KEY_G))
+			start_weapon_animation(&window->scene);
+		if (mlx_is_key_down(window->mlx, MLX_KEY_R))
+			start_reload_animation(&window->scene);
+		if (window->scene.weapon.is_animating || window->scene.weapon.is_reloading)
+			next_weapon_frame(&window->scene, window->mlx->delta_time);
+
 		if (window->scene.recast == true)
 		{
 			draw_raycast(&window->scene);
@@ -31,6 +38,8 @@ void
 				draw_minimap_walls(&window->minimap);
 			if (window->map.enabled == true)
 				draw_map_player(&window->map);
+			draw_crosshair(&window->scene);
+			draw_ammo_display(&window->scene);
 			window->scene.recast = false;
 		}
 	}

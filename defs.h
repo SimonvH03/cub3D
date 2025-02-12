@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/10/05 21:06:51 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2025/01/26 13:29:05 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define WINDOW_TITLE "cub3d"
 # define WIDTH				1920
 # define HEIGHT				1200
+
+# define MAX_AMMO           9
 
 // colours
 # define C_TRANSPARENT		0x00
@@ -113,6 +115,18 @@ typedef struct s_colour_construct
 	unsigned char	a;
 }	t_colour_construct;
 
+typedef struct s_health_bar
+{
+	mlx_image_t		*image;
+	mlx_texture_t	*texture;
+	float			current_health;
+	float			max_health;
+	uint32_t		x_pos;
+	uint32_t		y_pos;
+	uint32_t		width;
+	uint32_t		height;
+}	t_health_bar;
+
 typedef struct s_column
 {
 	int				height;
@@ -139,6 +153,32 @@ typedef struct s_camera
 	float			movement_speed;
 }	t_camera;
 
+typedef struct s_weapon
+{
+    mlx_image_t     *image;
+    mlx_texture_t   *texture;
+    mlx_texture_t   *textures[34];  // Array to store all weapon textures (6 shoot + 28 reload)
+    uint32_t        x_pos;
+    uint32_t        y_pos;
+    float           scale;
+    bool            enabled;
+    int             current_frame;  // Current frame
+    bool            is_animating;   // Whether animation is in progress
+    bool            is_reloading;   // Whether weapon is reloading
+    float           frame_time;     // Time accumulator for frame updates
+    float           frame_delay;    // Delay between frames
+    int             ammo_count;     // Current ammo count
+}   t_weapon;
+
+typedef struct s_ammo_display
+{
+    mlx_image_t     *image;
+    mlx_texture_t   *number_textures[10];  // 0-9 digits
+    mlx_texture_t   *slash_texture;        // / symbol
+    uint32_t        x_pos;
+    uint32_t        y_pos;
+}   t_ammo_display;
+
 typedef struct s_scene
 {
 	mlx_image_t		*walls;
@@ -157,12 +197,17 @@ typedef struct s_scene
 	mlx_texture_t	*door_texture;
 	mlx_texture_t	*door_texture2;
 	mlx_texture_t	*player_texture;
+	mlx_texture_t	*crosshair_texture;
+	mlx_image_t		*crosshair;
 	uint32_t		floor;
 	uint32_t		ceiling;
 	bool			recast;	
-	int				max_doors;
+	int				max_doors;        
+	t_door_state	*doors;
 	int				door_count;
-	t_door			*doors;
+	t_health_bar	health_bar;     	
+	t_weapon        weapon;
+    t_ammo_display  ammo_display;      
 }	t_scene;
 
 typedef struct s_minimap

@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   texture_column_draw.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/23 02:13:58 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2025/01/22 23:16:13 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-static uint32_t
-	get_ray_pixel_colour(
-		mlx_texture_t *texture,
-		uint32_t tex_x,
-		uint32_t tex_y)
+uint32_t
+    get_ray_pixel_colour(
+        mlx_texture_t *texture,
+        uint32_t tex_x,
+        uint32_t tex_y)
 {
-	uint32_t	colour;
-	uint32_t	index;
-	uint8_t		*texel;
+    uint32_t    index;
+    uint8_t     *texel;
+    uint32_t    colour;
 
 	if (tex_x >= texture->width || tex_y >= texture->height)
 		return (C_TRANSPARENT);
@@ -42,20 +42,21 @@ static void
 	uint32_t	tex_y;
 	uint32_t	colour;
 
-	tex_x = col->x * col->texture->width;
-	if ((ray->hit_type == HORIZONTAL && ray->sign_x < 0)
-		|| (ray->hit_type == VERTICAL && ray->sign_y > 0))
-		tex_x = col->texture->width - 1 - tex_x;
-	screen_y = (uint32_t)col->start;
-	while (screen_y < (uint32_t)col->end)
-	{
-		tex_y = (int)col->y & (col->texture->height - 1);
-		col->y += col->step;
-		colour = get_ray_pixel_colour(col->texture, tex_x, tex_y);
-		if ((colour & 0xFF) != 0)
-			mlx_put_pixel(scene->walls, screen_x, screen_y, colour);
-		++screen_y;
-	}
+    tex_x = col->x * col->texture->width;
+    if ((ray->hit_type == HORIZONTAL && ray->sign_x < 0)
+        || (ray->hit_type == VERTICAL && ray->sign_y > 0))
+        tex_x = col->texture->width - 1 - tex_x;
+
+    screen_y = (uint32_t)col->start;
+    while (screen_y < (uint32_t)col->end)
+    {
+        tex_y = (int)col->y & (col->texture->height - 1);
+        col->y += col->step;
+        colour = get_ray_pixel_colour(col->texture, tex_x, tex_y);
+        if ((colour & 0xFF) != 0)
+            mlx_put_pixel(scene->walls, screen_x, screen_y, colour);
+        ++screen_y;
+    }
 }
 
 static void

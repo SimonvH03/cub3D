@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/17 03:28:56 by svan-hoo         ###   ########.fr       */
+/*   Updated: 2025/01/26 13:24:33 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ short		init_game_images(mlx_t *mlx, t_window *window);
 void		draw_scene_background(t_scene *scene);
 void		draw_minimap_circle_overlay(t_minimap *minimap);
 void		draw_map_walls(t_map *map);
+short		init_ammo_display(mlx_t *mlx, t_scene *scene);
 
 short		init_menu_structs(mlx_t *mlx, t_menu *menu);
 short		init_menu_images(mlx_t *mlx, t_menu *menu);
@@ -54,6 +55,10 @@ bool		is_solid(int tile);
 t_door		*get_door_at_position(t_scene *scene, int x, int y);
 void		interact_with_door(t_scene *scene, t_camera *camera);
 void		update_door_animations(t_scene *scene, float delta_time);
+
+// Health bar functions
+void update_health_bar(t_health_bar *health_bar, float new_health);
+void draw_health_bar(t_health_bar *health_bar);
 
 // frame processing
 void		draw_raycast(t_scene *scene);
@@ -86,5 +91,22 @@ void		reset_image(mlx_image_t *image);
 // void		print_content(t_scene *scene);
 // void		print_map(t_scene *scene);
 // void		draw_textures(t_window *window);
+
+// Texture functions
+uint32_t get_ray_pixel_colour(mlx_texture_t *texture, uint32_t tex_x, uint32_t tex_y);
+
+// Weapon system
+short   init_weapon(mlx_t *mlx, t_scene *scene);
+void    draw_weapon(t_scene *scene);
+void    next_weapon_frame(t_scene *scene, float delta_time);
+void    start_weapon_animation(t_scene *scene);
+void    start_reload_animation(t_scene *scene);
+
+// Crosshair system
+short   init_crosshair(mlx_t *mlx, t_scene *scene);
+void    draw_crosshair(t_scene *scene);
+
+// Ammo display system
+void    draw_ammo_display(t_scene *scene);
 
 #endif

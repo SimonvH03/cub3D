@@ -32,6 +32,9 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/user_interface/view_manager.c \
 			$(SRCDIR)/user_interface/wasd_move.c \
 			$(SRCDIR)/user_interface/door_system.c \
+			$(SRCDIR)/user_interface/health_bar.c \
+			$(SRCDIR)/user_interface/init_ammo_display.c \
+			$(SRCDIR)/user_interface/draw_ammo_display.c \
 			$(SRCDIR)/frame_process/arithmetic.c \
 			$(SRCDIR)/frame_process/draw_map_player.c \
 			$(SRCDIR)/frame_process/draw_minimap_walls.c \
@@ -39,6 +42,9 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/frame_process/ray_collision.c \
 			$(SRCDIR)/frame_process/texture_column_init.c \
 			$(SRCDIR)/frame_process/texture_column_draw.c \
+			$(SRCDIR)/frame_process/weapon_init.c \
+			$(SRCDIR)/frame_process/weapon_animation.c \
+			$(SRCDIR)/frame_process/weapon_draw.c \
 			$(SRCDIR)/frame_process/modlx.c \
 			#$(SRCDIR)/test.c
 
