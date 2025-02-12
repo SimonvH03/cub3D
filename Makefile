@@ -33,8 +33,7 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/user_interface/wasd_move.c \
 			$(SRCDIR)/user_interface/door_system.c \
 			$(SRCDIR)/user_interface/health_bar.c \
-			$(SRCDIR)/user_interface/init_ammo_display.c \
-			$(SRCDIR)/user_interface/draw_ammo_display.c \
+			$(SRCDIR)/user_interface/ammo_display.c \
 			$(SRCDIR)/frame_process/arithmetic.c \
 			$(SRCDIR)/frame_process/draw_map_player.c \
 			$(SRCDIR)/frame_process/draw_minimap_walls.c \

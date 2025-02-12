@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2025/01/26 13:24:33 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/27 16:24:23 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ static short
 	if (mlx_image_to_window(mlx, scene->health_bar.image, scene->health_bar.x_pos, scene->health_bar.y_pos) < 0)
 		return (EXIT_FAILURE);
 	if (init_weapon(mlx, scene) != EXIT_SUCCESS)
-		return (EXIT_FAILURE);
-	if (init_ammo_display(mlx, scene) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -110,7 +108,9 @@ short
 		return (EXIT_FAILURE);
 	draw_scene_background(&window->scene);
 	draw_minimap_circle_overlay(&window->minimap);
-	if (init_crosshair(mlx, &window->scene) == EXIT_FAILURE)
+	if (init_crosshair(mlx, &window->scene) != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
+	if (init_weapon(mlx, &window->scene) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	draw_map_walls(&window->map);
 	window->fps = mlx_put_string(mlx, "0000", WIDTH / 2 - 50, 100);

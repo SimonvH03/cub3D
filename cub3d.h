@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2025/01/26 13:24:33 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/27 16:28:48 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ short		init_game_images(mlx_t *mlx, t_window *window);
 void		draw_scene_background(t_scene *scene);
 void		draw_minimap_circle_overlay(t_minimap *minimap);
 void		draw_map_walls(t_map *map);
-short		init_ammo_display(mlx_t *mlx, t_scene *scene);
 
 short		init_menu_structs(mlx_t *mlx, t_menu *menu);
 short		init_menu_images(mlx_t *mlx, t_menu *menu);
@@ -107,6 +106,6 @@ short   init_crosshair(mlx_t *mlx, t_scene *scene);
 void    draw_crosshair(t_scene *scene);
 
 // Ammo display system
-void    draw_ammo_display(t_scene *scene);
+void    draw_ammo_count(t_scene *scene);
 
 #endif

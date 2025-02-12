@@ -6,14 +6,14 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo          #+#    #+#             */
-/*   Updated: 2025/01/26 13:24:33 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/27 17:12:48 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
 static void
-	init_ui_elements(
+	init_health_bar(
 		t_scene *scene)
 {
 	scene->health_bar.image = NULL;
@@ -24,20 +24,56 @@ static void
 	scene->health_bar.height = HEIGHT / 20;
 	scene->health_bar.x_pos = 20;
 	scene->health_bar.y_pos = HEIGHT - scene->health_bar.height - 80;
+}
+
+static void
+	init_weapon_state(
+		t_scene *scene)
+{
+	int i;
 
 	scene->weapon.image = NULL;
 	scene->weapon.texture = NULL;
-	scene->weapon.scale = 1.0f;
 	scene->weapon.enabled = true;
-	scene->weapon.x_pos = WIDTH / 2;
-	scene->weapon.y_pos = HEIGHT - HEIGHT / 3;
+	scene->weapon.scale = 1.0f;
+	scene->weapon.is_animating = false;
+	scene->weapon.is_reloading = false;
+	scene->weapon.frame_time = 0.0f;
+	scene->weapon.frame_delay = 0.05f;
+	scene->weapon.ammo_count = MAX_AMMO;
+	i = 0;
+	while (i < 34)
+	{
+		scene->weapon.textures[i] = NULL;
+		i++;
+	}
+}
+
+static void
+	init_ammo_display(
+		t_scene *scene)
+{
+	int i;
 
 	scene->ammo_display.image = NULL;
-	for (int i = 0; i < 10; i++)
+	i = 0;
+	while (i < 10)
+	{
 		scene->ammo_display.number_textures[i] = NULL;
+		i++;
+	}
 	scene->ammo_display.slash_texture = NULL;
 	scene->ammo_display.x_pos = 0;
 	scene->ammo_display.y_pos = 0;
+}
+
+static void
+	init_ui_elements(
+		t_scene *scene)
+{
+	init_health_bar(scene);
+	init_weapon_state(scene);
+	init_ammo_display(scene);
 }
 
 void

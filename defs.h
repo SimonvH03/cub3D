@@ -6,7 +6,7 @@
 /*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2025/01/26 13:29:05 by ferid            ###   ########.fr       */
+/*   Updated: 2025/01/27 17:06:01 by ferid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WIDTH				1920
 # define HEIGHT				1200
 
-# define MAX_AMMO           9
+# define MAX_AMMO          9
 
 // colours
 # define C_TRANSPARENT		0x00
@@ -207,7 +207,7 @@ typedef struct s_scene
 	int				door_count;
 	t_health_bar	health_bar;     	
 	t_weapon        weapon;
-    t_ammo_display  ammo_display;      
+	t_ammo_display  ammo_display;
 }	t_scene;
 
 typedef struct s_minimap
