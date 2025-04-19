@@ -1,51 +1,66 @@
-NAME	=	cub3d
+NAME	=	cub3D
 
 CC		=	cc
-CFLAGS	=	-O3
-CFLAGS	+=	-Wall -Werror -Wextra
-#CFLAGS	+=	-g
+CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	+=	-g
+# CFLAGS	+=	-O3
 MLXFLAGS=	-ldl -lglfw -pthread -lm
 
-LMLXDIR	=	./MLX42
+LMLXDIR	=	MLX42
 LIBMLX	=	$(LMLXDIR)/build/libmlx42.a
 
-LFTDIR	=	./libft
+LFTDIR	=	libft
 LIBFT	=	$(LFTDIR)/libft.a
 
-HEADERS =	./cub3d.h \
-			./defs.h \
-			./paths.h \
+INCLDIR	=	. \
+			./include \
+			MLX42/include \
+			libft
 
-SRCDIR	=	./src
+INCLUDE =	$(addprefix -I , $(INCLDIR))
+
+SRCDIR	=	src
 SRC		=	$(SRCDIR)/main.c \
-			$(SRCDIR)/initialise/draw_game_images.c \
-			$(SRCDIR)/initialise/draw_menu_images.c \
-			$(SRCDIR)/initialise/init_game_images.c \
-			$(SRCDIR)/initialise/init_game_structs.c \
-			$(SRCDIR)/initialise/init_menu_images.c \
-			$(SRCDIR)/initialise/init_menu_structs.c \
-			$(SRCDIR)/initialise/read_cub_elements.c \
-			$(SRCDIR)/initialise/read_map_init_camera.c \
-			$(SRCDIR)/user_interface/arrowkey_turn.c \
+			$(SRCDIR)/error.c \
+			$(SRCDIR)/gamestate/door_animation.c \
+			$(SRCDIR)/gamestate/update_frametime.c \
+			$(SRCDIR)/gamestate/weapon_animation.c \
+			$(SRCDIR)/init/init_doors.c \
+			$(SRCDIR)/init/init_game.c \
+			$(SRCDIR)/init/init_hud.c \
+			$(SRCDIR)/init/init_menu.c \
+			$(SRCDIR)/init/init_player.c \
+			$(SRCDIR)/init/init_weapon.c \
+			$(SRCDIR)/init/init_window.c \
+			$(SRCDIR)/init/new_images_bigmap.c \
+			$(SRCDIR)/init/new_images_minimap.c \
+			$(SRCDIR)/init/perimeter_check.c \
+			$(SRCDIR)/init/read_elements.c \
+			$(SRCDIR)/init/read_map.c \
+			$(SRCDIR)/init/scalable.c \
+			$(SRCDIR)/render/cast_ray.c \
+			$(SRCDIR)/render/draw_texture_column.c \
+			$(SRCDIR)/render/raycast.c \
+			$(SRCDIR)/render/update_bigmap.c \
+			$(SRCDIR)/render/update_minimap.c \
+			$(SRCDIR)/user_interface/keyboard_controls.c \
 			$(SRCDIR)/user_interface/keyhooks.c \
-			$(SRCDIR)/user_interface/up_down_select.c \
+			$(SRCDIR)/user_interface/mouse_controls.c \
+			$(SRCDIR)/user_interface/player_interaction.c \
+			$(SRCDIR)/user_interface/select_button.c \
 			$(SRCDIR)/user_interface/view_manager.c \
-			$(SRCDIR)/user_interface/wasd_move.c \
-			$(SRCDIR)/user_interface/door_system.c \
-			$(SRCDIR)/user_interface/health_bar.c \
-			$(SRCDIR)/user_interface/ammo_display.c \
-			$(SRCDIR)/frame_process/arithmetic.c \
-			$(SRCDIR)/frame_process/draw_map_player.c \
-			$(SRCDIR)/frame_process/draw_minimap_walls.c \
-			$(SRCDIR)/frame_process/ray_init.c \
-			$(SRCDIR)/frame_process/ray_collision.c \
-			$(SRCDIR)/frame_process/texture_column_init.c \
-			$(SRCDIR)/frame_process/texture_column_draw.c \
-			$(SRCDIR)/frame_process/weapon_init.c \
-			$(SRCDIR)/frame_process/weapon_animation.c \
-			$(SRCDIR)/frame_process/weapon_draw.c \
-			$(SRCDIR)/frame_process/modlx.c \
-			#$(SRCDIR)/test.c
+			$(SRCDIR)/utils/allocation_list.c \
+			$(SRCDIR)/utils/arithmetic_float.c \
+			$(SRCDIR)/utils/arithmetic_int.c \
+			$(SRCDIR)/utils/gridmap_iter.c \
+			$(SRCDIR)/utils/hudmap_setget_ability.c \
+			$(SRCDIR)/utils/image_iter.c \
+			$(SRCDIR)/utils/menu_scene_set_ability.c \
+			$(SRCDIR)/utils/modlx.c \
+			$(SRCDIR)/utils/normalize_vector2.c \
+			$(SRCDIR)/utils/tilemap_cell.c \
+			$(SRCDIR)/utils/transpore_texture.c
+
 
 OBJDIR	=	./obj
 OBJ		=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
@@ -61,9 +76,9 @@ $(LIBFT):
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -o $@ -c $< -I MLX42/include
+	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE)
 
 $(NAME): $(LIBMLX) $(LIBFT) $(OBJDIR) $(OBJ)
 	$(CC) $(OBJ) $(LIBMLX) $(MLXFLAGS) $(LIBFT) -o $(NAME)

@@ -1,83 +1,72 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   view_manager.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ferid <ferid@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2025/01/27 16:28:48 by ferid            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   view_manager.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
+/*   Updated: 2025/04/19 01:00:00 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "cub3d.h"
 
 void
 	view_manager(
 		void *param)
 {
 	t_window	*window;
+	mlx_t		*mlx;
 
 	window = param;
-	if (window->view == GAME)
+	mlx = window->mlx;
+	if (window->view == wv_game)
 	{
-		wasd_move(window, &window->scene.camera);
-		arrowkey_turn(window, &window->scene.camera);
-		update_door_animations(&window->scene, window->mlx->delta_time);
-		if (mlx_is_key_down(window->mlx, MLX_KEY_G))
-			start_weapon_animation(&window->scene);
-		if (mlx_is_key_down(window->mlx, MLX_KEY_R))
-			start_reload_animation(&window->scene);
-		if (window->scene.weapon.is_animating || window->scene.weapon.is_reloading)
-			next_weapon_frame(&window->scene, window->mlx->delta_time);
-
-		if (window->scene.recast == true)
-		{
-			draw_raycast(&window->scene);
-			if (window->minimap.enabled == true)
-				draw_minimap_walls(&window->minimap);
-			if (window->map.enabled == true)
-				draw_map_player(&window->map);
-			draw_crosshair(&window->scene);
-			draw_ammo_count(&window->scene);
-			window->scene.recast = false;
-		}
+		wasd_move(mlx, &window->scene.grid, &window->scene.player.camera);
+		arrowkey_look(mlx, &window->scene.player.camera);
+		mouse_pan(mlx, &window->scene.player.camera);
+		update_doors(&window->scene.grid, mlx->delta_time);
+		raycast(&window->scene);
+		update_weapon_animation(mlx, &window->scene.player.weapon);
+		update_minimap(&window->hud.minimap);
+		update_bigmap(&window->hud.bigmap);
+	}
+	else if (window->view == wv_menu)
+	{
+		hover_button(&window->menu, window);
 	}
 }
 
 void
 	toggle_maps(
-		t_minimap *minimap,
-		t_map *map)
+		t_hud *hud)
 {
-	minimap->player->enabled = !minimap->player->enabled;
-	minimap->walls->enabled = !minimap->walls->enabled;
-	minimap->enabled = !minimap->enabled;
-	map->player->enabled = !map->player->enabled;
-	map->walls->enabled = !map->walls->enabled;
-	map->enabled = !map->enabled;
-	map->r_scene->recast = true;
+	set_minimap_ability(&hud->minimap, !get_minimap_ability(&hud->minimap));
+	set_bigmap_ability(&hud->bigmap, !get_bigmap_ability(&hud->bigmap));
 }
 
 void
 	toggle_view(
 		t_window *window)
 {
-	size_t	i;
+	bool	game_img;
 
-	if (window->view == MENU)
-		window->view = GAME;
-	else if (window->view == GAME)
-		window->view = MENU;
-	window->menu.background.image->enabled
-		= !window->menu.background.image->enabled;
-	window->menu.highlight.image->enabled
-		= !window->menu.highlight.image->enabled;
-	i = 0;
-	while (i < MENU_B_COUNT)
+	if (window->view == wv_menu)
 	{
-		window->menu.buttons[i].image->enabled
-			= !window->menu.buttons[i].image->enabled;
-		++i;
+		window->view = wv_game;
+		mlx_set_cursor_mode(window->mlx, MLX_MOUSE_HIDDEN);
+		mlx_set_mouse_pos(window->mlx,
+			window->mlx->width / 2, window->mlx->height / 2);
 	}
+	else if (window->view == wv_game)
+	{
+		window->view = wv_menu;
+		mlx_set_cursor_mode(window->mlx, MLX_MOUSE_NORMAL);
+	}
+	game_img = (bool)(window->view == wv_game);
+	set_menu_ability(&window->menu, !game_img);
+	set_scene_ability(&window->scene, game_img);
+	set_minimap_ability(&window->hud.minimap, game_img);
+	set_bigmap_ability(&window->hud.bigmap, false);
 }

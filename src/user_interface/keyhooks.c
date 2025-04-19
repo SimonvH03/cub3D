@@ -1,34 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   keyhooks.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/18 17:51:00 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   keyhooks.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
+/*   Updated: 2025/04/19 00:19:50 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "cub3d.h"
 
 static void
 	game_keys(
 		mlx_key_data_t keydata,
 		t_window *window)
 {
-	if ((keydata.key == MLX_KEY_M || keydata.key == MLX_KEY_TAB)
-		&& keydata.action == MLX_PRESS)
+	if (keydata.action != MLX_PRESS)
+		return ;
+	if (keydata.key == MLX_KEY_M || keydata.key == MLX_KEY_TAB)
 	{
-		toggle_maps(&window->minimap, &window->map);
+		toggle_maps(&window->hud);
 	}
-	if (keydata.key == MLX_KEY_LEFT_CONTROL && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_LEFT_CONTROL)
 	{
 		toggle_view(window);
 	}
-	if (keydata.key == MLX_KEY_E && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_E)
 	{
-		interact_with_door(&window->scene, &window->scene.camera);
+		player_interaction(&window->scene.grid, &window->scene.player.camera);
+	}
+	if (keydata.key == MLX_KEY_G)
+	{
+		fire_weapon(&window->scene.player.weapon);
+	}
+	if (keydata.key == MLX_KEY_R)
+	{
+		reload_weapon(&window->scene.player.weapon);
 	}
 }
 
@@ -37,19 +46,13 @@ static void
 		mlx_key_data_t keydata,
 		t_window *window)
 {
-	if ((keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_DOWN)
-		&& keydata.action == MLX_PRESS)
+	if (keydata.action != MLX_PRESS)
+		return ;
+	if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_DOWN)
 	{
-		if (keydata.key == MLX_KEY_UP
-			&& window->menu.selection > 0)
-			window->menu.selection -= 1;
-		if (keydata.key == MLX_KEY_DOWN
-			&& window->menu.selection < MENU_B_COUNT - 1)
-			window->menu.selection += 1;
-		up_down_select(&window->menu);
+		select_button(&window->menu, keydata.key);
 	}
-	if ((keydata.key == MLX_KEY_ENTER || keydata.key == MLX_KEY_SPACE)
-		&& keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_ENTER || keydata.key == MLX_KEY_SPACE)
 	{
 		confirm_selection(&window->menu, window);
 	}
@@ -67,11 +70,11 @@ void
 	{
 		mlx_close_window(window->mlx);
 	}
-	if (window->view == GAME)
+	if (window->view == wv_game)
 	{
 		game_keys(keydata, window);
 	}
-	else if (window->view == MENU)
+	else if (window->view == wv_menu)
 	{
 		menu_keys(keydata, window);
 	}

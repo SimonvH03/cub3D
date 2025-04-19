@@ -1,0 +1,4 @@
+- add specific wall texture to inside of door block
+
+- compile bonus (doors, weapon) features and associated defines seperately
+	- potential for debug build
