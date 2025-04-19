@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   init_game.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/17 00:40:12 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/19 20:22:13 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ static int
 	content_progress = content_start;
 	if (read_elements(window, scene, &content_progress) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
+	if (scene->walls.doorface == NULL || scene->walls.doorside == NULL)
+		return (set_error(CUB_DATAFAIL));
+	if (scene->walls.north == NULL || scene->walls.east == NULL
+		|| scene->walls.south == NULL || scene->walls.west == NULL)
+		return (set_error(CUB_NOTEX));
+	if (scene->floor_clr == (uint32_t)0 || scene->ceiling_clr == (uint32_t)0)
+		return (set_error(CUB_NOCLR));
 	if (read_tilemap(&scene->grid, content_progress) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	ft_arrclear((void **)content_start);

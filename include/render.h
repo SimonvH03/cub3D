@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   render.h                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/28 21:58:55 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/19 22:38:48 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ typedef struct s_ray
 	float			start_y;
 	float			partial;
 	float			distance;
-	float			door_position;
+	int16_t			hit_cell;
+	int16_t			faced_cell;
 	short			sign_x;
 	short			sign_y;
 	bool			hit_type;
-	bool			hits_door;
 }	t_ray;
 
 typedef struct s_colour_construct

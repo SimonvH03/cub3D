@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   player_interaction.c                               :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/18 19:59:15 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/19 23:02:23 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,14 @@ static int
 			ray->distance = ray->total_y - ray->step_y;
 		}
 		cell = grid->tilemap[ray->pos_y][ray->pos_x];
-		if (is_solid(cell) || is_door(cell)
-			|| ray->distance > INTERACTION_RANGE)
+		if (is_solid(cell) || is_door(cell))
+		{
+			if (ray->distance > INTERACTION_RANGE)
+				return (-1);
 			return (cell);
+		}
 	}
-	return (0);
+	return (-1);
 }
 
 void

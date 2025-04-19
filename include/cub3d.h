@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/19 01:00:00 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/19 23:11:05 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 // mlx window
 # define WINDOW_TITLE		"cub3d"
 # define FULLSCREEN			false
-# define MONITOR_ID			1
+# define MONITOR_ID			0
 # define WIDTH				1280
 # define HEIGHT				720
 
@@ -84,6 +84,7 @@ typedef enum cub_errno
 	CUB_MLXFAIL,		// MLX42 function has failed.
 	CUB_LIBFTFAIL,		// Libft function has failed.
 	CUB_MEMFAIL,		// Dynamic memory allocation has failed.
+	CUB_DATAFAIL,		// Data file failed to load.
 	CUB_INVFILE,		// The provided file was invalid / does not exist.
 	CUB_INVELEM,		// Cub element has invalid type identifier.
 	CUB_INVCLR,			// Cub colour has invalid format. (R,G,B [0,255])
@@ -420,6 +421,9 @@ char
 		const int16_t cell);
 bool
 	is_door(
+		const int16_t cell);
+bool
+	is_wall(
 		const int16_t cell);
 
 #endif

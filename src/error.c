@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   error.c                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: simon <simon@student.codam.nl>               +#+                     */
+/*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/04/16 17:53:05 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/18 20:49:10 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/19 20:21:57 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static const char	*cub_strerror(mlx_errno_t val)
 		"MLX42 function has failed.",
 		"Libft function has failed.",
 		"Dynamic memory allocation has failed.",
+		"Data file failed to load.",
 		"The provided file was invalid / does not exist.",
 		"Cub element has invalid type identifier.",
 		"Cub colour has invalid format. (R,G,B [0,255])",

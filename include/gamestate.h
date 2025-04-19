@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/19 01:08:05 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/19 20:20:16 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ typedef struct s_walls
 	mlx_texture_t		*east;
 	mlx_texture_t		*south;
 	mlx_texture_t		*west;
-	mlx_texture_t		*door;
+	mlx_texture_t		*doorface;
+	mlx_texture_t		*doorside;
 }	t_walls;
 
 typedef struct s_door

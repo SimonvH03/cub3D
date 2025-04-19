@@ -6,28 +6,30 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/19 00:27:03 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/19 22:43:33 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void
+static mlx_texture_t	*
 	select_texture(
-		t_column *column,
 		t_walls *walls,
 		t_ray *ray)
 {
-	if (ray->hits_door)
-		column->texture = walls->door;
-	else if (ray->hit_type == ha_horizontal && ray->sign_y >= 0)
-		column->texture = walls->south;
-	else if (ray->hit_type == ha_horizontal && ray->sign_y < 0)
-		column->texture = walls->north;
-	else if (ray->hit_type == ha_vertical && ray->sign_x >= 0)
-		column->texture = walls->east;
-	else if (ray->hit_type == ha_vertical && ray->sign_x < 0)
-		column->texture = walls->west;
+	if (is_door(ray->hit_cell))
+		return (walls->doorface);
+	if (is_door(ray->faced_cell))
+		return (walls->doorside);
+	if (ray->hit_type == ha_horizontal && ray->sign_y >= 0)
+		return (walls->south);
+	if (ray->hit_type == ha_horizontal && ray->sign_y < 0)
+		return (walls->north);
+	if (ray->hit_type == ha_vertical && ray->sign_x >= 0)
+		return (walls->east);
+	if (ray->hit_type == ha_vertical && ray->sign_x < 0)
+		return (walls->west);
+	return (NULL);
 }
 
 static void
@@ -69,13 +71,11 @@ void
 	uint32_t		screen_y;
 	uint32_t		*texumn_start;
 
-	select_texture(&column, walls, ray);
+	column.texture = select_texture(walls, ray);
 	vertical_boundaries(&column, ray, walls, camera);
-	if (ray->partial >= 1 || ray->partial < 0)
-		return ;
-	if (((ray->hit_type == ha_vertical && ray->sign_x < 0)
-			|| (ray->hit_type == ha_horizontal && ray->sign_y > 0))
-		&& !ray->hits_door)
+	if (!is_door(ray->hit_cell)
+		&& ((ray->hit_type == ha_vertical && ray->sign_x < 0)
+			|| (ray->hit_type == ha_horizontal && ray->sign_y > 0)))
 		ray->partial = 1 - ray->partial;
 	texumn_start = &((uint32_t *)column.texture->pixels)[column.texture->height
 		* (int)(ray->partial * column.texture->width)];

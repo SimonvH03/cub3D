@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   cast_ray.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: simon <simon@student.codam.nl>               +#+                     */
+/*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/15 22:08:51 by svan-hoo      ########   odam.nl         */
+/*   Updated: 2025/04/19 22:58:01 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static int16_t
 		t_ray *ray,
 		float cell_shift)
 {
-	int			steps;
-	int			i;
+	int		steps;
+	int		i;
 
 	steps = ft_abs((int)cell_shift) + (cell_shift < 0);
 	i = 1;
@@ -45,13 +45,13 @@ static int16_t
 	}
 }
 
-static void
+static bool
 	door_half_step(
 		t_ray *ray,
-		t_grid *grid,
-		int16_t	cell)
+		t_grid *grid)
 {
-	float		cell_shift;
+	float	cell_shift;
+	float	door_position;
 
 	if (ray->hit_type == ha_horizontal)
 		cell_shift = ray->partial + (ray->step_y * 0.5) * ray->dir_x;
@@ -59,21 +59,20 @@ static void
 		cell_shift = ray->partial + (ray->step_x * 0.5) * ray->dir_y;
 	if (cell_shift < 0 || cell_shift > 1)
 	{
-		cell = see_through(grid, ray, cell_shift);
-		if (cell == RETURN_FAILURE)
-			return ;
+		ray->hit_cell = see_through(grid, ray, cell_shift);
+		if (ray->hit_cell == RETURN_FAILURE)
+			return (false);
 	}
 	ray->partial = (cell_shift - (int)cell_shift) + (cell_shift < 0);
-	ray->door_position = grid->door_list[get_id(cell)].position;
-	if (get_type(cell) == 'd')
+	if (get_type(ray->hit_cell) == 'd')
 		ray->partial = 1 - ray->partial;
-	ray->hits_door = (ray->partial < ray->door_position);
-	if (ray->hits_door)
-	{
-		ray->partial += 1 - ray->door_position;
-		ray->total_y += ray->step_y * 0.5;
-		ray->total_x += ray->step_x * 0.5;
-	}
+	door_position = grid->door_list[get_id(ray->hit_cell)].position;
+	if (ray->partial > door_position)
+		return (false);
+	ray->partial += 1 - door_position;
+	ray->total_y += ray->step_y * 0.5;
+	ray->total_x += ray->step_x * 0.5;
+	return (true);
 }
 
 static void
@@ -96,35 +95,22 @@ static bool
 		int pos_y,
 		int pos_x)
 {
-	const int16_t	cell = grid->tilemap[pos_y][pos_x];
-	int16_t			facing_cell;
-
-	if (is_solid(cell) == false && !is_door(cell))
-		return (false);
 	calculate_partial(ray);
-	if (ft_isdigit(get_type(cell)))
-		return (true);
-	if (is_door(cell))
+	ray->hit_cell = grid->tilemap[pos_y][pos_x];
+	ray->faced_cell = grid->tilemap
+	[pos_y - ray->sign_y * (ray->hit_type == ha_horizontal)]
+	[pos_x - ray->sign_x * (ray->hit_type == ha_vertical)];
+	if (is_door(ray->hit_cell))
 	{
-		if (ray->hit_type == ha_horizontal)
-			facing_cell = grid->tilemap[pos_y - ray->sign_y][pos_x];
-		else
-			facing_cell = grid->tilemap[pos_y][pos_x - ray->sign_x];
-		if (is_door(facing_cell))
+		if (is_door(ray->faced_cell))
 			return (false);
+		return (door_half_step(ray, grid));
 	}
-	if (is_door(cell))
-	{
-		calculate_partial(ray);
-		door_half_step(ray, grid, cell);
-		return (ray->hits_door);
-	}
-	return (true);
+	return (is_solid(ray->hit_cell));
 }
 
 // assuming the camera is not inside a wall;
-//	shift map position to the nearest (total_y <> total_x) grid line;
-//	and check wall type (' ', 0-9)
+//	shift map position to the nearest grid line and check wall type
 void
 	cast_ray(
 		t_ray *ray,

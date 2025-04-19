@@ -59,6 +59,7 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/utils/modlx.c \
 			$(SRCDIR)/utils/normalize_vector2.c \
 			$(SRCDIR)/utils/tilemap_cell.c \
+			$(SRCDIR)/utils/tilemap_type.c \
 			$(SRCDIR)/utils/transpore_texture.c
 
 
@@ -85,12 +86,12 @@ $(NAME): $(LIBMLX) $(LIBFT) $(OBJDIR) $(OBJ)
 
 clean:
 	rm -f $(OBJ)
+	rm -rf $(OBJDIR)
 	make -C $(LFTDIR) clean
 
 fclean: clean
 	rm -f $(NAME)
-	rm -rf $(OBJDIR)
-	rm -f $(LIBFT)
+	make -C $(LFTDIR) fclean
 	rm -rf $(LMLXDIR)/build
 
 re: clean all

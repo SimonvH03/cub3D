@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/19 00:14:54 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/19 23:10:29 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 static void
 	draw_background(
-		t_scene *scene)
+		t_scene *scene,
+		t_camera *camera)
 {
 	mlx_image_t	*image;
-	t_camera	*camera;
 	uint32_t	x;
 	uint32_t	y;
 
 	image = scene->walls.image;
-	camera = &scene->player.camera;
 	y = 0;
 	while (y < image->height - camera->height_offset)
 	{
@@ -70,7 +69,6 @@ static void
 	ray->start_x = camera->pos_x;
 	ray->start_y = camera->pos_y;
 	ray->distance = 0;
-	ray->hits_door = false;
 }
 
 void
@@ -80,7 +78,7 @@ void
 	t_ray		ray;
 	uint32_t	x;
 
-	draw_background(scene);
+	draw_background(scene, &scene->player.camera);
 	x = 0;
 	while (x < scene->walls.image->width)
 	{

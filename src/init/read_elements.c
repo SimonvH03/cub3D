@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   read_elements.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/17 02:04:40 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/19 20:22:36 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,10 @@ int
 	int		element_count;
 	char	*line;
 
-	if (load_tile_texture(window, &scene->walls.door, DOOR_TEXTURE_PATH)
+	if (load_tile_texture(window, &scene->walls.doorface, DOORFACE_TEXTURE_PATH)
+		!= RETURN_SUCCESS)
+		return (RETURN_FAILURE);
+	if (load_tile_texture(window, &scene->walls.doorside, DOORSIDE_TEXTURE_PATH)
 		!= RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	element_count = 0;
@@ -138,10 +141,5 @@ int
 			return (RETURN_FAILURE);
 		element_count++;
 	}
-	if (scene->walls.north == NULL || scene->walls.east == NULL
-		|| scene->walls.south == NULL || scene->walls.west == NULL)
-		return (set_error(CUB_NOTEX));
-	if (scene->floor_clr == (uint32_t)0 || scene->ceiling_clr == (uint32_t)0)
-		return (set_error(CUB_NOCLR));
 	return (RETURN_SUCCESS);
 }
