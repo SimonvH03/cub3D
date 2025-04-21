@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/21 23:10:52 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 23:20:34 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,6 @@
 # define MLX_FONT_WIDTH		10
 
 # define MINIMAP_SCALE		10
-
-enum	e_window_view
-{
-	wv_menu,
-	wv_game
-};
 
 typedef struct s_menu
 {

@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/21 22:04:37 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 23:26:44 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@ enum	e_hit_axis
 	ha_horizontal,
 	ha_vertical
 };
-
-typedef struct s_colour_construct
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	a;
-}	t_colour_construct;
 
 typedef struct s_column
 {

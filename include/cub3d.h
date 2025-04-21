@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cub3d.h                                            :+:    :+:            */
+/*   SAVED.cub3d.h                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/21 23:11:51 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 23:20:41 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@
 # else
 #  define VALID_MAP_CHAR	"01NESW "
 # endif
+
+enum	e_window_view
+{
+	wv_menu,
+	wv_game
+};
 
 typedef struct s_window
 {
