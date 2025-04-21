@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/19 23:11:05 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 20:55:42 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,12 @@ typedef struct s_window
 	enum e_window_view		view;
 }	t_window;
 
-// compile with bonus
-# define VALID_MAP_CHAR		"01NESW dD"
-
-// # define VALID_MAP_CHAR		"01NESW "
+# define VALID_MAP_CHAR	"01NESW "
+// # define VALID_MAP_CHAR	"01NESW dD"
 
 extern int				g_cub_errno;
 
-typedef enum cub_errno
+typedef enum e_cub_errno
 {
 	CUB_SUCCESS = 0,	// No Errors.
 	CUB_MLXFAIL,		// MLX42 function has failed.
@@ -97,8 +95,8 @@ typedef enum cub_errno
 	CUB_NOPLAY,			// Cub map has no player position.
 	CUB_MULTPLAY,		// Cub map has multiple player positions.
 	CUB_INVDOOR,		// Cub map has invalid door placement.
-	CUB_ERRMAX			// Error count
-}	cub_errno_t;
+	CUB_ERRMAX,			// Error count
+}	t_cub_errno;
 
 typedef union u_inv_sqrt
 {
@@ -106,50 +104,49 @@ typedef union u_inv_sqrt
 	int32_t	as_int;
 }	t_q3;
 
-typedef	void
-	(imgiter_func)(
-		mlx_image_t *image,
-		uint32_t x,
-		uint32_t y,
-		void *param);
-typedef	int
-	(griditer_func)(
-		t_grid *grid,
-		unsigned int y,
-		unsigned int x,
-		void *param);
+typedef	void	(imgiter_func)(
+					mlx_image_t *image,
+					uint32_t x,
+					uint32_t y,
+					void *param);
 
-void
+typedef	int		(griditer_func)(
+					t_grid *grid,
+					unsigned int y,
+					unsigned int x,
+					void *param);
+
+void		
 	image_iter(
 		mlx_image_t *image,
 		imgiter_func function,
 		void *param);
-int
+int			
 	gridmap_iter(
 		t_grid *grid,
 		griditer_func function,
 		void *param);
 
-int
+int			
 	set_error(
 		const int err_val);
 
-void
+void		
 	print_error(void);
 
-int
+int			
 	add_to_texture_list(
 		t_window *window,
 		mlx_texture_t *texture_ptr);
-void
+void		
 	empty_texture_list(
 		t_window *window);
 
-int
+int			
 	new_scaled_image(
 		mlx_t *mlx,
 		t_scalable *dest);
-void
+void		
 	sample_scalable(
 		mlx_image_t *dest,
 		uint32_t img_x,
@@ -157,152 +154,152 @@ void
 		void *param);
 
 //// PHASE 0: initialising mlx window, game, hud and menu
-int
+int			
 	init_window(
 		t_window *window);
 
-int
+int			
 	init_game(
 		t_window *window,
 		t_scene *scene,
 		const char *input_file);
-int
+int			
 	read_elements(
 		t_window *window,
 		t_scene *scene,
 		char ***content);
-int
+int			
 	read_tilemap(
 		t_grid *grid,
 		char *const *content);
-int
+int			
 	perimeter_check(
 		t_grid *grid,
 		unsigned int y,
 		unsigned int x,
 		void *param);
-int
+int			
 	init_doors(
 		t_grid *grid);
-int
+int			
 	init_player(
 		t_player *player,
 		t_grid *grid);
-int
+int			
 	init_weapon(
 		t_window *window,
 		t_weapon *weapon);
 
-int
+int			
 	init_hud(
 		t_window *window,
 		t_hud *hud,
 		t_scene *scene);
-int
+int			
 	new_images_minimap(
 		mlx_t *mlx,
 		t_minimap *minimap);
-int
+int			
 	new_images_bigmap(
 		mlx_t *mlx,
 		t_bigmap *map,
 		t_scene *scene);
 
-int
+int			
 	init_menu(
 		t_window *window,
 		t_menu *menu);
 
-int
+int			
 	set_view_depths(
 		t_window *window);
 
 // MLX_HOOKS
-void
+void		
 	frametime_dependant_variables(
 		void *param);
-void
+void		
 	view_manager(
 		void *param);
-void
+void		
 	window_keyhook(
 		mlx_key_data_t key_data,
 		void *param);
-void
+
+// user inputs
+void		
 	mouse_buttons(
 		mouse_key_t button,
 		action_t action,
 		modifier_key_t mods,
 		void *param);
-
-// user inputs
-void
+void		
+	mouse_pan(
+		mlx_t *mlx,
+		t_camera *camera);
+void		
 	wasd_move(
 		mlx_t *mlx,
 		t_grid *grid,
 		t_camera *camera);
-void
+void		
 	arrowkey_look(
 		mlx_t *mlx,
 		t_camera *camera);
-void
-	mouse_pan(
-		mlx_t *mlx,
-		t_camera *camera);
-void
+void		
 	fire_weapon(
 		t_weapon *weapon);
-void
+void		
 	reload_weapon(
 		t_weapon *weapon);
-void
+void		
 	update_weapon_animation(
 		mlx_t *mlx,
 		t_weapon *weapon);
-void
+void		
 	player_interaction(
 		t_grid *grid,
 		t_camera *camera);
-void
+void		
 	operate_door(
 		t_door *door,
 		t_camera *camera);
-void
+void		
 	update_doors(
 		t_grid *grid,
 		float delta_time);
-void
+void		
 	hover_button(
 		t_menu *menu,
 		t_window *window);
-void
+void		
 	click_button(
 		t_menu *menu,
 		t_window *window);
-void
+void		
 	select_button(
 		t_menu *menu,
 		keys_t key);
-void
+void		
 	confirm_selection(
 		t_menu *menu,
 		t_window *window);
-void
+void		
 	toggle_maps(
 		t_hud *hud);
-void
+void		
 	toggle_view(
 		t_window *window);
 
 // render
-void
+void		
 	raycast(
 		t_scene *scene);
-void
+void		
 	cast_ray(
 		t_ray *ray,
 		t_grid *grid);
-void
+void		
 	draw_texture_column(
 		t_ray *ray,
 		t_walls *walls,
@@ -310,120 +307,119 @@ void
 		uint32_t x);
 
 // hud
-void
+void		
 	update_minimap(
 		t_minimap *minimap);
-void
+void		
 	update_bigmap(
 		t_bigmap *map);
 
 // modlx
-mlx_texture_t	*
-	modlx_load_xpm42(
+mlx_texture_t
+	*modlx_load_xpm42(
 		const char *path);
-int
+int			
 	modlx_put_string(
 		mlx_image_t *strimage,
 		const char *str);
-mlx_image_t	*
-	modlx_imgcpy(
+mlx_image_t	
+	*modlx_imgcpy(
 		mlx_image_t *dest,
 		mlx_image_t *src);
-int
+int			
 	transpose_texture(
 		mlx_texture_t *texture);
 
 // setters getters of (mlx_image_t *)->enabled bit
-void
+void		
 	set_minimap_ability(
 		t_minimap *minimap,
 		bool ability);
-bool
+bool		
 	get_minimap_ability(
 		t_minimap *minimap);
-void
+void		
 	set_bigmap_ability(
 		t_bigmap *bigmap,
 		bool ability);
-bool
+bool		
 	get_bigmap_ability(
 		t_bigmap *bigmap);
-void
+void		
 	set_menu_ability(
 		t_menu *menu,
 		bool ability);
-void
+void		
 	set_scene_ability(
 		t_scene *scene,
 		bool ability);
 
 // arithmetic and maths
-float
+float		
 	nearest_power_of_2(
 		float value);
-float
+float		
 	ft_max_float(
 		float a,
 		float b);
-float
+float		
 	ft_min_float(
 		float a,
 		float b);
-float
+float		
 	ft_abs_float(
 		float value);
-short
+short		
 	ft_sign_float(
 		float value);
 
-int
+int			
 	ft_clamp(
 		int a,
 		int lower_bound,
 		int upper_bound);
-int
+int			
 	ft_max_int(
 		int a,
 		int b);
-int
+int			
 	ft_min_int(
 		int a,
 		int b);
-int
+int			
 	ft_abs_int(
 		int value);
-short
+short		
 	ft_sign_int(
 		int value);
 
-void
+void		
 	normalize_vector2(
 		float *x_component,
 		float *y_component);
 
 // tilemap_cell
-int16_t
+int16_t		
 	set_cell(
 		const bool solid,
 		const int id,
 		const char type);
-bool
+bool		
 	is_solid(
 		const int16_t cell);
-bool
+bool		
 	get_axis(
 		const int16_t cell);
-int
+int			
 	get_id(
 		const int16_t cell);
-char
+char		
 	get_type(
 		const int16_t cell);
-bool
+bool		
 	is_door(
 		const int16_t cell);
-bool
+bool		
 	is_wall(
 		const int16_t cell);
-
 #endif

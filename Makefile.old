@@ -1,36 +1,23 @@
 NAME	=	cub3D
 
 CC		=	cc
-CFLAGS	=	-Wall -Werror -Wextra -MMD -MP
+CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	+=	-g
+# CFLAGS	+=	-O3
+MLXFLAGS=	-ldl -lglfw -pthread -lm
 
-BUILD	?=	mandatory
-MODE	?=	fast
-
-ifeq ($(BUILD),bonus)
-	CFLAGS		+=	-DBONUS
-else
-	CFLAGS		+=	-DNBONUS
-endif
-
-ifeq ($(MODE),debug)
-	CFLAGS += -g -DDEBUG
-else
-	CFLAGS += -O3
-endif
-
-BUILDDIR=	build/$(BUILD)/$(MODE)
-
--include $(OBJ:.o=.d)
+LMLXDIR	=	MLX42
+LIBMLX	=	$(LMLXDIR)/build/libmlx42.a
 
 LFTDIR	=	libft
 LIBFT	=	$(LFTDIR)/libft.a
 
-LMLXDIR	=	MLX42
-LIBMLX	=	$(LMLXDIR)/build/libmlx42.a
-MLXFLAGS=	-ldl -lglfw -pthread -lm
+INCLDIR	=	. \
+			./include \
+			MLX42/include \
+			libft
 
-INCLDIR	=	. ./include MLX42/include libft
-INCLUDE	=	$(addprefix -I , $(INCLDIR))
+INCLUDE =	$(addprefix -I , $(INCLDIR))
 
 SRCDIR	=	src
 SRC		=	$(SRCDIR)/main.c \
@@ -75,36 +62,30 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/utils/tilemap_type.c \
 			$(SRCDIR)/utils/transpose_texture.c
 
-OBJDIR	=	$(BUILDDIR)
-OBJ		=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)/%.o)
+OBJDIR	=	./obj
+OBJ		=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
-all: mandatory
-
-mandatory:
-	$(MAKE) BUILD=mandatory $(NAME)
-
-bonus:
-	$(MAKE) BUILD=bonus $(NAME)
-
-$(LIBFT):
-	$(MAKE) -C $(LFTDIR)
+all:  $(NAME)
 
 $(LIBMLX):
 	cmake $(LMLXDIR) -B $(LMLXDIR)/build && make -C $(LMLXDIR)/build -j4
 
-$(OBJDIR)/%.o: $(SRCDIR)%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+$(LIBFT):
+	make -C $(LFTDIR) all -s
 
-$(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LIBMLX) $(MLXFLAGS) -o $@
-ifeq ($(MODE),fast)
-	strip $(NAME)
-endif
+	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE)
+
+$(NAME): $(LIBMLX) $(LIBFT) $(OBJDIR) $(OBJ)
+	$(CC) $(OBJ) $(LIBMLX) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 
 clean:
-	rm -rf build
+	rm -f $(OBJ)
+	rm -rf $(OBJDIR)
 	make -C $(LFTDIR) clean
 
 fclean: clean
