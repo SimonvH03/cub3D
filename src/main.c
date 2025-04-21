@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/18 23:36:27 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 23:12:08 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	cub3d_terminate(t_window *window)
 	mlx_terminate(window->mlx);
 	ft_arrclear((void **)window->scene.grid.tilemap);
 	empty_texture_list(window);
-	free(window->scene.player.weapon.fire);
-	free(window->scene.player.weapon.reload);
+	free(window->player.weapon.fire);
+	free(window->player.weapon.reload);
 	free(window->scene.grid.door_list);
 	free((void *)window->hud.minimap.circle_overlay);
 }
@@ -46,9 +46,9 @@ int	main(int argc, char **argv)
 		print_error();
 		return (RETURN_FAILURE);
 	}
-	if (init_menu(&window, &window.menu) == RETURN_SUCCESS
-		&& init_game(&window, &window.scene, argv[1]) == RETURN_SUCCESS
-		&& init_hud(&window, &window.hud, &window.scene) == RETURN_SUCCESS
+	if (init_game(&window, &window.scene, argv[1]) == RETURN_SUCCESS
+		&& init_weapon(&window, &window.player.weapon) == RETURN_SUCCESS
+		&& init_menu(&window, &window.menu) == RETURN_SUCCESS
 		&& set_view_depths(&window) == RETURN_SUCCESS)
 	{
 		link_loop_hooks(&window);

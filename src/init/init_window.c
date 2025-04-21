@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/19 00:25:02 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 22:41:15 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int
 	mlx_set_setting(MLX_MAXIMIZED, FULLSCREEN);
 	mlx_set_setting(MLX_DECORATED, !FULLSCREEN);
 	mlx_set_setting(MLX_HEADLESS, false);
-	window->mlx = mlx_init(WIDTH, HEIGHT, WINDOW_TITLE, false);
+	window->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false);
 	if (window->mlx == NULL)
 		return (set_error(CUB_MEMFAIL));
 	if (FULLSCREEN == true)
@@ -48,7 +48,7 @@ int
 
 	depth = 0;
 	window->scene.walls.image->instances[0].z = depth++;
-	window->scene.player.weapon.display_img->instances[0].z = depth++;
+	window->player.weapon.display_img->instances[0].z = depth++;
 	window->hud.bigmap.walls->instances[0].z = depth++;
 	window->hud.bigmap.player->instances[0].z = depth++;
 	window->hud.minimap.walls->instances[0].z = depth++;

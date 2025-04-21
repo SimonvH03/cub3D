@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/19 00:39:20 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 21:53:18 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ static int
 	init_bigmap_player_icon(
 		mlx_t *mlx,
 		t_scalable *player_icon,
-		t_bigmap *bigmap,
-		t_camera *camera)
+		t_bigmap *bigmap)
 {
 	player_icon->scale = bigmap->block_size / player_icon->texture->height;
 	player_icon->scale = nearest_power_of_2(player_icon->scale);
@@ -59,9 +58,7 @@ static int
 			player_icon->image->width, player_icon->image->height);
 	if (bigmap->player == NULL)
 		return (set_error(CUB_MLXFAIL));
-	if (mlx_image_to_window(mlx, bigmap->player,
-			bigmap->x_offset + camera->pos_x * bigmap->block_size,
-			bigmap->y_offset + camera->pos_y * bigmap->block_size) < 0)
+	if (mlx_image_to_window(mlx, bigmap->player, 0, 0) < 0)
 		return (set_error(CUB_MLXFAIL));
 	return (RETURN_SUCCESS);
 }
@@ -69,16 +66,15 @@ static int
 int
 	new_images_bigmap(
 		mlx_t *mlx,
-		t_bigmap *bigmap,
-		t_scene *scene)
+		t_bigmap *bigmap)
 {
 	bigmap->walls = mlx_new_image(mlx, mlx->width, mlx->height);
 	if (bigmap->walls == NULL)
 		return (set_error(CUB_MLXFAIL));
 	if (mlx_image_to_window(mlx, bigmap->walls, 0, 0) < 0)
 		return (set_error(CUB_MLXFAIL));
-	if (init_bigmap_player_icon(mlx, &bigmap->player_icon_src, bigmap,
-			&scene->player.camera) != RETURN_SUCCESS)
+	if (init_bigmap_player_icon(mlx, &bigmap->player_icon_src, bigmap)
+		!= RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	bigmap->x_offset -= bigmap->player->width / 2;
 	bigmap->y_offset -= bigmap->player->height / 2;

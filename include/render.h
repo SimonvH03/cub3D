@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/19 22:38:48 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 22:04:37 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 # define RENDER_H
 # include "MLX42/MLX42_Int.h"
 
+// ratio of wall height / width
+# define CAMERA_PLANE		1
+
 enum	e_hit_axis
 {
 	ha_horizontal,
 	ha_vertical
 };
+
+typedef struct s_colour_construct
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	a;
+}	t_colour_construct;
 
 typedef struct s_column
 {
@@ -52,13 +63,5 @@ typedef struct s_ray
 	short			sign_y;
 	bool			hit_type;
 }	t_ray;
-
-typedef struct s_colour_construct
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	a;
-}	t_colour_construct;
 
 #endif

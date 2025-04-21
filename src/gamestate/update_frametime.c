@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   update_frametime.c                                 :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/05 17:50:17 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 21:46:30 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void
 
 	window = (t_window *)param;
 	delta_time = window->mlx->delta_time;
-	camera = &window->scene.player.camera;
+	camera = &window->player.camera;
 	update_fps_image(window->mlx->delta_time, &window->hud.fps);
 	camera->movement_speed = MOVEMENT_SPEED * delta_time;
 	if (camera->movement_speed > 0.5f)

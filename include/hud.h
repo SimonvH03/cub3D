@@ -6,22 +6,31 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/19 00:48:15 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 23:10:52 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HUD_H
 # define HUD_H
-# include "MLX42/MLX42_Int.h"
+# include "MLX42/MLX42.h"
 # include "gamestate.h"
+# include "player.h"
 # include "paths.h"
 
-# define HUD_FULL_WIDTH		100
-# define HUD_FULL_HEIGHT	30
-# define HEALTHBAR_WIDTH	30
-# define HEALTHBAR_HEIGHT	5
-# define AMMO_WIDTH			20
-# define CROSSHAIR_SIZE		15
+// UI colours 0xAaBbGgRr
+# define C_TRANSPARENT		0x00000000
+# define C_TRANSLUCENT		0x42000000
+# define C_CEILING			0xBB000000
+# define C_FLOOR			0x80424242
+# define C_WALL				0xFF2A66C0
+# define C_DOOR				0xFF153360
+# define C_OPENDOOR			0xFF00C0C0
+# define C_ERROR			0xFF80FF00
+
+// uhhhh it wasn't public info for some reason
+# define MLX_FONT_WIDTH		10
+
+# define MINIMAP_SCALE		10
 
 enum	e_window_view
 {

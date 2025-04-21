@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/06 23:30:28 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/18 23:35:54 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 21:56:05 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void
 	else if (window->view == wv_game)
 	{
 		if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
-			fire_weapon(&window->scene.player.weapon);
+			fire_weapon(&window->player.weapon);
 	}
 }
 

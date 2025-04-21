@@ -3,29 +3,17 @@
 /*                                                        ::::::::            */
 /*   read_map.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/16 23:53:41 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 22:38:15 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int16_t
-	set_cell(
-		const bool solid,
-		const int id,
-		const char type)
-{
-	return ((solid << SOLID_SHIFT)
-		| ((bool)0 << AXIS_SHIFT)
-		| ((id & 0x7F) << ID_SHIFT)
-		| (type & TYPE_MASK));
-}
-
 static int
-	set_tilemap_cell(
+	tilemap_interpret_cell(
 		t_grid *grid,
 		int16_t *dest,
 		int token)
@@ -36,20 +24,20 @@ static int
 	}
 	else if (ft_isdigit(token))
 	{
-		*dest = set_cell((token > '0'), (token - '0'), token);
+		*dest = set_tilemap_cell((token > '0'), (token - '0'), token);
 	}
 	else
 	{
 		if (token == 'd' || token == 'D')
-			*dest = set_cell(true, grid->door_count++, token);
+			*dest = set_tilemap_cell(true, grid->door_count++, token);
 		else
-			*dest = set_cell(true, 0, token);
+			*dest = set_tilemap_cell(true, 0, token);
 	}
 	return (RETURN_SUCCESS);
 }
 
 static int
-	tilemap_fill_row(
+	tilemap_interpret_row(
 		t_grid *grid,
 		const int y,
 		const char *line)
@@ -59,14 +47,14 @@ static int
 	x = 0;
 	while (line[x])
 	{
-		if (set_tilemap_cell(grid, &grid->tilemap[y][x], line[x])
+		if (tilemap_interpret_cell(grid, &grid->tilemap[y][x], line[x])
 			!= RETURN_SUCCESS)
 			return (RETURN_FAILURE);
 		++x;
 	}
 	while (x < grid->x_max)
 	{
-		if (set_tilemap_cell(grid, &grid->tilemap[y][x], ' ')
+		if (tilemap_interpret_cell(grid, &grid->tilemap[y][x], ' ')
 			!= RETURN_SUCCESS)
 			return (RETURN_FAILURE);
 		++x;
@@ -119,7 +107,7 @@ int
 		grid->tilemap[y] = (int16_t *)ft_calloc(grid->x_max, sizeof(int16_t));
 		if (grid->tilemap[y] == NULL)
 			return (set_error(CUB_MEMFAIL));
-		if (tilemap_fill_row(grid, y, content[y]) != RETURN_SUCCESS)
+		if (tilemap_interpret_row(grid, y, content[y]) != RETURN_SUCCESS)
 			return (RETURN_FAILURE);
 		++y;
 	}

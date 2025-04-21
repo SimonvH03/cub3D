@@ -3,16 +3,17 @@
 /*                                                        ::::::::            */
 /*   modlx.c                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/28 22:07:27 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/18 20:18:56 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 22:30:27 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "MLX42/src/font/font.h"
 
+// duplicates an mlx_texture_t
 static mlx_texture_t	*
 	modlx_texdup(
 		mlx_texture_t *src)
@@ -40,6 +41,7 @@ static mlx_texture_t	*
 	return (dest);
 }
 
+// loads xpm and properly deletes it, not strictly necessary in current version
 mlx_texture_t	*
 	modlx_load_xpm42(
 		const char *path)
@@ -63,7 +65,7 @@ mlx_texture_t	*
 	return (texture);
 }
 
-// copied from mlx library, modified for norm
+// copied from mlx library, modified for norm, for some reason font isn't public
 static void
 	mlx_draw_char(
 		mlx_image_t *image,
@@ -86,7 +88,7 @@ static void
 	}
 }
 
-// writes new string in image created by mlx_put_string()
+// writes new string in existent mlx_image_t created by mlx_put_string()
 // fails if new string is longer than original
 int
 	modlx_put_string(
@@ -110,6 +112,8 @@ int
 	return (RETURN_SUCCESS);
 }
 
+// copies pixelbuffer from one mlx_image_t to another
+//	to avoid improper usage of MLX42 owned memory
 mlx_image_t	*
 	modlx_imgcpy(
 		mlx_image_t *dest,

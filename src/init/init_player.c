@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/19 01:08:40 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 22:37:24 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static int
 	if (ft_strchr("NESW", get_type(cell)) && get_type(cell) != 0)
 	{
 		init_camera(camera, y, x, get_type(cell));
-		grid->tilemap[y][x] = set_cell(false, 0, '0');
+		grid->tilemap[y][x] = set_tilemap_cell(false, 0, '0');
 	}
 	return (RETURN_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   arithmetic_float.c                                 :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:51:01 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/27 21:44:46 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 22:35:21 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@ float	nearest_power_of_2(float value)
 	if (value <= 0)
 		return (0);
 	return (powf(2.0f, roundf(log2f(value))));
+}
+
+// return absolute value
+float	ft_abs_float(float value)
+{
+	if (value < 0)
+		return (-value);
+	return (value);
 }
 
 // return highest value
@@ -35,14 +43,6 @@ float	ft_min_float(float a, float b)
 		return (a);
 	else
 		return (b);
-}
-
-// return absolute value
-float	ft_abs_float(float value)
-{
-	if (value < 0)
-		return (-value);
-	return (value);
 }
 
 // return polarity of value

@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/19 20:22:36 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 22:46:14 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,29 @@ static int
 		uint32_t *dest,
 		const char *line)
 {
-	t_colour_construct	new;
-	int					r_val;
-	int					g_val;
-	int					b_val;
-	int					a_val;
+	int	red;
+	int	green;
+	int	blue;
+	int	alpha;
 
 	while (*line == ' ')
 		++line;
-	a_val = 0xFF;
-	r_val = ft_atoi(line);
+	alpha = 0xFF;
+	red = ft_atoi(line);
 	line = ft_strchr(line, ',') + 1;
-	g_val = ft_atoi(line);
+	green = ft_atoi(line);
 	line = ft_strchr(line, ',') + 1;
-	b_val = ft_atoi(line);
-	if (a_val < 0 || a_val > 255
-		|| r_val < 0 || r_val > 255
-		|| g_val < 0 || g_val > 255
-		|| b_val < 0 || b_val > 255)
+	blue = ft_atoi(line);
+	if (alpha < 0 || alpha > 255
+		|| red < 0 || red > 255
+		|| green < 0 || green > 255
+		|| blue < 0 || blue > 255)
 		return (set_error(CUB_INVCLR));
-	new.a = a_val;
-	new.r = r_val;
-	new.g = g_val;
-	new.b = b_val;
-	*dest = (uint32_t)((new.a << 24) | (new.b << 16) | (new.g << 8) | new.r);
+	*dest = (uint32_t)(
+			((char)alpha << 24)
+			| ((char)blue << 16)
+			| ((char)green << 8)
+			| (char)red);
 	return (RETURN_SUCCESS);
 }
 

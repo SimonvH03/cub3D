@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/19 20:22:13 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 22:13:54 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,22 +80,22 @@ int
 	mlx_t	*mlx;
 
 	mlx = window->mlx;
-	scene->player.camera.aspect_ratio = mlx->width / (float)mlx->height;
-	scene->player.camera.height_offset = mlx->height / 2;
+	window->player.camera.aspect_ratio = mlx->width / (float)mlx->height;
+	window->player.camera.height_offset = mlx->height / 2;
 	if (parse_input_file(window, scene, input_file) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	if (gridmap_iter(&scene->grid, perimeter_check, NULL) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
-	if (init_player(&scene->player, &scene->grid) != RETURN_SUCCESS)
-		return (RETURN_FAILURE);
 	if (init_doors(&scene->grid) != RETURN_SUCCESS)
+		return (RETURN_FAILURE);
+	if (init_player(&window->player, &scene->grid) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	scene->walls.image = mlx_new_image(mlx, mlx->width, mlx->height);
 	if (scene->walls.image == NULL)
 		return (set_error(CUB_MLXFAIL));
 	if (mlx_image_to_window(mlx, scene->walls.image, 0, 0) < 0)
 		return (set_error(CUB_MLXFAIL));
-	if (init_weapon(window, &scene->player.weapon) != RETURN_SUCCESS)
+	if (init_hud(window, &window->hud) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	return (RETURN_SUCCESS);
 }

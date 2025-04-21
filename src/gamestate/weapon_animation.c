@@ -6,13 +6,13 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/19 00:52:25 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 22:23:58 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	update_fire_animation(t_weapon *weapon)
+static void	update_fire_weapon(t_weapon *weapon)
 {
 	if (weapon->fire[weapon->frame_id].image != NULL)
 	{
@@ -28,7 +28,7 @@ static void	update_fire_animation(t_weapon *weapon)
 	}
 }
 
-static void	update_reload_animation(t_weapon *weapon)
+static void	update_reload_weapon(t_weapon *weapon)
 {
 	if (weapon->reload[weapon->frame_id].image != NULL)
 	{
@@ -47,7 +47,7 @@ static void	update_reload_animation(t_weapon *weapon)
 }
 
 void
-	update_weapon_animation(
+	update_weapon(
 		mlx_t *mlx,
 		t_weapon *weapon)
 {
@@ -59,9 +59,9 @@ void
 	weapon->frame_time = 0;
 	weapon->frame_id++;
 	if (weapon->state == ws_firing)
-		update_fire_animation(weapon);
+		update_fire_weapon(weapon);
 	if (weapon->state == ws_reloading)
-		update_reload_animation(weapon);
+		update_reload_weapon(weapon);
 }
 
 void	fire_weapon(t_weapon *weapon)

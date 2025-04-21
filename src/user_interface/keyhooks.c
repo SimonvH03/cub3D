@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/19 00:19:50 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 21:55:58 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ static void
 	}
 	if (keydata.key == MLX_KEY_E)
 	{
-		player_interaction(&window->scene.grid, &window->scene.player.camera);
+		player_interaction(&window->scene.grid, &window->player.camera);
 	}
 	if (keydata.key == MLX_KEY_G)
 	{
-		fire_weapon(&window->scene.player.weapon);
+		fire_weapon(&window->player.weapon);
 	}
 	if (keydata.key == MLX_KEY_R)
 	{
-		reload_weapon(&window->scene.player.weapon);
+		reload_weapon(&window->player.weapon);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/19 23:10:29 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 21:55:51 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,20 @@ static void
 
 void
 	raycast(
-		t_scene *scene)
+		t_scene *scene,
+		t_camera *camera)
 {
 	t_ray		ray;
 	uint32_t	x;
 
-	draw_background(scene, &scene->player.camera);
+	draw_background(scene, camera);
 	x = 0;
 	while (x < scene->walls.image->width)
 	{
 		ray.camera_x = x / (float)(scene->walls.image->width - 1) - 0.5;
-		init_ray(&ray, &scene->player.camera);
+		init_ray(&ray, camera);
 		cast_ray(&ray, &scene->grid);
-		draw_texture_column(&ray, &scene->walls, &scene->player.camera, x);
+		draw_texture_column(&ray, &scene->walls, camera, x);
 		++x;
 	}
 }

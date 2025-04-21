@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   arithmetic_int.c                                   :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:51:01 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/20 02:26:00 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 22:35:31 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ int	ft_clamp(int a, int lower_bound, int upper_bound)
 	if (a > upper_bound)
 		return (upper_bound);
 	return (a);
+}
+
+// return absolute value
+int	ft_abs_int(int value)
+{
+	if (value < 0)
+		return (-value);
+	return (value);
 }
 
 // return highest value
@@ -37,14 +45,6 @@ int	ft_min_int(int a, int b)
 		return (a);
 	else
 		return (b);
-}
-
-// return absolute value
-int	ft_abs_int(int value)
-{
-	if (value < 0)
-		return (-value);
-	return (value);
 }
 
 // return polarity of value
