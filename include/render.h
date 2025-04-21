@@ -6,13 +6,13 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/21 23:26:44 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/21 23:33:42 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
-# include "MLX42/MLX42_Int.h"
+# include "MLX42/MLX42.h"
 
 // ratio of wall height / width
 # define CAMERA_PLANE		1
