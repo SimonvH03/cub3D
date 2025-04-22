@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   SAVED.cub3d.h                                      :+:    :+:            */
+/*   cub3d.h                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/21 23:20:41 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/22 01:34:50 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,19 +369,9 @@ int
 		int lower_bound,
 		int upper_bound);
 int			
-	ft_abs_int(
-		int value);
-int			
-	ft_max_int(
-		int a,
-		int b);
-int			
 	ft_min_int(
 		int a,
 		int b);
-short		
-	ft_sign_int(
-		int value);
 
 // tilemap cell composition
 int16_t		

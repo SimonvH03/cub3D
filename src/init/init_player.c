@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/21 22:37:24 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/22 02:03:12 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static int
 		unsigned int x,
 		void *param)
 {
-	int			*starting_positions;
-	uint16_t	cell;
+	int		*starting_positions;
+	int16_t	cell;
 
 	starting_positions = param;
 	cell = grid->tilemap[y][x];
@@ -84,7 +84,7 @@ static int
 		void *param)
 {
 	t_camera	*camera;
-	uint16_t	cell;
+	int16_t		cell;
 
 	camera = param;
 	cell = grid->tilemap[y][x];

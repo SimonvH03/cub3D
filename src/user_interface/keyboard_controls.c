@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/19 01:01:00 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/22 02:03:49 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 static void
 	move_camera(
 		t_camera *camera,
-		int16_t	**tilemap,
+		int16_t **tilemap,
 		short forward_backward,
 		short left_right)
 {
