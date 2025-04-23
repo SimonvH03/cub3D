@@ -1,3 +1,4 @@
 .vscode
 build/
 cub3d
+cub3d_*

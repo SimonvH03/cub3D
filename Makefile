@@ -1,90 +1,123 @@
-NAME	=	cub3D
+MAKEFLAGS	+=	-r -R
 
-CC		=	cc
-CFLAGS	=	-Wall -Werror -Wextra -MMD -MP
+NAME		=	cub3D
 
-BUILD	?=	mandatory
-MODE	?=	fast
+CC			=	cc
+CFLAGS		=	-Wall -Werror -Wextra -MMD -MP
+
+LFTDIR		=	libft
+LIBFT		:=	$(LFTDIR)/libft.a
+
+LMLXDIR		=	MLX42
+LIBMLX		:=	$(LMLXDIR)/build/libmlx42.a
+MLXFLAGS	=	-ldl -lglfw -pthread -lm
+
+INCLDIR		=	. ./include MLX42/include libft
+INCLUDE		:=	$(addprefix -I , $(INCLDIR))
+
+MANSRCDIR	=	mandatory.src
+MANSRC		:=	$(MANSRCDIR)/main.c \
+				$(MANSRCDIR)/draw_texture_column.c \
+				$(MANSRCDIR)/error.c \
+				$(MANSRCDIR)/keyboard_controls.c \
+				$(MANSRCDIR)/raycast.c \
+				$(MANSRCDIR)/init_parse/init_game.c \
+				$(MANSRCDIR)/init_parse/init_player.c \
+				$(MANSRCDIR)/init_parse/init_window.c \
+				$(MANSRCDIR)/init_parse/perimeter_check.c \
+				$(MANSRCDIR)/init_parse/read_elements.c \
+				$(MANSRCDIR)/init_parse/read_map.c \
+				$(MANSRCDIR)/internal_utils/allocation_list.c \
+				$(MANSRCDIR)/internal_utils/arithmetic.c \
+				$(MANSRCDIR)/internal_utils/gridmap_iter.c \
+				$(MANSRCDIR)/internal_utils/modlx.c \
+				$(MANSRCDIR)/internal_utils/normalize_vector2.c \
+				$(MANSRCDIR)/internal_utils/tilemap_cell.c
+
+BONUSSRCDIR	=	src
+BONUSSRC	:=	$(BONUSSRCDIR)/main.c \
+				$(BONUSSRCDIR)/error.c \
+				$(BONUSSRCDIR)/gamestate/door_animation.c \
+				$(BONUSSRCDIR)/gamestate/update_frametime.c \
+				$(BONUSSRCDIR)/gamestate/weapon_animation.c \
+				$(BONUSSRCDIR)/init/init_doors.c \
+				$(BONUSSRCDIR)/init/init_game.c \
+				$(BONUSSRCDIR)/init/init_hud.c \
+				$(BONUSSRCDIR)/init/init_menu.c \
+				$(BONUSSRCDIR)/init/init_player.c \
+				$(BONUSSRCDIR)/init/init_weapon.c \
+				$(BONUSSRCDIR)/init/init_window.c \
+				$(BONUSSRCDIR)/init/new_images_bigmap.c \
+				$(BONUSSRCDIR)/init/new_images_minimap.c \
+				$(BONUSSRCDIR)/init/perimeter_check.c \
+				$(BONUSSRCDIR)/init/read_elements.c \
+				$(BONUSSRCDIR)/init/read_map.c \
+				$(BONUSSRCDIR)/init/scalable.c \
+				$(BONUSSRCDIR)/render/cast_ray.c \
+				$(BONUSSRCDIR)/render/draw_texture_column.c \
+				$(BONUSSRCDIR)/render/raycast.c \
+				$(BONUSSRCDIR)/render/update_bigmap.c \
+				$(BONUSSRCDIR)/render/update_minimap.c \
+				$(BONUSSRCDIR)/user_interface/keyboard_controls.c \
+				$(BONUSSRCDIR)/user_interface/keyhooks.c \
+				$(BONUSSRCDIR)/user_interface/mouse_controls.c \
+				$(BONUSSRCDIR)/user_interface/player_interaction.c \
+				$(BONUSSRCDIR)/user_interface/select_button.c \
+				$(BONUSSRCDIR)/user_interface/view_manager.c \
+				$(BONUSSRCDIR)/utils/allocation_list.c \
+				$(BONUSSRCDIR)/utils/arithmetic_float.c \
+				$(BONUSSRCDIR)/utils/arithmetic_int.c \
+				$(BONUSSRCDIR)/utils/gridmap_iter.c \
+				$(BONUSSRCDIR)/utils/hudmap_setget_ability.c \
+				$(BONUSSRCDIR)/utils/image_iter.c \
+				$(BONUSSRCDIR)/utils/menu_scene_set_ability.c \
+				$(BONUSSRCDIR)/utils/modlx.c \
+				$(BONUSSRCDIR)/utils/normalize_vector2.c \
+				$(BONUSSRCDIR)/utils/tilemap_cell.c \
+				$(BONUSSRCDIR)/utils/tilemap_type.c \
+				$(BONUSSRCDIR)/utils/transpose_texture.c
+
+BUILD		?=	mandatory
+MODE		?=	fast
 
 ifeq ($(BUILD),bonus)
-	CFLAGS		+=	-DBONUS
+	CFLAGS	+=	-DBONUS
+	SRCDIR	:=	$(BONUSSRCDIR)
+	SRC		:=	$(BONUSSRC)
+	NAME	:=	$(NAME)_bonus
 else
-	CFLAGS		+=	-DNBONUS
+	CFLAGS	+=	-DNBONUS
+	SRCDIR	:=	$(MANSRCDIR)
+	SRC		:=	$(MANSRC)
 endif
 
 ifeq ($(MODE),debug)
-	CFLAGS += -g -DDEBUG
+	CFLAGS	+=	-g -DDEBUG
+	NAME	:=	$(NAME)_debug
 else
-	CFLAGS += -O3
+	CFLAGS	+=	-O3
 endif
 
-BUILDDIR=	build/$(BUILD)/$(MODE)
+BUILDDIR	:=	build/$(BUILD)/$(MODE)
 
--include $(OBJ:.o=.d)
+OBJDIR		:=	$(BUILDDIR)
+OBJ			:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
+DEP			:=	$(OBJ:.o=.d)
 
-LFTDIR	=	libft
-LIBFT	=	$(LFTDIR)/libft.a
+.PHONY:	all clean fclean re
 
-LMLXDIR	=	MLX42
-LIBMLX	=	$(LMLXDIR)/build/libmlx42.a
-MLXFLAGS=	-ldl -lglfw -pthread -lm
+all:	$(NAME)
 
-INCLDIR	=	. ./include MLX42/include libft
-INCLUDE	=	$(addprefix -I , $(INCLDIR))
+$(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LIBMLX) $(MLXFLAGS) -o $@
+ifeq ($(MODE),fast)
+	strip $(NAME)
+endif
 
-SRCDIR	=	src
-SRC		=	$(SRCDIR)/main.c \
-			$(SRCDIR)/error.c \
-			$(SRCDIR)/gamestate/door_animation.c \
-			$(SRCDIR)/gamestate/update_frametime.c \
-			$(SRCDIR)/gamestate/weapon_animation.c \
-			$(SRCDIR)/init/init_doors.c \
-			$(SRCDIR)/init/init_game.c \
-			$(SRCDIR)/init/init_hud.c \
-			$(SRCDIR)/init/init_menu.c \
-			$(SRCDIR)/init/init_player.c \
-			$(SRCDIR)/init/init_weapon.c \
-			$(SRCDIR)/init/init_window.c \
-			$(SRCDIR)/init/new_images_bigmap.c \
-			$(SRCDIR)/init/new_images_minimap.c \
-			$(SRCDIR)/init/perimeter_check.c \
-			$(SRCDIR)/init/read_elements.c \
-			$(SRCDIR)/init/read_map.c \
-			$(SRCDIR)/init/scalable.c \
-			$(SRCDIR)/render/cast_ray.c \
-			$(SRCDIR)/render/draw_texture_column.c \
-			$(SRCDIR)/render/raycast.c \
-			$(SRCDIR)/render/update_bigmap.c \
-			$(SRCDIR)/render/update_minimap.c \
-			$(SRCDIR)/user_interface/keyboard_controls.c \
-			$(SRCDIR)/user_interface/keyhooks.c \
-			$(SRCDIR)/user_interface/mouse_controls.c \
-			$(SRCDIR)/user_interface/player_interaction.c \
-			$(SRCDIR)/user_interface/select_button.c \
-			$(SRCDIR)/user_interface/view_manager.c \
-			$(SRCDIR)/utils/allocation_list.c \
-			$(SRCDIR)/utils/arithmetic_float.c \
-			$(SRCDIR)/utils/arithmetic_int.c \
-			$(SRCDIR)/utils/gridmap_iter.c \
-			$(SRCDIR)/utils/hudmap_setget_ability.c \
-			$(SRCDIR)/utils/image_iter.c \
-			$(SRCDIR)/utils/menu_scene_set_ability.c \
-			$(SRCDIR)/utils/modlx.c \
-			$(SRCDIR)/utils/normalize_vector2.c \
-			$(SRCDIR)/utils/tilemap_cell.c \
-			$(SRCDIR)/utils/tilemap_type.c \
-			$(SRCDIR)/utils/transpose_texture.c
-
-OBJDIR	=	$(BUILDDIR)
-OBJ		=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)/%.o)
-
-all: mandatory
-
-mandatory:
-	$(MAKE) BUILD=mandatory $(NAME)
-
-bonus:
-	$(MAKE) BUILD=bonus $(NAME)
+$(OBJ): $(OBJDIR)%.o: $(SRCDIR)%.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(LIBFT):
 	$(MAKE) -C $(LFTDIR)
@@ -92,26 +125,15 @@ $(LIBFT):
 $(LIBMLX):
 	cmake $(LMLXDIR) -B $(LMLXDIR)/build && make -C $(LMLXDIR)/build -j4
 
-$(OBJDIR)/%.o: $(SRCDIR)%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-
-$(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LIBMLX) $(MLXFLAGS) -o $@
-ifeq ($(MODE),fast)
-	strip $(NAME)
-endif
+-include $(DEP)
 
 clean:
 	rm -rf build
 	make -C $(LFTDIR) clean
 
-fclean: clean
+fclean:	clean
 	rm -f $(NAME)
 	make -C $(LFTDIR) fclean
 	rm -rf $(LMLXDIR)/build
 
-re: clean all
-
-.PHONY: all clean fclean re
+re:		clean all

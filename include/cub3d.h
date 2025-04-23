@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/22 01:34:50 by simon         ########   odam.nl         */
+/*   Updated: 2025/04/23 17:55:50 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 # define CUB3D_H
 # include <unistd.h>
 # include <errno.h>
+# include <string.h>
 # include <fcntl.h>
 # include <math.h>
 // libraries
 # include "MLX42/MLX42.h"
+# include "MLX42/MLX42_Int.h"
 # include "libft.h"
 // chopped up headers for some reason
 # include "gamestate.h"
