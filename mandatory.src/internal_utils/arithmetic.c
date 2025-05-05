@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   arithmetic_float.c                                 :+:    :+:            */
+/*   arithmetic.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:51:01 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/22 01:34:33 by simon         ########   odam.nl         */
+/*   Updated: 2025/05/05 22:18:59 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,16 @@ short	ft_sign_float(float value)
 	if (value > 0)
 		return (1);
 	return (0);
+}
+
+// returns the value or the bound it crosses
+int	ft_clamp(int a, int lower_bound, int upper_bound)
+{
+	if (a < lower_bound)
+		return (lower_bound);
+	if (a > upper_bound)
+		return (upper_bound);
+	return (a);
 }
 
 // return lowest value

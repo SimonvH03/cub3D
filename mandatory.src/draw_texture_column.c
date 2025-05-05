@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/22 17:46:58 by simon         ########   odam.nl         */
+/*   Updated: 2025/05/05 22:26:31 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,14 @@ void
 	t_column		column;
 	uint32_t		screen_y;
 	uint32_t		*texumn_start;
+	uint32_t		column_index;
 
 	column.texture = select_texture(walls, ray);
 	vertical_boundaries(&column, ray, walls);
-	texumn_start = &((uint32_t *)column.texture->pixels)[column.texture->height
-		* (int)(ray->partial * column.texture->width)];
+	column_index = (uint32_t)(ray->partial * column.texture->width);
+	column_index = ft_clamp(column_index, 0, column.texture->width - 1);
+	texumn_start = &((uint32_t *)column.texture->pixels)
+	[column.texture->height * column_index];
 	screen_y = (uint32_t)column.start;
 	while (screen_y < (uint32_t)column.end)
 	{

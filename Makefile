@@ -92,7 +92,7 @@ else
 endif
 
 ifeq ($(MODE),debug)
-	CFLAGS	+=	-g -DDEBUG
+	CFLAGS	+=	-g
 	NAME	:=	$(NAME)_debug
 else
 	CFLAGS	+=	-O3
