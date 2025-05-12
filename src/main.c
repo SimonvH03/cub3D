@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/21 23:12:08 by simon         ########   odam.nl         */
+/*   Updated: 2025/05/12 14:41:31 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	cub3d_terminate(t_window *window)
 {
 	mlx_terminate(window->mlx);
+	mlx_destroy_cursor(window->cursor);
 	ft_arrclear((void **)window->scene.grid.tilemap);
 	empty_texture_list(window);
 	free(window->player.weapon.fire);
