@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/04/15 20:50:32 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/17 02:07:06 by simon         ########   odam.nl         */
+/*   Updated: 2025/05/12 18:28:32 by svan-hoo      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ int
 {
 	(void)param;
 	if (!visited(grid->tilemap[y][x])
-		&& ft_strchr("NESW", get_type(grid->tilemap[y][x])
-		|| (get_type(grid->tilemap[y][x]) == '0')))
+		&& (ft_strchr("NESW", get_type(grid->tilemap[y][x]))
+		|| get_type(grid->tilemap[y][x]) == '0'
+		|| is_door(grid->tilemap[y][x])))
 	{
 		if (!flood_fill(grid, y, x))
 			return (set_error(CUB_PERIM));

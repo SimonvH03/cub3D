@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/21 22:13:54 by simon         ########   odam.nl         */
+/*   Updated: 2025/05/12 18:17:29 by svan-hoo      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ static int
 		return (RETURN_FAILURE);
 	content_progress = content_start;
 	if (read_elements(window, scene, &content_progress) != RETURN_SUCCESS)
+	{
+		ft_arrclear((void **)content_start);
 		return (RETURN_FAILURE);
+	}
 	if (scene->walls.doorface == NULL || scene->walls.doorside == NULL)
 		return (set_error(CUB_DATAFAIL));
 	if (scene->walls.north == NULL || scene->walls.east == NULL
@@ -66,7 +69,10 @@ static int
 	if (scene->floor_clr == (uint32_t)0 || scene->ceiling_clr == (uint32_t)0)
 		return (set_error(CUB_NOCLR));
 	if (read_tilemap(&scene->grid, content_progress) != RETURN_SUCCESS)
+	{
+		ft_arrclear((void **)content_start);
 		return (RETURN_FAILURE);
+	}
 	ft_arrclear((void **)content_start);
 	return (RETURN_SUCCESS);
 }

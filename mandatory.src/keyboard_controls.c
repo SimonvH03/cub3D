@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/22 02:09:25 by simon         ########   odam.nl         */
+/*   Updated: 2025/05/12 20:38:59 by svan-hoo      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ static void
 	move_dir_y = camera->dir_x * cos_sin[1] + camera->dir_y * cos_sin[0];
 	hitbox_x = COLLISION_HITBOX * ft_sign_float(move_dir_x);
 	hitbox_y = COLLISION_HITBOX * ft_sign_float(move_dir_y);
-	if (tilemap[(int)camera->pos_y][(int)(camera->pos_x + hitbox_x
-			+ move_dir_x * camera->movement_speed)] == '1')
+	if (get_type(tilemap[(int)camera->pos_y][(int)(camera->pos_x + hitbox_x
+			+ move_dir_x * camera->movement_speed)]) == '1')
 		move_dir_x = (int)camera->pos_x - camera->pos_x + (move_dir_x > 0)
 			- hitbox_x;
-	if (tilemap[(int)(camera->pos_y + hitbox_y
-				+ move_dir_y * camera->movement_speed)][(int)camera->pos_x] == '1')
+	if (get_type(tilemap[(int)(camera->pos_y + hitbox_y
+				+ move_dir_y * camera->movement_speed)]
+		[(int)camera->pos_x]) == '1')
 		move_dir_y = (int)camera->pos_y - camera->pos_y + (move_dir_y > 0)
 			- hitbox_y;
 	camera->pos_x += move_dir_x * camera->movement_speed;

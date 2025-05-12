@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   mandatory_cub3d.h                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/05/12 18:47:31 by svan-hoo      #+#    #+#                 */
+/*   Updated: 2025/05/12 18:47:55 by svan-hoo      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MANDATORY_CUB3D_H
 # define MANDATORY_CUB3D_H
 # include <unistd.h>
@@ -271,10 +283,10 @@ int
 	ft_min_int(
 		int a,
 		int b);
-char
+char		
 	set_tilemap_cell(
 		const char type);
-char
+char		
 	get_type(const char cell);
 
 #endif
