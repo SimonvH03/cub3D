@@ -263,6 +263,11 @@ short
 	ft_sign_float(
 		float value);
 int			
+	ft_clamp(
+		int a,
+		int lower_bound,
+		int upper_bound);
+int			
 	ft_min_int(
 		int a,
 		int b);
