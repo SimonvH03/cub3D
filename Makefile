@@ -133,6 +133,9 @@ clean:
 
 fclean:	clean
 	rm -f $(NAME)
+	rm -f $(NAME)_debug
+	rm -f $(NAME)_bonus
+	rm -f $(NAME)_bonus_debug
 	make -C $(LFTDIR) fclean
 	rm -rf $(LMLXDIR)/build
 
