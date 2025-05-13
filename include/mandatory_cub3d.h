@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/12 18:47:31 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/05/12 18:47:55 by svan-hoo      ########   odam.nl         */
+/*   Updated: 2025/05/13 13:25:51 by svan-hoo      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,10 +227,6 @@ void
 		t_camera *camera);
 
 // render
-void		
-	cast_ray(
-		t_ray *ray,
-		t_grid *grid);
 void		
 	draw_texture_column(
 		t_ray *ray,

@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/22 17:47:10 by simon         ########   odam.nl         */
+/*   Updated: 2025/05/13 13:25:55 by svan-hoo      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void
 
 // assuming the camera is not inside a wall;
 //	shift map position to the nearest grid line and check wall type
-void
+static void
 	cast_ray(
 		t_ray *ray,
 		t_grid *grid)
