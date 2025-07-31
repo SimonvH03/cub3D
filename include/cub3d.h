@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/07/31 15:07:25 by simon         ########   odam.nl         */
+/*   Updated: 2025/07/31 15:15:26 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_window
 }	t_window;
 
 // global internal errno
-extern int	g_cub_errno;
+extern t_cub_errno	g_cub_errno;
 typedef enum e_cub_errno
 {
 	CUB_SUCCESS = 0,	// No Errors.
