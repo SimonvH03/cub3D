@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/04/23 17:55:50 by simon         ########   odam.nl         */
+/*   Updated: 2025/07/31 15:07:25 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int
 // error
 int			
 	set_error(
-		const int err_val);
+		const t_cub_errno err_val);
 void		
 	print_error(void);
 // allocations
