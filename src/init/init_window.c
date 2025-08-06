@@ -6,7 +6,7 @@
 /*   By: simon <svan-hoo@student.codam.nl>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/04/21 22:41:15 by simon         ########   odam.nl         */
+/*   Updated: 2025/08/06 17:34:58 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,18 @@ int
 	return (RETURN_SUCCESS);
 }
 
+void
+	set_image_depth(
+		mlx_image_t *image,
+		int32_t	depth)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < image->count)
+		image->instances[i++].z = depth;
+}
+
 int
 	set_view_depths(
 		t_window *window)
@@ -47,18 +59,18 @@ int
 	size_t	i;
 
 	depth = 0;
-	window->scene.walls.image->instances[0].z = depth++;
-	window->player.weapon.display_img->instances[0].z = depth++;
-	window->hud.bigmap.walls->instances[0].z = depth++;
-	window->hud.bigmap.player->instances[0].z = depth++;
-	window->hud.minimap.walls->instances[0].z = depth++;
-	window->hud.minimap.player.image->instances[0].z = depth++;
-	window->menu.background.image->instances[0].z = depth++;
+	set_image_depth(window->scene.walls.image, depth++);
+	set_image_depth(window->player.weapon.display_img, depth++);
+	set_image_depth(window->hud.bigmap.walls, depth++);
+	set_image_depth(window->hud.bigmap.player, depth++);
+	set_image_depth(window->hud.minimap.walls, depth++);
+	set_image_depth(window->hud.minimap.player.image, depth++);
+	set_image_depth(window->menu.background.image, depth++);
 	i = 0;
 	while (i < MENU_B_COUNT)
-		window->menu.buttons[i++].image->instances[0].z = depth++;
-	window->menu.highlight.image->instances[0].z = depth++;
-	window->hud.fps.image->instances[0].z = depth++;
+		set_image_depth(window->menu.buttons[i++].image, depth++);
+	set_image_depth(window->menu.highlight.image, depth++);
+	set_image_depth(window->hud.fps.image, depth++);
 	sort_queue = true;
 	window->view = wv_menu;
 	return (RETURN_SUCCESS);
